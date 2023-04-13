@@ -53,36 +53,6 @@ export default function GroupingItems() {
                                 <p className="topSliderTile"> برنج هندی  </p>
                             </Link>
                         </SwiperSlide>
-                        <SwiperSlide>
-                            <Link to="/" className="topSliderLink">
-                                <img className="topSliderImg" src={indianRice} alt="slider " />
-                                <p className="topSliderTile"> برنج هندی  </p>
-                            </Link>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Link to="/" className="topSliderLink">
-                                <img className="topSliderImg" src={indianRice} alt="slider " />
-                                <p className="topSliderTile"> برنج هندی  </p>
-                            </Link>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Link to="/" className="topSliderLink">
-                                <img className="topSliderImg" src={indianRice} alt="slider " />
-                                <p className="topSliderTile"> برنج هندی  </p>
-                            </Link>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Link to="/" className="topSliderLink">
-                                <img className="topSliderImg" src={indianRice} alt="slider " />
-                                <p className="topSliderTile"> برنج هندی  </p>
-                            </Link>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Link to="/" className="topSliderLink">
-                                <img className="topSliderImg" src={indianRice} alt="slider " />
-                                <p className="topSliderTile"> برنج هندی  </p>
-                            </Link>
-                        </SwiperSlide>
                     </Swiper>
                 </div>
 

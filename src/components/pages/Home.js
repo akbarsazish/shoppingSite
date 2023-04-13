@@ -11,11 +11,12 @@ import brand from '../../assets/images/brand.jpg'
 import contactImage from '../../assets/images/contactImage.jpg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
+import MainGroupItem from './MainGroupItem'
 
 export default function Home() {
-
+const baseUrl="//starfoods.ir/api"
     const [showModal, setShowModal] = useState(false);
+    const [mainGroups,setMainGroups]=useState(0)
 
     useEffect(() => {
         setTimeout(function () {
@@ -23,6 +24,12 @@ export default function Home() {
         }, 10000);
     }, [showModal]);
 
+        fetch("http://192.168.10.27:8080/api/getMainGroups")
+        .then(response=>response.json())
+        .then((groups) => {
+            setMainGroups(groups.map((element)=><MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))
+        })
+        
     return (
         <div className="container mainSliderContainer">
             <div className="row">
@@ -48,26 +55,7 @@ export default function Home() {
                 </div>
             </div >
             <div className="categories">
-                <div className="categoryItem">
-                    <Link to="/"> <img className="categoryImg" alt="categoryImage" src={category} /> </Link>
-                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج هندی </Link> </span>
-                </div>
-                <div className="categoryItem">
-                    <Link to="/"><img className="categoryImg" alt="categoryImage" src={category} /> </Link>
-                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج هندی </Link> </span>
-                </div>
-                <div className="categoryItem">
-                    <Link to="/"><img className="categoryImg" alt="categoryImage" src={category} /> </Link>
-                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج هندی </Link> </span>
-                </div>
-                <div className="categoryItem">
-                    <Link to="/"><img className="categoryImg" alt="categoryImage" src={category} /> </Link>
-                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج هندی </Link> </span>
-                </div>
-                <div className="categoryItem">
-                    <Link to="/"><img className="categoryImg" alt="categoryImage" src={category} /> </Link>
-                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج هندی </Link> </span>
-                </div>
+                {mainGroups}
             </div>
 
 
