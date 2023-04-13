@@ -1,53 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import category from "../../assets/images/category.jpg"
 import Footer from "../genrealComponent/Footer";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
-
+import MainGroupList from "./MainGroupList"
 export default function Grouping() {
+    const [mainGroups,setMainGroups]=useState(0)
+    fetch("http://192.168.10.27:8080/api/getMainGroups")
+    .then(response=>response.json())
+    .then((groups) => {
+        setMainGroups(groups.map((element)=><MainGroupList title={element.title} id={element.id} ></MainGroupList>))
+    })
     return (
         <>
             <Header />
             <Sidebar />
             <div className="container grouping">
                 <ul className="groupingPart">
-                    <li className="groupingPartItem shadow">
-                        <Link to="/groupingItems" className="groupingImgLink">
-                            <img className="groupingImg" alt="categoryImage" src={category} />
-                        </Link>
-                        <Link to="/" className="groupingTitleLink"> <p className="groupingTitle">  کالا نرخ دولتي </p> </Link>
-                    </li>
-                    <li className="groupingPartItem shadow">
-                        <Link to="/" className="groupingImgLink">
-                            <img className="groupingImg" alt="categoryImage" src={category} />
-                        </Link>
-                        <Link to="/" className="groupingTitleLink"> <p className="groupingTitle">  کالا نرخ دولتي </p> </Link>
-                    </li>
-                    <li className="groupingPartItem shadow">
-                        <Link to="/" className="groupingImgLink">
-                            <img className="groupingImg" alt="categoryImage" src={category} />
-                        </Link>
-                        <Link to="/" className="groupingTitleLink"> <p className="groupingTitle">  کالا نرخ دولتي </p> </Link>
-                    </li>
-                    <li className="groupingPartItem shadow">
-                        <Link to="/" className="groupingImgLink">
-                            <img className="groupingImg" alt="categoryImage" src={category} />
-                        </Link>
-                        <Link to="/" className="groupingTitleLink"> <p className="groupingTitle">  کالا نرخ دولتي </p> </Link>
-                    </li >
-                    <li className="groupingPartItem shadow">
-                        <Link to="/" className="groupingImgLink">
-                            <img className="groupingImg" alt="categoryImage" src={category} />
-                        </Link>
-                        <Link to="/" className="groupingTitleLink"> <p className="groupingTitle">  کالا نرخ دولتي </p> </Link>
-                    </li >
-                    <li className="groupingPartItem shadow">
-                        <Link to="/" className="groupingImgLink">
-                            <img className="groupingImg" alt="categoryImage" src={category} />
-                        </Link>
-                        <Link to="/" className="groupingTitleLink"> <p className="groupingTitle">  کالا نرخ دولتي </p> </Link>
-                    </li >
+                    {mainGroups}
                 </ul >
             </div >
             <Footer />
