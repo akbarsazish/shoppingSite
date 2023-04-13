@@ -31,7 +31,7 @@ function App() {
         <Route path='/home' element={<Layout />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/grouping' element={<Grouping />} />
-        <Route path='/groupingItems' element={<GroupingItems />} />
+        <Route path='/groupingItems/:id' element={<GroupingItems />} />
         <Route path='/descKala' element={<DescKala />} />
         <Route path='/shoppingCart' element={<ShoppingCart />} />
         <Route path='/favorite' element={<Favorite />} />
