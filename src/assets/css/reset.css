@@ -1,0 +1,67 @@
+*,
+:after,
+:before {
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+}
+
+body {
+    direction: rtl;
+    font-size: 62.5%;
+    font-family: IRANSans;
+    font-weight: 300;
+    color: #515151;
+
+}
+
+a {
+    font-size: 1.4em;
+    text-decoration: none;
+    color: #fff;
+}
+
+li {
+    list-style: none;
+}
+
+h3 {
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.6em;
+}
+
+span {
+    font-size: 1.4em;
+}
+
+button {
+    cursor: pointer;
+    font-size: 1.4em;
+    user-select: none;
+}
+
+input,
+button {
+    border: none;
+}
+
+i,
+img,
+input {
+    vertical-align: middle;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.social .fa:before {
+    font-family: fontawesome;
+}
+
+textarea {
+    overflow: auto;
+}

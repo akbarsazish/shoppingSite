@@ -1,0 +1,160 @@
+@media (max-width: 920px) {
+    .categoryItem {
+        flex: 32%;
+        max-width: 32%;
+    }
+}
+
+
+@media (max-width: 920px) {
+    .profileRightPart {
+        flex: 99%;
+        max-width: 100%;
+    }
+
+    .profileLeftPart {
+        flex: 99%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 920px) {
+    .footer {
+        display: block;
+    }
+}
+
+@media (max-width: 920px) {
+    .cartNotification {
+        top: 1%;
+        left: 18%;
+    }
+}
+
+@media (max-width: 920px) {
+    .grouping {
+        padding: 5px 0px !important;
+    }
+
+    .groupingPart {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .groupingPartItem {
+        flex-basis: 30%;
+    }
+
+
+    .groupingTitle {
+        font-size: 10px;
+    }
+
+    .groupingItemsImg {
+        width: 88%;
+    }
+
+    .groupingItem {
+        flex: 47%;
+        max-width: 47%;
+    }
+
+    .kalaImg {
+        flex: 99%;
+        max-width: 99%;
+    }
+
+    .kalaDescibtion {
+        flex: 99%;
+        max-width: 99%;
+        font-size: 9px;
+    }
+
+    .descKalaTakImg {
+        max-width: 88%;
+        align-self: center;
+    }
+
+    .similarKalaImg {
+        flex: 47%;
+        max-width: 47%;
+        flex-basis: 47%;
+    }
+
+
+}
+
+@media (max-width: 920px) {
+    .shoppingCart {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .shoppingRight {
+        flex: 99%;
+        max-width: 99%;
+    }
+
+    .shoppingLeft {
+        border: 1px solid red;
+        padding: 3px;
+        border-radius: 8px;
+        position: fixed;
+        bottom: 42px;
+        background-color: aliceblue;
+        flex: 99%;
+        max-width: 99%;
+        width: 84%;
+        align-self: center;
+    }
+
+    .shoppingItem {
+        display: flex;
+        flex: 98%;
+        max-width: 98%;
+
+    }
+
+    .yourBenefit {
+        right: 29%;
+    }
+
+    .contactRight {
+        flex: 199%;
+        max-width: 99%;
+    }
+
+    .contactLeft {
+        flex: 99%;
+        max-width: 99%;
+    }
+
+    .contactImg {
+        width: 50%;
+        margin-top: 10px;
+
+    }
+
+}
+
+@media only screen and (max-width: 990px) and (min-width:278px) {
+    .description {
+        box-shadow: 0px 0px 1px 1px red;
+        width: 98%;
+    }
+}
+
+
+@media (max-width: 920px) {
+    .shippingPart {
+        flex: 98%;
+        max-width: 98%;
+    }
+
+    .login {
+        flex: 98%;
+        max-width: 98%;
+    }
+
+}
