@@ -19,8 +19,10 @@
     "jquery": "^3.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "^2.1.8",
+    "redux": "^4.2.1",
     "swiper": "^9.1.1",
     "web-vitals": "^2.1.4"
   },
@@ -29,7 +31,6 @@
     "eject": "react-scripts eject",
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts --openssl-legacy-provider build"
-
   },
   "eslintConfig": {
     "extends": [

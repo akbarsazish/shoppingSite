@@ -12,6 +12,7 @@ import contactImage from '../../assets/images/contactImage.jpg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import MainGroupItem from './MainGroupItem'
+import {Counter} from '../../features/counter/Counter'
 
 export default function Home() {
 const baseUrl="//starfoods.ir/api"
@@ -98,13 +99,7 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
 
                         <div className="bottomPart">
@@ -122,13 +117,7 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
 
                         <div className="bottomPart">
@@ -145,15 +134,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -168,15 +150,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -191,15 +166,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -255,15 +223,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -278,15 +239,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -301,15 +255,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -324,15 +271,8 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
-
                         <div className="bottomPart">
                             <span className="bottommPartItem">
                                 <p>  </p>
@@ -347,13 +287,7 @@ const baseUrl="//starfoods.ir/api"
                     <SwiperSlide className="bg-light text-center">
                         <FontAwesomeIcon onClick={() => setShowModal(!showModal)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
                         <span className="buyLabel"> خرید </span>
-
-                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome">
-                            <FontAwesomeIcon icon={faPlusCircle} id="addTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                            <span className='tobuy fw-bold' id=''>  0  </span>
-                            <FontAwesomeIcon icon={faMinusCircle} id="minusTobuy" className='tobuy fw-bold'> </FontAwesomeIcon>
-                        </div> : null}
-
+                        {showModal ? <div className='smallModalTobuy' id="preBuyFromHome"> <Counter /></div> : null}
                         <Link to="/"><img className="fourColSliderImg" alt="مراقبت سلامت فردی" src={category} /> </Link>
 
                         <div className="bottomPart">
