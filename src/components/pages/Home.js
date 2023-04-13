@@ -51,7 +51,7 @@ export default function Home() {
             <div className="categories">
                 <div className="categoryItem">
                     <Link to="/"> <img className="categoryImg" alt="categoryImage" src={category} /> </Link>
-                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج هندی </Link> </span>
+                    <span className="categoryTitle"> <Link to="/" className="categoryImgTitl"> برنج 1هندی </Link> </span>
                 </div>
                 <div className="categoryItem">
                     <Link to="/"><img className="categoryImg" alt="categoryImage" src={category} /> </Link>

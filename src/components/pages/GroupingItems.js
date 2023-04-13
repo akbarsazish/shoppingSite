@@ -94,7 +94,7 @@ export default function GroupingItems() {
                             <img className="groupingItemsImg" src={indianRice} alt="slider " />
                         </Link>
                         <Link to="/" className="groupingItemTitleLink">
-                            <p className="groupingItemTitle"> برنج هندي 1121 داريوش  </p>
+                            <p className="groupingItemTitle"> برنج هندي 1 داريوش  </p>
                         </Link>
                         <div className="groupingItemBottomInfo">
                             <div className="groupingItemInfo" onClick={() => changeHeartIconColor(setIsActive, isActive)}> <FontAwesomeIcon className={isActive ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
