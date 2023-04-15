@@ -21,10 +21,10 @@ export default function GroupingItems() {
     const [isActive, setIsActive] = useState(false);
     const [subGrups,setSubGroups]=useState(0);
     const [maingroupKala,setMainGroupKala]=useState(0);
-    const {id}=useParams();
+    const {mainId,subId}=useParams();
    
     //
-    fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId="+id)
+    fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId="+mainId)
     .then(response=>response.json())
     .then((groups) => {
         setSubGroups(groups.map((element)=><SwiperSlide>
@@ -36,7 +36,7 @@ export default function GroupingItems() {
     })
     //
     useEffect(() => {
-    fetch("http://192.168.10.27:8080/api/getMainGroupKala/?mainGrId="+id)
+    fetch("http://192.168.10.27:8080/api/appendSubGroupKala/?mainGrId="+mainId+"?subKalaGroupId="+subId)
     .then(response=>response.json())
     .then((data) => {
         setMainGroupKala(data.listKala.map((element)=><div className="groupingItem">
@@ -64,7 +64,7 @@ export default function GroupingItems() {
                                     
     //getUnitsForUpdate Pcode
 
-    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+id)
+    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+subId)
     .then(response=>response.json())
     .then((data) => {
         data.map((element)=><button className="btn btn-sm btn-danger buyButton" onClick={() => setByModal(!byModal)}> یک کیسه معادل 10 کیلو  </button>)

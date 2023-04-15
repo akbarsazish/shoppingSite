@@ -22,7 +22,7 @@ import Success from './components/pages/Success';
 import LuckyWheel from './components/pages/LuckWell';
 import Wallet from './components/pages/Wallet';
 import Login from './components/pages/Login';
-
+import SubGroupItems from './components/pages/SubGroupItems';
 
 function App() {
   return (
@@ -32,7 +32,8 @@ function App() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/grouping' element={<Grouping />} />
         <Route path='/groupingItems/:id' element={<GroupingItems />} />
-        <Route path='/descKala' element={<DescKala />} />
+        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems />} />
+        <Route path='/descKala' element={<DescKala/>} />
         <Route path='/shoppingCart' element={<ShoppingCart />} />
         <Route path='/favorite' element={<Favorite />} />
         <Route path='/message' element={<Message />} />
