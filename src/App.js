@@ -23,8 +23,23 @@ import LuckyWheel from './components/pages/LuckWell';
 import Wallet from './components/pages/Wallet';
 import Login from './components/pages/Login';
 import SubGroupItems from './components/pages/SubGroupItems';
+import axios from 'axios'
+// import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 
 function App() {
+  const API_URL='http://192.168.10.27:8080/api'
+const login=(email, password)=> {
+    return axios.post(API_URL + '/login', {
+      email,
+      password
+    }).then(response => {
+      console.log(response.data)
+      // if (response.data.accessToken) {
+      //   localStorage.setItem('user', JSON.stringify(response.data));
+      // }
+      return response.data;
+    });
+  }
   return (
     <>
       <Routes>
@@ -44,7 +59,7 @@ function App() {
         <Route path='/success' element={<Success />}> </Route>
         <Route path='/luckWell' element={<LuckyWheel />}></Route>
         <Route path='/wallet' element={<Wallet />}> </Route>
-        <Route path='/' element={<Login />}> </Route>
+        <Route path='/login' element={<Login submitForm={()=>login("09106670985","2266")} />}> </Route>
       </Routes>
 
     </>
