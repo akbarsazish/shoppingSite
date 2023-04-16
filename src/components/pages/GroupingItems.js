@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Link,
-    useLocation,
     useParams
-  } from "react-router-dom"
+} from "react-router-dom"
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { Swiper, SwiperSlide } from "swiper/react";
-import indianRice from "../../assets/images/indianRice.jpg"
 import starfood from "../../assets/images/starfood.png"
 import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
@@ -19,53 +17,55 @@ import GroupSwiperSlide from './GroupSwiperSlide'
 export default function GroupingItems() {
     const [byModal, setByModal] = useState(false);
     const [isActive, setIsActive] = useState(false);
-    const [subGrups,setSubGroups]=useState(0);
-    const [maingroupKala,setMainGroupKala]=useState(0);
-    const {id}=useParams();
-   
-    //
-    fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId="+id)
-    .then(response=>response.json())
-    .then((groups) => {
-        setSubGroups(groups.map((element)=><SwiperSlide>
-        <Link to="/" className="topSliderLink">
-            <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/"+element.id+".jpg"} alt="slider"/>
-            <p className="topSliderTile"> {element.title} </p>
-        </Link>
-    </SwiperSlide>))
-    })
-    //
-    fetch("http://192.168.10.27:8080/api/getMainGroupKala/?mainGrId="+id)
-    .then(response=>response.json())
-    .then((data) => {
-        setMainGroupKala(data.listKala.map((element)=><div className="groupingItem">
-                                                <img className="topLeft" src={starfood} alt="slider" />
-                                                <span className="groupingTakhfif"> {((element.Price4-element.Price3)*100)/element.Price4}% </span>
-                                                <Link to="/descKala" className="groupingItemLink">
-                                                    <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider " />
-                                                </Link>
-                                                <Link to="/" className="groupingItemTitleLink">
-                                                    <p className="groupingItemTitle"> {element.GoodName} </p>
-                                                </Link>
-                                                <div className="groupingItemBottomInfo">
-                                                    <div className="groupingItemInfo" onClick={() => changeHeartIconColor(setIsActive, isActive)}> <FontAwesomeIcon className={isActive ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
-                                                    <div className="groupingItemInfo">
-                                                        <p className="price" style={{ color: "#39ae00" }}> {element.Price3} تومان </p>
-                                                        <p className="price" style={{ color: "#ff2c50" }}> <del>{element.Price4} تومان </del> </p>
-                                                    </div>
-                                                </div>
-                                                <div className="groupingItemBottomBtn">
-                                                    <button className="btn btn-sm btn-danger selectAmount" onClick={() => setByModal(!byModal)}> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} />  </button>
-                                                </div>
-                                            </div>))
-                                        })
-    //getUnitsForUpdate Pcode
+    const [subGrups, setSubGroups] = useState(0);
+    const [maingroupKala, setMainGroupKala] = useState(0);
+    const { id } = useParams();
 
-    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+id)
-    .then(response=>response.json())
-    .then((data) => {
-        data.map((element)=><button className="btn btn-sm btn-danger buyButton" onClick={() => setByModal(!byModal)}> یک کیسه معادل 10 کیلو  </button>)
-    });
+    //
+    fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId=" + id)
+        .then(response => response.json())
+        .then((groups) => {
+            setSubGroups(groups.map((element) => <SwiperSlide>
+                <Link to={"/subGroupItems/" + element.selfGroupId + "/" + element.id} className="topSliderLink">
+                    <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/" + element.id + ".jpg"} alt="slider" />
+                    <p className="topSliderTile"> {element.title} </p>
+                </Link>
+            </SwiperSlide>))
+        })
+    //
+    useEffect(() => {
+        fetch("http://192.168.10.27:8080/api/getMainGroupKala/?mainGrId=" + id)
+            .then(response => response.json())
+            .then((data) => {
+                setMainGroupKala(data.listKala.map((element) => <div className="groupingItem">
+                    <img className="topLeft" src={starfood} alt="slider" />
+                    <span className="groupingTakhfif"> {((element.Price4 - element.Price3) * 100) / element.Price4}% </span>
+                    <Link to="/descKala" className="groupingItemLink">
+                        <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
+                    </Link>
+                    <Link to="/" className="groupingItemTitleLink">
+                        <p className="groupingItemTitle"> {element.GoodName} </p>
+                    </Link>
+                    <div className="groupingItemBottomInfo">
+                        <div className="groupingItemInfo" onClick={() => changeHeartIconColor(setIsActive, isActive)}> <FontAwesomeIcon className={isActive ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
+                        <div className="groupingItemInfo">
+                            <p className="price" style={{ color: "#39ae00" }}> {element.Price3} تومان </p>
+                            <p className="price" style={{ color: "#ff2c50" }}> <del>{element.Price4} تومان </del> </p>
+                        </div>
+                    </div>
+                    <div className="groupingItemBottomBtn">
+                        <button className="btn btn-sm btn-danger selectAmount" onClick={() => setByModal(!byModal)}> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} />  </button>
+                    </div>
+                </div>))
+            })
+    })
+
+    //getUnitsForUpdate Pcode
+    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode=" + id)
+        .then(response => response.json())
+        .then((data) => {
+            data.map((element) => <button className="btn btn-sm btn-danger buyButton" onClick={() => setByModal(!byModal)}> یک کیسه معادل 10 کیلو  </button>)
+        });
 
     return (
         <>
@@ -103,43 +103,15 @@ export default function GroupingItems() {
                 </div>
 
                 <div className="groupingItems">
-
-
-                    {/* <div className="groupingItem">
-                        <img className="topLeft" src={starfood} alt="slider" />
-                        <span className="groupingTakhfif"> 5% </span>
-                        <Link to="/descKala" className="groupingItemLink">
-                            <img className="groupingItemsImg" src={indianRice} alt="slider " />
-                        </Link>
-                        <Link to="/" className="groupingItemTitleLink">
-                            <p className="groupingItemTitle"> برنج هندي 1 داريوش  </p>
-                        </Link>
-                        <div className="groupingItemBottomInfo">
-                            <div className="groupingItemInfo" onClick={() => changeHeartIconColor(setIsActive, isActive)}> <FontAwesomeIcon className={isActive ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
-                            <div className="groupingItemInfo">
-                                <p className="price" style={{ color: "#39ae00" }}>29,200 تومان </p>
-                                <p className="price" style={{ color: "#ff2c50" }}> <del > 19, 500 تومان </del> </p>
-                            </div>
-                        </div>
-                        <div className="groupingItemBottomBtn">
-                            <button className="btn btn-sm btn-danger selectAmount" onClick={() => setByModal(!byModal)}> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} />  </button>
-                        </div>
-                    </div> */}
                     {maingroupKala}
-
-
                 </div>
-
             </div >
-
             {byModal ?
                 <div className="modalBackdrop" id="clickToBuyModal">
                     <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
                         <button className="btn btn-sm btn-danger buyButton" onClick={() => setByModal(!byModal)}> یک کیسه معادل 10 کیلو  </button>
                     </div>
                 </div> : null}
-
-
         </>
     );
 

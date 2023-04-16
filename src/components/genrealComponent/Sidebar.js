@@ -14,10 +14,12 @@ import Contact from "../pages/Contact";
 function Sidebar() {
     return (
         <div className="offcanvas offcanvas-end customeOffcanvas" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-            < div className="offcanvas-header dri-left" dir="ltr">
-                <button type="button" className="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
-                <img width="177px" src={logo} className="me-1 logo" alt="لوگو" />
-            </div >
+            <Link to="/home">
+                <div className="offcanvas-header dri-left" dir="ltr">
+                    <button type="button" className="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
+                    <img width="177px" src={logo} className="me-1 logo" alt="لوگو" />
+                </div >
+            </Link>
             <div className="offcanvas-body px-0">
                 <Link className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faUser} />  نام یوزر  </Link>
                 <Link to="/profile" element={<Profile />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faInfoCircle} />  وضعیت من  </Link>

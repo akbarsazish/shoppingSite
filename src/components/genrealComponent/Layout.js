@@ -3,8 +3,9 @@ import Home from "../pages/Home";
 import Footer from "./Footer";
 import Sidebar from './Header'
 import Header from './Sidebar';
+import { Outlet } from "react-router-dom";
 
-function Layout() {
+const Layout = () => {
     return (
         <>
             <Header />

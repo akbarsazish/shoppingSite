@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png"
 import gPlay from "../../assets/images/Gplay.png"
 import bazar from "../../assets/images/bazar.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-import { faApple, faGooglePay } from "@fortawesome/free-brands-svg-icons";
+import { faApple } from "@fortawesome/free-brands-svg-icons";
 
 export default function Login() {
     return (

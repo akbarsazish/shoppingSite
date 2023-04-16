@@ -59,7 +59,6 @@ export default function Home() {
                 {mainGroups}
             </div>
 
-
             {/* مراقبت سلامت فردی  */}
             <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
