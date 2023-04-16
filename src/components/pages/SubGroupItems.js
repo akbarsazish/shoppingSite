@@ -15,14 +15,15 @@ import 'swiper/modules/pagination/pagination.min.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { changeHeartIconColor } from "./Utils";
-import GroupSwiperSlide from './GroupSwiperSlide'
+
 export default function GroupingItems() {
     const [byModal, setByModal] = useState(false);
     const [isActive, setIsActive] = useState(false);
     const [subGrups,setSubGroups]=useState(0);
     const [maingroupKala,setMainGroupKala]=useState(0);
     const {mainId,subId}=useParams();
-   
+
+      
     //
     fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId="+mainId)
     .then(response=>response.json())
@@ -36,9 +37,10 @@ export default function GroupingItems() {
     })
     //
     useEffect(() => {
-    fetch("http://192.168.10.27:8080/api/appendSubGroupKala/?mainGrId="+mainId+"?subKalaGroupId="+subId)
+    fetch("http://192.168.10.27:8080/api/appendSubGroupKala/?mainGrId="+mainId+"&subKalaGroupId="+subId)
     .then(response=>response.json())
     .then((data) => {
+        console.log(data)
         setMainGroupKala(data.listKala.map((element)=><div className="groupingItem">
                                                 <img className="topLeft" src={starfood} alt="slider" />
                                                 <span className="groupingTakhfif"> {((element.Price4-element.Price3)*100)/element.Price4}% </span>

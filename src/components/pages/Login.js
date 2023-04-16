@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { faApple, faGooglePay } from "@fortawesome/free-brands-svg-icons";
 
-export default function Login() {
+export default function Login(props) {
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
@@ -23,7 +23,7 @@ export default function Login() {
                             <input className="form-control form-control-sm" type="text" placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label for="login" className="text-start mt-2" style={{ float: "right" }}>کلمه عبور</label>
                             <input name="password" className="form-control form-control-sm" type="password" asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
-                            <Link to="/home"> <button type="submit" className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button> </Link>
+                             <button type="button" onClick={props.submitForm} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">
@@ -36,7 +36,6 @@ export default function Login() {
                             </div>
                             <Link className="loginContact" to="tel://02148286"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faPhone} />  <b>ارتباط :</b>  48286-021 </Link >
                             <Link className="loginContact" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
-
                         </div>
                     </div>
                 </div>
