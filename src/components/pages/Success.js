@@ -1,12 +1,20 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faHistory } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export default function Success() {
+    localStorage.setItem("buyAmount",0)
+    const [succedFactorData,setSuccedFactorData]=useState(0)
+    useEffect(()=>{
+        axios.get("http://192.168.10.27:8080/api/successFactorInfo").then((data)=>{
+            setSuccedFactorData( data.data.factorBYS.map((element,index)=><tr><td> {(index+1)} </td><td>{element.GoodName}</td><td>{parseInt(element.PackAmount).toLocaleString()}</td><td>{parseInt(element.Fi/10).toLocaleString()}</td><td>{parseInt(element.Price/10).toLocaleString()}</td></tr>))
+        })
+    },[])
     return (
         <>
             <Header />
@@ -18,7 +26,7 @@ export default function Success() {
                     <div className="col-lg-3 col-md-3 col-sm-12">
                         <div className="card text-dark p-3 ">
                             <p className="factorStaff">سود شما از این خرید : 2</p>
-                            <Link to={-1} style={{ textDecoration: "none", margin: "0 auto" }} className="btn btn-danger btn-sm w-50"> بازگشت < FontAwesomeIcon icon={faHistory} />  </Link>
+                            <Link to={-3} style={{ textDecoration: "none", margin: "0 auto" }} className="btn btn-danger btn-sm w-50"> بازگشت < FontAwesomeIcon icon={faHistory} />  </Link>
                         </div>
                     </div>
                     <div className="col-lg-9 col-md-9 col-sm-12">
@@ -33,39 +41,7 @@ export default function Success() {
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td> 1 </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr>
-                                    <td> 1 </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr>
-                                    <td> 1 </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
-                                <tr>
-                                    <td> 1 </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
+                               {succedFactorData}
                             </tbody>
                         </table>
                     </div>

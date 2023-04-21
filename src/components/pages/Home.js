@@ -29,7 +29,7 @@ const baseUrl="//starfoods.ir/api"
         .then(response=>response.json())
         .then((groups) => {
             setMainGroups(groups.map((element)=><MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))
-        })
+        },[])
         
     return (
         <div className="container mainSliderContainer">

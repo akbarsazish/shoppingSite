@@ -157,4 +157,17 @@
         max-width: 98%;
     }
 
+
+    
+.factors {
+    max-width: 99%;
+    flex: 99%;
+}
+
+.factorsResult {
+    max-width: 99%;
+    flex: 99%;
+}
+
+
 }
