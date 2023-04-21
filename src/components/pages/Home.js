@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper";
 import 'swiper/swiper.min.css';
-import 'swiper/modules/pagination/pagination.min.css';
 import slider from '../../assets/images/slider.jpg'
 import eid from '../../assets/images/eid.jpg'
 import category from '../../assets/images/category.jpg'
@@ -12,12 +11,12 @@ import contactImage from '../../assets/images/contactImage.jpg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import MainGroupItem from './MainGroupItem'
-import {Counter} from '../../features/counter/Counter'
+import { Counter } from '../../features/counter/Counter'
 
 export default function Home() {
-const baseUrl="//starfoods.ir/api"
+    const baseUrl = "//starfoods.ir/api"
     const [showModal, setShowModal] = useState(false);
-    const [mainGroups,setMainGroups]=useState(0)
+    const [mainGroups, setMainGroups] = useState(0)
 
     useEffect(() => {
         setTimeout(function () {
@@ -25,12 +24,18 @@ const baseUrl="//starfoods.ir/api"
         }, 10000);
     }, [showModal]);
 
-        fetch("http://192.168.10.27:8080/api/getMainGroups")
-        .then(response=>response.json())
+    fetch("http://192.168.10.26:8080/api/getMainGroups")
+        .then(response => response.json())
         .then((groups) => {
+<<<<<<< HEAD
             setMainGroups(groups.map((element)=><MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))
         },[])
         
+=======
+            setMainGroups(groups.map((element) => <MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))
+        })
+
+>>>>>>> a1b44de5ff6830efee118133af864ccee23d78cf
     return (
         <div className="container mainSliderContainer">
             <div className="row">
@@ -58,7 +63,6 @@ const baseUrl="//starfoods.ir/api"
             <div className="categories">
                 {mainGroups}
             </div>
-
 
             {/* مراقبت سلامت فردی  */}
             <div className="forTitle mt-2 p-2">

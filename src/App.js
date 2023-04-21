@@ -28,6 +28,8 @@ import SubGroupItems from './components/pages/SubGroupItems';
 import axios from 'axios'
 // import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 
+
+
 function App() {
   const [buyOption, setBuyOption]=useState(0)
   const [byModal, setByModal] = useState(false);
@@ -40,9 +42,9 @@ function App() {
       password
     }).then(response => {
       console.log(response.data)
-      // if (response.data.accessToken) {
-      //   localStorage.setItem('user', JSON.stringify(response.data));
-      // }
+      if (response.data.accessToken) {
+        localStorage.setItem('user', JSON.stringify(response.data));
+      }
       return response.data;
     })
   }

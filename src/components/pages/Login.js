@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png"
 import gPlay from "../../assets/images/Gplay.png"
 import bazar from "../../assets/images/bazar.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
-import { faApple, faGooglePay } from "@fortawesome/free-brands-svg-icons";
+import { faApple } from "@fortawesome/free-brands-svg-icons";
 
 export default function Login(props) {
     return (
@@ -23,7 +23,7 @@ export default function Login(props) {
                             <input className="form-control form-control-sm" type="text" placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label for="login" className="text-start mt-2" style={{ float: "right" }}>کلمه عبور</label>
                             <input name="password" className="form-control form-control-sm" type="password" asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
-                             <button type="button" onClick={props.submitForm} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
+                            <button type="button" onClick={props.submitForm} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">

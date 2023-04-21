@@ -2,14 +2,13 @@ import React, { useState,useEffect,useRef } from "react";
 import {
     Link,
     useParams
-  } from "react-router-dom"
+} from "react-router-dom"
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { Swiper, SwiperSlide } from "swiper/react";
 import starfood from "../../assets/images/starfood.png"
 import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
-import 'swiper/modules/pagination/pagination.min.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
@@ -118,7 +117,6 @@ export default function GroupingItems(props) {
                 <div className="groupingItems">
                     {maingroupKala}
                 </div>
-
             </div >
             
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
