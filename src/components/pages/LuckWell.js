@@ -3,7 +3,7 @@ import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import "../../assets/css/lottery/lottery.css";
-import $ from 'jquery';
+
 
 export default function LuckyWheel() {
     const [showWhell, setWheel] = useState(false)
@@ -140,22 +140,7 @@ export default function LuckyWheel() {
             //     "success"
             // );
             //برای ثبت تاریخچه
-            $.ajax({
-                method: 'get',
-                url: "/setCustomerLotteryHistory",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    customerId: "",
-                    product: SelectedItem
-                },
-                async: true,
-                success: function (data) {
-                    $("#spinnerBtn").prop("disabled", true);
-                },
-                error: function (errer) {
 
-                }
-            });
         }, 5500);
 
         // Delay and set to normal state
@@ -192,9 +177,7 @@ export default function LuckyWheel() {
         console.log(error);
     }
 
-    $("#useLuckyWheel").on("click", () => {
-        $("#luckyWheel").css("display", "flex");
-    })
+
     return (
         <>
             <Header />

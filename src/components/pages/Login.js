@@ -11,7 +11,8 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 export default function Login(props) {
     return (
         <>
-            <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
+            <div className="containerFluid login1" style={{ height: "100vh", width: "100%" }}>
+
                 <div className="loginWaper p-5">
                     <div className="login">
                         <div className="loginHeader text-center">

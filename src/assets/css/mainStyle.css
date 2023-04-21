@@ -1192,6 +1192,7 @@ ul li a.active {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .loginBody {
@@ -1236,4 +1237,24 @@ ul li a.active {
     border-radius: 50%;
     margin-bottom: -5px;
     margin-top: 5px;
+}
+
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+
+
+
+.login1 {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #671e1e;
+    overflow: hidden;
 }
