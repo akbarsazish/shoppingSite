@@ -5,7 +5,6 @@ import Sidebar from "../genrealComponent/Sidebar";
 import indianRice from "../../assets/images/indianRice.jpg"
 import starfood from "../../assets/images/starfood.png"
 import 'swiper/swiper.min.css';
-import 'swiper/modules/pagination/pagination.min.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { changeHeartIconColor } from "./Utils";

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper";
 import 'swiper/swiper.min.css';
-import 'swiper/modules/pagination/pagination.min.css';
 import slider from '../../assets/images/slider.jpg'
 import eid from '../../assets/images/eid.jpg'
 import category from '../../assets/images/category.jpg'
@@ -25,7 +24,7 @@ export default function Home() {
         }, 10000);
     }, [showModal]);
 
-    fetch("http://192.168.10.27:8080/api/getMainGroups")
+    fetch("http://192.168.10.26:8080/api/getMainGroups")
         .then(response => response.json())
         .then((groups) => {
             setMainGroups(groups.map((element) => <MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))

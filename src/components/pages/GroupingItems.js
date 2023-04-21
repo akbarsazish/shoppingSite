@@ -9,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import starfood from "../../assets/images/starfood.png"
 import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
-import 'swiper/modules/pagination/pagination.min.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { changeHeartIconColor } from "./Utils";
@@ -22,7 +21,7 @@ export default function GroupingItems() {
     const { id } = useParams();
 
     //
-    fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId=" + id)
+    fetch("http://192.168.10.26:8080/api/getSubGroupList/?mainGrId=" + id)
         .then(response => response.json())
         .then((groups) => {
             setSubGroups(groups.map((element) => <SwiperSlide>
@@ -34,7 +33,7 @@ export default function GroupingItems() {
         })
     //
     useEffect(() => {
-        fetch("http://192.168.10.27:8080/api/getMainGroupKala/?mainGrId=" + id)
+        fetch("http://192.168.10.26:8080/api/getMainGroupKala/?mainGrId=" + id)
             .then(response => response.json())
             .then((data) => {
                 setMainGroupKala(data.listKala.map((element) => <div className="groupingItem">
@@ -61,7 +60,7 @@ export default function GroupingItems() {
     })
 
     //getUnitsForUpdate Pcode
-    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode=" + id)
+    fetch("http://192.168.10.26:8080/api/getUnitsForUpdate/?Pcode=" + id)
         .then(response => response.json())
         .then((data) => {
             data.map((element) => <button className="btn btn-sm btn-danger buyButton" onClick={() => setByModal(!byModal)}> یک کیسه معادل 10 کیلو  </button>)
