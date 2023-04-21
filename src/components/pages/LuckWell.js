@@ -4,10 +4,20 @@ import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import "../../assets/css/lottery/lottery.css";
 import $ from 'jquery';
-
+import { useEffect } from "react";
+import axios from "axios"
 export default function LuckyWheel() {
     const [showWhell, setWheel] = useState(false)
+    const [emtiyaz,setEmtiyaz] = useState(0)
+    const [lotteryMinBonus,setLotteryMinBonus] = useState(0)
 
+    useEffect(()=>{
+        axios.get("http://192.168.10.27:8080/api/bagCash").then((data)=>{
+        console.log(data.data)
+        setEmtiyaz(data.data.allBonus);
+        setLotteryMinBonus(data.data.lotteryMinBonus)
+        })
+    },[])
     function shuffle(array) {
         var currentIndex = array.length,
             randomIndex;
@@ -203,13 +213,13 @@ export default function LuckyWheel() {
                 <div className="row text-center">
                     <div className="col-lg-12 text-center">
                         <div className="five-pointed-star">
-                            <span className="starContent">  امتیاز شما 34 </span>
+                            <span className="starContent">  امتیاز شما {emtiyaz} </span>
                         </div>
                         <div className="row mt-2">
                             <div className="col-lg-12 text-end p-2">
                                 <div className="useStar">
                                     <ol className="list-group list-group-numbered pe-1">
-                                        <li className="list-group-item"> استفاده از گردونه شانس 500 امتیاز <button id="useLuckyWheel" onClick={() => setWheel(!showWhell)} className="btn btn-sm btn-primary float-start p-1" > استفاده می کنم  </button> </li>
+                                        <li className="list-group-item"> استفاده از گردونه شانس {lotteryMinBonus} امتیاز <button id="useLuckyWheel" onClick={() => setWheel(!showWhell)} className="btn btn-sm btn-primary float-start p-1" > استفاده می کنم  </button> </li>
                                     </ol>
                                 </div>
                             </div>
@@ -222,25 +232,24 @@ export default function LuckyWheel() {
                         <div className="mainbox" id="mainbox">
                             <div className="box boxBorder" id="box">
                                 <div className="box1">
-                                    <span className="font span1"><b> </b></span>
-                                    <span className="font span2"><b>  </b></span>
-                                    <span className="font span3"><b>   </b></span>
-                                    <span className="font span4"><b> </b></span>
-                                    <span className="font span5"> <b>  </b> </span>
-                                    <span className="font span6"> <b> </b> </span>
-                                    <span className="font span7"> <b> </b> </span>
-                                    <span className="font span1"> <b>  </b> </span>
-
+                                    <span className="font span1"><b></b></span>
+                                    <span className="font span2"><b></b></span>
+                                    <span className="font span3"><b></b></span>
+                                    <span className="font span4"><b></b></span>
+                                    <span className="font span5"><b></b></span>
+                                    <span className="font span6"><b></b></span>
+                                    <span className="font span7"><b></b></span>
+                                    <span className="font span1"><b></b></span>
                                 </div>
                                 <div className="box2">
                                     <span className="font span1"><b></b></span>
-                                    <span className="font span2"><b>  </b> </span>
-                                    <span className="font span3"> <b>  </b></span>
-                                    <span className="font span4"> <b> </b></span>
-                                    <span className="font span5"> <b> </b> </span>
-                                    <span className="font span6"> <b>  </b> </span>
-                                    <span className="font span7"> <b> </b> </span>
-                                    <span className="font span8"> <b> </b> </span>
+                                    <span className="font span2"><b></b></span>
+                                    <span className="font span3"><b></b></span>
+                                    <span className="font span4"><b></b></span>
+                                    <span className="font span5"><b></b></span>
+                                    <span className="font span6"><b></b></span>
+                                    <span className="font span7"><b></b></span>
+                                    <span className="font span8"><b></b></span>
                                 </div>
                             </div>
                             <button className="spin" id="spinnerBtn" >  چرخش   </button>
@@ -249,11 +258,9 @@ export default function LuckyWheel() {
                         <audio controls="controls" id="wheel" src="{{url('/resources/assets/lottery/wheel.mp3')}}" type="audio/mp3"></audio>
                     </div>
                 </div> : " "}
-
                 <div className="lotteryInformation my-5 text-center">
                     <div className="lotteryDesc">
                         <ul className="lists p-2">
-
                             <li className="itemList"> وقتی امتیاز شما بالای  شد چرخش فعال میگردد</li>
                             <li className="itemList"> روی دکمه چرخش کلید نماید.</li>
                             <li className="itemList"> هر  امتیاز یک شانس</li>
@@ -263,9 +270,7 @@ export default function LuckyWheel() {
                     </div>
                 </div>
             </div >
-
             <Footer />
-
         </>
     )
 }
