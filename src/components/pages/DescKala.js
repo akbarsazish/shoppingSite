@@ -7,10 +7,12 @@ import { Link } from "react-router-dom"
 import Header from "../genrealComponent/Header"
 import Sidebar from "../genrealComponent/Sidebar"
 import { changeHeartIconColor } from "./Utils"
-
+import { useParams } from "react-router-dom"
 export default function DescKala() {
     const [byModal, setByModal] = useState(false);
     const [isActive, setIsActive] = useState(false);
+    const {goodSn}=useParams();
+    alert(goodSn)
     return (
         <>
             <Header />

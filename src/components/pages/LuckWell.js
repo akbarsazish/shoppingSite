@@ -129,9 +129,6 @@ export default function LuckyWheel() {
         if (fifteenthPrize.includes(Hasil[0])) SelectedItem = "{{ $products[0]-> fifteenthPrize }}";
 
         if (sixteenthPrize.includes(Hasil[0])) SelectedItem = "{{ $products[0]-> sixteenthPrize }}";
-
-
-
         // Proses
 
         box.style.setProperty("transition", "all ease 5s");

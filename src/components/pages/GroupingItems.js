@@ -44,7 +44,7 @@ export default function GroupingItems(props) {
                                             <div key={index} className="groupingItem">
                                                 <img className="topLeft" src={starfood} alt="slider" />
                                                 {element.Price4>0&& <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>}
-                                                <Link to="/descKala" className="groupingItemLink">
+                                                <Link to={"/descKala/"+element.GoodSn} className="groupingItemLink">
                                                     <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider " />
                                                 </Link>
                                                 <Link to="/" className="groupingItemTitleLink">
