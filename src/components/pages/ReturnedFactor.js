@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { faHistory } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
+import axios from "axios";
 
-export default function ReturnedFactor() {
+export default function ReturnedFactor(props) {
+    const[returnedFactors,setReturnedFactors]=useState(0)
+    useEffect(()=>{
+        axios.get("http://192.168.10.27:8080/api/listFactors").then((data)=>{
+            setReturnedFactors(data.data.rejectedFactors.map((element,index)=>
+            <tr>
+                <td>{index+1}</td>
+                <td>{element.FactNo}</td>
+                <td>{element.FactDate}</td>
+                <td>وضعیت پرداخت</td>
+                <td>{parseInt(element.TotalPriceHDS/10).toLocaleString()}</td>
+                <td>جزئیات</td></tr>))
+        })
+    },[])
     return (
         <>
             <Header />
@@ -32,13 +46,6 @@ export default function ReturnedFactor() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th> 1</th>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td> </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -54,21 +61,12 @@ export default function ReturnedFactor() {
                                     <th>فاکتور</th>
                                     <th>تاریخ </th>
                                     <th>وضعیت پرداخت</th>
-                                    <th>مبلغ کل</th>
+                                    <th>مبلغ کل (تومان)</th>
                                     <th>نمایش</th>
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>وضعیت پدراخت</td>
-                                    <td></td>
-                                    <td></td>
-
-                                </tr>
+                                {returnedFactors}
                             </tbody>
                         </table>
                     </div>

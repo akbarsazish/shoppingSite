@@ -235,14 +235,10 @@ p.price {
 }
 
 
-.smallModalTobuy {
-    width: 99px;
-    text-align: center;
-    background-color: #ff001f;
-    border-radius: 5px;
-    margin: 0 auto;
-    position: fixed;
-    left: 25%;
+
+.buyModal {
+    width: 200px !important;
+
 }
 
 #addTobuy,
@@ -1239,22 +1235,41 @@ ul li a.active {
     margin-top: 5px;
 }
 
-
-@keyframes move {
-    100% {
-        transform: translate3d(0, 0, 1px) rotate(360deg);
-    }
+.modal.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0s, opacity 0.2s;
 }
 
 
+/* style for factor view  */
+.factorView {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 
+.factors {
+    max-width: 69%;
+    flex: 69%;
+}
 
-.login1 {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background: #671e1e;
-    overflow: hidden;
+.factorsResult {
+    max-width: 29%;
+    flex: 29%;
+}
+
+.factorDetailPart {
+    border-bottom: 1px solid gray;
+    padding: 10px;
+}
+
+.factorDetailItems {
+    display: block;
+    font-size: 16px;
+}
+
+.luckywheel {
+    font-family: sans-serif;
+    text-align: center;
 }

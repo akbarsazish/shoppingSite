@@ -5,11 +5,27 @@ import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function Wallet() {
     const [yesNo, setYesNo] = useState(false);
     const [questions, setQuestions] = useState(false);
-
+    const [takhfifMoney,settakhfifMoney] = useState(0)
+    const [firstQuestions,setFirstQuestions]=useState(0)
+    const [secondQuestions,setSecondQuestions]=useState(0)
+    const [thirdQuestions,setThirdQuestions]=useState(0)
+    const [nazarId,sertNazarId]=useState(0)
+    
+    useEffect(()=>{
+        axios.get("http://192.168.10.27:8080/api/wallet").then((data)=>{
+            settakhfifMoney(data.data.moneyTakhfif)
+            setFirstQuestions(data.data.nazars[0].question1)
+            setSecondQuestions(data.data.nazars[0].question2)
+            setThirdQuestions(data.data.nazars[0].question3)
+            sertNazarId(data.data.nazars[0].id)
+        })
+    },[])
     return (
         <>
             <Header />
@@ -19,7 +35,7 @@ export default function Wallet() {
                 <div className="row text-center">
                     <div className="col-lg-12">
                         <div className="mywalet mt-3">
-                            <span className="walletContent"> 23200 ریال </span>
+                            <span className="walletContent"> {takhfifMoney} ریال </span>
                         </div>
                         <div className="labelContent">
                             موجودی شما
@@ -43,22 +59,22 @@ export default function Wallet() {
                 {questions ? <div className="row rounded-3 mt-3" id="questionPart">
                     <div div className="col-lg-12 p-2" >
                         <ul className="list-group  pe-1">
-                            <input type="hidden" name="nazarId" value="" />
+                            <input type="hidden" name="nazarId" value={nazarId} />
                             <li className="list-group-item question">
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label"> <b>  سوال اول : دو مورد یا بیشتر از نقاط ضعف استارفود را نام ببرید.   </b> </label>
-                                    <textarea className="form-control" name="answer1" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
-                                </div>
-                            </li>
-                            <li className="list-group-item question">
-                                <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال دوم :دو مورد از نقاط قوت استارفود را نام ببرید.   </b>  </label>
+                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال اول :{firstQuestions}.   </b>  </label>
                                     <textarea className="form-control" name="answer2" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
                                 </div>
                             </li>
                             <li className="list-group-item question">
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال سوم:  جای چه کالایی در استارفود خالی است؟  </b>  </label>
+                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال دوم :{secondQuestions}.   </b>  </label>
+                                    <textarea className="form-control" name="answer2" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
+                                </div>
+                            </li>
+                            <li className="list-group-item question">
+                                <div className="mb-3">
+                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال سوم:  {thirdQuestions}  </b>  </label>
                                     <textarea className="form-control" name="answer3" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
                                 </div>
                             </li>
