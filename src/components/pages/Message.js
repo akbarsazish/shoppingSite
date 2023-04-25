@@ -1,12 +1,61 @@
 import { faHandshake, faMessage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../genrealComponent/Footer";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import profile from "../../assets/images/profile.png"
 import boy from "../../assets/images/boy.png"
+import axios from "axios";
 export default function Message() {
+    const[messages,setMessages]=useState("");
+    const[newMessage,setNewMessage]=useState("");
+    const addNewMessage=()=>{
+        setNewMessage(newMessage);
+        document.getElementById("messageTextArea").value="";
+        axios.get("http://192.168.10.27:8080/api/doAddMessage",{params:{
+            pmContent:newMessage
+        }}).then((data)=>{
+            if(data.data=="good"){
+                axios.get("http://192.168.10.27:8080/api/messageList").then((data)=>{setMessages(data.data.messages.map((message)=> 
+                <>
+                    <br/>
+                    <span className="messageContentSender">
+                        <img className="profilePic" alt="عکس یوزر" src={boy} />
+                        <span className="messageText"> <span className="messageDate"> {new Date(message.messageDate).toLocaleString('fa-IR')} </span> {message.messageContent} </span>
+                    </span>
+                    <br/>
+                    {message.replay.map((replay)=>
+                    <>
+                        <br/>
+                        <span className="messageContentRecevier">
+                        <img className="profilePic" alt="عکس یوزر" src={profile} />
+                        <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
+                        </span>
+                        <br/><br/>
+                    </>)}
+            </>))}
+            )}
+        })
+    }
+    useEffect(()=>{
+        axios.get("http://192.168.10.27:8080/api/messageList").then((data)=>{setMessages(data.data.messages.map((message)=> 
+        <><br/>
+            <span className="messageContentSender">
+                <img className="profilePic" alt="عکس یوزر" src={boy} />
+                <span className="messageText"> <span className="messageDate"> {new Date(message.messageDate).toLocaleString('fa-IR')} </span> {message.messageContent} </span>
+            </span>
+            <br/>
+            {message.replay.map((replay)=><><br/><span className="messageContentRecevier">
+                                            <img className="profilePic" alt="عکس یوزر" src={profile} />
+                                            <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
+                                            </span><br/><br/></>)}
+        </>   
+        ))
+
+        }
+        )
+    },[])
     return (
         <>
             <Header />
@@ -19,21 +68,14 @@ export default function Message() {
                 </div>
                 <div className="messageBody">
                     <div className="messageContent">
-                        <span className="messageContentSender">
-                            <img className="profilePic" alt="عکس یوزر" src={boy} />
-                            <span className="messageText"> <span className="messageDate"> 1402/01/16 12:05:33 </span>  سلام وقت شما بخیر ! سلام به قاصدک های خبر رسان که محکوم به خبرند </span>
-                        </span>
-                        <span className="messageContentRecevier">
-                            <img className="profilePic" alt="عکس یوزر" src={profile} />
-                            <span className="messageText"> <span className="messageDate"> 1402/01/16 12:05:33 </span>  سلام به قاصدک های خبر رسان که محکوم به خبرند! ع سلام وقت شما بخیر  </span>
-                        </span>
+                        {messages}
                     </div>
                 </div>
                 <div className="messageFooter">
                     <div class="mb-3">
-                        <textarea class="form-control h-25" id="exampleFormControlTextarea1" rows="3" placeholder="متن پیام خود را بنویسید!"></textarea>
+                        <textarea class="form-control h-25" id="messageTextArea" onKeyUp={(event)=>setNewMessage(event.target.value)} rows="3" placeholder="متن پیام خود را بنویسید!"></textarea>
                     </div>
-                    <button className="btn btn-sm btn-primary"> ارسال پیام <FontAwesomeIcon icon={faMessage} /> </button>
+                    <button className="btn btn-sm btn-primary" onClick={()=>addNewMessage()}> ارسال پیام <FontAwesomeIcon icon={faMessage} /> </button>
                 </div>
             </div>
 

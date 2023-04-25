@@ -32,7 +32,6 @@ export default function LuckyWheel() {
                     </div>
                 </div>
 
-
                 <LuckyCode />
 
                 <div className="lotteryInformation my-5 text-center">
@@ -46,8 +45,10 @@ export default function LuckyWheel() {
                         </ul>
                     </div>
                 </div>
-            </div >
+            </div>
+
             <Footer />
+
         </>
     )
 }

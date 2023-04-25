@@ -13,13 +13,20 @@ function Header() {
     
     useEffect(()=>{
         axios.get("http://192.168.10.27:8080/api/getHeaderInfo").then((data)=>{
-            console.log(data.data)
-            
             localStorage.getItem("buyAmount")
             setBonusResult(data.data.bonusResult)
             settakhfifMoney(data.data.takhfifMoney)
         })
     },[])
+
+
+    const searchKala=(event)=>{
+        if (event.keyCode === 13) {
+            
+            window.location = 'searchKala/'+event.target.value;
+        }
+    }
+
 
     return (
         <div className="row topMenu ">
@@ -29,7 +36,7 @@ function Header() {
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
                         <FontAwesomeIcon onClick={() => setSearchInput(!searchInput)} className="faIcon" id="searchIcon" icon={faSearch} />
-                        {searchInput ? <input className="txtsearch" type="text" id="txtsearch" placeholder="چی لازم داری ؟  ..." /> : null}
+                        {searchInput ? <input className="txtsearch" type="text" onKeyUp={(e)=>searchKala(e)} placeholder="چی لازم داری ؟  ..." /> : null}
                     </form>
                 </div>
                 {!searchInput ? <div className="flex-item-right mt-2">
