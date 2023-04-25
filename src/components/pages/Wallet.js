@@ -62,26 +62,25 @@ export default function Wallet() {
                             <input type="hidden" name="nazarId" value={nazarId} />
                             <li className="list-group-item question">
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال اول :{firstQuestions}.   </b>  </label>
+                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال اول : {firstQuestions}</b></label>
                                     <textarea className="form-control" name="answer2" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
                                 </div>
                             </li>
                             <li className="list-group-item question">
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال دوم :{secondQuestions}.   </b>  </label>
+                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال دوم : {secondQuestions}</b></label>
                                     <textarea className="form-control" name="answer2" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
                                 </div>
                             </li>
                             <li className="list-group-item question">
                                 <div className="mb-3">
-                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال سوم:  {thirdQuestions}  </b>  </label>
+                                    <label for="exampleFormControlTextarea1" className="form-label"> <b> سوال سوم: {thirdQuestions}</b></label>
                                     <textarea className="form-control" name="answer3" required id="exampleFormControlTextarea1" minlength="15" rows="3"></textarea>
                                 </div>
                             </li>
                             <span className="list-group-item question textn-end">
                                 <input type="hidden" name="takhfif" value="" />
-                                <button className="walletbutton" type="submit"> ارسال  </button>
-
+                                <button className="walletbutton" type="submit"> ارسال </button>
                             </span>
                         </ul>
                     </div >

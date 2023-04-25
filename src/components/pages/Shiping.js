@@ -23,20 +23,21 @@ export default function Shiping(props) {
     const[selectdPayType,setSelectedPayType]=useState(0)
     const[allMoney,setAllMoney]=useState(localStorage.getItem("allMoney"))
     const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
+    const[takhfifCase,setTakhfifCase]=useState(0)
 
     useEffect(() => {
         axios.get("http://192.168.10.27:8080/api/shippingData")
         .then((data) => {
-           console.log(data.data)
-           setWeekDay1(data.data.date1);
-           setWeekDay2(data.data.date2);
-           setTomorrowDate(data.data.tomorrowDate);
-           setAfterTomorrowDate(data.data.afterTomorrowDate);
-           setMoorningTimeContent(data.data.setting.moorningTimeContent);
-           setaAternoonTimeContent(data.data.setting.afternoonTimeContent);
-           setDefaultAddress(data.data.customer.peopeladdress)
-           setSelectedAddress(0+'_'+data.data.customer.peopeladdress)
-           setOtherAddresses(data.data.addresses.map((element)=><option value={element.AddressPeopel+'_'+element.SnPeopelAddress}>{element.AddressPeopel}</option>))
+            setTakhfifCase(data.data.takhfifCase)
+            setWeekDay1(data.data.date1);
+            setWeekDay2(data.data.date2);
+            setTomorrowDate(data.data.tomorrowDate);
+            setAfterTomorrowDate(data.data.afterTomorrowDate);
+            setMoorningTimeContent(data.data.setting.moorningTimeContent);
+            setaAternoonTimeContent(data.data.setting.afternoonTimeContent);
+            setDefaultAddress(data.data.customer.peopeladdress)
+            setSelectedAddress(0+'_'+data.data.customer.peopeladdress)
+            setOtherAddresses(data.data.addresses.map((element)=><option value={element.AddressPeopel+'_'+element.SnPeopelAddress}>{element.AddressPeopel}</option>))
         })
     },[])
 
@@ -53,7 +54,6 @@ axios.get("http://192.168.10.27:8080/api/addFactorApi",{params:{
     customerAddress:selectdAddress,
     allMoney:allMoney}
 }).then((data)=>{
-console.log(data.data)
 window.location.href = '/success'
 })    }
 
@@ -162,10 +162,10 @@ window.location.href = '/success'
                         <p className="factorInfo"> مبلغ قابل پرداخت</p>
                     </div>
                     <div className="shippingPartBottom mt-2">
-                        <p className="factorInfo"> {parseInt(parseInt(localStorage.getItem('allMoney'))+parseInt(localStorage.getItem('allProfit'))).toLocaleString()} تومان </p>
-                        <p className="factorInfo"> 0 تومان  </p>
-                        <p className="factorInfo text-danger"> {parseInt(localStorage.getItem('allProfit')).toLocaleString()} تومان  </p>
-                        <p className="factorInfo"> {parseInt(localStorage.getItem('allMoney')).toLocaleString()} تومان  </p>
+                        <p className="factorInfo"> {parseInt(parseInt(localStorage.getItem('allMoney'))+parseInt(localStorage.getItem('allProfit'))).toLocaleString("fa-IR")} تومان </p>
+                        <p className="factorInfo"> {parseInt(takhfifCase).toLocaleString("fa-IR")} تومان  </p>
+                        <p className="factorInfo text-danger"> {parseInt(localStorage.getItem('allProfit')).toLocaleString("fa-IR")} تومان  </p>
+                        <p className="factorInfo"> {parseInt(localStorage.getItem('allMoney')).toLocaleString("fa-IR")} تومان  </p>
                     </div>
                     <div className="shippingPartBottom">
                        {(payType && factorDay) ? (

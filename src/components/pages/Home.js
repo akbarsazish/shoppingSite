@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import MainGroupItem from './MainGroupItem'
 import { Counter } from '../../features/counter/Counter'
+import axios from "axios";
 
 export default function Home() {
     const baseUrl = "//starfoods.ir/api"
@@ -24,18 +25,13 @@ export default function Home() {
         }, 10000);
     }, [showModal]);
 
-    fetch("http://192.168.10.26:8080/api/getMainGroups")
-        .then(response => response.json())
-        .then((groups) => {
-<<<<<<< HEAD
-            setMainGroups(groups.map((element)=><MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))
-        },[])
-        
-=======
-            setMainGroups(groups.map((element) => <MainGroupItem title={element.title} id={element.id} ></MainGroupItem>))
+    useEffect(() => {
+    axios.get("http://192.168.10.27:8080/api/getMainGroups").then((data) => {
+            setMainGroups(data.data.map((element,index)=><MainGroupItem key={index
+            } title={element.title} id={element.id} ></MainGroupItem>))
         })
-
->>>>>>> a1b44de5ff6830efee118133af864ccee23d78cf
+    },[])
+        
     return (
         <div className="container mainSliderContainer">
             <div className="row">

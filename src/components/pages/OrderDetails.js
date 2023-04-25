@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState } from "react";
 
 export default function FactoreDetails(props){
-    const [factorItem, setFactorItem] = useState(0);
+    const [orderItem, setFactorItem] = useState(0);
     const [allPrice, setAllPrice] = useState(0)
     useEffect(()=>{
         axios.post("http://192.168.10.27:8080/api/factorView", {factorSn:localStorage.getItem("selectedHDS")
@@ -38,7 +38,7 @@ export default function FactoreDetails(props){
                          <h4 className="p-3"> تعداد کالا: 8 </h4>
                         <div className="factorView">
                             
-                           {factorItem}
+                           {orderItem}
 
                             <div className="factorsResult card">
                                     <div className="factorDetailPart">
