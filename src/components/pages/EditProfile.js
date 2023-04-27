@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
@@ -11,10 +11,10 @@ export default function EditProfile() {
     const handleSelect = (index) => {
         setActiveTab(index);
     };
-    const[haqiqiCustomerInfo,setHaqiqiCustomerInfo]=useState(0)
-    const[hoquqiCustomerInfo,setHoquqiCustomerInfo]=useState(0)
-    useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/profile").then((data)=>{
+    const [haqiqiCustomerInfo, setHaqiqiCustomerInfo] = useState(0)
+    const [hoquqiCustomerInfo, setHoquqiCustomerInfo] = useState(0)
+    useEffect(() => {
+        axios.get("http://192.168.10.27:8080/api/profile").then((data) => {
             setHaqiqiCustomerInfo(data.data.exactHoqoqi)
             setHoquqiCustomerInfo([data.data.exactHaqiqi])
             

@@ -13,6 +13,7 @@ import Contact from "../pages/Contact";
 
 function Sidebar() {
     return (
+        <>
         <div className="offcanvas offcanvas-end customeOffcanvas" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <Link to="/home">
                 <div className="offcanvas-header dri-left" dir="ltr">
@@ -30,12 +31,9 @@ function Sidebar() {
                 <Link to="/contact" element={<Contact />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faPhone} /> تماس با ما </Link>
                 <Link to="/login" onClick={()=>{localStorage.removeItem("isLogedIn")}} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faSignOut} /> خروج </Link>
             </div>
-            < div className="offcanvas-header dri-left" dir="ltr">
-                <Link className="socialMedia" to="https://instagram.com/{{$instagram}}"><FontAwesomeIcon className="menuFaIcon" style={{ color: "#b32eba" }} icon={faInstagram} /></Link>
-                <Link className="socialMedia" to="https://instagram.com/{{$instagram}}"><FontAwesomeIcon className="menuFaIcon" style={{ color: "#00a0d7" }} icon={faTelegram} /></Link>
-                <Link className="socialMedia" to="https://instagram.com/{{$instagram}}"><FontAwesomeIcon className="menuFaIcon" style={{ color: "#00cd6c" }} icon={faWhatsapp} /></Link>
             </div>
-        </div>
+
+        </>
     )
 }
 

@@ -1188,6 +1188,7 @@ ul li a.active {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 999;
 }
 
 .loginBody {
@@ -1233,11 +1234,12 @@ ul li a.active {
     margin-bottom: -5px;
     margin-top: 5px;
 }
+
 .modal.hidden {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s linear 0s, opacity 0.2s;
-  }
+}
 
 
 /* style for factor view  */
@@ -1265,4 +1267,19 @@ ul li a.active {
 .factorDetailItems {
     display: block;
     font-size: 16px;
+}
+
+#wheel canvas {
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+    align-self: center !important;
+    width: 80% !important;
+    display: flex !important;
+}
+
+.lotteryInformation {
+    box-shadow: 1px 1px 5px red;
+    justify-content: center;
+    border-radius: 5px;
 }

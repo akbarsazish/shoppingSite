@@ -158,16 +158,20 @@
     }
 
 
-    
-.factors {
-    max-width: 99%;
-    flex: 99%;
-}
 
-.factorsResult {
-    max-width: 99%;
-    flex: 99%;
-}
+    .factors {
+        max-width: 99%;
+        flex: 99%;
+    }
+
+    .factorsResult {
+        max-width: 99%;
+        flex: 99%;
+    }
+
+    #wheel canvas {
+        width: 100% !important;
+    }
 
 
 }

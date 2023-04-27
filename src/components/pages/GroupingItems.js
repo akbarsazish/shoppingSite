@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
     Link,
     useParams
@@ -10,28 +10,28 @@ import starfood from "../../assets/images/starfood.png"
 import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShoppingCart,faBell } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
-import { event } from "jquery";
+
 export default function GroupingItems(props) {
     const [byModal, setByModal] = useState(false);
     const [isActive, setIsActive] = useState(false);
-    const [subGrups,setSubGroups]=useState(0);
-    const [maingroupKala,setMainGroupKala]=useState(0);
+    const [subGrups, setSubGroups] = useState(0);
+    const [maingroupKala, setMainGroupKala] = useState(0);
     const [selectedHeart, setSelectedHeart] = useState(null);
     const {id}=useParams();
     const [buyOption, setBuyOption]=useState(0)
     //
-    useEffect(()=>{
-            fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId="+id)
-            .then(response=>response.json())
+    useEffect(() => {
+        fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId=" + id)
+            .then(response => response.json())
             .then((groups) => {
-                setSubGroups(groups.map((element,index)=><SwiperSlide key={index}>
-                <Link to={"/subGroupItems/"+element.selfGroupId+"/"+element.id} className="topSliderLink">
-                    <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/"+element.id+".jpg"} alt="slider"/>
-                    <p className="topSliderTile"> {element.title} </p>
-                </Link>
-            </SwiperSlide>))
+                setSubGroups(groups.map((element, index) => <SwiperSlide key={index}>
+                    <Link to={"/subGroupItems/" + element.selfGroupId + "/" + element.id} className="topSliderLink">
+                        <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/" + element.id + ".jpg"} alt="slider" />
+                        <p className="topSliderTile"> {element.title} </p>
+                    </Link>
+                </SwiperSlide>))
             })
         },[id])
 
