@@ -20,6 +20,7 @@ export default function GroupingItems(props) {
     const [maingroupKala, setMainGroupKala] = useState(0);
     const [selectedHeart, setSelectedHeart] = useState(null);
     const {id}=useParams();
+    const heartRef = useRef(null);
     const [buyOption, setBuyOption]=useState(0)
     //
     useEffect(() => {
@@ -33,11 +34,11 @@ export default function GroupingItems(props) {
                     </Link>
                 </SwiperSlide>))
             })
-        },[id])
+        },[isActive])
 
     useEffect(() => {
         renewGroupItems();
-        },[id])
+        },[isActive])
 
         const requestProduct=(psn,goodSn,event)=>{
             axios.get("http://192.168.10.27:8080/api/addRequestedProduct",{params:{
@@ -121,7 +122,7 @@ export default function GroupingItems(props) {
                                                     </div>
                                                 </div>))
                                                 })
-                                            }
+    }
 
                                         const showBuyModal=(goodSn,event)=>{
     
@@ -187,61 +188,60 @@ export default function GroupingItems(props) {
                                                     renewGroupItems();
                                                   })
                                                 }   
-                                        }
-    if(localStorage.getItem("isLogedIn")){
-        return (
-            <>
-                <Header />
-                <Sidebar />
-                <div className="container">
-                    <div className="groupingItemsTopSlider">
-                        <Swiper
-                            slidesPerView={1}
-                            spaceBetween={10}
-                            navigation={true}
+                                      }
+    return (
+        <>
+            <Header />
+            <Sidebar />
+            <div className="container">
+                <div className="groupingItemsTopSlider">
+                    <Swiper
+                        slidesPerView={1}
+                        spaceBetween={10}
+                        navigation={true}
 
-                            breakpoints={{
-                                320: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20,
-                                },
-                                640: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20,
-                                },
-                                768: {
-                                    slidesPerView: 4,
-                                    spaceBetween: 40,
-                                },
-                                1024: {
-                                    slidesPerView: 5,
-                                    spaceBetween: 50,
-                                },
-                            }}
-                            modules={[Navigation]}
-                            className="mySwiper">
-                            {subGrups}
-                        </Swiper>
-                    </div>
-                    <div className="groupingItems">
-                        {maingroupKala}
-                    </div>
-                </div >
-                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog buyModal">
-                        <div className="modal-content">
-                            <div className="modal-body">
-                                <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                    {buyOption}
-                                </div>
+                        breakpoints={{
+                            320: {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                            },
+                            640: {
+                                slidesPerView: 2,
+                                spaceBetween: 20,
+                            },
+                            768: {
+                                slidesPerView: 4,
+                                spaceBetween: 40,
+                            },
+                            1024: {
+                                slidesPerView: 5,
+                                spaceBetween: 50,
+                            },
+                        }}
+                        modules={[Navigation]}
+                        className="mySwiper">
+                        {subGrups}
+                    </Swiper>
+                </div>
+
+                <div className="groupingItems">
+                    {maingroupKala}
+                </div>
+            </div >
+            
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog buyModal">
+                    <div className="modal-content">
+                        <div className="modal-body">
+                            <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                {buyOption}
                             </div>
                         </div>
                     </div>
                 </div>
-            </>
-        )
-    }else{
-        window.location.href="/login"
-    }
+            </div>
+
+        </>
+    )
 
 }

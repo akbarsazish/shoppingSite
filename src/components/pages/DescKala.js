@@ -73,7 +73,7 @@ export default function DescKala(props) {
 
     useEffect(() => {
         renewDescKala();
-    },[goodSn])
+    },[])
     const updateBuy=(orderId,amountUnit,goodSn)=>{
         axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
             {
@@ -159,57 +159,52 @@ export default function DescKala(props) {
                 </div>))
         })
     }
+    return (
+        <>
+            <Header />
+            <Sidebar />
+            <div className="container marginTop mb-5">
+                <div className="kalaDescibe mt-2 p-2">
+                    <div className="kalaImg">
+                        <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite=='YES') ? 'defaultHeartColor' :''} icon={faHeart}  ></FontAwesomeIcon>
+                        <img className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
+                    </div>
 
-    if(localStorage.getItem("isLogedIn")){
-        return (
-            <>
-                <Header />
-                <Sidebar />
-                <div className="container marginTop mb-5">
-                    <div className="kalaDescibe mt-2 p-2">
-                        <div className="kalaImg">
-                            <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite=='YES') ? 'defaultHeartColor' :''} icon={faHeart}  ></FontAwesomeIcon>
-                            <img className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
+                    <div className="kalaDescibtion">
+                        <div className="descHeader">
+                            <div className="desckTitle">
+                                <span className="title" > <b> {kalaName}:</b>  {parseInt(mainPrice/10).toLocaleString()} تومان </span>
+                            </div>
+                            {boughtInf}
                         </div>
 
-                        <div className="kalaDescibtion">
-                            <div className="descHeader">
-                                <div className="desckTitle">
-                                    <span className="title" > <b> {kalaName}:</b>  {parseInt(mainPrice/10).toLocaleString()} تومان </span>
-                                </div>
-                                {boughtInf}
-                            </div>
+                        <div className="desckalaBody">
+                            <p className="title mt-2">  <b> گروه اصلی  :</b> {groupName} </p>
+                            <p className="title">  <b> کد محصول :</b> {pcode} </p>
+                            <p className="desciption">
+                                {descKala}
+                            </p>
+                        </div> <hr></hr>
+                        <h5 className="similarKalaTitle"> کالاهای مشابه </h5>
+                        <div className="similarKala">
+                            {asameKalas}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                            <div className="desckalaBody">
-                                <p className="title mt-2">  <b> گروه اصلی  :</b> {groupName} </p>
-                                <p className="title">  <b> کد محصول :</b> {pcode} </p>
-                                <p className="desciption">
-                                    {descKala}
-                                </p>
-                            </div> <hr></hr>
-                            <h5 className="similarKalaTitle"> کالاهای مشابه </h5>
-                            <div className="similarKala">
-                                {asameKalas}
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog buyModal">
+                    <div className="modal-content">
+                        <div className="modal-body">
+                            <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                {buyOption}
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog buyModal">
-                        <div className="modal-content">
-                            <div className="modal-body">
-                                <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                    {buyOption}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </>
-        )
-    }else{
-        window.location.href="/login"
-    }
+        </>
+    )
 }

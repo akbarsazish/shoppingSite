@@ -35,7 +35,7 @@ export default function Login(props) {
                 localStorage.setItem("isLogedIn",res.data.token);
                 localStorage.setItem('userName', res.data.username);
                 localStorage.setItem('psn', res.data.psn);
-                window.location.href="/home"
+               window.location.href="/home"
             }
             else if (res.data.status === 401) {
                 window.location.href="/login"
@@ -49,8 +49,7 @@ export default function Login(props) {
 
     return (
         <>
-            <div className="containerFluid login1" style={{ height: "100vh", width: "100%" }}>
-
+            <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
                 <div className="loginWaper p-5">
                     <div className="login">
                         <div className="loginHeader text-center">

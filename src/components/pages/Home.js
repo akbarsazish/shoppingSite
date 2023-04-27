@@ -17,8 +17,9 @@ import axios from "axios";
 export default function Home() {
     const baseUrl = "//starfoods.ir/api"
     const [showModal, setShowModal] = useState(false);
-    const [mainGroups, setMainGroups] = useState(0)
-    const [slides, setSlides] = useState({})
+    const [mainGroups, setMainGroups] = useState(0);
+    const [slides,setSlides]=useState([])
+    const [smallSlider,setSmallSlider]=useState([])
 
     useEffect(() => {
         setTimeout(function () {
@@ -28,17 +29,18 @@ export default function Home() {
 
     useEffect(() => {
 
+        axios.get("http://192.168.10.27:8080/api/getSlidersApi").then((data) => {
+            console.log(data.data.sliders)
+            setSlides(data.data.sliders[0])
+            setSmallSlider(data.data.smallSlider[0])
+        })
+
     axios.get("http://192.168.10.27:8080/api/getMainGroups").then((data) => {
             setMainGroups(data.data.map((element,index)=><MainGroupItem key={index
             } title={element.title} id={element.id} ></MainGroupItem>))
         })
-
-        axios.get("http://192.168.10.27:8080/api/getSlidersApi").then((data) => {
-            setSlides(data.data.sliders[0])
-        })
     },[])
-    //https://starfoods.ir/resources/assets/images/mainSlider/130_1.jpg
-
+        
     return (
         <div className="container mainSliderContainer">
             <div className="row">
@@ -50,7 +52,6 @@ export default function Home() {
                         }}
                         modules={[Pagination]}
                         className="mySwiper mainSlider">
-                            
                         <SwiperSlide><img src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.firstPic} className="me-1 logo" alt="لوگو" /></SwiperSlide>
                         <SwiperSlide><img src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.secondPic} className="me-1 logo" alt="لوگو" /></SwiperSlide>
                         <SwiperSlide><img src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.thirdPic} className="me-1 logo" alt="لوگو" /></SwiperSlide>
@@ -58,10 +59,10 @@ export default function Home() {
                 </div>
                 <div className="col-lg-4 px-0 mx-0">
                     <div className="row">
-                        <img src={eid} className="smallSlider" alt="لوگو" />
+                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} className="smallSlider" alt="لوگو" />
                     </div>
                     <div className="row">
-                        <img src={eid} className="smallSlider" alt="لوگو" />
+                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} className="smallSlider" alt="لوگو" />
                     </div>
                 </div>
             </div >

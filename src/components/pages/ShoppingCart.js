@@ -144,6 +144,7 @@ export default function ShoppingCart(props) {
         ).then((response) => {
             renewCarts()
         })
+    }
 
               const deleteOrder=(orderBYSSn,goodSn)=>{
                 axios.post('http://192.168.10.27:8080/api/deleteOrderBYS',{
@@ -241,5 +242,4 @@ export default function ShoppingCart(props) {
     }else{
         window.location.href = '/login'
     }
-}
 }

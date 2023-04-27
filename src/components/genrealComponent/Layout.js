@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Home from "../pages/Home";
 import Footer from "./Footer";
 import Sidebar from './Header'
 import Header from './Sidebar';
-import axios from "axios";
+import { Outlet } from "react-router-dom";
 
 const Layout = () => {
     // useEffect(()=>{

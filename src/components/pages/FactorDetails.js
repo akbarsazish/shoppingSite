@@ -28,16 +28,18 @@ export default function FactoreDetails(props){
 
   
 
-    if(localStorage.getItem("isLogedIn")){
-        return(
-            <>
-            <Header />
-            <Sidebar />
-                <div className="container marginTop" style={{ borderRadius: "10px 10px 5px 5px" }}>
-                    <div className="row p-2">
-                        <h4 className="p-3"> تعداد کالا: {parseInt(factorItem.length).toLocaleString("fa-IR")} </h4>
+
+    return(
+        <>
+        <Header />
+        <Sidebar />
+            <div className="container marginTop" style={{ borderRadius: "10px 10px 5px 5px" }}>
+                <div className="row p-2">
+                         <h4 className="p-3"> تعداد کالا: 8 </h4>
                         <div className="factorView">
-                            {factorItem}
+                            
+                           {factorItem}
+
                             <div className="factorsResult card">
                                     <div className="factorDetailPart">
                                         <span className="factorDetailItems"> <b>  قیمت کالا  : </b> {parseInt(allPrice/10).toLocaleString()} </span>
@@ -52,12 +54,10 @@ export default function FactoreDetails(props){
                                     </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-            <Footer />
-        </>
-        )
-    }else{
-        window.location.href="/login"
-    }
+            </div>
+   
+           <Footer />
+       </>
+    )
 }

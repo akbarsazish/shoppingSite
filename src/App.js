@@ -22,7 +22,6 @@ import Success from './components/pages/Success';
 import LuckyWheel from './components/pages/LuckWell';
 import Wallet from './components/pages/Wallet';
 import FactoreDetails from "./components/pages/FactorDetails";
-import OrderDetails from "./components/pages/OrderDetails";
 import Login from './components/pages/Login';
 import SubGroupItems from './components/pages/SubGroupItems';
 import axios from 'axios'
@@ -150,7 +149,6 @@ function App() {
         <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
         <Route path='/login'                        element={<Login submitForm={()=>login("09106670985","2266")}/>}></Route>
         <Route path='/searchKala/:term'                        element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
-        <Route path='/orderDetails'                element={<OrderDetails/>}></Route>
       </Routes>
     </>
   )

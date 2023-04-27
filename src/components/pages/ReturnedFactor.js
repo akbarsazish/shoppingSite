@@ -21,8 +21,6 @@ export default function ReturnedFactor(props) {
                 <td>جزئیات</td></tr>))
         })
     },[])
-
-    if(localStorage.getItem("isLogedIn")){
     return (
         <>
             <Header />
@@ -78,7 +76,4 @@ export default function ReturnedFactor(props) {
             <Footer />
         </>
     )
-    }else{
-        window.location.href="/login"
-    }
 }
