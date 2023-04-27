@@ -145,7 +145,6 @@ export default function ShoppingCart(props) {
             renewCarts()
         })
 
-<<<<<<< HEAD
               const deleteOrder=(orderBYSSn,goodSn)=>{
                 axios.post('http://192.168.10.27:8080/api/deleteOrderBYS',{
                  SnOrderBYS: orderBYSSn
@@ -159,29 +158,10 @@ export default function ShoppingCart(props) {
                    }
                  })
              }
-=======
-    }
-
-    const deleteOrder = (orderBYSSn, goodSn) => {
-
-        axios.post('http://192.168.10.27:8080/api/deleteOrderBYS', {
-            SnOrderBYS: orderBYSSn
-        }).then((data) => {
-            let countBought = parseInt(localStorage.getItem('buyAmount'));
-            if (countBought > 0) {
-                localStorage.setItem('buyAmount', countBought - 1);
-                let cartDiv = document.getElementById(goodSn + "cartDiv")
-                cartDiv.style.display = "none";
-                renewCarts()
-            }
-        })
-    }
->>>>>>> 19dba35ad95baab34834b2a8b4b4d17adca29c07
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
 
-<<<<<<< HEAD
     if(localStorage.getItem("isLogedIn")){
         
         return (
@@ -195,31 +175,6 @@ export default function ShoppingCart(props) {
                         <div className="shoppingRight">
                             <div className="shoppingItems">
                                 {cartItems}
-=======
-            <div className="container marginTop">
-                <h5 className="fw-bold"> سبد خرید : </h5>
-                <div className="shoppingCart p-2">
-                    <div className="shoppingRight">
-                        <div className="shoppingItems">
-                            {cartItems}
-                        </div>
-                    </div>
-                    <div className="shoppingLeft">
-                        <div className="shoppingLefFirst">
-                            <h6 className="payAbleTitle"> مبلغ قابل پرداخت </h6>
-                            <p className="payAbleAmount"> {parseInt(allMoney).toLocaleString("fa-IR")} {currencyName} </p>
-                        </div>
-                        <div className="shoppingLeftSecond">
-                            <div>
-                                {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState == 0) ?
-                                    <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart} /></Link>
-                                    : (allMoney <= minSalePriceFactor ?
-                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
-                                        :
-                                        <Link to="#" type="button" data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
-                                    )
-                                }
->>>>>>> 19dba35ad95baab34834b2a8b4b4d17adca29c07
                             </div>
                         </div>
                         <div className="shoppingLeft">
@@ -260,7 +215,6 @@ export default function ShoppingCart(props) {
                     </div>
                 }
 
-<<<<<<< HEAD
                 <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-sm">
                         <div className="modal-content">
@@ -278,24 +232,6 @@ export default function ShoppingCart(props) {
                                     <button type="button" className="btn btn-success float-end" onClick={()=>changeCartsPrice(snHDS)} data-bs-dismiss="modal">ادامه <i className="fa fa-repeat"></i></button>
                                 <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal">خیر <i className="fa fa-xmark"></i></button>
                             </div>
-=======
-            <div id="myModal" className="modal fade" role="dialog" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-sm">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h6 className="modal-title text-center">کالاهای زیر تغییر قیمت دارند.</h6>
-                        </div>
-                        <div className="modal-body">
-                            <ul className="list-group list-group-flush">
-                                {changedItems}
-                            </ul>
-                            <hr />
-                            <h6>در صورت ادامه با قیمت جدید ثبت خواهد شد.</h6>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-success float-end" onClick={() => changeCartsPrice(snHDS)} data-bs-dismiss="modal">ادامه <i className="fa fa-repeat"></i></button>
-                            <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal">خیر <i className="fa fa-xmark"></i></button>
->>>>>>> 19dba35ad95baab34834b2a8b4b4d17adca29c07
                         </div>
                     </div>
                 </div>
@@ -305,4 +241,5 @@ export default function ShoppingCart(props) {
     }else{
         window.location.href = '/login'
     }
+}
 }
