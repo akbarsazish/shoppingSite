@@ -28,7 +28,7 @@ function Sidebar() {
                 <Link to="/shoppingCart" element={<faShoppingCart />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faShoppingCart} />  سبد خرید </Link>
                 <Link to="/message" element={<Message />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faEnvelope} /> پیام ها  </Link>
                 <Link to="/contact" element={<Contact />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faPhone} /> تماس با ما </Link>
-                <Link to="/" className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faSignOut} /> خروج </Link>
+                <Link to="/login" onClick={()=>{localStorage.removeItem("isLogedIn")}} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faSignOut} /> خروج </Link>
             </div>
             < div className="offcanvas-header dri-left" dir="ltr">
                 <Link className="socialMedia" to="https://instagram.com/{{$instagram}}"><FontAwesomeIcon className="menuFaIcon" style={{ color: "#b32eba" }} icon={faInstagram} /></Link>

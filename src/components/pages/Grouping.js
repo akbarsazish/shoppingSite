@@ -14,18 +14,21 @@ export default function Grouping() {
             setMainGroups(groups.map((element)=><MainGroupList title={element.title} id={element.id} ></MainGroupList>))
         })
     },[])
-    
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div className="container grouping">
-                <ul className="groupingPart">
-                    {mainGroups}
-                </ul >
-            </div >
-            <Footer />
-        </>
-    );
+    if(localStorage.getItem("isLogedIn")){
+        return (
+            <>
+                <Header />
+                <Sidebar />
+                <div className="container grouping">
+                    <ul className="groupingPart">
+                        {mainGroups}
+                    </ul >
+                </div >
+                <Footer />
+            </>
+        );
+    }else{
+        window.location.href="/login"
+    }
 
 }

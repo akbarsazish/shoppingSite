@@ -145,7 +145,6 @@ export default function ShoppingCart(props) {
             }
 
               const deleteOrder=(orderBYSSn,goodSn)=>{
-  
                 axios.post('http://192.168.10.27:8080/api/deleteOrderBYS',{
                  SnOrderBYS: orderBYSSn
                  }).then((data)=>{
@@ -161,78 +160,84 @@ export default function ShoppingCart(props) {
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
-    return (
-        <>
-            <Header />
-            <Sidebar />
 
-            <div className="container marginTop">
-                <h5 className="fw-bold"> سبد خرید : </h5>
-                <div className="shoppingCart p-2">
-                    <div className="shoppingRight">
-                        <div className="shoppingItems">
-                            {cartItems}
-                        </div>
-                    </div>
-                    <div className="shoppingLeft">
-                        <div className="shoppingLefFirst">
-                            <h6 className="payAbleTitle"> مبلغ قابل پرداخت </h6>
-                            <p className="payAbleAmount"> {parseInt(allMoney).toLocaleString("fa-IR")} {currencyName} </p>
-                        </div>
-                        <div className="shoppingLeftSecond">
-                            <div>
-                                {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
-                                    <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
-                                :( allMoney <= minSalePriceFactor?
-                                    <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
-                                    :
-                                    <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
-                                )
-                                }
+    if(localStorage.getItem("isLogedIn")){
+        
+        return (
+            <>
+                <Header />
+                <Sidebar />
+
+                <div className="container marginTop">
+                    <h5 className="fw-bold"> سبد خرید : </h5>
+                    <div className="shoppingCart p-2">
+                        <div className="shoppingRight">
+                            <div className="shoppingItems">
+                                {cartItems}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div className="yourBenefit">
-                    <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
-                </div>
-            </div>
-            <Footer />
-            {true &&
-                <div className="modal fade " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog buyModal">
-                        <div className="modal-content">
-                            <div className="modal-body">
-                                <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                    {buyOption}
+                        <div className="shoppingLeft">
+                            <div className="shoppingLefFirst">
+                                <h6 className="payAbleTitle"> مبلغ قابل پرداخت </h6>
+                                <p className="payAbleAmount"> {parseInt(allMoney).toLocaleString("fa-IR")} {currencyName} </p>
+                            </div>
+                            <div className="shoppingLeftSecond">
+                                <div>
+                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
+                                        <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
+                                    :( allMoney <= minSalePriceFactor?
+                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
+                                        :
+                                        <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
+                                    )
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div className="yourBenefit">
+                        <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
+                    </div>
                 </div>
-            }
+                <Footer />
+                {true &&
+                    <div className="modal fade " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog buyModal">
+                            <div className="modal-content">
+                                <div className="modal-body">
+                                    <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                        {buyOption}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
 
-            <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog modal-dialog-sm">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h6 className="modal-title text-center">کالاهای زیر تغییر قیمت دارند.</h6>
-                        </div>
-                        <div className="modal-body">
-                            <ul className="list-group list-group-flush">
-                                {changedItems}
-                            </ul>
-                            <hr/>
-                            <h6>در صورت ادامه با قیمت جدید ثبت خواهد شد.</h6>
-                        </div>
-                        <div className="modal-footer">
-                                <button type="button" className="btn btn-success float-end" onClick={()=>changeCartsPrice(snHDS)} data-bs-dismiss="modal">ادامه <i className="fa fa-repeat"></i></button>
-                            <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal">خیر <i className="fa fa-xmark"></i></button>
+                <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-sm">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h6 className="modal-title text-center">کالاهای زیر تغییر قیمت دارند.</h6>
+                            </div>
+                            <div className="modal-body">
+                                <ul className="list-group list-group-flush">
+                                    {changedItems}
+                                </ul>
+                                <hr/>
+                                <h6>در صورت ادامه با قیمت جدید ثبت خواهد شد.</h6>
+                            </div>
+                            <div className="modal-footer">
+                                    <button type="button" className="btn btn-success float-end" onClick={()=>changeCartsPrice(snHDS)} data-bs-dismiss="modal">ادامه <i className="fa fa-repeat"></i></button>
+                                <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal">خیر <i className="fa fa-xmark"></i></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </>
-    )
+            </>
+        )
+    }else{
+        window.location.href = '/login'
+    }
 }

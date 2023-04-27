@@ -39,7 +39,7 @@ export default function Profile(props) {
             <td>{new Date(element.TimeStamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
             <td>{element.OrderDate}</td><td> {parseInt(element.Price/10).toLocaleString()} </td>
             <td>  پرداخت در محل  </td>
-            <td> <Link to="/factorDetails" onClick={()=>{localStorage.setItem("selectedHDS", element.SnOrder)}}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
+            <td> <Link to="/orderDetails" onClick={()=>{localStorage.setItem("selectedHDS", element.SnOrder)}}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
             setCustomerName(data.data.profile.Name)
             setIntroducerCode(data.data.profile.selfIntroCode) 
             setCustomerMobile((data.data.profile.PhoneStr.split("-"))[0])       
@@ -52,85 +52,92 @@ export default function Profile(props) {
         });
       
     },[])
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div className="container marginTop">
-                <div className="profile">
-                    <div className="profileRightPart shadow card">
-                        <div className="profileHeader text-center">
-                            <img className="profilePic" alt="عکس یوزر" src={ profile } />
-                            <p className="userName">  { customerName } </p>
-                        </div> <br />
-                        <div className="profileInfo border-top mx-2">
-                            <div className="profileInfoItems">
-                                همراه: { customerMobile }
-                            </div>
-                            <div className="profileInfoItems">
-                                تلفن ثابت : { customerPhone }
-                            </div>
-                        </div>
-                        <div className="profileInfo border-top mx-2">
-                            <div className="profileInfoItems">
-                                شناس نامه
-                            </div>
-                            <div className="profileInfoItems">
-                                <Link className="editProfile" to="/editProfile">  ویرایش <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> </Link>
-                            </div>
-                        </div>
-                        <div className="profileFooter text-center">
-                            <div className="profileItems">
-                                <Link className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>
-                            </div>
-                            <div className="profileItems">
-                                <Link className="profileFooterIcon" to="/returnedFactor">  فاکتورهای برگشتی  <FontAwesomeIcon icon={faHistory}></FontAwesomeIcon> </Link>
-                            </div>
-                            <div className="profileItems">
-                                <Link className="profileFooterIcon" to="/favorite">  علاقه مندیها  <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon> </Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="profileLeftPart card">
-                        <h5 className="tableTitle"> فاکتور های ثبت شده </h5>
-                        <table class="table table-bordered table-sm factorTable">
-                            <thead className="tableHeader">
-                                <tr>
-                                    <th> ردیف </th>
-                                    <th>شماره </th>
-                                    <th>تاریخ </th>
-                                    <th>تاریخ تحویل </th>
-                                    <th> مبلغ (تومان) </th>
-                                    <th> عملیات پرداخت </th>
-                                    <th> جزئیات </th>
-                                </tr>
-                            </thead>
-                            <tbody className="tableBody">
-                                {sendedFactors}
-                            </tbody>
-                        </table>
 
-                        <h5 className="tableTitle"> فاکتور های در انتظار ارسال </h5>
-                        <table class="table table-bordered table-sm factorTable">
-                            <thead className="tableHeader">
-                                <tr>
-                                    <th> ردیف </th>
-                                    <th>شماره </th>
-                                    <th>تاریخ </th>
-                                    <th>تاریخ تحویل </th>
-                                    <th>   مبلغ (تومان) </th>
-                                    <th> عملیات پرداخت </th>
-                                    <th> جزئیات </th>
-                                </tr>
-                            </thead>
-                            <tbody className="tableBody">
-                                {waitingOrders}
-                            </tbody>
-                        </table>
+    if(localStorage.getItem("isLogedIn")){
+
+        return (
+            <>
+                <Header />
+                <Sidebar />
+                <div className="container marginTop">
+                    <div className="profile">
+                        <div className="profileRightPart shadow card">
+                            <div className="profileHeader text-center">
+                                <img className="profilePic" alt="عکس یوزر" src={ profile } />
+                                <p className="userName">  { customerName } </p>
+                            </div> <br />
+                            <div className="profileInfo border-top mx-2">
+                                <div className="profileInfoItems">
+                                    همراه: { customerMobile }
+                                </div>
+                                <div className="profileInfoItems">
+                                    تلفن ثابت : { customerPhone }
+                                </div>
+                            </div>
+                            <div className="profileInfo border-top mx-2">
+                                <div className="profileInfoItems">
+                                    شناس نامه
+                                </div>
+                                <div className="profileInfoItems">
+                                    <Link className="editProfile" to="/editProfile">  ویرایش <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> </Link>
+                                </div>
+                            </div>
+                            <div className="profileFooter text-center">
+                                <div className="profileItems">
+                                    <Link className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>
+                                </div>
+                                <div className="profileItems">
+                                    <Link className="profileFooterIcon" to="/returnedFactor">  فاکتورهای برگشتی  <FontAwesomeIcon icon={faHistory}></FontAwesomeIcon> </Link>
+                                </div>
+                                <div className="profileItems">
+                                    <Link className="profileFooterIcon" to="/favorite">  علاقه مندیها  <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon> </Link>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="profileLeftPart card">
+                            <h5 className="tableTitle"> فاکتور های ثبت شده </h5>
+                            <table class="table table-bordered table-sm factorTable">
+                                <thead className="tableHeader">
+                                    <tr>
+                                        <th> ردیف </th>
+                                        <th>شماره </th>
+                                        <th>تاریخ </th>
+                                        <th>تاریخ تحویل </th>
+                                        <th> مبلغ (تومان) </th>
+                                        <th> عملیات پرداخت </th>
+                                        <th> جزئیات </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="tableBody">
+                                    {sendedFactors}
+                                </tbody>
+                            </table>
+
+                            <h5 className="tableTitle"> فاکتور های در انتظار ارسال </h5>
+                            <table class="table table-bordered table-sm factorTable">
+                                <thead className="tableHeader">
+                                    <tr>
+                                        <th> ردیف </th>
+                                        <th>شماره </th>
+                                        <th>تاریخ </th>
+                                        <th>تاریخ تحویل </th>
+                                        <th>   مبلغ (تومان) </th>
+                                        <th> عملیات پرداخت </th>
+                                        <th> جزئیات </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="tableBody">
+                                    {waitingOrders}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Footer />
-        </>
-    )
+                <Footer />
+            </>
+        )
+
+    }else{
+        window.location.href = '/login'
+    }
 }
