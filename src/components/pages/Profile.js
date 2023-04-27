@@ -11,47 +11,49 @@ import { useEffect } from "react"
 import { useState } from "react"
 export default function Profile(props) {
 
-    const[sendedFactors,setSendedFactors]=useState(0);
-    const[waitingOrders,setWaitingOrders]=useState(0);
-    const[customerName,setCustomerName]=useState(0)
-    const[introducerCode,setIntroducerCode]=useState(0)
-    const[customerMobile,setCustomerMobile]=useState(0)
-    const[customerPhone,setCustomerPhone]=useState(0)
+    const [sendedFactors, setSendedFactors] = useState(0);
+    const [waitingOrders, setWaitingOrders] = useState(0);
+    const [customerName, setCustomerName] = useState(0)
+    const [introducerCode, setIntroducerCode] = useState(0)
+    const [customerMobile, setCustomerMobile] = useState(0)
+    const [customerPhone, setCustomerPhone] = useState(0)
 
 
-    useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/profile").then((data)=>{
-            
-            setSendedFactors(data.data.factors.map((element,index)=>
-            <tr>
-                <th>{index+1}</th>
-                <td>{element.FactNo}</td>
-                <td>{new Date(element.timestamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
-                <td>{element.FactDate}</td>
-                <td> {parseInt(element.TotalPriceHDS/10).toLocaleString()} </td>
-                <td> پرداخت در محل </td>
-                <td> <Link to="/factorDetails" onClick={()=>{localStorage.setItem("selectedHDS", element.SerialNoHDS)}} > <FontAwesomeIcon icon={faEye} />  </Link> </td></tr>))
 
 
-            setWaitingOrders(data.data.orders.map((element,index)=>
-            <tr><th>{index+1}</th>
-            <td>{element.OrderNo}</td>
-            <td>{new Date(element.TimeStamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
-            <td>{element.OrderDate}</td><td> {parseInt(element.Price/10).toLocaleString()} </td>
-            <td>  پرداخت در محل  </td>
-            <td> <Link to="/factorDetails" onClick={()=>{localStorage.setItem("selectedHDS", element.SnOrder)}}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
+    useEffect(() => {
+        axios.get("https://starfoods.ir/api/profile").then((data) => {
+
+            setSendedFactors(data.data.factors.map((element, index) =>
+                <tr>
+                    <th>{index + 1}</th>
+                    <td>{element.FactNo}</td>
+                    <td>{new Date(element.timestamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
+                    <td>{element.FactDate}</td>
+                    <td> {parseInt(element.TotalPriceHDS / 10).toLocaleString()} </td>
+                    <td> پرداخت در محل </td>
+                    <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > <FontAwesomeIcon icon={faEye} />  </Link> </td></tr>))
+
+
+            setWaitingOrders(data.data.orders.map((element, index) =>
+                <tr><th>{index + 1}</th>
+                    <td>{element.OrderNo}</td>
+                    <td>{new Date(element.TimeStamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
+                    <td>{element.OrderDate}</td><td> {parseInt(element.Price / 10).toLocaleString()} </td>
+                    <td>  پرداخت در محل  </td>
+                    <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SnOrder) }}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
             setCustomerName(data.data.profile.Name)
-            setIntroducerCode(data.data.profile.selfIntroCode) 
-            setCustomerMobile((data.data.profile.PhoneStr.split("-"))[0])       
-            setCustomerPhone((data.data.profile.PhoneStr.split("-"))[1]) 
-        
-         let factorDetails = () => {
-                
-         }
+            setIntroducerCode(data.data.profile.selfIntroCode)
+            setCustomerMobile((data.data.profile.PhoneStr.split("-"))[0])
+            setCustomerPhone((data.data.profile.PhoneStr.split("-"))[1])
+
+            let factorDetails = () => {
+
+            }
 
         });
-      
-    },[])
+
+    }, [])
     return (
         <>
             <Header />
@@ -60,15 +62,15 @@ export default function Profile(props) {
                 <div className="profile">
                     <div className="profileRightPart shadow card">
                         <div className="profileHeader text-center">
-                            <img className="profilePic" alt="عکس یوزر" src={ profile } />
-                            <p className="userName">  { customerName } </p>
+                            <img className="profilePic" alt="عکس یوزر" src={profile} />
+                            <p className="userName">  {customerName} </p>
                         </div> <br />
                         <div className="profileInfo border-top mx-2">
                             <div className="profileInfoItems">
-                                همراه: { customerMobile }
+                                همراه: {customerMobile}
                             </div>
                             <div className="profileInfoItems">
-                                تلفن ثابت : { customerPhone }
+                                تلفن ثابت : {customerPhone}
                             </div>
                         </div>
                         <div className="profileInfo border-top mx-2">

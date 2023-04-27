@@ -26,7 +26,7 @@ export default function Home() {
     }, [showModal]);
 
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/getMainGroups").then((data) => {
+        axios.get("https://starfoods.ir/api/getMainGroups").then((data) => {
             setMainGroups(data.data.map((element, index) => <MainGroupItem key={index
             } title={element.title} id={element.id} ></MainGroupItem>))
         })

@@ -1,9 +1,8 @@
-import React,{ useState,useRef} from "react";
+import React, { useState, useRef } from "react";
 import './App.css';
 import './assets/css/mainStyle.css';
 import './assets/css/mediaq.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Modal } from 'bootstrap';
 import 'bootstrap/dist/js/bootstrap.js'
 import './components/genrealComponent/Sidebar';
 import { Route, Routes } from 'react-router-dom';
@@ -33,10 +32,10 @@ import SearchResult from './components/pages/SearchResult'
 
 function App() {
   const [byModal, setByModal] = useState(false);
-  const cartRef=useRef(null);
-  const API_URL='http://192.168.10.27:8080/api'
+  const cartRef = useRef(null);
+  const API_URL = 'https://starfoods.ir/api'
 
-  const login=(username, password)=> {
+  const login = (username, password) => {
     return axios.post(API_URL + '/login', {
       username,
       password
@@ -48,82 +47,84 @@ function App() {
       return response.data;
     })
   }
- 
 
 
 
-// const updateBuy=(orderId,amountUnit,goodSn)=>{
-//       axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
-//       {params:{
-//         kalaId: goodSn,
-//         amountUnit: amountUnit,
-//         orderBYSSn: orderId
-//       }
-//       }
-//       ).then((response)=> {
-        
-//       })
 
-//   }
+  // const updateBuy=(orderId,amountUnit,goodSn)=>{
+  //       axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
+  //       {params:{
+  //         kalaId: goodSn,
+  //         amountUnit: amountUnit,
+  //         orderBYSSn: orderId
+  //       }
+  //       }
+  //       ).then((response)=> {
 
-//   const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
+  //       })
 
-//     if((amountUnit > amountExist) && (freeExistance==0)){
-//       alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
-//     }else{
-//             if (costLimit > 0) {
-//               if (amountUnit >= costLimit) {
-//                 alert(costError);
-//               }
-//             }
-//             axios.get('http://192.168.10.27:8080/api/buySomething',
-//             {params:{
-//               kalaId: goodSn,
-//               amountUnit: amountUnit
-//               }
-//             }).then((response)=> {
-//             let  countBought=parseInt(localStorage.getItem('buyAmount'));
-//               localStorage.setItem('buyAmount',countBought+1);
+  //   }
 
-//               // let modalCloser=document.querySelector("[data-bs-dismiss]");
-//               // modalCloser.dispatchEvent(new Event("click"))
+  //   const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
 
-//               // const truck_modal = document.querySelector('#exampleModal');
-//               // const modal = bootstrap.Modal.getInstance(truck_modal);    
-//               // modal.hide();
+  //     if((amountUnit > amountExist) && (freeExistance==0)){
+  //       alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
+  //     }else{
+  //             if (costLimit > 0) {
+  //               if (amountUnit >= costLimit) {
+  //                 alert(costError);
+  //               }
+  //             }
+  //             axios.get('http://192.168.10.27:8080/api/buySomething',
+  //             {params:{
+  //               kalaId: goodSn,
+  //               amountUnit: amountUnit
+  //               }
+  //             }).then((response)=> {
+  //             let  countBought=parseInt(localStorage.getItem('buyAmount'));
+  //               localStorage.setItem('buyAmount',countBought+1);
 
-//               event.target.textContent=btnModalEvent.target.textContent;
-//               event.target.classList.remove("btn-danger");
-//               event.target.classList.add("btn-info");
-            
-//             })
-//           }   
-// }
+  //               // let modalCloser=document.querySelector("[data-bs-dismiss]");
+  //               // modalCloser.dispatchEvent(new Event("click"))
 
-const changeHeartIconColor = (goodSn,event) => {
-    axios.get('http://192.168.10.27:8080/api/setFavorite',{params:{
-        goodSn:goodSn
-    }}).then((data)=>{
-        if(data.data.msg){
-            
-            event.target.style.color="red";
-        }else{
-            event.target.style.color="black";
-        }
-        
+  //               // const truck_modal = document.querySelector('#exampleModal');
+  //               // const modal = bootstrap.Modal.getInstance(truck_modal);    
+  //               // modal.hide();
+
+  //               event.target.textContent=btnModalEvent.target.textContent;
+  //               event.target.classList.remove("btn-danger");
+  //               event.target.classList.add("btn-info");
+
+  //             })
+  //           }   
+  // }
+
+  const changeHeartIconColor = (goodSn, event) => {
+    axios.get('http://192.168.10.27:8080/api/setFavorite', {
+      params: {
+        goodSn: goodSn
+      }
+    }).then((data) => {
+      if (data.data.msg) {
+
+        event.target.style.color = "red";
+      } else {
+        event.target.style.color = "black";
+      }
+
     })
-};
+  };
 
 
 
 
-const setAllMoneyToLocaleStorage=(allMoney)=>{
-  localStorage.setItem("allMoney",allMoney)
-}
+  const setAllMoneyToLocaleStorage = (allMoney) => {
+    localStorage.setItem("allMoney", allMoney)
+  }
 
-const setAllProfitToLocaleStorage=(allProfit)=>{
-  localStorage.setItem("allProfit",allProfit)
-}
+  const setAllProfitToLocaleStorage = (allProfit) => {
+    localStorage.setItem("allProfit", allProfit)
+  }
 
 
   return (
@@ -132,22 +133,22 @@ const setAllProfitToLocaleStorage=(allProfit)=>{
         <Route path='/home' element={<Layout />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/grouping' element={<Grouping />} />
-        <Route path='/groupingItems/:id'            element={<GroupingItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/shoppingCart'                 element={<ShoppingCart  cartRef={cartRef} setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}  />} />
-        <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/message'                      element={<Message />} />
-        <Route path='/contact'                      element={<Contact />} />
-        <Route path='/editProfile'                  element={<EditProfile />}></Route>
-        <Route path='/returnedFactor'               element={<ReturnedFactor/>}></Route>
-        <Route path='/shipping'                     element={<Shiping/>}></Route>
-        <Route path='/success'                      element={<Success/>}></Route>
-        <Route path='/luckWell'                     element={<LuckyWheel/>}></Route>
-        <Route path='/wallet'                       element={<Wallet/>}></Route>
-        <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
-        <Route path='/login'                        element={<Login submitForm={()=>login("09106670985","2266")}/>}></Route>
-        <Route path='/searchKala/:term'                        element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
+        <Route path='/groupingItems/:id' element={<GroupingItems buyModal={byModal} changeHeartIconColor={((goodSn, event) => changeHeartIconColor(goodSn, event))} />} />
+        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems buyModal={byModal} changeHeartIconColor={((goodSn, event) => changeHeartIconColor(goodSn, event))} />} />
+        <Route path='/descKala/:goodSn/:groupId' element={<DescKala buyModal={byModal} changeHeartIconColor={((goodSn, event) => changeHeartIconColor(goodSn, event))} />} />
+        <Route path='/shoppingCart' element={<ShoppingCart cartRef={cartRef} setAllMoneyToLocaleStorage={(allMoney) => setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit) => setAllProfitToLocaleStorage(allProfit)} />} />
+        <Route path='/favorite' element={<Favorite buyModal={byModal} changeHeartIconColor={((goodSn, event) => changeHeartIconColor(goodSn, event))} />} />
+        <Route path='/message' element={<Message />} />
+        <Route path='/contact' element={<Contact />} />
+        <Route path='/editProfile' element={<EditProfile />}></Route>
+        <Route path='/returnedFactor' element={<ReturnedFactor />}></Route>
+        <Route path='/shipping' element={<Shiping />}></Route>
+        <Route path='/success' element={<Success />}></Route>
+        <Route path='/luckWell' element={<LuckyWheel />}></Route>
+        <Route path='/wallet' element={<Wallet />}></Route>
+        <Route path='/factorDetails' element={<FactoreDetails />}></Route>
+        <Route path='/login' element={<Login submitForm={() => login("09106670985", "2266")} />}></Route>
+        <Route path='/searchKala/:term' element={<SearchResult changeHeartIconColor={((goodSn, event) => changeHeartIconColor(goodSn, event))} />}></Route>
       </Routes>
     </>
   )

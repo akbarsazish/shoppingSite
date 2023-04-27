@@ -24,7 +24,8 @@ export default function LuckyWheel() {
                             <div className="col-lg-12 text-end p-2">
                                 <div className="useStar">
                                     <ol className="list-group list-group-numbered pe-1">
-                                        <li className="list-group-item"> استفاده از گردونه شانس {lotteryMinBonus} امتیاز <button id="useLuckyWheel" onClick={() => setWheel(!showWhell)} className="btn btn-sm btn-primary float-start p-1" > استفاده می کنم  </button> </li>
+                                        <li className="list-group-item"> استفاده از گردونه شانس {lotteryMinBonus} امتیاز
+                                            <button id="useLuckyWheel" onClick={() => setWheel(!showWhell)} className="btn btn-sm btn-primary float-start p-1" > استفاده می کنم  </button> </li>
                                     </ol>
                                 </div>
                             </div>
@@ -32,9 +33,9 @@ export default function LuckyWheel() {
                     </div>
                 </div>
 
-                <LuckyCode />
+                {showWhell ? <LuckyCode /> : ""}
 
-                <div className="lotteryInformation my-5 text-center">
+                <div className="lotteryInformation my-5 text-center ">
                     <div className="lotteryDesc">
                         <ul className="lists p-2">
                             <li className="itemList"> وقتی امتیاز شما بالای  شد چرخش فعال میگردد</li>
@@ -48,7 +49,6 @@ export default function LuckyWheel() {
             </div>
 
             <Footer />
-
         </>
     )
 }
