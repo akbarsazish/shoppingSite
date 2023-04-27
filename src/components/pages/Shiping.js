@@ -26,7 +26,7 @@ export default function Shiping(props) {
     const[takhfifCase,setTakhfifCase]=useState(0)
 
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/shippingData")
+        axios.get("http://192.168.10.27:8080/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
         .then((data) => {
             setTakhfifCase(data.data.takhfifCase)
             setWeekDay1(data.data.date1);
@@ -52,6 +52,7 @@ axios.get("http://192.168.10.27:8080/api/addFactorApi",{params:{
     pardakhtType:selectdPayType,
     recivedTime:selectdFactorDate,
     customerAddress:selectdAddress,
+    psn:localStorage.getItem("psn"),
     allMoney:allMoney}
 }).then((data)=>{
 window.location.href = '/success'

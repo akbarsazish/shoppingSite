@@ -21,7 +21,7 @@ export default function ShoppingCart(props) {
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/cartsList").then((data) => {
+        axios.get("http://192.168.10.27:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -66,7 +66,7 @@ export default function ShoppingCart(props) {
     }, [isLoad]);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("http://192.168.10.27:8080/api/updateChangedPrice", { params: { SnHDS: snHDS } }).then((data) => {
+        axios.get("http://192.168.10.27:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
 
             renewCarts();
 
@@ -74,7 +74,7 @@ export default function ShoppingCart(props) {
     }
 
     const renewCarts = () => {
-        axios.get("http://192.168.10.27:8080/api/cartsList").then((data) => {
+        axios.get("http://192.168.10.27:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)

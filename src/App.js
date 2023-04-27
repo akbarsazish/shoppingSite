@@ -102,7 +102,8 @@ function App() {
   const changeHeartIconColor = (goodSn, event) => {
     axios.get('http://192.168.10.27:8080/api/setFavorite', {
       params: {
-        goodSn: goodSn
+        goodSn: goodSn,
+        psn:localStorage.getItem("psn")
       }
     }).then((data) => {
       if (data.data.msg) {

@@ -42,6 +42,7 @@ const [buyOption, setBuyOption]=useState(0)
       }
 const reNewSearchResult=()=>{
         axios.get("http://192.168.10.27:8080/api/searchKala",{params:{
+            psn:localStorage.getItem("psn"),
             name:term
         }}).then((data)=>{
             console.log(data.data.kala)

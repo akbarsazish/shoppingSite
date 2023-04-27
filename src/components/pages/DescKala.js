@@ -103,7 +103,8 @@ export default function DescKala(props) {
                 {
                     params: {
                         kalaId: goodSn,
-                        amountUnit: amountUnit
+                        amountUnit: amountUnit,
+                        psn:localStorage.getItem("psn")
                     }
                 }).then((response) => {
                     let countBought = parseInt(localStorage.getItem('buyAmount'));
@@ -117,7 +118,8 @@ export default function DescKala(props) {
         axios.get("http://192.168.10.27:8080/api/descKala", {
             params: {
                 id: goodSn,
-                groupId: groupId
+                groupId: groupId,
+                psn:localStorage.getItem("psn")
             }
         }).then((data) => {
             setDescKala(data.data.product[0].descKala)

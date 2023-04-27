@@ -18,7 +18,7 @@ export default function Favorite(props) {
     const [kalaItem,setKalaItem]=useState(0)
 
     useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/favoritKalaApi").then((data)=>{
+        axios.get("http://192.168.10.27:8080/api/favoritKalaApi",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             setKalaItem(data.data.favorits.map((element,index)=>     
             <div key={index} className="groupingItem">
             <img className="topLeft" src={starfood} alt="slider" />

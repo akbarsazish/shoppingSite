@@ -34,11 +34,12 @@ export default function GroupingItems(props) {
         </Link>
     </SwiperSlide>))
     })
-},[isActive])
+},[subId])
 
 const changeHeartIconColor = (goodSn, favoritState) => {
     axios.get('http://192.168.10.27:8080/api/setFavorite',{params:{
-        goodSn:goodSn
+        goodSn:goodSn,
+        psn:localStorage.getItem("psn")
     }}).then((data)=>{
         heartRef.current.style.backgroundColor = "blue";
         // element.classList.addClass("defaultHeartColor")
@@ -65,14 +66,18 @@ const requestProduct=(psn,goodSn,event)=>{
     //
     useEffect(() => {
         renewSubGroupCarts();
-    },[isActive]);
+    },[subId]);
 
     const renewSubGroupCarts=()=>{
-        fetch("http://192.168.10.27:8080/api/appendSubGroupKala/?mainGrId="+mainId+"&subKalaGroupId="+subId)
-        .then(response=>response.json())
+        axios.get("http://192.168.10.27:8080/api/appendSubGroupKala",{
+            params:{
+                mainGrId:mainId,
+                subKalaGroupId:subId,
+                psn:localStorage.getItem("psn")
+            }
+        })
         .then((data) => {
-            console.log(data)
-            setMainGroupKala(data.listKala.map((element,index)=>
+            setMainGroupKala(data.data.listKala.map((element,index)=>
                                                 <div key={index} className="groupingItem">
                                                     <img className="topLeft" src={starfood} alt="slider" />
                                                     {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span> :''}
@@ -187,7 +192,8 @@ const requestProduct=(psn,goodSn,event)=>{
                   axios.get('http://192.168.10.27:8080/api/buySomething',
                   {params:{
                     kalaId: goodSn,
-                    amountUnit: amountUnit
+                    amountUnit: amountUnit,
+                    psn:localStorage.getItem('psn')
                     }
                   }).then((response)=> {
                   let  countBought=parseInt(localStorage.getItem('buyAmount'));

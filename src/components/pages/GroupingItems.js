@@ -34,11 +34,11 @@ export default function GroupingItems(props) {
                     </Link>
                 </SwiperSlide>))
             })
-        },[isActive])
+        },[id])
 
     useEffect(() => {
         renewGroupItems();
-        },[isActive])
+        },[id])
 
         const requestProduct=(psn,goodSn,event)=>{
             axios.get("http://192.168.10.27:8080/api/addRequestedProduct",{params:{
@@ -60,10 +60,12 @@ export default function GroupingItems(props) {
 
 
     const renewGroupItems=()=>{
-        fetch("http://192.168.10.27:8080/api/getMainGroupKala/?mainGrId="+id)
-        .then(response=>response.json())
+        axios.get("http://192.168.10.27:8080/api/getMainGroupKala",{params:{
+            psn:localStorage.getItem('psn'),
+            mainGrId:id
+        }})
         .then((data) => {
-            setMainGroupKala(data.listKala.map((element,index)=>
+            setMainGroupKala(data.data.listKala.map((element,index)=>
                                                 <div key={index} className="groupingItem">
                                                     <img className="topLeft" src={starfood} alt="slider" />
                                                     {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
@@ -126,13 +128,14 @@ export default function GroupingItems(props) {
 
                                         const showBuyModal=(goodSn,event)=>{
     
-                                            fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
-                                          .then(response=>response.json())
+                                            axios.get("http://192.168.10.27:8080/api/getUnitsForUpdate",{params:{
+                                                Pcode:goodSn,
+                                                psn:localStorage.getItem("psn")
+                                            }})
                                           .then((data) => {
-                                            console.log(data)
                                             let modalItems=[];
-                                              for (let index = 1; index <= data.maxSale; index++) {
-                                                modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton" onClick={(e) =>buySomething(data.amountExist,data.freeExistance,data.zeroExistance,data.costLimit,data.costError,data.amountUnit*index,data.kalaId,data.defaultUnit,e,event)}>{index+' '+data.secondUnit+' معادل '+' '+index*data.amountUnit+' '+data.defaultUnit}</button>)
+                                              for (let index = 1; index <= data.data.maxSale; index++) {
+                                                modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton" onClick={(e) =>buySomething(data.data.amountExist,data.data.freeExistance,data.data.zeroExistance,data.data.costLimit,data.data.costError,data.data.amountUnit*index,data.data.kalaId,data.data.defaultUnit,e,event)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
                                               }
                                               const items=modalItems.map((item)=>item)
                                               setBuyOption(items)
@@ -141,12 +144,14 @@ export default function GroupingItems(props) {
                                         }
                             
                                           const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-                                            fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
-                                            .then(response=>response.json())
+                                            axios.get("http://192.168.10.27:8080/api/getUnitsForUpdate",{params:{
+                                                Pcode:goodSn,
+                                                psn:localStorage.getItem("psn")
+                                            }})
                                             .then((data) => {
                                               let modalItems=[];
-                                                for (let index = 1; index <= data.maxSale; index++) {
-                                                  modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.amountUnit*index,data.kalaId)}>{index+' '+data.secondUnit+' معادل '+' '+index*data.amountUnit+' '+data.defaultUnit}</button>)
+                                                for (let index = 1; index <= data.data.maxSale; index++) {
+                                                  modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
                                                 }
                                                 const items=modalItems.map((item)=>item)
                                                 setBuyOption(items)
@@ -180,7 +185,8 @@ export default function GroupingItems(props) {
                                                   axios.get('http://192.168.10.27:8080/api/buySomething',
                                                   {params:{
                                                     kalaId: goodSn,
-                                                    amountUnit: amountUnit
+                                                    amountUnit: amountUnit,
+                                                    psn:localStorage.getItem("psn")
                                                     }
                                                   }).then((response)=> {
                                                   let  countBought=parseInt(localStorage.getItem('buyAmount'));

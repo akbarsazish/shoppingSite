@@ -18,7 +18,7 @@ export default function Profile(props) {
     const [customerMobile, setCustomerMobile] = useState(0)
     const [customerPhone, setCustomerPhone] = useState(0)
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/profile").then((data) => {
+        axios.get("https://starfoods.ir/api/profile",{psn:localStorage.getItem("psn")}).then((data) => {
 
             setSendedFactors(data.data.factors.map((element, index) =>
                 <tr>

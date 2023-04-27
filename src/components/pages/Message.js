@@ -14,10 +14,11 @@ export default function Message() {
         setNewMessage(newMessage);
         document.getElementById("messageTextArea").value="";
         axios.get("http://192.168.10.27:8080/api/doAddMessage",{params:{
-            pmContent:newMessage
+            pmContent:newMessage,
+            psn:localStorage.getItem("psn")
         }}).then((data)=>{
             if(data.data=="good"){
-                axios.get("http://192.168.10.27:8080/api/messageList").then((data)=>{setMessages(data.data.messages.map((message)=> 
+                axios.get("http://192.168.10.27:8080/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
                 <>
                     <br/>
                     <span className="messageContentSender">
@@ -39,7 +40,7 @@ export default function Message() {
         })
     }
     useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/messageList").then((data)=>{setMessages(data.data.messages.map((message)=> 
+        axios.get("http://192.168.10.27:8080/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
         <><br/>
             <span className="messageContentSender">
                 <img className="profilePic" alt="عکس یوزر" src={boy} />
