@@ -9,7 +9,7 @@ export default function LuckyWheel() {
     const [showWhell, setWheel] = useState(false)
     const [emtiyaz, setEmtiyaz] = useState(0)
     const [lotteryMinBonus, setLotteryMinBonus] = useState(0)
-
+if(localStorage.getItem("isLogedIn")){
     return (
         <>
             <Header />
@@ -51,5 +51,8 @@ export default function LuckyWheel() {
             <Footer />
         </>
     )
+}else{
+    window.location.href="/login"
+}
 }
 

@@ -127,11 +127,11 @@ function App() {
     localStorage.setItem("allProfit", allProfit)
   }
 
-
   return (
     <>
       <Routes>
         <Route path='/home' element={<Layout />} />
+        <Route path='/' element={<Layout />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/grouping' element={<Grouping />} />
         <Route path='/groupingItems/:id'            element={<GroupingItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
@@ -148,11 +148,12 @@ function App() {
         <Route path='/luckWell'                     element={<LuckyWheel/>}></Route>
         <Route path='/wallet'                       element={<Wallet/>}></Route>
         <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
-        <Route path='/login'                        element={<Login submitForm={()=>login("09106670985","2266")}/>}></Route>
-        <Route path='/searchKala/:term'                        element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
+        <Route path='/login'                        element={<Login />}></Route>
+        <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>
     </>
   )
+
 }
 
 export default App;

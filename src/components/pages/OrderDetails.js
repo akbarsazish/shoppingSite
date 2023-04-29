@@ -9,8 +9,13 @@ export default function FactoreDetails(props){
     const [orderItem, setFactorItem] = useState(0);
     const [allPrice, setAllPrice] = useState(0)
     useEffect(()=>{
-        axios.post("http://192.168.10.27:8080/api/factorView", {factorSn:localStorage.getItem("selectedHDS")
+        axios.get("http://192.168.10.27:8080/api/factorView", 
+        {params:
+            {
+                factorSn:localStorage.getItem("selectedHDS"),
+                psn:localStorage.getItem("psn")
 
+            }
         }).then((data)=>{
          setFactorItem(data.data.factorBYS.map((element, index) => 
             <div className="factors card">
@@ -26,9 +31,7 @@ export default function FactoreDetails(props){
 
     },[])
 
-  
-
-
+  if(localStorage.getItem("isLogedIn")){
     return(
         <>
         <Header />
@@ -60,4 +63,7 @@ export default function FactoreDetails(props){
            <Footer />
        </>
     )
+  }else{
+    window.location.href="/login"
+  }
 }

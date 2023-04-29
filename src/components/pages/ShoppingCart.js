@@ -147,8 +147,10 @@ export default function ShoppingCart(props) {
     }
 
               const deleteOrder=(orderBYSSn,goodSn)=>{
-                axios.post('http://192.168.10.27:8080/api/deleteOrderBYS',{
+                axios.get('http://192.168.10.27:8080/api/deleteOrderBYS',
+                {params:{
                  SnOrderBYS: orderBYSSn
+                }
                  }).then((data)=>{
                    let  countBought=parseInt(localStorage.getItem('buyAmount'));
                    if(countBought>0){

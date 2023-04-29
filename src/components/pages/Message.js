@@ -57,31 +57,34 @@ export default function Message() {
         }
         )
     },[])
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div className="container marginTop">
-                <div className="messageHeader text-center mt-2">
-                    <h6 className="messageTitle">
-                        با پیام ها خود ما را در ارائه بهتر خدمات یاری رسانید <FontAwesomeIcon style={{ color: "red", fontSize: "22px" }} icon={faHandshake} />
-                    </h6>
-                </div>
-                <div className="messageBody">
-                    <div className="messageContent">
-                        {messages}
+
+    if(localStorage.getItem("isLogedIn")){
+        return (
+            <>
+                <Header />
+                <Sidebar />
+                <div className="container marginTop">
+                    <div className="messageHeader text-center mt-2">
+                        <h6 className="messageTitle">
+                            با پیام ها خود ما را در ارائه بهتر خدمات یاری رسانید <FontAwesomeIcon style={{ color: "red", fontSize: "22px" }} icon={faHandshake} />
+                        </h6>
+                    </div>
+                    <div className="messageBody">
+                        <div className="messageContent">
+                            {messages}
+                        </div>
+                    </div>
+                    <div className="messageFooter">
+                        <div class="mb-3">
+                            <textarea class="form-control h-25" id="messageTextArea" onKeyUp={(event)=>setNewMessage(event.target.value)} rows="3" placeholder="متن پیام خود را بنویسید!"></textarea>
+                        </div>
+                        <button className="btn btn-sm btn-primary" onClick={()=>addNewMessage()}> ارسال پیام <FontAwesomeIcon icon={faMessage} /> </button>
                     </div>
                 </div>
-                <div className="messageFooter">
-                    <div class="mb-3">
-                        <textarea class="form-control h-25" id="messageTextArea" onKeyUp={(event)=>setNewMessage(event.target.value)} rows="3" placeholder="متن پیام خود را بنویسید!"></textarea>
-                    </div>
-                    <button className="btn btn-sm btn-primary" onClick={()=>addNewMessage()}> ارسال پیام <FontAwesomeIcon icon={faMessage} /> </button>
-                </div>
-            </div>
-
-            <Footer />
-
-        </>
-    )
+                <Footer />
+            </>
+        )
+    }else{
+        window.location.href="/login"
+    }
 }

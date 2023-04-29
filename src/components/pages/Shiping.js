@@ -58,6 +58,7 @@ axios.get("http://192.168.10.27:8080/api/addFactorApi",{params:{
 window.location.href = '/success'
 })    }
 
+if(localStorage.getItem("isLogedIn")){
     return (
         <>
             <Header />
@@ -181,4 +182,7 @@ window.location.href = '/success'
             <Footer />
         </>
     )
+    }else{
+        window.location.href="/login"
+    }
 }

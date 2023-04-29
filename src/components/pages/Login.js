@@ -35,13 +35,14 @@ export default function Login(props) {
                 localStorage.setItem("isLogedIn",res.data.token);
                 localStorage.setItem('userName', res.data.username);
                 localStorage.setItem('psn', res.data.psn);
+                localStorage.setItem("buyAmount",res.data.countBuy);
                window.location.href="/home"
             }
             else if (res.data.status === 401) {
                 window.location.href="/login"
             }
             else {
-                setLogin({ ...loginInput, error_list: res.data.validation_errors });
+                window.location.href="/login"
             }
         });
     }
@@ -61,11 +62,7 @@ export default function Login(props) {
                             <input className="form-control form-control-sm" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label className="text-start mt-2" style={{ float: "right" }}> کلمه عبور </label>
                             <input name="password" className="form-control form-control-sm" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
-                            <button type="button"  onClick={()=>{loginSubmit()}}
-                            // onClick={()=>{
-                            //     localStorage.setItem("isLogedIn",true);window.location.href="/home"
-                            //     }}
-                                 className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
+                            <button type="button"  onClick={()=>{loginSubmit()}} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">

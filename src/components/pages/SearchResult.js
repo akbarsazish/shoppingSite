@@ -175,25 +175,30 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
         }   
 }
     useEffect(()=>reNewSearchResult(),[])
-    return (<>
-            <Header />
-            <Sidebar />
-            <div className="container">
-                <div className="groupingItems">
-                    {items}
-                </div>
-            </div >
-            
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog buyModal">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                {buyOption}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </>)
+
+    if(localStorage.getItem("isLogedIn")){
+      return (<>
+              <Header />
+              <Sidebar />
+              <div className="container">
+                  <div className="groupingItems">
+                      {items}
+                  </div>
+              </div >
+              
+              <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div className="modal-dialog buyModal">
+                      <div className="modal-content">
+                          <div className="modal-body">
+                              <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                  {buyOption}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      </>)
+    }else{
+      window.location.href="/login"
+    }
 }

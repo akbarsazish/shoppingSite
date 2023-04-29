@@ -18,7 +18,7 @@ export default function Profile(props) {
     const [customerMobile, setCustomerMobile] = useState(0)
     const [customerPhone, setCustomerPhone] = useState(0)
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/profile",{psn:localStorage.getItem("psn")}).then((data) => {
+        axios.get("http://192.168.10.27:8080/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
 
             setSendedFactors(data.data.factors.map((element, index) =>
                 <tr>
@@ -52,7 +52,6 @@ export default function Profile(props) {
     },[])
 
     if(localStorage.getItem("isLogedIn")){
-
         return (
             <>
                 <Header />
@@ -134,7 +133,6 @@ export default function Profile(props) {
                 <Footer />
             </>
         )
-
     }else{
         window.location.href = '/login'
     }

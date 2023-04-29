@@ -30,7 +30,7 @@ export default function Home() {
     useEffect(() => {
 
         axios.get("http://192.168.10.27:8080/api/getSlidersApi").then((data) => {
-            console.log(data.data.sliders)
+
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })
@@ -40,7 +40,7 @@ export default function Home() {
             } title={element.title} id={element.id} ></MainGroupItem>))
         })
     },[])
-        
+    if(localStorage.getItem("psn")){    
     return (
         <div className="container mainSliderContainer">
             <div className="row">
@@ -59,10 +59,10 @@ export default function Home() {
                 </div>
                 <div className="col-lg-4 px-0 mx-0">
                     <div className="row">
-                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} className="smallSlider" alt="لوگو" />
+                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} className="smallSlider" alt={smallSlider.secondPic} />
                     </div>
                     <div className="row">
-                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} className="smallSlider" alt="لوگو" />
+                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} className="smallSlider" alt={smallSlider.firstPic} />
                     </div>
                 </div>
             </div >
@@ -71,7 +71,7 @@ export default function Home() {
             </div>
 
             {/* مراقبت سلامت فردی  */}
-            <div className="forTitle mt-2 p-2">
+            {/* <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6>مراقبت سلامت فردي  </h6>
                 </div>
@@ -194,7 +194,7 @@ export default function Home() {
 
 
 
-            {/* جدیدترین کالا ها  */}
+            {/* جدیدترین کالا ها  
 
             <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
@@ -312,10 +312,10 @@ export default function Home() {
                         </div>
                     </SwiperSlide>
                 </Swiper>
-            </div>
+            </div> */}
 
 
-            {/* برندها  */}
+            {/* برندها  
 
             <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
@@ -371,6 +371,7 @@ export default function Home() {
                     </SwiperSlide>
                 </Swiper>
             </div>
+            */}
 
             <div className="row my-5 p-2 text-center">
                 <img className="fourColSliderImg" alt="تماس با ما" src={contactImage} />
@@ -399,5 +400,8 @@ export default function Home() {
 
         </div >
 
-    );
+    )
+}else{
+    window.location.href="/login"
+}
 } 

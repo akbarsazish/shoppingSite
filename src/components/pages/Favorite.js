@@ -81,6 +81,7 @@ export default function Favorite(props) {
             })
     },[])
 
+    if(localStorage.getItem("isLogedIn")){
     return (
         <>
             <Header />
@@ -104,6 +105,9 @@ export default function Favorite(props) {
             </div>
             <Footer />
         </>
-    );
+    )
+    }else{
+        window.location.href="/login"
+    }
 
 }

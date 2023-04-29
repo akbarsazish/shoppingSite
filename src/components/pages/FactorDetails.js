@@ -9,9 +9,11 @@ export default function FactoreDetails(props){
     const [factorItem, setFactorItem] = useState(0);
     const [allPrice, setAllPrice] = useState(0)
     useEffect(()=>{
-        axios.post("http://192.168.10.27:8080/api/factorView", {factorSn:localStorage.getItem("selectedHDS")
-
-        }).then((data)=>{
+        axios.get("http://192.168.10.27:8080/api/factorView", 
+        {params:{
+            factorSn:localStorage.getItem("selectedHDS"),
+            psn:localStorage.getItem("psn")
+        }}).then((data)=>{
          setFactorItem(data.data.factorBYS.map((element, index) => 
             <div className="factors card">
             <div className="factorDetailPart">
@@ -23,12 +25,11 @@ export default function FactoreDetails(props){
         ))
         setAllPrice( data.data.factorBYS.reduce((acc, curValue)=> acc + parseInt(curValue.Price), 0));
         })
-
     },[])
 
   
 
-
+if(localStorage.getItem("isLogedIn")){
     return(
         <>
         <Header />
@@ -60,4 +61,7 @@ export default function FactoreDetails(props){
            <Footer />
        </>
     )
+}else{
+    window.location.href="/login"
+}
 }

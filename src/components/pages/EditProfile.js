@@ -45,7 +45,7 @@ export default function EditProfile() {
 
 
 
-
+if(localStorage.getItem("isLogedIn")){
     return (
         <>
             <Header />
@@ -202,4 +202,7 @@ export default function EditProfile() {
             <Footer />
         </>
     )
+}else{
+    window.location.href="/login"
+}
 }

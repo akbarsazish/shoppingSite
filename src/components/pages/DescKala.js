@@ -73,7 +73,8 @@ export default function DescKala(props) {
 
     useEffect(() => {
         renewDescKala();
-    },[])
+    },[goodSn])
+
     const updateBuy=(orderId,amountUnit,goodSn)=>{
         axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
             {
@@ -161,6 +162,7 @@ export default function DescKala(props) {
                 </div>))
         })
     }
+    if(localStorage.getItem("isLogedIn")){
     return (
         <>
             <Header />
@@ -206,7 +208,9 @@ export default function DescKala(props) {
                     </div>
                 </div>
             </div>
-
         </>
     )
+    }else{
+        window.location.href="/login"
+    }
 }

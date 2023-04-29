@@ -195,59 +195,63 @@ export default function GroupingItems(props) {
                                                   })
                                                 }   
                                       }
-    return (
-        <>
-            <Header />
-            <Sidebar />
-            <div className="container">
-                <div className="groupingItemsTopSlider">
-                    <Swiper
-                        slidesPerView={1}
-                        spaceBetween={10}
-                        navigation={true}
 
-                        breakpoints={{
-                            320: {
-                                slidesPerView: 2,
-                                spaceBetween: 20,
-                            },
-                            640: {
-                                slidesPerView: 2,
-                                spaceBetween: 20,
-                            },
-                            768: {
-                                slidesPerView: 4,
-                                spaceBetween: 40,
-                            },
-                            1024: {
-                                slidesPerView: 5,
-                                spaceBetween: 50,
-                            },
-                        }}
-                        modules={[Navigation]}
-                        className="mySwiper">
-                        {subGrups}
-                    </Swiper>
-                </div>
+    if(localStorage.getItem("isLogedIn")){
+        return (
+            <>
+                <Header />
+                <Sidebar />
+                <div className="container">
+                    <div className="groupingItemsTopSlider">
+                        <Swiper
+                            slidesPerView={1}
+                            spaceBetween={10}
+                            navigation={true}
 
-                <div className="groupingItems">
-                    {maingroupKala}
-                </div>
-            </div >
-            
-            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog buyModal">
-                    <div className="modal-content">
-                        <div className="modal-body">
-                            <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                {buyOption}
+                            breakpoints={{
+                                320: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20,
+                                },
+                                640: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20,
+                                },
+                                768: {
+                                    slidesPerView: 4,
+                                    spaceBetween: 40,
+                                },
+                                1024: {
+                                    slidesPerView: 5,
+                                    spaceBetween: 50,
+                                },
+                            }}
+                            modules={[Navigation]}
+                            className="mySwiper">
+                            {subGrups}
+                        </Swiper>
+                    </div>
+
+                    <div className="groupingItems">
+                        {maingroupKala}
+                    </div>
+                </div >
+                
+                <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal-dialog buyModal">
+                        <div className="modal-content">
+                            <div className="modal-body">
+                                <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                    {buyOption}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </>
-    )
-
+            </>
+        )
+    }else{
+        window.location.href="/login"
+    }
 }
