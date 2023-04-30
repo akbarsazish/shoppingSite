@@ -10,14 +10,29 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useState } from "react";
 
-export default function Login(props) {
+import $ from 'jquery';
 
+export default function Login(props) {
+//localStorage.removeItem("isLogedIn");
     // const history = useHistory();
+    const [deviceInfo,setDeviceInfo]=useState('');
+    const [customerId,setCustomerId]=useState(0);
+    const [userToken,setUserToken]=useState(0);
+    const deviceDialog = document.getElementById("favDialog");
+    const introducerDialog = document.getElementById("introducerDialog");
     const [loginInput, setLogin] = useState({
         email: '',
         password: '',
         error_list: [],
     });
+
+    const hideModal=()=>{
+        deviceDialog.close("animalNotChosen");
+    }
+
+    const hideIntroducerModal=()=>{
+        introducerDialog.close();
+    }
 
     const handleInput = (e) => {
         e.persist();
@@ -29,22 +44,74 @@ export default function Login(props) {
         const data = {
             email: loginInput.email,
             password: loginInput.password,
+            token:localStorage.getItem("isLogedIn")
         }
         axios.get("http://192.168.10.27:8080/api/loginApi", {params:data}).then(res => {
-            if (res.data.status === 200) {
+
+            if(res.data.loginInfo){
+                if(res.data.loginInfo.length>0){
+                    console.log(res.data)
+                    setUserToken(res.data.token)
+                    alert(res.data.token)
+                    setCustomerId(res.data.psn)
+                    setDeviceInfo(res.data.loginInfo.map((element,index)=><><div>{element.platform}</div><div>{element.browser}</div><div><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></div></>))
+                    deviceDialog.showModal();
+                }
+            }
+            if(res.data.introducerCode){
+                setCustomerId(res.data.psn)
+                setUserToken(res.data.token)
+                introducerDialog.showModal();
+            }
+            if (res.data.isSuccessfull) {
                 localStorage.setItem("isLogedIn",res.data.token);
                 localStorage.setItem('userName', res.data.username);
                 localStorage.setItem('psn', res.data.psn);
                 localStorage.setItem("buyAmount",res.data.countBuy);
                window.location.href="/home"
             }
-            else if (res.data.status === 401) {
-                window.location.href="/login"
+            if (res.data.logedInBefore) {
+                localStorage.setItem("isLogedIn",res.data.token);
+                localStorage.setItem('userName', res.data.username);
+                localStorage.setItem('psn', res.data.psn);
+                localStorage.setItem("buyAmount",res.data.countBuy);
+               window.location.href="/home"
             }
-            else {
-                window.location.href="/login"
+
+            if (res.data.Allowed==0) {
+                alert(res.data.message)
             }
         });
+    }
+
+    const saveIntroduceCode=()=>{
+        axios.get("http://192.168.10.27:8080/api/addIntroducerCode", {params:{
+            introCode:document.getElementById("introducerCode").value,
+            customerId:customerId,
+            token:userToken
+        }}).then(res => {
+            localStorage.setItem("isLogedIn",userToken);
+            localStorage.setItem('userName', res.data.username);
+            localStorage.setItem('psn',customerId);
+            localStorage.setItem("buyAmount",res.data.buyAmount);
+            window.location.href="/home"
+        })
+        
+        introducerDialog.close();
+    }
+
+    const confirmBrowserLogOut=()=>{
+        axios.get("http://192.168.10.27:8080/api/logOutConfirm", {params:{
+            customerId:customerId,
+            token:userToken
+        }}).then(res => {
+            localStorage.setItem("isLogedIn",res.data.token);
+            alert(res.data.token)
+            localStorage.setItem('userName', res.data.username);
+            localStorage.setItem('psn',customerId);
+            localStorage.setItem("buyAmount",res.data.buyAmount);
+            window.location.href="/home"
+        })
     }
 
 
@@ -79,6 +146,27 @@ export default function Login(props) {
                     </div>
                 </div>
             </div>
+
+            <dialog id="favDialog" style={{width:'300px',margin:'0 auto'}}>
+                    {deviceInfo}
+                    <div>
+                    <button id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
+                    <button onClick={()=>confirmBrowserLogOut()}>ادامه</button>
+                    </div>
+            </dialog>
+
+            <dialog id="introducerDialog" style={{width:'300px',margin:'0 auto'}}>
+                <div>
+                    <form>
+                        <div className="form-group">
+                            <label className="form-label">کد معرف</label>
+                            <input className="form-control" id="introducerCode" ></input>
+                        </div>
+                        <button id="cancelIntroducer"  className="btn btn-sm btn-danger" onClick={()=>hideIntroducerModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
+                        <button type="button" onClick={()=>saveIntroduceCode()} className="btn btn-sm btn-success">ادامه</button>
+                    </form>
+                </div>
+            </dialog>
         </>
     )
 }

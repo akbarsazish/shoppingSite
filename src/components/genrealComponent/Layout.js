@@ -6,14 +6,6 @@ import Header from './Sidebar';
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
-    // useEffect(()=>{
-    //     axios.get("http://192.168.10.27:8080/api/checkLogin",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
-    //         alert(data.data.isLogin)
-    //         if(data.data.isLogin=="NO"){
-    //             localStorage.removeItem("isLogedIn")
-    //         }
-    //     })
-    // },[])
 
     if(localStorage.getItem("isLogedIn")){
         return (

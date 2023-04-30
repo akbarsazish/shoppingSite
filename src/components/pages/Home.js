@@ -40,7 +40,8 @@ export default function Home() {
             } title={element.title} id={element.id} ></MainGroupItem>))
         })
     },[])
-    if(localStorage.getItem("psn")){    
+    console.log(localStorage.getItem("isLogedIn"))
+    if(localStorage.getItem("isLogedIn")){    
     return (
         <div className="container mainSliderContainer">
             <div className="row">
