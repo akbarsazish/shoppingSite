@@ -92,7 +92,7 @@ export default function DescKala(props) {
 
     const buySomething = (amountExist, freeExistance, zeroExistance, costLimit, costError, amountUnit, goodSn, defaultUnit, btnModalEvent, event) => {
 
-        if ((amountUnit > amountExist) && (freeExistance == 0)) {
+        if ((amountUnit > amountExist) && (freeExistance === 0)) {
             alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
         } else {
             if (costLimit > 0) {
@@ -139,7 +139,7 @@ export default function DescKala(props) {
                 <div className="desckBuyBtn text-start">
                     {element.activePishKharid < 1
                         ?
-                        (element.bought == "Yes" ?
+                        (element.bought === "Yes" ?
                             <button className="btn btn-sm btn-info selectAmount" onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount) + " " + element.secondUnit + " معادل " + parseInt(element.Amount) + " " + element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
                             : (element.callOnSale > 0 ?
                                 <button className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
@@ -147,7 +147,7 @@ export default function DescKala(props) {
                                     ?
                                     <button className="btn btn-sm btn-danger selectAmount" id={"buyButton" + element.GoodSn} onClick={(event) => { showBuyModal(element.GoodSn, event) }} data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
                                     :
-                                    (element.requested == 0 ?
+                                    (element.requested === 0 ?
                                         <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request" + element.GoodSn}>
                                             <button value="0" id={"preButton" + element.GoodSn} onClick={(event) => requestProduct(3609, element.GoodSn, event)} className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
                                         </span>
@@ -170,7 +170,7 @@ export default function DescKala(props) {
             <div className="container marginTop mb-5">
                 <div className="kalaDescibe mt-2 p-2">
                     <div className="kalaImg">
-                        <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite=='YES') ? 'defaultHeartColor' :''} icon={faHeart}  ></FontAwesomeIcon>
+                        <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite==='YES') ? 'defaultHeartColor' :''} icon={faHeart}  ></FontAwesomeIcon>
                         <img className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
                     </div>
 

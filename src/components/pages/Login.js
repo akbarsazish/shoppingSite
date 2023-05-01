@@ -78,7 +78,7 @@ export default function Login(props) {
                window.location.href="/home"
             }
 
-            if (res.data.Allowed==0) {
+            if (res.data.Allowed===0) {
                 alert(res.data.message)
             }
         });

@@ -1250,8 +1250,9 @@ ul li a.active {
 }
 
 .factors {
-    max-width: 69%;
-    flex: 69%;
+    max-width: 70%;
+    flex: 70%; 
+   
 }
 
 .factorsResult {
@@ -1260,8 +1261,8 @@ ul li a.active {
 }
 
 .factorDetailPart {
-    border-bottom: 1px solid gray;
     padding: 10px;
+    border-bottom: 1px solid gray;
 }
 
 .factorDetailItems {

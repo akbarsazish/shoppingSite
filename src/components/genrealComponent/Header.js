@@ -13,7 +13,7 @@ function Header() {
     useEffect(()=>{
         axios.get("http://192.168.10.27:8080/api/checkLogin",{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
 
-            if(data.data.isLogin=="NO"){
+            if(data.data.isLogin==="NO"){
                localStorage.removeItem("isLogedIn")
             }
         })

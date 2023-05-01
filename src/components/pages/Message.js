@@ -17,7 +17,7 @@ export default function Message() {
             pmContent:newMessage,
             psn:localStorage.getItem("psn")
         }}).then((data)=>{
-            if(data.data=="good"){
+            if(data.data==="good"){
                 axios.get("http://192.168.10.27:8080/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
                 <>
                     <br/>

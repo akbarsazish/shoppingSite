@@ -58,7 +58,7 @@ export default function ShoppingCart(props) {
                 </div>
             </div>))
             setChanedItems(data.data.orders.map((element) => {
-                if (element.changedPrice == 0) {
+                if (element.changedPrice === 0) {
                     return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
                 }
             }))
@@ -111,7 +111,7 @@ export default function ShoppingCart(props) {
                 </div>
             </div>))
             setChanedItems(data.data.orders.map((element) => {
-                if (element.changedPrice == 0) {
+                if (element.changedPrice === 0) {
                     return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
                 }
             }))
@@ -187,7 +187,7 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
+                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState===0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
                                     :( allMoney <= minSalePriceFactor?
                                         <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>

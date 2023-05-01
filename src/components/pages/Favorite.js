@@ -34,20 +34,20 @@ export default function Favorite(props) {
                 <p className="groupingItemTitle"> {element.GoodName} </p>
             </Link>
             <div className="groupingItemBottomInfo">
-                <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==1) ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+                <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
                         
                 </div>
                 <div className="groupingItemInfo">
                     {element.Amount>0?
                         <>
                         <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
-                        {element.overLine==1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
+                        {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
                         </>
                         :
                             (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
                                 ''
                                 :(
-                                    element.requested==0?
+                                    element.requested===0?
                                         <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
                                             <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
                                         </span>
@@ -63,7 +63,7 @@ export default function Favorite(props) {
                 <div className="groupingItemBottomBtn">
                     {element.activePishKharid<1 
                         ?
-                            (element.bought=="Yes" ?
+                            (element.bought==="Yes" ?
                                 <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.Amount)+" "+ element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
                                 :(element.callOnSale>0?
                                     <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
@@ -152,7 +152,7 @@ export default function Favorite(props) {
   
     const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
   
-      if((amountUnit > amountExist) && (freeExistance==0)){
+      if((amountUnit > amountExist) && (freeExistance===0)){
         alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
       }else{
               if (costLimit > 0) {

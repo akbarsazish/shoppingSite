@@ -16,7 +16,7 @@ export default function Shiping(props) {
     const[defaultAddress,setDefaultAddress]=useState(0)
     const[otherAddresses,setOtherAddresses]=useState('')
     const[factorDay,setFactorDay]=useState(false)
-    const[payType,setpayType]=useState(false);
+    const[payType,setpayType]=useState("");
 
     const[selectdFactorDate,setSelectedFactorDate]=useState(0)
     const[selectdAddress,setSelectedAddress]=useState(defaultAddress)
@@ -136,20 +136,20 @@ if(localStorage.getItem("isLogedIn")){
 
                 <div className="shipingBottom">
                     <div className="shippingPartBottom">
-                        <p className="weekDay"> انتخاب پرداخت   </p>
+                        <p className="weekDay"> انتخاب پرداخت </p>
                     </div>
                     <div className="shippingPartBottom mt-2">
                         <div className="form-check">
                             <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType(true);setSelectedPayType("hozori")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
                                 حضوری  <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faTruck} />
                             </label>
                         </div>
                     </div>
                     <div className="shippingPartBottom">
                         <div className="form-check mt-2">
-                            <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" disabled onChange={()=>{checkSelectedFactorDay(factorDay);setpayType(true)}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
+                            <label className="form-check-label text-start timeLabel" for="">
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
                                 غیر حضوری  <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
                             </label>
                         </div>
@@ -170,11 +170,13 @@ if(localStorage.getItem("isLogedIn")){
                         <p className="factorInfo"> {parseInt(localStorage.getItem('allMoney')).toLocaleString("fa-IR")} تومان  </p>
                     </div>
                     <div className="shippingPartBottom">
-                       {(payType && factorDay) ? (
+                       {(payType==="hozori" && factorDay) ? (
                        <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
                        )
-                       :
-                       <Link  to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                       :((payType==="online" && factorDay)?
+                        <Link  to="/payOnline"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn"> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                       :<Link  to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                        )
                        }
                     </div>
                 </div>
