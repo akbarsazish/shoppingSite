@@ -21,8 +21,8 @@ export default function Shiping(props) {
     const[selectdFactorDate,setSelectedFactorDate]=useState(0)
     const[selectdAddress,setSelectedAddress]=useState(defaultAddress)
     const[selectdPayType,setSelectedPayType]=useState(0)
-    const[allMoney,setAllMoney]=useState(localStorage.getItem("allMoney"))
-    const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
+     const[allMoney,setAllMoney]=useState(localStorage.getItem("allMoney"))
+    // const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
     const[takhfifCase,setTakhfifCase]=useState(0)
 
     useEffect(() => {
@@ -47,7 +47,6 @@ alert("لطفا تاریخ فاکتور را انتخاب کنید.")
         }
     }
     const addFactorToSefarish=()=>{
-        console.log(selectdAddress)
 axios.get("http://192.168.10.27:8080/api/addFactorApi",{params:{
     pardakhtType:selectdPayType,
     recivedTime:selectdFactorDate,

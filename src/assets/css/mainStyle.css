@@ -1284,3 +1284,8 @@ ul li a.active {
     justify-content: center;
     border-radius: 5px;
 }
+
+.aboutImg {
+    width: 100%;
+    height: auto;
+}

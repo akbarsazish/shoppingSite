@@ -27,6 +27,9 @@ import Login from './components/pages/Login';
 import SubGroupItems from './components/pages/SubGroupItems';
 import axios from 'axios'
 import SearchResult from './components/pages/SearchResult'
+import About from "./components/pages/About";
+import Policy from "./components/pages/Policy";
+import Privacy from "./components/pages/Privacy";
 // import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 
 
@@ -151,6 +154,9 @@ function App() {
         <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
         <Route path='/orderDetails'                element={<OrderDetails/>}></Route>
         <Route path='/login'                        element={<Login />}></Route>
+        <Route path="/about"                         element={<About />}> </Route>
+        <Route path="/policy"                      element={<Policy />}> </Route>
+        <Route path="privacy"                      element={<Privacy />}> </Route>
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>
     </>

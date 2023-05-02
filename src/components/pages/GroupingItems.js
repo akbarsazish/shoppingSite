@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Link,
     useParams
@@ -14,13 +14,9 @@ import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-ico
 import axios from 'axios'
 
 export default function GroupingItems(props) {
-    const [byModal, setByModal] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const [subGrups, setSubGroups] = useState(0);
     const [maingroupKala, setMainGroupKala] = useState(0);
-    const [selectedHeart, setSelectedHeart] = useState(null);
     const {id}=useParams();
-    const heartRef = useRef(null);
     const [buyOption, setBuyOption]=useState(0)
     //
     useEffect(() => {
@@ -139,7 +135,7 @@ export default function GroupingItems(props) {
                                               }
                                               const items=modalItems.map((item)=>item)
                                               setBuyOption(items)
-                                              setByModal(true)
+                                              
                                           })
                                         }
                             
@@ -155,7 +151,7 @@ export default function GroupingItems(props) {
                                                 }
                                                 const items=modalItems.map((item)=>item)
                                                 setBuyOption(items)
-                                                setByModal(true)
+                                                
                                             })
                                           }
                                           const updateBuy=(orderId,amountUnit,goodSn)=>{

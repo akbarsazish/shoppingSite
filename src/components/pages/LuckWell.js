@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
-import { useEffect } from "react";
-import axios from "axios"
 import LuckyCode from "./LuckyCode";
 export default function LuckyWheel() {
     const [showWhell, setWheel] = useState(false)

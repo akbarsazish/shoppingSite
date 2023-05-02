@@ -8,8 +8,6 @@ import Sidebar from "../genrealComponent/Sidebar"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 export default function DescKala(props) {
-    const [byModal, setByModal] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const { goodSn, groupId } = useParams();
     const [descKala, setDescKala] = useState("")
     const [kalaName, setKalaName] = useState("")
@@ -31,7 +29,7 @@ export default function DescKala(props) {
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
-                setByModal(true)
+                
             })
     }
 
@@ -45,7 +43,7 @@ export default function DescKala(props) {
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
-                setByModal(true)
+                
             })
     }
     const requestProduct = (psn, goodSn, event) => {

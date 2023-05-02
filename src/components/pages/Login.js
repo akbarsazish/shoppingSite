@@ -10,11 +10,7 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useState } from "react";
 
-import $ from 'jquery';
-
 export default function Login(props) {
-//localStorage.removeItem("isLogedIn");
-    // const history = useHistory();
     const [deviceInfo,setDeviceInfo]=useState('');
     const [customerId,setCustomerId]=useState(0);
     const [userToken,setUserToken]=useState(0);

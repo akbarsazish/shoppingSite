@@ -13,13 +13,7 @@ import axios from 'axios'
 
 
 export default function GroupingItems(props) {
-    const [byModal, setByModal] = useState(false);
 const [items, setItems] = useState(0);
-const [subGrups,setSubGroups]=useState(0);
-const [maingroupKala,setMainGroupKala]=useState(0);
-const [selectedHeart, setSelectedHeart] = useState(null);
-const {id}=useParams();
-const heartRef = useRef(null);
 const [buyOption, setBuyOption]=useState(0)
 
     const {term}=useParams();
@@ -121,7 +115,6 @@ const showBuyModal=(goodSn,event)=>{
       }
       const items=modalItems.map((item)=>item)
       setBuyOption(items)
-      setByModal(true)
   })
 }
 
@@ -135,7 +128,7 @@ const showBuyModal=(goodSn,event)=>{
         }
         const items=modalItems.map((item)=>item)
         setBuyOption(items)
-        setByModal(true)
+
     })
   }
   const updateBuy=(orderId,amountUnit,goodSn)=>{

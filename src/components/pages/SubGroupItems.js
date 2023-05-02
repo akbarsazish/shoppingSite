@@ -1,8 +1,5 @@
-import React, { useState,useEffect,useRef } from "react";
-import {
-    Link,
-    useParams
-} from "react-router-dom"
+import React, { useState,useEffect } from "react";
+import {Link,useParams } from "react-router-dom"
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,12 +12,9 @@ import { faHeart, faShoppingCart,faBell } from "@fortawesome/free-solid-svg-icon
 import axios from "axios";
 
 export default function GroupingItems(props) {
-    const [byModal, setByModal] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const [subGrups,setSubGroups]=useState(0);
     const [maingroupKala,setMainGroupKala]=useState(0);
     const {mainId,subId}=useParams();
-    const heartRef = useRef(null);
     const [buyOption, setBuyOption]=useState(0)
     
     useEffect(() => {
@@ -36,15 +30,7 @@ export default function GroupingItems(props) {
     })
 },[subId])
 
-const changeHeartIconColor = (goodSn, favoritState) => {
-    axios.get('http://192.168.10.27:8080/api/setFavorite',{params:{
-        goodSn:goodSn,
-        psn:localStorage.getItem("psn")
-    }}).then((data)=>{
-        heartRef.current.style.backgroundColor = "blue";
-        // element.classList.addClass("defaultHeartColor")
-    })
-};
+
 const requestProduct=(psn,goodSn,event)=>{
     axios.get("http://192.168.10.27:8080/api/addRequestedProduct",{params:{
       customerId:psn,
@@ -147,7 +133,7 @@ const requestProduct=(psn,goodSn,event)=>{
                 }
                 const items=modalItems.map((item)=>item)
                 setBuyOption(items)
-                setByModal(true)
+                
             })
         }
 
@@ -161,7 +147,7 @@ const requestProduct=(psn,goodSn,event)=>{
                 }
                 const items=modalItems.map((item)=>item)
                 setBuyOption(items)
-                setByModal(true)
+                
             })
         }
 

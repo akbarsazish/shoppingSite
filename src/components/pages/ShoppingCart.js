@@ -8,8 +8,6 @@ import Footer from "../genrealComponent/Footer";
 import axios from "axios";
 
 export default function ShoppingCart(props) {
-    const [byModal, setByModal] = useState(false);
-    const [isLoad, setLoad] = useState(0)
     const [cartItems, setCartItems] = useState(0)
     const [allMoney, setAllMoney] = useState(0)
     const [currencyName, setCurrencyName] = useState('تومان')
@@ -63,7 +61,7 @@ export default function ShoppingCart(props) {
                 }
             }))
         })
-    }, [isLoad]);
+    }, []);
 
     const changeCartsPrice = (snHDS) => {
         axios.get("http://192.168.10.27:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
@@ -128,7 +126,6 @@ export default function ShoppingCart(props) {
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
-                setByModal(true)
             })
     }
 

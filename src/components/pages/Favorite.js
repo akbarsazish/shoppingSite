@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
-import indianRice from "../../assets/images/indianRice.jpg"
 import starfood from "../../assets/images/starfood.png"
 import 'swiper/swiper.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBan, faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../genrealComponent/Footer";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 
 
 export default function Favorite(props) {
-    const [byModal, setByModal] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const [kalaItem,setKalaItem]=useState(0)
     const [buyOption, setBuyOption]=useState(0)
     useEffect(()=>{
@@ -117,7 +114,7 @@ export default function Favorite(props) {
           }
           const items=modalItems.map((item)=>item)
           setBuyOption(items)
-          setByModal(true)
+          
       })
     }
 
@@ -133,7 +130,7 @@ export default function Favorite(props) {
             }
             const items=modalItems.map((item)=>item)
             setBuyOption(items)
-            setByModal(true)
+            
         })
       }
       const updateBuy=(orderId,amountUnit,goodSn)=>{
