@@ -26,7 +26,7 @@ export default function Shiping(props) {
     const[takhfifCase,setTakhfifCase]=useState(0)
 
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
+        axios.get("https://s.starfoods.ir/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
         .then((data) => {
             setTakhfifCase(data.data.takhfifCase)
             setWeekDay1(data.data.date1);
@@ -47,7 +47,7 @@ alert("لطفا تاریخ فاکتور را انتخاب کنید.")
         }
     }
     const addFactorToSefarish=()=>{
-axios.get("http://192.168.10.27:8080/api/addFactorApi",{params:{
+axios.get("https://s.starfoods.ir/api/addFactorApi",{params:{
     pardakhtType:selectdPayType,
     recivedTime:selectdFactorDate,
     customerAddress:selectdAddress,
