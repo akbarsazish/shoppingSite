@@ -9,7 +9,7 @@ export default function FactoreDetails(props){
     const [factorItem, setFactorItem] = useState(0);
     const [allPrice, setAllPrice] = useState(0)
     useEffect(()=>{
-        axios.get("https://s.starfoods.ir/api/factorView", 
+        axios.get("http://192.168.10.27:8080/api/factorView", 
         {params:{
             factorSn:localStorage.getItem("selectedHDS"),
             psn:localStorage.getItem("psn")

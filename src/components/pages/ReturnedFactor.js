@@ -10,7 +10,7 @@ import axios from "axios";
 export default function ReturnedFactor(props) {
     const[returnedFactors,setReturnedFactors]=useState(0)
     useEffect(()=>{
-        axios.get("https://s.starfoods.ir/api/listFactors",{data:{psn:localStorage.getItem('psn')}}).then((data)=>{
+        axios.get("http://192.168.10.27:8080/api/listFactors",{data:{psn:localStorage.getItem('psn')}}).then((data)=>{
             setReturnedFactors(data.data.rejectedFactors.map((element,index)=>
             <tr>
                 <td>{index+1}</td>

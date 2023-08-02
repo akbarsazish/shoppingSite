@@ -82,7 +82,7 @@ export default function Login(props) {
     }
 
     const saveIntroduceCode=()=>{
-        axios.get("https://s.starfoods.ir/api/addIntroducerCode", {params:{
+        axios.get("http://192.168.10.27:8080/api/addIntroducerCode", {params:{
             introCode:document.getElementById("introducerCode").value,
             customerId:customerId,
             token:userToken
@@ -98,7 +98,7 @@ export default function Login(props) {
     }
 
     const confirmBrowserLogOut=()=>{
-        axios.get("https://s.starfoods.ir/api/logOutConfirm", {params:{
+        axios.get("http://192.168.10.27:8080/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken
         }}).then(res => {

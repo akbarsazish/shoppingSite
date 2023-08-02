@@ -18,7 +18,7 @@ export default function Wallet() {
     const [nazarId,sertNazarId]=useState(0)
     
     useEffect(()=>{
-        axios.get("https://s.starfoods.ir/api/wallet",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+        axios.get("http://192.168.10.27:8080/api/wallet",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             settakhfifMoney(data.data.moneyTakhfif)
             setFirstQuestions(data.data.nazars[0].question1)
             setSecondQuestions(data.data.nazars[0].question2)
