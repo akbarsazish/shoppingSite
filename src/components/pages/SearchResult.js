@@ -18,7 +18,7 @@ const [buyOption, setBuyOption]=useState(0)
 
     const {term}=useParams();
     const requestProduct=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.27:8080/api/addRequestedProduct",{params:{
+        axios.get("https://s.starfoods.ir/api/addRequestedProduct",{params:{
           customerId:psn,
           productId:goodSn
         }}).then((data)=>{
@@ -27,7 +27,7 @@ const [buyOption, setBuyOption]=useState(0)
       }
       
       const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.27:8080/api/cancelRequestedProduct",{params:{
+        axios.get("https://s.starfoods.ir/api/cancelRequestedProduct",{params:{
           psn:psn,
           gsn:goodSn
         }}).then((data)=>{
@@ -35,7 +35,7 @@ const [buyOption, setBuyOption]=useState(0)
         })
       }
 const reNewSearchResult=()=>{
-        axios.get("http://192.168.10.27:8080/api/searchKala",{params:{
+        axios.get("https://s.starfoods.ir/api/searchKala",{params:{
             psn:localStorage.getItem("psn"),
             name:term
         }}).then((data)=>{
@@ -105,7 +105,7 @@ const reNewSearchResult=()=>{
 
 const showBuyModal=(goodSn,event)=>{
     
-    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+    fetch("https://s.starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
   .then(response=>response.json())
   .then((data) => {
     console.log(data)
@@ -119,7 +119,7 @@ const showBuyModal=(goodSn,event)=>{
 }
 
   const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-    fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+    fetch("https://s.starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
     .then(response=>response.json())
     .then((data) => {
       let modalItems=[];
@@ -132,7 +132,7 @@ const showBuyModal=(goodSn,event)=>{
     })
   }
   const updateBuy=(orderId,amountUnit,goodSn)=>{
-    axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
+    axios.get('https://s.starfoods.ir/api/updateOrderBYS',
     {params:{
       kalaId: goodSn,
       amountUnit: amountUnit,
@@ -155,7 +155,7 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
               alert(costError);
             }
           }
-          axios.get('http://192.168.10.27:8080/api/buySomething',
+          axios.get('https://s.starfoods.ir/api/buySomething',
           {params:{
             kalaId: goodSn,
             amountUnit: amountUnit
