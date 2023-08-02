@@ -43,6 +43,7 @@ export default function Login(props) {
             token:localStorage.getItem("isLogedIn")
         }
         axios.get("http://192.168.10.27:8080/api/loginApi", {params:data}).then(res => {
+            console.log(res);
 
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
