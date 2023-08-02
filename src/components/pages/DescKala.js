@@ -18,6 +18,7 @@ export default function DescKala(props) {
     const [isFavorite, setIsFavorite] = useState("NO")
     const [boughtInf, setBoughtInfo] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
+    // fetching data form backend
     const showBuyModal = (goodSn, event) => {
         fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
