@@ -1289,3 +1289,14 @@ ul li a.active {
     width: 100%;
     height: auto;
 }
+
+.loginDialog {
+    background: #eeaeca;
+    background: radial-gradient(circle,#eeaeca 0,#94bbe9 100%);
+    border: none;
+    border-radius: 8px;
+    margin: 0 auto;
+    position: absolute;
+    top: 8%;
+    width: 299px;
+}
