@@ -32,6 +32,7 @@ export default function Home() {
             } title={element.title} id={element.id} ></MainGroupItem>))
         })
     },[])
+
     if(localStorage.getItem("isLogedIn")){    
     return (
         <div className="container mainSliderContainer">

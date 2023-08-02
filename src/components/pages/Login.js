@@ -49,9 +49,16 @@ export default function Login(props) {
                 if(res.data.loginInfo.length>0){
                     console.log(res.data)
                     setUserToken(res.data.token)
-                    alert(res.data.token)
+                    localStorage.setItem("isLogedIn",res.data.token);
                     setCustomerId(res.data.psn)
-                    setDeviceInfo(res.data.loginInfo.map((element,index)=><><div>{element.platform}</div><div>{element.browser}</div><div><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></div></>))
+                    setDeviceInfo(res.data.loginInfo.map((element,index)=>
+                    <>
+                       <tr>
+                        <td>{element.platform}</td>
+                        <td>{element.browser}</td>
+                        <td><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></td>
+                       </tr>
+                    </>))
                     deviceDialog.showModal();
                 }
             }
@@ -102,8 +109,8 @@ export default function Login(props) {
             customerId:customerId,
             token:userToken
         }}).then(res => {
+
             localStorage.setItem("isLogedIn",res.data.token);
-            alert(res.data.token)
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);
             localStorage.setItem("buyAmount",res.data.buyAmount);
@@ -123,9 +130,9 @@ export default function Login(props) {
                         </div>
                         <div className="loginBody py-2 px-4 text-center">
                             <label className="text-start" style={{ float: "right" }}>  شماره موبایل</label>
-                            <input className="form-control form-control-sm" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
+                            <input className="form-control form-control-sm" autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label className="text-start mt-2" style={{ float: "right" }}> کلمه عبور </label>
-                            <input name="password" className="form-control form-control-sm" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
+                            <input name="password" autoComplete="off" className="form-control form-control-sm" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
                             <button type="button"  onClick={()=>{loginSubmit()}} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
                         <div className="loginFooter p-1">
@@ -144,12 +151,21 @@ export default function Login(props) {
                 </div>
             </div>
 
-            <dialog id="favDialog" style={{width:'300px',margin:'0 auto'}}>
-                    {deviceInfo}
-                    <div>
-                    <button id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
-                    <button onClick={()=>confirmBrowserLogOut()}>ادامه</button>
-                    </div>
+             <dialog id="favDialog" className="loginDialog">
+                <table className="table table-sm table-striped table-bordered">
+                   <tr>
+                      <th> انتخاب  </th>
+                     <th> مرورگر  </th>
+                     <th> سیستم عامل </th>
+                   </tr>
+                   <tbody>
+                       {deviceInfo}
+                   </tbody>
+                </table>   
+             <div>
+               <button className="btn btn-sm btn-danger" id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
+                <button className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
+            </div>
             </dialog>
 
             <dialog id="introducerDialog" style={{width:'300px',margin:'0 auto'}}>
