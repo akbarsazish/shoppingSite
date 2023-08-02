@@ -49,7 +49,7 @@ export default function Login(props) {
                 if(res.data.loginInfo.length>0){
                     console.log(res.data)
                     setUserToken(res.data.token)
-                    alert(res.data.token)
+                    localStorage.setItem("isLogedIn",res.data.token);
                     setCustomerId(res.data.psn)
                     setDeviceInfo(res.data.loginInfo.map((element,index)=><><div>{element.platform}</div><div>{element.browser}</div><div><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></div></>))
                     deviceDialog.showModal();
