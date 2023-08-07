@@ -47,7 +47,7 @@ export default function Wallet() {
     const handleSubmit = (event) => {
         console.log(JSON.stringify(answers))
         event.preventDefault();
-        fetch(`${baseUrl}/nazarSanjiAnswer`, {
+        fetch(`${baseUrl}/addMoneyToCase`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
