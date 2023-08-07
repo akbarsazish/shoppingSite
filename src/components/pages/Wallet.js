@@ -8,6 +8,7 @@ import { faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons"
 import { useEffect } from "react";
 import axios from "axios";
 
+
 export default function Wallet() {
     const baseUrl = "http://192.168.10.24:8080/api";
     const [yesNo, setYesNo] = useState(false);
@@ -19,16 +20,12 @@ export default function Wallet() {
     const [nazarId,sertNazarId]=useState(0);
 
     if (showQuestion) {
-       let yesNoPart = document.getElementById("yesNoBtn");
+       const yesNoPart = document.getElementById("yesNoBtn");
            yesNoPart.style.display = 'none';
       }
 
-    const [answers, setAnswer] = useState({
-        answer1: '',
-        answer2: '',
-        answer3: '',
-      });
-    
+     
+  
     useEffect(()=>{
         axios.get(`${baseUrl}/wallet`,{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             settakhfifMoney(data.data.moneyTakhfif)
@@ -39,21 +36,13 @@ export default function Wallet() {
         })
     },[]);
 
-    const handleAnswerChange = (event) => {
-        const { name, value } = event.target;
-        setAnswer((prevAnswer) => ({ ...prevAnswer, [name]: value }));
-      };
-
     const handleSubmit = (event) => {
-        console.log(JSON.stringify(answers))
+       let  myanswer={answer1:document.getElementById("answer1").value,answer2:document.getElementById("answer2").value,
+                    answer3:document.getElementById("answer3").value,takhfif:document.getElementById("takhfif").value,
+                    psn:document.getElementById("psn").value,nazarId:document.getElementById("nazarId").value};
+        console.log(JSON.stringify(myanswer))
         event.preventDefault();
-        fetch(`${baseUrl}/addMoneyToCase`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(answers),
-        })
+        axios.get(`${baseUrl}/addMoneyToCase`, {params:myanswer})
         .then((response) => response.json())
            .then((data) => {
             console.log('Response from server:', data);
@@ -61,7 +50,15 @@ export default function Wallet() {
         .catch((error) => {
             console.error('Error:', error);
         });
+        myanswer="";
       };
+
+      const sendAnswerBtn = document.getElementById("sendAnswerBtn");
+      if (takhfifMoney < 0) {
+          console.log(takhfifMoney)
+          console.log(sendAnswerBtn)
+            sendAnswerBtn.disabled = true;
+      }
 
     if(localStorage.getItem("isLogedIn")){
         return (
@@ -96,28 +93,30 @@ export default function Wallet() {
                         <div div className="col-lg-12 p-2" >
                             <ul className="list-group  pe-1">
                             <form onSubmit={handleSubmit}>
-                                <input type="hidden" name="nazarId" value={nazarId} />
+                                <input type="hidden" name="nazarId" id="nazarId" value={nazarId} />
                                 <li className="list-group-item question">
                                     <div className="mb-3">
-                                        <label for="question-text-area" className="form-label"> <b> سوال اول : {firstQuestions}</b></label>
-                                        <textarea value={answers.answer1} onChange={handleAnswerChange} className="form-control" name="answer1" required id="question-text-area" minlength="15" rows="3"></textarea>
+                                        <label htmlFor="question-text-area" className="form-label"> <b> سوال اول : {firstQuestions}</b></label>
+                                        <textarea   className="form-control" name="answer1" id="answer1" required  minLength="15" rows="3"></textarea>
                                     </div>
                                 </li>
                                 <li className="list-group-item question">
                                     <div className="mb-3">
-                                        <label for="question-text-area" className="form-label"> <b> سوال دوم : {secondQuestions}</b></label>
-                                        <textarea value={answers.answer2} onChange={handleAnswerChange} className="form-control" name="answer2" required id="question-text-area" minlength="15" rows="3"></textarea>
+                                        <label htmlFor="question-text-area" className="form-label"> <b> سوال دوم : {secondQuestions}</b></label>
+                                        <textarea   className="form-control" name="answer2" id="answer2" required  minLength="15" rows="3"></textarea>
                                     </div>
                                 </li>
                                 <li className="list-group-item question">
                                     <div className="mb-3">
-                                        <label for="question-text-area" className="form-label"> <b> سوال سوم: {thirdQuestions}</b></label>
-                                        <textarea value={answers.answer3} onChange={handleAnswerChange} className="form-control" name="answer3" required id="question-text-area" minlength="15" rows="3"></textarea>
+                                        <label htmlFor="question-text-area" className="form-label"> <b> سوال سوم: {thirdQuestions}</b></label>
+                                        <textarea   className="form-control" name="answer3" id="answer3" required  minLength="15" rows="3"></textarea>
+                                        <input type="hidden" value={localStorage.getItem("psn")} id="psn" name="psn"/>
+                                        <input type="hidden" value={takhfifMoney}  id="takhfif" name="takhfif"/>
                                     </div>
                                 </li>
                                 <span className="list-group-item question textn-end">
                                     <input type="hidden" name="takhfif" value="" />
-                                    <button className="walletbutton" type="submit"> ارسال </button>
+                                    <button id="sendAnswerBtn" className="walletbutton" type="submit"> ارسال </button>
                                 </span>
                              </form>
                             </ul>
