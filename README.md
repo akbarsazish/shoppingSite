@@ -43,13 +43,15 @@
     <li><a href="#">React </a></li>
     <li><a href="#">React Redux</a></li>
   </ul>
+</details>
+
+<details>
   <summary>Server</summary>
   <ul>
     <li><a href="#">Laravel</a></li>
     <li><a href="#">SQL Server</a></li>
   </ul>
-</details>
-
+<details>
 <!-- Features -->
 
 ### Key Features <a name="key-features"></a>

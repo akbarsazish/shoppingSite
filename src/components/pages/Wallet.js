@@ -24,8 +24,6 @@ export default function Wallet() {
            yesNoPart.style.display = 'none';
       }
 
-     
-  
     useEffect(()=>{
         axios.get(`${baseUrl}/wallet`,{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             settakhfifMoney(data.data.moneyTakhfif)
@@ -52,13 +50,6 @@ export default function Wallet() {
         });
         myanswer="";
       };
-
-      const sendAnswerBtn = document.getElementById("sendAnswerBtn");
-      if (takhfifMoney < 0) {
-          console.log(takhfifMoney)
-          console.log(sendAnswerBtn)
-            sendAnswerBtn.disabled = true;
-      }
 
     if(localStorage.getItem("isLogedIn")){
         return (
@@ -116,7 +107,7 @@ export default function Wallet() {
                                 </li>
                                 <span className="list-group-item question textn-end">
                                     <input type="hidden" name="takhfif" value="" />
-                                    <button id="sendAnswerBtn" className="walletbutton" type="submit"> ارسال </button>
+                                    <button id="sendAnswerBtn" className="walletbutton" type="submit" disabled="${takhfifMoney <= 0 ? 'disabled' : ''}"> ارسال </button>
                                 </span>
                              </form>
                             </ul>
