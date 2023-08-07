@@ -1,22 +1,39 @@
-import React, { useEffect } from "react"
-import { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faShoppingCart, faWallet, faStar, faSearch, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import ShoppingCart from "../pages/ShoppingCart";
 import axios from "axios";
+
 function Header() {
-    const [searchInput, setSearchInput] = useState(false)
+
+  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleSearchIcon = () => {
+    setShowSearchInput(!showSearchInput);
+    if (screenWidth < 768) {
+      const headerStaffDiv = document.getElementById('headerStaff');
+      if (headerStaffDiv) {
+        headerStaffDiv.style.display = showSearchInput ? 'block' : 'none';
+      }
+    }
+  };
+  window.addEventListener('resize', () => {
+    setScreenWidth(window.innerWidth);
+  });
+
+
     const navigate = useNavigate();
     const [bonusResult,setBonusResult] = useState(0)
     const [takhfifMoney,settakhfifMoney] = useState(0)
     useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/checkLogin",{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
+        axios.get("http://192.168.10.24:8080/api/checkLogin",{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
             if(data.data.isLogin==="NO"){
                localStorage.removeItem("isLogedIn")
             }
         })
-        axios.get("http://192.168.10.27:8080/api/getHeaderInfo",{psn:localStorage.getItem("psn")}).then((data)=>{
+        axios.get("http://192.168.10.24:8080/api/getHeaderInfo",{psn:localStorage.getItem("psn")}).then((data)=>{
             localStorage.getItem("buyAmount")
             setBonusResult(data.data.bonusResult)
             settakhfifMoney(data.data.takhfifMoney)
@@ -29,6 +46,7 @@ function Header() {
             window.location = 'searchKala/'+event.target.value;
         }
     }
+  
 
 if(localStorage.getItem("isLogedIn")){
     return (
@@ -38,17 +56,18 @@ if(localStorage.getItem("isLogedIn")){
                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon" icon={faChevronRight} />
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
-                        <FontAwesomeIcon onClick={() => setSearchInput(!searchInput)} className="faIcon" id="searchIcon" icon={faSearch} />
-                        {searchInput ? <input className="txtsearch" type="text" onKeyUp={(e)=>searchKala(e)} placeholder="چی لازم داری ؟  ..." /> : null}
+                        <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="faIcon" id="searchIcon" icon={faSearch} />
+                        {showSearchInput && ( <input className="txtsearch" id="searchTextInput" type="text" onKeyUp={(e)=>searchKala(e)} placeholder="چی لازم داری ؟  ..." />  )}
                     </form>
                 </div>
-                {!searchInput ? <div className="flex-item-right mt-2">
+                
+                <div className="flex-item-right mt-2" id="headerStaff">
                     <Link to="/luckWell" className="headerLink" > <span> {bonusResult} </span> <FontAwesomeIcon className="faIcon" icon={faStar} /> &nbsp;  </Link>  
                     <Link to="/wallet" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faWallet} /> &nbsp;  </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} ><FontAwesomeIcon className="faIcon" icon={faShoppingCart} /> &nbsp; <span className="badge text-bg-dark cartNotification">{localStorage.getItem("buyAmount")}</span> </Link> 
-                </div> : null}
+                </div>  
             </div>
-        </div >
+        </div>
     )
 }else{
     window.location.href="/login"

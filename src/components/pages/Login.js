@@ -42,7 +42,7 @@ export default function Login(props) {
             password: loginInput.password,
             token:localStorage.getItem("isLogedIn")
         }
-        axios.get("http://192.168.10.27:8080/api/loginApi", {params:data}).then(res => {
+        axios.get("http://192.168.10.24:8080/api/loginApi", {params:data}).then(res => {
             console.log(res);
 
             if(res.data.loginInfo){
@@ -89,7 +89,7 @@ export default function Login(props) {
     }
 
     const saveIntroduceCode=()=>{
-        axios.get("http://192.168.10.27:8080/api/addIntroducerCode", {params:{
+        axios.get("http://192.168.10.24:8080/api/addIntroducerCode", {params:{
             introCode:document.getElementById("introducerCode").value,
             customerId:customerId,
             token:userToken
@@ -105,7 +105,7 @@ export default function Login(props) {
     }
 
     const confirmBrowserLogOut=()=>{
-        axios.get("http://192.168.10.27:8080/api/logOutConfirm", {params:{
+        axios.get("http://192.168.10.24:8080/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken
         }}).then(res => {
@@ -117,8 +117,6 @@ export default function Login(props) {
             window.location.href="/home"
         })
     }
-
-
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
@@ -153,14 +151,10 @@ export default function Login(props) {
 
              <dialog id="favDialog" className="loginDialog">
                 <table className="table table-sm table-striped table-bordered">
-                   <tr>
-                      <th> انتخاب  </th>
-                     <th> مرورگر  </th>
-                     <th> سیستم عامل </th>
-                   </tr>
-                   <tbody>
-                       {deviceInfo}
-                   </tbody>
+                   <thead>
+                    <tr><th> انتخاب</th><th>مرورگر</th><th> سیستم عامل </th></tr>
+                   </thead>
+                   <tbody>{deviceInfo}</tbody>
                 </table>   
              <div>
                <button className="btn btn-sm btn-danger" id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>

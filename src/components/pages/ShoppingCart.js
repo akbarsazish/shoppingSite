@@ -19,7 +19,7 @@ export default function ShoppingCart(props) {
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("http://192.168.10.24:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -64,7 +64,7 @@ export default function ShoppingCart(props) {
     }, []);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("http://192.168.10.27:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
+        axios.get("http://192.168.10.24:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
 
             renewCarts();
 
@@ -72,7 +72,7 @@ export default function ShoppingCart(props) {
     }
 
     const renewCarts = () => {
-        axios.get("http://192.168.10.27:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("http://192.168.10.24:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -117,7 +117,7 @@ export default function ShoppingCart(props) {
     }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("http://192.168.10.24:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -130,7 +130,7 @@ export default function ShoppingCart(props) {
     }
 
     const updateBuy = (orderId, amountUnit, goodSn) => {
-        axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
+        axios.get('http://192.168.10.24:8080/api/updateOrderBYS',
             {
                 params: {
                     kalaId: goodSn,
@@ -144,7 +144,7 @@ export default function ShoppingCart(props) {
     }
 
               const deleteOrder=(orderBYSSn,goodSn)=>{
-                axios.get('http://192.168.10.27:8080/api/deleteOrderBYS',
+                axios.get('http://192.168.10.24:8080/api/deleteOrderBYS',
                 {params:{
                  SnOrderBYS: orderBYSSn
                 }

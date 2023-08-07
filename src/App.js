@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import './App.css';
 import './assets/css/mainStyle.css';
 import './assets/css/mediaq.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -31,7 +30,6 @@ import About from "./components/pages/About";
 import Policy from "./components/pages/Policy";
 import Privacy from "./components/pages/Privacy";
 // import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
-
 
 
 function App() {

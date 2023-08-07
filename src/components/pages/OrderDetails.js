@@ -9,7 +9,7 @@ export default function FactoreDetails(props){
     const [orderItem, setFactorItem] = useState(0);
     const [allPrice, setAllPrice] = useState(0)
     useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/listOrders", 
+        axios.get("http://192.168.10.24:8080/api/listOrders", 
         {params:
             {
                 factorSn:localStorage.getItem("selectedHDS"),

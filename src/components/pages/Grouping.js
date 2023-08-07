@@ -8,7 +8,7 @@ import MainGroupList from "./MainGroupList"
 export default function Grouping() {
     const [mainGroups,setMainGroups]=useState(0)
     useEffect(()=>{
-        fetch("http://192.168.10.27:8080/api/getMainGroups")
+        fetch("http://192.168.10.24:8080/api/getMainGroups")
         .then(response=>response.json())
         .then((groups) => {
             setMainGroups(groups.map((element)=><MainGroupList title={element.title} id={element.id} ></MainGroupList>))

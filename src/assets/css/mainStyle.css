@@ -1291,12 +1291,13 @@ ul li a.active {
 }
 
 .loginDialog {
-    background: #eeaeca;
-    background: radial-gradient(circle,#eeaeca 0,#94bbe9 100%);
+    background: #feaeca;
+    background: radial-gradient(circle,#efaeca 0,#ff5555 100%);
     border: none;
     border-radius: 8px;
     margin: 0 auto;
     position: absolute;
     top: 8%;
-    width: 299px;
+    width: 333px;
+    font-size: 14px;
 }
