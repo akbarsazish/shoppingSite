@@ -143,7 +143,7 @@ span {
 }
 
 .categoryItem {
-    flex: 20%;
+    flex-basis:20%;
     padding: 2px;
 }
 
@@ -1301,3 +1301,59 @@ ul li a.active {
     width: 333px;
     font-size: 14px;
 }
+
+.round-menu{
+    background-color:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height: 111px;
+    border-radius: 5px;
+    margin: 0 auto;
+    border-bottom: 1px solid #edf;
+}
+
+.round-menu-items{
+    flex:24%;
+    width:24%;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.round-item {
+    border-radius:50%;
+    text-align:center;
+    text-align:center;
+}
+
+.round-menu-info {
+    width:70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid red;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.prize-button {
+    font-size:10px !important;
+}
+
+.round-menu-img {
+    width:66px;
+    height:66px;
+}
+
+.round-link {
+    text-decoration:none;
+    color:#000;
+    margin: 0 auto;
+ }
+ 
+ .rount-menu-text {
+     font-size:16px;
+ }
+ 

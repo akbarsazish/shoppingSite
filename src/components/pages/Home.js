@@ -6,6 +6,7 @@ import 'swiper/swiper.min.css';
 import contactImage from '../../assets/images/contactImage.jpg'
 import MainGroupItem from './MainGroupItem'
 import axios from "axios";
+import SecondMenu from "./SecondMenu";
 
 export default function Home() {
     const [showModal, setShowModal] = useState(false);
@@ -20,7 +21,9 @@ export default function Home() {
     }, [showModal]);
 
     useEffect(() => {
+
         axios.get("http://192.168.10.24:8080/api/getSlidersApi").then((data) => {
+
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })
@@ -57,11 +60,12 @@ export default function Home() {
                     </div>
                 </div>
             </div >
-            
-            <div className="categories">
-                {mainGroups}
-            </div>
-
+            <div className="row" style={{boxShadow: "0px 0px 1px 1px #DEF"}}>
+                <SecondMenu /> 
+                <div className="categories">
+                    {mainGroups}
+                </div>
+            </div>             
             {/* مراقبت سلامت فردی  */}
             {/* <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
