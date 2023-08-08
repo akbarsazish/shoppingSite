@@ -151,28 +151,39 @@
         flex: 98%;
         max-width: 98%;
     }
-
     .login {
         flex: 98%;
         max-width: 98%;
     }
 
-
-
     .factors {
         max-width: 99%;
         flex: 99%;
     }
-
     .factorsResult {
         max-width: 99%;
         flex: 99%;
     }
-
     #wheel canvas {
         width: 100% !important;
     }
+}
 
+@media (max-width: 920px) {
+    .gamer-item {
+        width: 32%;
+    }
 
+    .gamer-image {
+        width: 99px;
+        height: 99px;
+    }
 
+    .gamer-container {
+        padding: 2px;
+     }
+
+     .gamer-prize {
+        font-size: 12px;
+    }
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle, faListAlt, faHeart, faShoppingCart, faEnvelope, faPhone, faSignOut, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle, faListAlt, faHeart, faShoppingCart, faEnvelope, faPhone, faSignOut, faUser, faBuilding } from '@fortawesome/free-solid-svg-icons'
 import { faInstagram, faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 import logo from '../../assets/images/logo.png'
 import Profile from "../pages/Profile";
@@ -9,6 +9,7 @@ import Grouping from "../pages/Grouping";
 import Favorite from "../pages/Favorite";
 import Message from "../pages/Message";
 import Contact from "../pages/Contact";
+import GamerList from "../game/GamerList";
 
 function Sidebar() {
     return (
@@ -27,6 +28,7 @@ function Sidebar() {
                 <Link to="/favorite" element={<Favorite />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faHeart} />  مورد علاقه  </Link>
                 <Link to="/shoppingCart" element={<faShoppingCart />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faShoppingCart} />  سبد خرید </Link>
                 <Link to="/message" element={<Message />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faEnvelope} /> پیام ها  </Link>
+                <Link to="/gamerList" element={<GamerList />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faBuilding} />  برج سازی  </Link>
                 <Link to="/contact" element={<Contact />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faPhone} /> تماس با ما </Link>
                 <Link to="/login" onClick={()=>{localStorage.removeItem("isLogedIn")}} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faSignOut} /> خروج </Link>
             </div>

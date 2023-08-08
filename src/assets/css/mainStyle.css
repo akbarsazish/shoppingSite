@@ -1357,3 +1357,104 @@ ul li a.active {
      font-size:16px;
  }
  
+ .gamer-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 44px;
+    padding: 10px;
+ }
+
+.gamer-item {
+    width: 19%;
+    position: relative;
+    text-align: center;
+    align-items: center; 
+    margin-top: 22px;
+}
+
+.gamer-image {
+    width: 111px;
+    height: 111px;
+    border-radius: 50%;
+    box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+}
+
+.gamer-prize {
+    font-size: 13px;
+    position: absolute;
+    box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+    border-radius: 8px;
+    color: #000;
+}
+
+#firstPerson {
+  background-color: gold;
+  animation: mymove 3s infinite;
+}
+#secondPerson {
+  background-color: silver;
+  animation: mymove 2s infinite;
+}
+#thirdPerson {
+  background-color: #ec7147;
+  animation: mymove 5s infinite;
+}
+
+#first-prize {
+    background-color: gold;
+    animation: mymove 3s infinite;
+}
+
+#second-prize {
+    background-color: silver;
+    animation: mymove 3s infinite;
+}
+
+#third-prize {
+    background-color: #ec7147;
+    animation: mymove 3s infinite;
+}
+
+@keyframes mymove {
+    from {background-color: gold;}
+    to {background-color: #ec7147;}
+  }
+
+.gamer-name {
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+}
+
+.gamer-score {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: red;
+}
+
+.buttonGame {
+    min-width: 188px;
+    min-height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    background: #ff3154;
+    border: none;
+    border-radius: 1000px;
+    cursor: pointer;
+    outline: none;
+    position: fixed;
+    bottom: 6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    z-index: auto;
+}

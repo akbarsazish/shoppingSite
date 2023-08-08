@@ -29,8 +29,7 @@ import SearchResult from './components/pages/SearchResult'
 import About from "./components/pages/About";
 import Policy from "./components/pages/Policy";
 import Privacy from "./components/pages/Privacy";
-// import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
-
+import GamerList from "./components/game/GamerList";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -51,56 +50,6 @@ function App() {
   }
 
 
-
-
-  // const updateBuy=(orderId,amountUnit,goodSn)=>{
-  //       axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
-  //       {params:{
-  //         kalaId: goodSn,
-  //         amountUnit: amountUnit,
-  //         orderBYSSn: orderId
-  //       }
-  //       }
-  //       ).then((response)=> {
-
-  //       })
-
-  //   }
-
-  //   const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
-
-  //     if((amountUnit > amountExist) && (freeExistance==0)){
-  //       alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
-  //     }else{
-  //             if (costLimit > 0) {
-  //               if (amountUnit >= costLimit) {
-  //                 alert(costError);
-  //               }
-  //             }
-  //             axios.get('http://192.168.10.27:8080/api/buySomething',
-  //             {params:{
-  //               kalaId: goodSn,
-  //               amountUnit: amountUnit
-  //               }
-  //             }).then((response)=> {
-  //             let  countBought=parseInt(localStorage.getItem('buyAmount'));
-  //               localStorage.setItem('buyAmount',countBought+1);
-
-  //               // let modalCloser=document.querySelector("[data-bs-dismiss]");
-  //               // modalCloser.dispatchEvent(new Event("click"))
-
-  //               // const truck_modal = document.querySelector('#exampleModal');
-  //               // const modal = bootstrap.Modal.getInstance(truck_modal);    
-  //               // modal.hide();
-
-  //               event.target.textContent=btnModalEvent.target.textContent;
-  //               event.target.classList.remove("btn-danger");
-  //               event.target.classList.add("btn-info");
-
-  //             })
-  //           }   
-  // }
-
   const changeHeartIconColor = (goodSn, event) => {
     axios.get('http://192.168.10.27:8080/api/setFavorite', {
       params: {
@@ -114,11 +63,8 @@ function App() {
       } else {
         event.target.style.color = "black";
       }
-
     })
   };
-
-
 
 
   const setAllMoneyToLocaleStorage = (allMoney) => {
@@ -155,6 +101,7 @@ function App() {
         <Route path="/about"                         element={<About />}> </Route>
         <Route path="/policy"                      element={<Policy />}> </Route>
         <Route path="privacy"                      element={<Privacy />}> </Route>
+        <Route path="gamerList"                      element={<GamerList />}> </Route>
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>
     </>
