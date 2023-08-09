@@ -21,7 +21,7 @@ export default function SecondMenu() {
                 </div>
                 <div className="round-menu-items" id="roundMenuItem">
                     <div className="round-item">
-                        <Link to={"/saveEarth/2"} className="round-link">
+                        <Link to={"/gamerList"} className="round-link">
                             <div className="round-menu-info" >
                                 <img src={game} alt="star" className="round-menu-img" />
                             </div>
@@ -32,7 +32,7 @@ export default function SecondMenu() {
         
         <div className="round-menu-items" id="roundMenuItem">
             <div className="round-item">
-                <Link to={"/"} className="round-link">
+                <Link to={"/disAndPrice"} className="round-link">
                     <div className="round-menu-info">
                         <img src={precentage} alt="star" className="round-menu-img" /> 
                     </div>

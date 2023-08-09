@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
@@ -6,10 +6,9 @@ import userAvatar from "../../assets/images/siteImage/userAvatar.png";
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 export default function GamerList (){
     return (
-    <>
+     <>
       <Header/>
       <Sidebar />
       <div className="container-fluid marginTop" style={{backgroundColor:"#f8f9f9"}}>
@@ -53,7 +52,7 @@ export default function GamerList (){
                 <p className="gamer-name"> اسماعيل قاسمي - کباب بناب آيلار </p>
             </div>
          </div>
-         <button id="playButton" class="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button>
+         <button id="playButton" class="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button> 
       </div>
       <Footer />
     </>

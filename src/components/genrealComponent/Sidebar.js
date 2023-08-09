@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faListAlt, faHeart, faShoppingCart, faEnvelope, faPhone, faSignOut, faUser, faBuilding } from '@fortawesome/free-solid-svg-icons'
-import { faInstagram, faTelegram, faWhatsapp } from "@fortawesome/free-brands-svg-icons"
 import logo from '../../assets/images/logo.png'
 import Profile from "../pages/Profile";
 import Grouping from "../pages/Grouping";

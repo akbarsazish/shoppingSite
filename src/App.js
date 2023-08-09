@@ -30,6 +30,7 @@ import About from "./components/pages/About";
 import Policy from "./components/pages/Policy";
 import Privacy from "./components/pages/Privacy";
 import GamerList from "./components/game/GamerList";
+import DiscountAndPrice from "./components/pages/DiscountAndPrice";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -66,7 +67,6 @@ function App() {
     })
   };
 
-
   const setAllMoneyToLocaleStorage = (allMoney) => {
     localStorage.setItem("allMoney", allMoney)
   }
@@ -89,19 +89,21 @@ function App() {
         <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
         <Route path='/message'                      element={<Message />} />
         <Route path='/contact'                      element={<Contact />} />
-        <Route path='/editProfile'                  element={<EditProfile />}></Route>
-        <Route path='/returnedFactor'               element={<ReturnedFactor/>}></Route>
+        <Route path='/editProfile'                  element={<EditProfile />}> </Route>
+        <Route path='/returnedFactor'               element={<ReturnedFactor/>}> </Route>
         <Route path='/shipping'                     element={<Shiping/>}></Route>
         <Route path='/success'                      element={<Success/>}></Route>
         <Route path='/luckWell'                     element={<LuckyWheel/>}></Route>
         <Route path='/wallet'                       element={<Wallet/>}></Route>
         <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
-        <Route path='/orderDetails'                element={<OrderDetails/>}></Route>
+        <Route path='/orderDetails'                 element={<OrderDetails/>}></Route>
         <Route path='/login'                        element={<Login />}></Route>
-        <Route path="/about"                         element={<About />}> </Route>
-        <Route path="/policy"                      element={<Policy />}> </Route>
-        <Route path="privacy"                      element={<Privacy />}> </Route>
-        <Route path="gamerList"                      element={<GamerList />}> </Route>
+        <Route path="/about"                        element={<About />}> </Route>
+        <Route path="/policy"                       element={<Policy />}> </Route>
+        <Route path="privacy"                       element={<Privacy />}> </Route>
+        <Route path="gamerList"                     element={<GamerList />}> </Route>
+        <Route path="disAndPrice"                     element={<DiscountAndPrice />}> </Route>
+
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>
     </>
