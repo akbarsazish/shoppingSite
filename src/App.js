@@ -31,6 +31,7 @@ import Policy from "./components/pages/Policy";
 import Privacy from "./components/pages/Privacy";
 import GamerList from "./components/game/GamerList";
 import DiscountAndPrice from "./components/pages/DiscountAndPrice";
+import Lottery from "./components/pages/Lottery";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -52,7 +53,7 @@ function App() {
 
 
   const changeHeartIconColor = (goodSn, event) => {
-    axios.get('http://192.168.10.27:8080/api/setFavorite', {
+    axios.get('http://192.168.10.33:8080/api/setFavorite', {
       params: {
         goodSn: goodSn,
         psn:localStorage.getItem("psn")
@@ -102,7 +103,8 @@ function App() {
         <Route path="/policy"                       element={<Policy />}> </Route>
         <Route path="privacy"                       element={<Privacy />}> </Route>
         <Route path="gamerList"                     element={<GamerList />}> </Route>
-        <Route path="disAndPrice"                     element={<DiscountAndPrice />}> </Route>
+        <Route path="disAndPrice"                   element={<DiscountAndPrice />}> </Route>
+        <Route path="lottery"                       element={<Lottery />}> </Route>
 
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>

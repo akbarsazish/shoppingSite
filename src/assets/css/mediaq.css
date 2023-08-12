@@ -214,3 +214,12 @@
         flex-direction: column;
     }
 }
+
+@media (max-width: 768px) { 
+    .discount-content-items {
+        width: 98%;
+    }
+    .award-container-item {
+        width: 98%;
+    }
+}

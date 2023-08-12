@@ -143,8 +143,11 @@ span {
 }
 
 .categoryItem {
-    flex-basis:20%;
+    flex-basis:19%;
     padding: 2px;
+    background-color: #fff;
+    margin: 5px;
+    border-radius: 6px;
 }
 
 .categoryImg {
@@ -444,7 +447,7 @@ tr {
 
 .groupingPartItem {
     flex-basis: 24%;
-    background-color: #fff;
+    background-color: #000 !important;
     margin: 2px;
     border-radius: 3px;
 }
@@ -1392,37 +1395,30 @@ ul li a.active {
 }
 
 #firstPerson {
-  background-color: gold;
-  animation: mymove 3s infinite;
-}
-#secondPerson {
-  background-color: silver;
-  animation: mymove 2s infinite;
-}
-#thirdPerson {
-  background-color: #ec7147;
-  animation: mymove 5s infinite;
-}
-
-#first-prize {
     background-color: gold;
-    animation: mymove 3s infinite;
-}
-
-#second-prize {
-    background-color: silver;
-    animation: mymove 3s infinite;
-}
-
-#third-prize {
-    background-color: #ec7147;
-    animation: mymove 3s infinite;
-}
-
-@keyframes mymove {
-    from {background-color: gold;}
-    to {background-color: #ec7147;}
+    animation: firstPerson 1s infinite;
   }
+  #secondPerson {
+    background-color: silver;
+    animation: secondPerson 1s infinite;
+  }
+  #thirdPerson {
+    background-color: #ec7147;
+    animation: thirdPerson 1s infinite;
+  }
+  
+  @keyframes firstPerson {
+      from {background-color: gold;}
+      to {background-color: #af9317;}
+    }
+  @keyframes secondPerson {
+      from {background-color: silver;}
+      to {background-color: rgb(206, 207, 207);}
+    }
+  @keyframes thirdPerson {
+      from {background-color: #ec7147;}
+      to {background-color: rgb(196, 114, 114);}
+    }
 
 .gamer-name {
     font-size: 12px;
@@ -1437,7 +1433,9 @@ ul li a.active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: red;
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .buttonGame {
@@ -1592,12 +1590,13 @@ ul li a.active {
 #coppied {
    position:fixed;
    bottom:10%;
-   left:0;
+   left:0%;
    background-color: #404040;
    border-radius: 5px;
    padding:10px;
    text-align:center;
-   display:none;
+   color: red;
+   width: 100%;
 }
 
 .coppied-code {
@@ -1655,7 +1654,7 @@ ul li a.active {
   padding: 5px;
   background-color: #f7ece1;
   border-radius: 6px;
-  border: 1px solid red;
+  border: 1px dotted red;
   margin: 5px;
 }
 
@@ -1682,20 +1681,28 @@ ul li a.active {
 }
 
 .award-container {
-    display: flex;
-    padding: 5px;
+  display: flex;
+  padding: 5px;
+  flex-wrap: wrap;
 }
 
 .award-container-item {
-    width: 32%;
-    padding: 5px;
-    background-color: #f7ece1;
-    min-height: 10rem;
-    border-radius: 6px;
-    margin: 5px;
-    padding: 10px;
+  width: 32%;
+  padding: 5px;
+  background-color: #f7ece1;
+  min-height: 10rem;
+  border-radius: 6px;
+  margin: 5px;
+  padding: 10px;
+  border: 1px dotted red;
 }
 
 .award-description {
   font-size: 0.9rem;
+}
+
+.instruction-container {
+    border-radius: 6px;
+    padding: 20px;
+
 }

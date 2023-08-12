@@ -19,7 +19,7 @@ export default function ShoppingCart(props) {
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
     useEffect(() => {
-        axios.get("http://192.168.10.24:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("http://192.168.10.33:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -27,20 +27,20 @@ export default function ShoppingCart(props) {
             setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-            let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
-                    accomulator += parseInt(currentValue.Price / currency)
-                }
+            let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
+                accomulator += parseInt(currentValue.Price / currency)
+                
                 return accomulator;
             }, 0))
 
-            let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
-                    accomulator += parseInt(currentValue.Price1 / currency)
-                }
+            console.log(data.data.orders)
+
+            let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
+                accomulator += parseInt(currentValue.Price1 / currency)
+                
                 return accomulator;
             }, 0))
-            setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
+            setAllProfit(parseInt(allMoneyProfit)-parseInt(allMoneyNoProfit))
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -64,7 +64,7 @@ export default function ShoppingCart(props) {
     }, []);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("http://192.168.10.24:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
+        axios.get("http://192.168.10.33:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
 
             renewCarts();
 
@@ -72,7 +72,7 @@ export default function ShoppingCart(props) {
     }
 
     const renewCarts = () => {
-        axios.get("http://192.168.10.24:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("http://192.168.10.33:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -117,7 +117,7 @@ export default function ShoppingCart(props) {
     }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("http://192.168.10.24:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -130,7 +130,7 @@ export default function ShoppingCart(props) {
     }
 
     const updateBuy = (orderId, amountUnit, goodSn) => {
-        axios.get('http://192.168.10.24:8080/api/updateOrderBYS',
+        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
             {
                 params: {
                     kalaId: goodSn,
@@ -143,21 +143,21 @@ export default function ShoppingCart(props) {
         })
     }
 
-              const deleteOrder=(orderBYSSn,goodSn)=>{
-                axios.get('http://192.168.10.24:8080/api/deleteOrderBYS',
-                {params:{
-                 SnOrderBYS: orderBYSSn
-                }
-                 }).then((data)=>{
-                   let  countBought=parseInt(localStorage.getItem('buyAmount'));
-                   if(countBought>0){
-                   localStorage.setItem('buyAmount',countBought-1);
-                   let cartDiv=document.getElementById(goodSn+"cartDiv")
-                   cartDiv.style.display="none";
-                   renewCarts()
-                   }
-                 })
-             }
+    const deleteOrder=(orderBYSSn,goodSn)=>{
+        axios.get('http://192.168.10.33:8080/api/deleteOrderBYS',
+        {params:{
+            SnOrderBYS: orderBYSSn
+        }
+            }).then((data)=>{
+            let  countBought=parseInt(localStorage.getItem('buyAmount'));
+            if(countBought>0){
+            localStorage.setItem('buyAmount',countBought-1);
+            let cartDiv=document.getElementById(goodSn+"cartDiv")
+            cartDiv.style.display="none";
+            renewCarts()
+            }
+        })
+    }
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
@@ -180,11 +180,11 @@ export default function ShoppingCart(props) {
                         <div className="shoppingLeft">
                             <div className="shoppingLefFirst">
                                 <h6 className="payAbleTitle"> مبلغ قابل پرداخت </h6>
-                                <p className="payAbleAmount"> {parseInt(allMoney).toLocaleString("fa-IR")} {currencyName} </p>
+                                <p className="payAbleAmount"> {parseInt(allMoney ).toLocaleString("fa-IR")} {currencyName} </p>
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState===0)?
+                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
                                     :( allMoney <= minSalePriceFactor?
                                         <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
@@ -202,7 +202,7 @@ export default function ShoppingCart(props) {
                 </div>
                 <Footer />
                 {true &&
-                    <div className="modal fade " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade " id="exampleModal" tabIndex="-1">
                         <div className="modal-dialog buyModal">
                             <div className="modal-content">
                                 <div className="modal-body">
@@ -215,7 +215,7 @@ export default function ShoppingCart(props) {
                     </div>
                 }
 
-                <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1">
                     <div className="modal-dialog modal-dialog-sm">
                         <div className="modal-content">
                             <div className="modal-header">

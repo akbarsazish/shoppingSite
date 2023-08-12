@@ -28,12 +28,12 @@ function Header() {
     const [bonusResult,setBonusResult] = useState(0)
     const [takhfifMoney,settakhfifMoney] = useState(0)
     useEffect(()=>{
-        axios.get("http://192.168.10.24:8080/api/checkLogin",{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
+        axios.get("http://192.168.10.33:8080/api/checkLogin",{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
             if(data.data.isLogin==="NO"){
                localStorage.removeItem("isLogedIn")
             }
         })
-        axios.get("http://192.168.10.24:8080/api/getHeaderInfo",{psn:localStorage.getItem("psn")}).then((data)=>{
+        axios.get("http://192.168.10.33:8080/api/getHeaderInfo",{psn:localStorage.getItem("psn")}).then((data)=>{
             localStorage.getItem("buyAmount")
             setBonusResult(data.data.bonusResult)
             settakhfifMoney(data.data.takhfifMoney)

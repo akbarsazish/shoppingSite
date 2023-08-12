@@ -19,7 +19,7 @@ export default function Favorite(props) {
     },[])
 
         const renewFavorite=()=>{
-        axios.get("http://192.168.10.24:8080/api/favoritKalaApi",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+        axios.get("http://192.168.10.33:8080/api/favoritKalaApi",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             setKalaItem(data.data.favorits.map((element,index)=>     
             <div key={index} className="groupingItem">
             <img className="topLeft" src={starfood} alt="slider" />
@@ -84,7 +84,7 @@ export default function Favorite(props) {
 
 
     const requestProduct=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.24:8080/api/addRequestedProduct",{params:{
+        axios.get("http://192.168.10.33:8080/api/addRequestedProduct",{params:{
           customerId:psn,
           productId:goodSn
         }}).then((data)=>{
@@ -93,7 +93,7 @@ export default function Favorite(props) {
       }
       
       const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.24:8080/api/cancelRequestedProduct",{params:{
+        axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct",{params:{
           psn:psn,
           gsn:goodSn
         }}).then((data)=>{
@@ -103,7 +103,7 @@ export default function Favorite(props) {
 
     const showBuyModal=(goodSn,event)=>{
     
-        axios.get("http://192.168.10.24:8080/api/getUnitsForUpdate",{params:{
+        axios.get("http://192.168.10.33:8080/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -119,7 +119,7 @@ export default function Favorite(props) {
     }
 
       const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-        axios.get("http://192.168.10.24:8080/api/getUnitsForUpdate",{params:{
+        axios.get("http://192.168.10.33:8080/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -134,7 +134,7 @@ export default function Favorite(props) {
         })
       }
       const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('http://192.168.10.24:8080/api/updateOrderBYS',
+        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
         {params:{
           kalaId: goodSn,
           amountUnit: amountUnit,
@@ -157,7 +157,7 @@ export default function Favorite(props) {
                   alert(costError);
                 }
               }
-              axios.get('http://192.168.10.24:8080/api/buySomething',
+              axios.get('http://192.168.10.33:8080/api/buySomething',
               {params:{
                 kalaId: goodSn,
                 amountUnit: amountUnit,

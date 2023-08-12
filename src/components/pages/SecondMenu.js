@@ -42,7 +42,7 @@ export default function SecondMenu() {
         </div>
         <div className="round-menu-items" id="roundMenuItem">
             <div className="round-item">
-                <Link to={"/"} className="round-link">    
+                <Link to="/lottery" className="round-link">    
                     <div className="round-menu-info">
                         <img src={star} alt="star" className="round-menu-img" /> 
                     </div>
