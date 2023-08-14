@@ -1282,11 +1282,6 @@ ul li a.active {
     display: flex !important;
 }
 
-.lotteryInformation {
-    box-shadow: 1px 1px 5px red;
-    justify-content: center;
-    border-radius: 5px;
-}
 
 .aboutImg {
     width: 100%;
@@ -1697,6 +1692,10 @@ ul li a.active {
   border: 1px dotted red;
 }
 
+.instruction-description {
+    font-size: 1rem;
+}
+
 .award-description {
   font-size: 0.9rem;
 }
@@ -1704,5 +1703,99 @@ ul li a.active {
 .instruction-container {
     border-radius: 6px;
     padding: 20px;
+}
 
+.instruction-details {
+    font-size: 0.9rem;
+    padding-right: 22px;
+}
+
+.your-star {
+    position: relative;
+    text-align: center;
+ }
+
+ .your-star-text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  .star-img {
+    width: 11rem;
+  }
+
+  .use-lucky-well {
+    width: 33%;
+
+  }
+
+  #weely-calendar {
+    background: url("../images/dialy.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    padding: 5%;
+    max-width: 100%;
+}
+
+.weekly-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+ }
+
+
+ .week-day {
+    text-align: center;
+    font-weight: bold;
+
+ }
+
+ .day-content {
+    background: #ffffff;
+    border-radius: 8px;
+    width: 72px;
+    height: 100px;
+    margin: 0 auto;
+ }
+
+ div.top{
+    padding-top: 10px;
+    font-size: 1rem;
+ }
+
+.daily-bottom {
+    height: 44px;
+}
+
+
+.day-label {
+    margin-top: 5px;
+    text-align: center;
+    align-self: center;
+    font-size: 14px;
+ }
+
+#chechIcon, #crossIcon {
+    font-size: 33px;
+    padding-top: 25px;
+}
+
+.crossIcon {
+    font-size: 33px;
+    padding-top: 25px;
+}
+
+.curren-day {
+    border: 3px solid #ffc845;
+    box-shadow: 0 4px 4px rgba(255,203,44,.24)
 }

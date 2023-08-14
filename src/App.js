@@ -18,7 +18,6 @@ import EditProfile from './components/pages/EditProfile';
 import ReturnedFactor from './components/pages/ReturnedFactor';
 import Shiping from './components/pages/Shiping';
 import Success from './components/pages/Success';
-import LuckyWheel from './components/pages/LuckWell';
 import Wallet from './components/pages/Wallet';
 import FactoreDetails from "./components/pages/FactorDetails";
 import OrderDetails from "./components/pages/OrderDetails";
@@ -94,7 +93,6 @@ function App() {
         <Route path='/returnedFactor'               element={<ReturnedFactor/>}> </Route>
         <Route path='/shipping'                     element={<Shiping/>}></Route>
         <Route path='/success'                      element={<Success/>}></Route>
-        <Route path='/luckWell'                     element={<LuckyWheel/>}></Route>
         <Route path='/wallet'                       element={<Wallet/>}></Route>
         <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
         <Route path='/orderDetails'                 element={<OrderDetails/>}></Route>
