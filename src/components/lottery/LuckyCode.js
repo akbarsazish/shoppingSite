@@ -54,7 +54,6 @@
     }, []);
 
 
-
     if(selectedItem.showfirstPrize ==1){
         FirstPrize = shuffle([(3766)]);
        }
@@ -183,7 +182,6 @@
             box.style.transition = 'initial';
             box.style.transform = 'rotate(180deg)';
         }, 6000);
-
     };
 
     return (
@@ -255,4 +253,4 @@
         </div>
         </>
     );
-    }
+}

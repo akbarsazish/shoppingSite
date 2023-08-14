@@ -1799,3 +1799,25 @@ ul li a.active {
     border: 3px solid #ffc845;
     box-shadow: 0 4px 4px rgba(255,203,44,.24)
 }
+
+.dialy-check {
+    display: none;
+}
+
+.calendar-check {
+    font-size: 2rem;
+}
+
+.calendar-cross {
+    font-size: 2rem;
+}
+
+.dialy-credit {
+    font-size: 1.5rem;
+    color: #7763fa;
+}
+
+.calendar-info {
+    font-size: 1rem;
+    color: #7763fa;
+}

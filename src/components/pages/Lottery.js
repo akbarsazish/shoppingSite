@@ -6,7 +6,6 @@ import Footer from "../genrealComponent/Footer";
 import DailyEmtyaz from "../lottery/DailyEmtyaz";
 import LuckyCode from "../lottery/LuckyCode";
 
-
 export default function Lottery() {
   return (
     <>
