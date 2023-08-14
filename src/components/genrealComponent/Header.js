@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faShoppingCart, faWallet, faStar, faSearch, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faShoppingCart, faSearch, faChevronRight, faPeopleArrows } from '@fortawesome/free-solid-svg-icons'
 import ShoppingCart from "../pages/ShoppingCart";
 import axios from "axios";
 
 function Header() {
-
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
@@ -22,7 +21,6 @@ function Header() {
   window.addEventListener('resize', () => {
     setScreenWidth(window.innerWidth);
   });
-
 
     const navigate = useNavigate();
     const [bonusResult,setBonusResult] = useState(0)
@@ -47,7 +45,6 @@ function Header() {
         }
     }
   
-
 if(localStorage.getItem("isLogedIn")){
     return (
         <div className="row topMenu ">
@@ -62,8 +59,7 @@ if(localStorage.getItem("isLogedIn")){
                 </div>
                 
                 <div className="flex-item-right mt-2" id="headerStaff">
-                    <Link to="/luckWell" className="headerLink" > <span> {bonusResult} </span> <FontAwesomeIcon className="faIcon" icon={faStar} /> &nbsp;  </Link>  
-                    <Link to="/wallet" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faWallet} /> &nbsp;  </Link>    
+                    <Link to="/lottery" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faPeopleArrows} /> &nbsp;  </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} ><FontAwesomeIcon className="faIcon" icon={faShoppingCart} /> &nbsp; <span className="badge text-bg-dark cartNotification">{localStorage.getItem("buyAmount")}</span> </Link> 
                 </div>  
             </div>
