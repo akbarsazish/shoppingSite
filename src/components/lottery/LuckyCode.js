@@ -15,13 +15,13 @@
 
     export default function LuckyCode() {
     const [selectedItem, setSelectedItem] = useState({eightthPrize:'',eleventhPrize:'',fifteenthPrize:''
-        ,fifthPrize:"",firstPrize: "",fourteenthPrize:'',fourthPrize:"",id :"0",ninethPrize:"",
-        secondPrize:"",seventhPrize:"",showeightthPrize:"0",showeleventhPrize:"0",showfifteenthPrize: "0",
-        showfifthPrize:"0",showfirstPrize:"0",showfourteenthPrize:"0",showfourthPrize:"0",
-        showninethPrize:"0",showsecondPrize:"0",showseventhPrize:"0",showsixteenthPrize:"0",
-        showsixthPrize:"0",showteenthPrize:"0",showtherteenthPrize:"0",showthirdPrize:"0",
-        showtwelvthPrize:"0",sixteenthPrize:"",sixthPrize:"",teenthPrize:"",therteenthPrize:"",                                                                                                                                               
-        thirdPrize:"",timestam:"2022-12-06 11:44:16.207",twelvthPrize:""});
+        ,fifthPrize:'',firstPrize:'',fourteenthPrize:'',fourthPrize:'',id :'0',ninethPrize:'',
+        secondPrize:'',seventhPrize:'',showeightthPrize:'0',showeleventhPrize:'0',showfifteenthPrize:'0',
+        showfifthPrize:'0',showfirstPrize:'0',showfourteenthPrize:'0',showfourthPrize:'0',
+        showninethPrize:'0',showsecondPrize:'0',showseventhPrize:'0',showsixteenthPrize:'0',
+        showsixthPrize:'0',showteenthPrize:'0',showtherteenthPrize:'0',showthirdPrize:'0',
+        showtwelvthPrize:'0',sixteenthPrize:'0',sixthPrize:'0',teenthPrize:'0',therteenthPrize:'0',                                                                                                                                               
+        thirdPrize:'',timestam:'2022-12-06 11:44:16.207',twelvthPrize:''});
     const [wonPrize,setWonPrize]=useState('');
     const [rotation, setRotation] = useState(90);
 
@@ -49,9 +49,15 @@
         })
         .then((data) => {
             setSelectedItem(data.data.products[0]);
-            console.log(data.data.products[0])
         });
-    }, []);
+      
+        if (wonPrize) {
+            setTimeout(() => {
+                // applause.play();
+                alert(`تبریک! شما برنده ${wonPrize} شده‌اید.`);
+            }, 5500);
+        }
+    }, [wonPrize]);
 
 
     if(selectedItem.showfirstPrize ==1){
@@ -105,32 +111,30 @@
 
        let hasil=[];
        let primaryPrizeList = shuffle([
-         FirstPrize[0],
-         secondPrize[0],
-         thirdPrize[0],
-         fourthPrize[0],
-         fifthPrize[0],
-         sixthPrize[0],
-         seventhPrize[0],
-         eightPrize[0],
-         ninthPrize[0],
-         teenthPrize[0],
-         eleventhPrize[0],
-         twelvthPrize[0],
-         therteenthPrize[0],
-         fourteenthPrize[0],
-         fifteenthPrize[0],
-         sixteenthPrize[0]
+        FirstPrize[0],
+        secondPrize[0],
+        thirdPrize[0],
+        fourthPrize[0],
+        fifthPrize[0],
+        sixthPrize[0],
+        seventhPrize[0],
+        eightPrize[0],
+        ninthPrize[0],
+        teenthPrize[0],
+        eleventhPrize[0],
+        twelvthPrize[0],
+        therteenthPrize[0],
+        fourteenthPrize[0],
+        fifteenthPrize[0],
+        sixteenthPrize[0]
        ]);
    
        primaryPrizeList.forEach((element)=>{
          if(element>0){
            hasil.push(element);
          }
-   
        })
-       console.log(hasil)
-       console.log(secondPrize)
+    
     const handleSpin = () => {
         // Animation logic
         // const randomRotation = Math.floor(Math.random() * 360); 
@@ -145,7 +149,6 @@
         setTimeout(() => {
             element.classList.add('animate');
         }, 5000);
-
 
         // Calculate selectedItem based on hasil array
         if (FirstPrize.includes(hasil[0])) setWonPrize(selectedItem.firstPrize);
@@ -170,17 +173,18 @@
         // Play the sound
         // wheel.play();
 
-        // Show alert
-        setTimeout(() => {
-        // applause.play();
-        alert(`تبریک! شما برنده ${wonPrize} شده‌اید.`);
-        }, 5500);
+        // console.log(wonPrize)
+        // // Show alert
+        // setTimeout(() => {
+        // // applause.play();
+        // alert(`تبریک! شما برنده ${wonPrize} شده‌اید.`);
+        // }, 5500);
 
         // Reset rotation
 
         setTimeout(() => {
             box.style.transition = 'initial';
-            box.style.transform = 'rotate(180deg)';
+            box.style.transform = 'rotate(90deg)';
         }, 6000);
     };
 
