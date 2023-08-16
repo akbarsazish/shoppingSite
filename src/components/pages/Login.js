@@ -10,11 +10,7 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useState } from "react";
 
-import $ from 'jquery';
-
 export default function Login(props) {
-//localStorage.removeItem("isLogedIn");
-    // const history = useHistory();
     const [deviceInfo,setDeviceInfo]=useState('');
     const [customerId,setCustomerId]=useState(0);
     const [userToken,setUserToken]=useState(0);
@@ -46,15 +42,23 @@ export default function Login(props) {
             password: loginInput.password,
             token:localStorage.getItem("isLogedIn")
         }
-        axios.get("http://192.168.10.27:8080/api/loginApi", {params:data}).then(res => {
+        axios.get("http://192.168.10.33:8080/api/loginApi", {params:data}).then(res => {
+            console.log(res);
 
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
                     console.log(res.data)
                     setUserToken(res.data.token)
-                    alert(res.data.token)
+                    localStorage.setItem("isLogedIn",res.data.token);
                     setCustomerId(res.data.psn)
-                    setDeviceInfo(res.data.loginInfo.map((element,index)=><><div>{element.platform}</div><div>{element.browser}</div><div><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></div></>))
+                    setDeviceInfo(res.data.loginInfo.map((element,index)=>
+                    <>
+                       <tr>
+                        <td>{element.platform}</td>
+                        <td>{element.browser}</td>
+                        <td><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></td>
+                       </tr>
+                    </>))
                     deviceDialog.showModal();
                 }
             }
@@ -78,14 +82,14 @@ export default function Login(props) {
                window.location.href="/home"
             }
 
-            if (res.data.Allowed==0) {
+            if (res.data.Allowed===0) {
                 alert(res.data.message)
             }
         });
     }
 
     const saveIntroduceCode=()=>{
-        axios.get("http://192.168.10.27:8080/api/addIntroducerCode", {params:{
+        axios.get("http://192.168.10.33:8080/api/addIntroducerCode", {params:{
             introCode:document.getElementById("introducerCode").value,
             customerId:customerId,
             token:userToken
@@ -101,20 +105,18 @@ export default function Login(props) {
     }
 
     const confirmBrowserLogOut=()=>{
-        axios.get("http://192.168.10.27:8080/api/logOutConfirm", {params:{
+        axios.get("http://192.168.10.33:8080/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken
         }}).then(res => {
+
             localStorage.setItem("isLogedIn",res.data.token);
-            alert(res.data.token)
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);
             localStorage.setItem("buyAmount",res.data.buyAmount);
             window.location.href="/home"
         })
     }
-
-
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
@@ -126,9 +128,9 @@ export default function Login(props) {
                         </div>
                         <div className="loginBody py-2 px-4 text-center">
                             <label className="text-start" style={{ float: "right" }}>  شماره موبایل</label>
-                            <input className="form-control form-control-sm" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
+                            <input className="form-control form-control-sm" autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label className="text-start mt-2" style={{ float: "right" }}> کلمه عبور </label>
-                            <input name="password" className="form-control form-control-sm" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
+                            <input name="password" autoComplete="off" className="form-control form-control-sm" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
                             <button type="button"  onClick={()=>{loginSubmit()}} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
                         <div className="loginFooter p-1">
@@ -147,12 +149,17 @@ export default function Login(props) {
                 </div>
             </div>
 
-            <dialog id="favDialog" style={{width:'300px',margin:'0 auto'}}>
-                    {deviceInfo}
-                    <div>
-                    <button id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
-                    <button onClick={()=>confirmBrowserLogOut()}>ادامه</button>
-                    </div>
+             <dialog id="favDialog" className="loginDialog">
+                <table className="table table-sm table-striped table-bordered">
+                   <thead>
+                    <tr><th> انتخاب</th><th>مرورگر</th><th> سیستم عامل </th></tr>
+                   </thead>
+                   <tbody>{deviceInfo}</tbody>
+                </table>   
+             <div>
+               <button className="btn btn-sm btn-danger" id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
+                <button className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
+            </div>
             </dialog>
 
             <dialog id="introducerDialog" style={{width:'300px',margin:'0 auto'}}>

@@ -3,19 +3,12 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper";
 import 'swiper/swiper.min.css';
-import slider from '../../assets/images/slider.jpg'
-import eid from '../../assets/images/eid.jpg'
-import category from '../../assets/images/category.jpg'
-import brand from '../../assets/images/brand.jpg'
 import contactImage from '../../assets/images/contactImage.jpg'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import MainGroupItem from './MainGroupItem'
-import { Counter } from '../../features/counter/Counter'
 import axios from "axios";
+import SecondMenu from "./SecondMenu";
 
 export default function Home() {
-    const baseUrl = "//starfoods.ir/api"
     const [showModal, setShowModal] = useState(false);
     const [mainGroups, setMainGroups] = useState(0);
     const [slides,setSlides]=useState([])
@@ -29,18 +22,18 @@ export default function Home() {
 
     useEffect(() => {
 
-        axios.get("http://192.168.10.27:8080/api/getSlidersApi").then((data) => {
+        axios.get("http://192.168.10.33:8080/api/getSlidersApi").then((data) => {
 
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })
 
-    axios.get("http://192.168.10.27:8080/api/getMainGroups").then((data) => {
+    axios.get("http://192.168.10.33:8080/api/getMainGroups").then((data) => {
             setMainGroups(data.data.map((element,index)=><MainGroupItem key={index
             } title={element.title} id={element.id} ></MainGroupItem>))
         })
     },[])
-    console.log(localStorage.getItem("isLogedIn"))
+
     if(localStorage.getItem("isLogedIn")){    
     return (
         <div className="container mainSliderContainer">
@@ -67,10 +60,12 @@ export default function Home() {
                     </div>
                 </div>
             </div >
-            <div className="categories">
-                {mainGroups}
-            </div>
-
+            <div className="row" style={{boxShadow: "0px 0px 1px 1px #DEF"}}>
+                <SecondMenu /> 
+                <div className="categories">
+                    {mainGroups}
+                </div>
+            </div>             
             {/* مراقبت سلامت فردی  */}
             {/* <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
@@ -392,10 +387,10 @@ export default function Home() {
             </div>
             <div className="flex-enamad">
                 <div className="enamadItem">
-                    <a className="siteInfo" href="/aboutUs">درباره استارفود</a> &nbsp;
-                    <a className="siteInfo" href="/privacy">حریم خصوصی</a> &nbsp;
-                    <a className="siteInfo" href="/contactUs">اطلاعات فروشگاه</a> &nbsp;
-                    <a className="siteInfo" href="/policy">شرایط و قوانین</a>
+                    <Link to="/about" className="siteInfo" >درباره استارفود</Link> &nbsp;
+                    <Link to="/policy" className="siteInfo">حریم خصوصی</Link> &nbsp;
+                    <Link to="/constact" className="siteInfo" >اطلاعات فروشگاه</Link> &nbsp;
+                    <Link to="/privacy" className="siteInfo" >شرایط و قوانین</Link>
                 </div>
             </div>
 

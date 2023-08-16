@@ -19,3 +19,50 @@
     height: 100%;
     object-fit: cover;
 }
+
+.round-menu{
+    background-color:transparent;
+    display:flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items:center;
+    justify-content:center;
+    min-height: 111px;
+    border-radius: 5px;
+    width:92%;
+    margin: 0 auto;
+}
+
+.round-menu-items{
+    flex:24%;
+    max-width:24%;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.round-item {
+    border-radius:50%;
+    text-align:center;
+    text-align:center;
+}
+
+.round-menu-info {
+    width:70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid red;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.prize-button {
+    font-size:10px !important;
+}
+
+.round-menu-img {
+    width:66px;
+    height:66px;
+}

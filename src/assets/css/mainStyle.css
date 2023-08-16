@@ -56,12 +56,13 @@ span {
 
 .faIcon {
     color: #fff;
-    font-size: 24px;
+    font-size: 1.7rem;
     cursor: pointer;
 }
 
 .headerLink {
     text-decoration: none;
+    color: #fff;
 }
 
 .txtsearch {
@@ -143,8 +144,11 @@ span {
 }
 
 .categoryItem {
-    flex: 20%;
+    flex-basis:19%;
     padding: 2px;
+    background-color: #fff;
+    margin: 5px;
+    border-radius: 6px;
 }
 
 .categoryImg {
@@ -444,7 +448,7 @@ tr {
 
 .groupingPartItem {
     flex-basis: 24%;
-    background-color: #fff;
+    background-color: #000 !important;
     margin: 2px;
     border-radius: 3px;
 }
@@ -1250,8 +1254,9 @@ ul li a.active {
 }
 
 .factors {
-    max-width: 69%;
-    flex: 69%;
+    max-width: 70%;
+    flex: 70%; 
+   
 }
 
 .factorsResult {
@@ -1260,8 +1265,8 @@ ul li a.active {
 }
 
 .factorDetailPart {
-    border-bottom: 1px solid gray;
     padding: 10px;
+    border-bottom: 1px solid gray;
 }
 
 .factorDetailItems {
@@ -1278,8 +1283,583 @@ ul li a.active {
     display: flex !important;
 }
 
-.lotteryInformation {
-    box-shadow: 1px 1px 5px red;
+
+.aboutImg {
+    width: 100%;
+    height: auto;
+}
+
+.loginDialog {
+    background: #feaeca;
+    background: radial-gradient(circle,#efaeca 0,#ff5555 100%);
+    border: none;
+    border-radius: 8px;
+    margin: 0 auto;
+    position: absolute;
+    top: 8%;
+    width: 333px;
+    font-size: 14px;
+}
+
+.round-menu{
+    background-color:transparent;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height: 111px;
+    border-radius: 5px;
+    margin: 0 auto;
+    border-bottom: 1px solid #edf;
+}
+
+.round-menu-items{
+    flex:24%;
+    width:24%;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.round-item {
+    border-radius:50%;
+    text-align:center;
+    text-align:center;
+}
+
+.round-menu-info {
+    width:70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid red;
+    text-align: center;
     justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.prize-button {
+    font-size:10px !important;
+}
+
+.round-menu-img {
+    width:66px;
+    height:66px;
+}
+
+.round-link {
+    text-decoration:none;
+    color:#000;
+    margin: 0 auto;
+ }
+ 
+ .rount-menu-text {
+     font-size:16px;
+ }
+ 
+ .gamer-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 44px;
+    padding: 10px;
+ }
+
+.gamer-item {
+    width: 19%;
+    position: relative;
+    text-align: center;
+    align-items: center; 
+    margin-top: 22px;
+}
+
+.gamer-image {
+    width: 111px;
+    height: 111px;
+    border-radius: 50%;
+    box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+}
+
+.gamer-prize {
+    font-size: 13px;
+    position: absolute;
+    box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+    border-radius: 8px;
+    color: #000;
+}
+
+#firstPerson {
+    background-color: gold;
+    animation: firstPerson 1s infinite;
+  }
+  #secondPerson {
+    background-color: silver;
+    animation: secondPerson 1s infinite;
+  }
+  #thirdPerson {
+    background-color: #ec7147;
+    animation: thirdPerson 1s infinite;
+  }
+  
+  @keyframes firstPerson {
+      from {background-color: gold;}
+      to {background-color: #af9317;}
+    }
+  @keyframes secondPerson {
+      from {background-color: silver;}
+      to {background-color: rgb(206, 207, 207);}
+    }
+  @keyframes thirdPerson {
+      from {background-color: #ec7147;}
+      to {background-color: rgb(196, 114, 114);}
+    }
+
+.gamer-name {
+    font-size: 12px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #000000;
+}
+
+.gamer-score {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.buttonGame {
+    min-width: 188px;
+    min-height: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    background: #ff3154;
+    border: none;
+    border-radius: 1000px;
+    cursor: pointer;
+    outline: none;
+    position: fixed;
+    bottom: 6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    z-index: auto;
+}
+
+
+.discount-container{
+    display:flex;
+    background-color: #ff3154;
+    flex-direction: row;
+    border-radius: 11px 11px 0px 0px;
+    justify-content: space-around;
+    margin-bottom:0px;
+}
+
+.discount-item {
+    max-width: 33%;
+    flex:33%;
+    cursor:pointer;
+}
+
+.discount-text > i {
+    font-size:26px;
+    color:#fff;
+}
+
+.discount-text{
+    font-size:14px;
+    color:#fff;
+    font-weight:bold;
+}
+
+.discount-container li.active {
+   border-bottom: 2px solid #fff;
+}
+
+.dicountAndprizeDiv {
+    min-height:66vh;
+    border: 1px solid red;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.prize-top-div {
+    display:flex;
+    background-color: #fff;
+    width:98%;
+    margin: 0 auto;
     border-radius: 5px;
 }
+
+.prize-top-div > .first {
+    width: 6%;
+}
+
+.prize-top-div > .second {
+   width: 90%;
+   padding:5px;
+   margin-top: 8px;
+}
+
+
+.remaind-time {
+    justify-content: flex-end;
+    font-weight:bold;
+}
+
+.view-details {
+    justify-content: flex-start;
+    float:left;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.text-start {
+   color:#515151;
+}
+
+.prize-exp {
+    font-size:12px;
+}
+
+.prize-button {
+    font-size: 12px !important
+}
+
+.for-prize-info {
+    display:flex;
+    width:98%;
+    background-color: #fff;
+    justify-content:space-around;
+    align-items:center;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding:10px;
+}
+
+.priz-btn {
+    width: 32%;
+    margin: 0 auto;
+    text-align:center;
+}
+
+.discounts {
+    display:flex;
+    padding:5px;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.discount-info {
+    width: 32%;
+    padding: 5px;
+    background-color: #f7ece1;
+    border-radius:6px;
+    border:1px solid red;
+	margin:5px;
+}
+
+.my-discount-code {
+    padding:5px;
+    border:1px dotted red;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight:bold;
+    margin: 5px;
+}
+
+.copy-code {
+    padding:5px 10px;
+    background-color:whitesmoke;
+    color: red;
+    font-weight:bold;
+    border-radius: 6px;
+}
+
+#coppied {
+   position:fixed;
+   bottom:10%;
+   left:0%;
+   background-color: #404040;
+   border-radius: 5px;
+   padding:10px;
+   text-align:center;
+   color: red;
+   width: 100%;
+}
+
+.coppied-code {
+    color: white;
+}
+
+.recievd-prize-des {
+    margin-bottom: 2px;
+}
+
+.recieved-prize-item {
+    margin:10px;
+}
+
+.used-date {
+    margin-right:26px;
+    font-style:italic;
+}
+
+.recieved-prizes {
+    width:98%;
+    background-color: #fff;
+    margin: 0 auto;
+}
+
+.discount-tab {
+    background-color: red;
+    border-radius: 6px 6px 1px 1px;
+}
+
+.nav-link {
+   color: #000 !important;
+   font-weight: bold;
+}
+.discount-tab .active{
+   border-bottom: 5px solid green;
+}
+
+#discountTabContent {
+    min-height: 66vh;
+    border: 1px solid red;
+    border-radius: 0px 0px 10px 10px;
+    padding: 10px;
+}
+
+.discount-content-container {
+  display: flex;
+  padding: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.discount-content-items {
+  width: 24%;
+  padding: 5px;
+  background-color: #f7ece1;
+  border-radius: 6px;
+  border: 1px dotted red;
+  margin: 5px;
+}
+
+.takfif-name, .use-day, .copy-code {
+  font-size: 0.9rem;
+  padding: 0.2rem;
+}
+
+.my-discount-code {
+    padding: 5px;
+    border: 1px dotted red;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.copy-code {
+    padding: 4px 9px;
+    background-color: whitesmoke;
+    color: red;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+.award-container {
+  display: flex;
+  padding: 5px;
+  flex-wrap: wrap;
+}
+
+.award-container-item {
+  width: 32%;
+  padding: 5px;
+  background-color: #f7ece1;
+  min-height: 10rem;
+  border-radius: 6px;
+  margin: 5px;
+  padding: 10px;
+  border: 1px dotted red;
+}
+
+.instruction-description {
+    font-size: 1rem;
+}
+
+.award-description {
+  font-size: 0.9rem;
+}
+
+.instruction-container {
+    border-radius: 6px;
+    padding: 20px;
+}
+
+.instruction-details {
+    font-size: 0.9rem;
+    padding-right: 22px;
+}
+
+.your-star {
+    position: relative;
+    text-align: center;
+ }
+
+ .your-star-text {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+
+  .star-img {
+    width: 11rem;
+  }
+
+  .use-lucky-well {
+    width: 33%;
+
+  }
+
+  #weely-calendar {
+    background: url("../images/dialy.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+    padding: 5%;
+    max-width: 100%;
+}
+
+.weekly-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+ }
+
+
+ .week-day {
+    text-align: center;
+    font-weight: bold;
+
+ }
+
+ .day-content {
+    background: #ffffff;
+    border-radius: 8px;
+    width: 72px;
+    height: 100px;
+    margin: 0 auto;
+ }
+
+ div.top{
+    padding-top: 10px;
+    font-size: 1rem;
+ }
+
+.daily-bottom {
+    height: 44px;
+}
+
+
+.day-label {
+    margin-top: 5px;
+    text-align: center;
+    align-self: center;
+    font-size: 14px;
+ }
+
+#chechIcon, #crossIcon {
+    font-size: 33px;
+    padding-top: 30px;
+}
+
+.crossIcon {
+    font-size: 33px;
+}
+
+.current-day {
+    border: 3px solid #ffc845;
+    box-shadow: 0 4px 4px rgba(255,203,44,.24)
+}
+
+.dialy-check {
+    display: none;
+}
+
+.calendar-check {
+    font-size: 2rem;
+}
+
+.calendar-cross {
+    font-size: 2rem;
+}
+
+.dialy-credit {
+    font-size: 1.5rem;
+    color: #7763fa;
+}
+
+.calendar-info {
+    font-size: 1rem;
+    color: #7763fa;
+}
+
+
+/* invite code style */
+
+.my-discount-code {
+    padding:5px;
+    border:1px dotted red;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight:bold;
+    margin: 5px;
+}
+#coppied {
+   position:fixed;
+   bottom:10%;
+   left:0;
+   background-color: #404040;
+   border-radius: 5px;
+   padding:10px;
+   text-align:center;
+   display:none;
+}
+
+.coppied-code {
+    color: white;
+}
+
+.copyText {
+    font-weight:bold;
+    font-size:18px;
+}
+
+.span-for-p1, .span-for-p2{
+    color: red;
+    font-size: 20px;
+}
+
+.paragraph-for-invite{
+    text-align: justify;
+    font-size: 1rem;
+}
+

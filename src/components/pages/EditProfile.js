@@ -14,7 +14,7 @@ export default function EditProfile() {
     const [haqiqiCustomerInfo, setHaqiqiCustomerInfo] = useState(0)
     const [hoquqiCustomerInfo, setHoquqiCustomerInfo] = useState(0)
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/profile").then((data) => {
+        axios.get("http://192.168.10.33:808/profile").then((data) => {
             setHaqiqiCustomerInfo(data.data.exactHoqoqi)
             setHoquqiCustomerInfo([data.data.exactHaqiqi])
             
@@ -206,3 +206,5 @@ if(localStorage.getItem("isLogedIn")){
     window.location.href="/login"
 }
 }
+
+

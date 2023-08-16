@@ -1,8 +1,5 @@
-import React, { useState,useEffect,useRef } from "react";
-import {
-    Link,
-    useParams
-} from "react-router-dom"
+import React, { useState,useEffect } from "react";
+import {Link,useParams } from "react-router-dom"
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,16 +12,13 @@ import { faHeart, faShoppingCart,faBell } from "@fortawesome/free-solid-svg-icon
 import axios from "axios";
 
 export default function GroupingItems(props) {
-    const [byModal, setByModal] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const [subGrups,setSubGroups]=useState(0);
     const [maingroupKala,setMainGroupKala]=useState(0);
     const {mainId,subId}=useParams();
-    const heartRef = useRef(null);
     const [buyOption, setBuyOption]=useState(0)
     
     useEffect(() => {
-    fetch("http://192.168.10.27:8080/api/getSubGroupList/?mainGrId="+mainId)
+    fetch("http://192.168.10.33:8080/api/getSubGroupList/?mainGrId="+mainId)
     .then(response=>response.json())
     .then((groups) => {
         setSubGroups(groups.map((element,index)=><SwiperSlide key={index} > 
@@ -36,17 +30,9 @@ export default function GroupingItems(props) {
     })
 },[subId])
 
-const changeHeartIconColor = (goodSn, favoritState) => {
-    axios.get('http://192.168.10.27:8080/api/setFavorite',{params:{
-        goodSn:goodSn,
-        psn:localStorage.getItem("psn")
-    }}).then((data)=>{
-        heartRef.current.style.backgroundColor = "blue";
-        // element.classList.addClass("defaultHeartColor")
-    })
-};
+
 const requestProduct=(psn,goodSn,event)=>{
-    axios.get("http://192.168.10.27:8080/api/addRequestedProduct",{params:{
+    axios.get("http://192.168.10.33:8080/api/addRequestedProduct",{params:{
       customerId:psn,
       productId:goodSn
     }}).then((data)=>{
@@ -55,7 +41,7 @@ const requestProduct=(psn,goodSn,event)=>{
   }
   
   const cancelRequestKala=(psn,goodSn,event)=>{
-    axios.get("http://192.168.10.27:8080/api/cancelRequestedProduct",{params:{
+    axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct",{params:{
       psn:psn,
       gsn:goodSn
     }}).then((data)=>{
@@ -69,7 +55,7 @@ const requestProduct=(psn,goodSn,event)=>{
     },[subId]);
 
     const renewSubGroupCarts=()=>{
-        axios.get("http://192.168.10.27:8080/api/appendSubGroupKala",{
+        axios.get("http://192.168.10.33:8080/api/appendSubGroupKala",{
             params:{
                 mainGrId:mainId,
                 subKalaGroupId:subId,
@@ -88,18 +74,18 @@ const requestProduct=(psn,goodSn,event)=>{
                                                         <p className="groupingItemTitle"> {element.GoodName} </p>
                                                     </Link>
                                                     <div className="groupingItemBottomInfo">
-                                                        <div className="groupingItemInfo"  onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite==1 ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
+                                                        <div className="groupingItemInfo"  onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite===1 ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
                                                         <div className="groupingItemInfo">
                                                             {element.Amount>0?
                                                                 <>
                                                                 <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
-                                                                {element.overLine==1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
+                                                                {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
                                                                 </>
                                                                 :
                                                                     (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
                                                                         ''
                                                                         :(
-                                                                            element.requested==0?
+                                                                            element.requested===0?
                                                                                 <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
                                                                                     <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
                                                                                 </span>
@@ -114,7 +100,7 @@ const requestProduct=(psn,goodSn,event)=>{
                                                     <div className="groupingItemBottomBtn">
                                                     {element.activePishKharid<1 
                                                     ?
-                                                        (element.bought=="Yes" ?
+                                                        (element.bought==="Yes" ?
                                                             <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.Amount)+" "+ element.UName} <FontAwesomeIcon icon={faShoppingCart} /></button>
                                                             :(element.callOnSale>0?
                                                                 <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
@@ -137,7 +123,7 @@ const requestProduct=(psn,goodSn,event)=>{
 
         const showBuyModal=(goodSn,event)=>{
 
-            fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+            fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
             .then(response=>response.json())
             .then((data) => {
             console.log(data)
@@ -147,12 +133,12 @@ const requestProduct=(psn,goodSn,event)=>{
                 }
                 const items=modalItems.map((item)=>item)
                 setBuyOption(items)
-                setByModal(true)
+                
             })
         }
 
         const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-            fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+            fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
             .then(response=>response.json())
             .then((data) => {
                 let modalItems=[];
@@ -161,12 +147,12 @@ const requestProduct=(psn,goodSn,event)=>{
                 }
                 const items=modalItems.map((item)=>item)
                 setBuyOption(items)
-                setByModal(true)
+                
             })
         }
 
         const updateBuy=(orderId,amountUnit,goodSn)=>{
-            axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
+            axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
             {params:{
               kalaId: goodSn,
               amountUnit: amountUnit,
@@ -181,7 +167,7 @@ const requestProduct=(psn,goodSn,event)=>{
       
         const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
       
-          if((amountUnit > amountExist) && (freeExistance==0)){
+          if((amountUnit > amountExist) && (freeExistance===0)){
             alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
           }else{
                   if (costLimit > 0) {
@@ -189,7 +175,7 @@ const requestProduct=(psn,goodSn,event)=>{
                       alert(costError);
                     }
                   }
-                  axios.get('http://192.168.10.27:8080/api/buySomething',
+                  axios.get('http://192.168.10.33:8080/api/buySomething',
                   {params:{
                     kalaId: goodSn,
                     amountUnit: amountUnit,

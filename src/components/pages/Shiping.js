@@ -6,7 +6,10 @@ import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+
 export default function Shiping(props) {
+    let now = new Date();
+    const currentHour = now.getHours();
     const[weekDay1,setWeekDay1]=useState(0)
     const[weekDay2,setWeekDay2]=useState(0)
     const[tomorrowDate,setTomorrowDate]=useState(0)
@@ -16,19 +19,35 @@ export default function Shiping(props) {
     const[defaultAddress,setDefaultAddress]=useState(0)
     const[otherAddresses,setOtherAddresses]=useState('')
     const[factorDay,setFactorDay]=useState(false)
-    const[payType,setpayType]=useState(false);
-
+    const[payType,setpayType]=useState("");
+    const[isUsedTakhfifCode,setTakhfifCode]=useState(0)
     const[selectdFactorDate,setSelectedFactorDate]=useState(0)
     const[selectdAddress,setSelectedAddress]=useState(defaultAddress)
     const[selectdPayType,setSelectedPayType]=useState(0)
     const[allMoney,setAllMoney]=useState(localStorage.getItem("allMoney"))
     const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
     const[takhfifCase,setTakhfifCase]=useState(0)
+    const[sendFast,setFastFactor]=useState(0)
+
+    const changePayMoneyAndTakhfif=()=>{
+        let element =document.getElementById("takhfifSwitch");
+        if(isUsedTakhfifCode !=1){
+            
+            if(element.checked){
+                setAllMoney(allMoney - takhfifCase)
+            }else{
+                setAllMoney(allMoney + takhfifCase)
+            }
+        }else{
+            alert("اسفتاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.");
+            element.checked=false;
+        }
+    }
 
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
+        axios.get("http://192.168.10.33:8080/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
         .then((data) => {
-            setTakhfifCase(data.data.takhfifCase)
+            setTakhfifCase(data.data.takhfifCase/10)
             setWeekDay1(data.data.date1);
             setWeekDay2(data.data.date2);
             setTomorrowDate(data.data.tomorrowDate);
@@ -38,25 +57,56 @@ export default function Shiping(props) {
             setDefaultAddress(data.data.customer.peopeladdress)
             setSelectedAddress(0+'_'+data.data.customer.peopeladdress)
             setOtherAddresses(data.data.addresses.map((element)=><option value={element.AddressPeopel+'_'+element.SnPeopelAddress}>{element.AddressPeopel}</option>))
+            // used for takhfifcode updating
         })
     },[])
 
     const checkSelectedFactorDay=(factorDay)=>{
         if(!factorDay){
-alert("لطفا تاریخ فاکتور را انتخاب کنید.")
+            alert("لطفا تاریخ فاکتور را انتخاب کنید.")
         }
     }
     const addFactorToSefarish=()=>{
-        console.log(selectdAddress)
-axios.get("http://192.168.10.27:8080/api/addFactorApi",{params:{
-    pardakhtType:selectdPayType,
-    recivedTime:selectdFactorDate,
-    customerAddress:selectdAddress,
-    psn:localStorage.getItem("psn"),
-    allMoney:allMoney}
-}).then((data)=>{
-window.location.href = '/success'
-})    }
+    axios.get("http://192.168.10.33:8080/api/addFactorApi",{params:{
+        pardakhtType:selectdPayType,
+        recivedTime:selectdFactorDate,
+        customerAddress:selectdAddress,
+        psn:localStorage.getItem("psn"),
+        allMoney:allMoney}
+    }).then((data)=>{
+        window.location.href = '/success'
+    })    
+}
+
+const calculateTakhfifCode=()=>{
+    let element=document.getElementById("takhfifSwitch");
+    if(element.checked){
+        document.getElementById("errorContainer").textContent=" استفاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.";
+        
+        
+    }else{
+        axios.get("http://192.168.10.33:8080/api/checkTakhfifCodeReliablity",
+        {params:{
+            psn:localStorage.getItem("psn"),
+            code:localStorage.getItem("takhfifCode")
+        }}).then((respond)=>{
+            if(respond.data[1]===0){
+                document.getElementById("errorContainer").textContent="کد تخفیف شما استفاده و یا اینکه موعدش گذشته است.";
+            }else{
+                document.getElementById("errorContainer").textContent="";
+            }
+            setTakhfifCode(1)
+        })
+    }
+}
+
+let justPayOnline=()=>{
+        
+    let payOnline=document.getElementById("payOnline");
+    if(sendFast==1){
+        payOnline.checked=true;
+    }
+}
 
 if(localStorage.getItem("isLogedIn")){
     return (
@@ -74,13 +124,13 @@ if(localStorage.getItem("isLogedIn")){
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                         {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px" }} icon={faSun} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value)}} type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0); justPayOnline()}} type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                        {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", fontSize: "18px" }} icon={faMoon} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value)}}  type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0); justPayOnline()}}  type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
                             </div>
@@ -95,18 +145,42 @@ if(localStorage.getItem("isLogedIn")){
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                     {moorningTimeContent}  &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px" }} icon={faSun} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value)}} type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0); justPayOnline()}} type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                     {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faMoon} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value)}} type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0); justPayOnline()}} type="radio" name="factorDay"  />
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {
+
+
+                    (currentHour >= 7 && currentHour < 19)?
+
+                    <div className="shippingPart">
+                        <div className="row">
+                            <div className="col-2">
+                                <p className="weekDay"> ارسال سریع  </p>
+                            </div>
+                            <div className="col-10">
+                                <div className="form-check">
+                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
+                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(1); justPayOnline()}} type="radio" name="factorDay" />
+                                        <p id="fastSendText" style={{display:"inline"}}>هزینه حمل در زمان هماهنگی اعلان می شود.</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    : ""
+}
+
+
                 </div>
                 <div className="shipigContainer">
                     <div className="shippingPart">
@@ -136,20 +210,20 @@ if(localStorage.getItem("isLogedIn")){
 
                 <div className="shipingBottom">
                     <div className="shippingPartBottom">
-                        <p className="weekDay"> انتخاب پرداخت   </p>
+                        <p className="weekDay"> انتخاب پرداخت </p>
                     </div>
                     <div className="shippingPartBottom mt-2">
                         <div className="form-check">
                             <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType(true);setSelectedPayType("hozori")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
                                 حضوری  <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faTruck} />
                             </label>
                         </div>
                     </div>
                     <div className="shippingPartBottom">
                         <div className="form-check mt-2">
-                            <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" disabled onChange={()=>{checkSelectedFactorDay(factorDay);setpayType(true)}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
+                            <label className="form-check-label text-start timeLabel" for="">
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");}} type="radio" name="payTypeRadio" id="payOnline" />
                                 غیر حضوری  <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
                             </label>
                         </div>
@@ -158,24 +232,46 @@ if(localStorage.getItem("isLogedIn")){
 
                 <div className="shipingBottom">
                     <div className="shippingPartBottom">
-                        <p className="factorInfo"> قیمت کالا () </p>
+                        <p className="factorInfo"> قیمت کالا  </p>
                         <p className="factorInfo"> کیف تخفیف </p>
                         <p className="factorInfo"> تخفیف کالا ها </p>
                         <p className="factorInfo"> مبلغ قابل پرداخت</p>
+                        <button className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#takhfifCodeModal">استفاده از کد تخفیف</button>
                     </div>
                     <div className="shippingPartBottom mt-2">
-                        <p className="factorInfo"> {parseInt(parseInt(localStorage.getItem('allMoney'))+parseInt(localStorage.getItem('allProfit'))).toLocaleString("fa-IR")} تومان </p>
-                        <p className="factorInfo"> {parseInt(takhfifCase).toLocaleString("fa-IR")} تومان  </p>
-                        <p className="factorInfo text-danger"> {parseInt(localStorage.getItem('allProfit')).toLocaleString("fa-IR")} تومان  </p>
-                        <p className="factorInfo"> {parseInt(localStorage.getItem('allMoney')).toLocaleString("fa-IR")} تومان  </p>
+                        <p className="factorInfo"> {parseInt(parseInt(allMoney)+parseInt(allProfit)).toLocaleString("fa-IR")} تومان </p>
+                        <p className="factorInfo" style={{display:"inline"}}> {parseInt(takhfifCase).toLocaleString("fa-IR")} تومان  </p> 
+                        <input type="checkbox" onChange={()=>changePayMoneyAndTakhfif()} id="takhfifSwitch" />
+                        <p className="factorInfo text-danger"> {parseInt(allProfit).toLocaleString("fa-IR")} تومان </p>
+                        <p className="factorInfo"> {parseInt(allMoney).toLocaleString("fa-IR")} تومان </p>
                     </div>
                     <div className="shippingPartBottom">
-                       {(payType && factorDay) ? (
-                       <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
+                       {(payType==="hozori" && factorDay) ? (
+                            <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
                        )
-                       :
-                       <Link  to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                       :((payType==="online" && factorDay)?
+                        <Link  to="/payOnline"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn"> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                       :<Link  to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                        )
                        }
+                    </div>
+                </div>
+                <div id="takhfifCodeModal" className="modal fade" role="dialog"  tabIndex="-1">
+                    <div className="modal-dialog modal-dialog-sm">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h6 className="modal-title text-center"> استفاده از کد تخفیف </h6>
+                            </div>
+                            <div className="modal-body">
+                                <label className="form-label">کد تخفیف</label>
+                                <input type="text" value={localStorage.getItem("takhfifCode")} className="form-control" name="takhfifCode"></input>
+                                <span id="errorContainer" style={{color:"red"}}></span>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" onClick={()=>calculateTakhfifCode()} className="btn btn-success float-end"> استفاده شود <i className="fa fa-repeat"></i></button>
+                                <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal"> انصراف <i className="fa fa-xmark"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

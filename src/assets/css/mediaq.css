@@ -151,27 +151,75 @@
         flex: 98%;
         max-width: 98%;
     }
-
     .login {
         flex: 98%;
         max-width: 98%;
     }
 
-
-
     .factors {
         max-width: 99%;
         flex: 99%;
     }
-
     .factorsResult {
         max-width: 99%;
         flex: 99%;
     }
-
     #wheel canvas {
         width: 100% !important;
     }
+}
 
+@media (max-width: 920px) {
+    .gamer-item {
+        width: 32%;
+    }
 
+    .gamer-image {
+        width: 99px;
+        height: 99px;
+    }
+
+    .gamer-container {
+        padding: 2px;
+     }
+
+     .gamer-prize {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) { 
+    .prize-top-div {
+        width:100%;
+        display:flex;
+    }
+
+    .prize-top-div > .first {
+        width: 15%;
+    }
+
+    .prize-top-div > .second {
+        width: 82%;
+    }
+
+    .for-prize-info {
+        width: 100%;
+    }
+
+    .discount-info {
+        width: 98%;
+    }
+
+    .discounts {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) { 
+    .discount-content-items {
+        width: 98%;
+    }
+    .award-container-item {
+        width: 98%;
+    }
 }

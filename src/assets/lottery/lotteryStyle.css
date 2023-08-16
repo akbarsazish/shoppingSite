@@ -1,0 +1,452 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+  }
+  
+  
+  .mainbox {
+    position: relative;
+    width: 400px;
+    height:400px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 992px) {
+    .mainbox {
+      /* position: absolute; */
+      width: 300px !important;
+      height:300px !important;
+      margin: 0 auto;
+      font-size: 12px;
+      /* top: 50%;
+      left: 50%;
+      margin: -100px 0 0 -150px; */
+    }
+  }
+
+
+  .mainbox:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: url(./arrow-bottom.png) no-repeat;
+    background-size: 9%;
+    left:5%;
+    top: 46%;
+    transform: rotate(90deg);
+    color:#000;
+  }
+  
+  .box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 50%;
+    border: 3px solid #ff4e3b;
+    outline: 2px dashed #ffc134;
+    overflow: hidden;
+    transition: all ease-in-out 5s;
+    transform: rotate(90deg);
+    box-shadow: 0 0 0 8px #5d1544;
+  }
+ 
+  span.font {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    color: white;
+    font-size: 12px;
+  }
+
+ 
+  
+  .span1 {
+    clip-path: polygon(0 17%, 0 50%, 50% 50%);
+    background-image: linear-gradient(to right, #376301 , #77af31, #abdb64);
+  }
+  
+  .span2 {
+    clip-path: polygon(0 17%, 30% 0, 50% 50%);
+    background-image: linear-gradient(to right, #2a8340 , #27e465, #64d68a);
+  }
+  
+  .span3 {
+    clip-path: polygon(30% 0, 71% 0, 50% 50%);
+    background-image: linear-gradient(to right, #086c77, #28c8e4, #59acac);
+  }
+  
+  .span4 {
+    clip-path: polygon(70% 0, 100% 18%, 50% 50%);
+    background-image: linear-gradient(to right, #063085, #4879ec, #a0b1cf);
+  }
+  
+  .span5 {
+    clip-path: polygon(100% 18%, 100% 50%, 50% 50%);
+    background-image: linear-gradient(to right, #4707a6, #8639fc, #b5a0d5);
+  }
+  
+  /* .span6 {
+    clip-path: polygon(100% 18%, 100% 50%, 50% 50%);
+    background-image: linear-gradient(to right, #470750, #ae25bd, #dc89e4);
+  }
+  .span7 {
+    clip-path: polygon(100% 18%, 100% 50%, 50% 50%);
+    background-image: linear-gradient(to right, #c80134, #d238e3, #dc6ee5);
+  }
+  
+  .span8 {
+    clip-path: polygon(100% 18%, 100% 50%, 50% 50%);
+    background-image: linear-gradient(to right, #b45a07, #df8c47, #cfc4bc);
+  }
+   */
+  
+  .box2 {
+    width: 100%;
+    height: 100%;
+    transform: rotate(180deg);
+  }
+ 
+  .box1 .span1 b {
+    position: absolute !important;
+    top: 38% !important;
+    right: 67% !important;
+    transform: rotate(200deg) !important;
+  }
+  
+  .box1 .span2 b {
+    position: absolute;
+    top: 21%;
+    right: 62%;
+    transform: rotate(-129deg);
+  }
+  
+  .box1 .span3 b {
+    position: absolute;
+    top: 12%;
+    right: 37%;
+    transform: rotate(-90deg);
+  }
+  
+  .box1 .span4 b {
+    position: absolute;
+    top: 22%;
+    right: 15%;
+    transform: rotate(-48deg);
+  }
+  
+  .box1 .span5 b {
+    position: absolute;
+    top: 36%;
+    right: 3%;
+    transform: rotate(-15deg);
+  }
+  
+  /* .box1 .span6 b {
+    position: absolute;
+    top: 30%;
+    right: 12%;
+    transform: rotate(-19deg);
+  }
+  
+  .box1 .span7 b {
+    position: absolute;
+    top: 30%;
+    right: 12%;
+    transform: rotate(-19deg);
+  }
+.box1 .span8 b {
+    position: absolute;
+    top: 30%;
+    right: 12%;
+    transform: rotate(-19deg);
+  } */
+  
+
+
+/* box 2 with 8 span style */
+.box2 .span1 b {
+    position: absolute;
+    top: 34%;
+    right: 86%;
+    transform: rotate(200deg);
+  }
+  
+  .box2 .span2 b {
+    position: absolute;
+    top: 22%;
+    right: 57%;
+    transform: rotate(-139deg);
+  }
+  
+  .box2 .span3 b {
+    position: absolute;
+    top: 10%;
+    right: 40%;
+    transform: rotate(271deg);
+  }
+  
+  .box2 .span4 b {
+    position: absolute;
+    top: 18%;
+    right: 16%;
+    transform: rotate(305deg);
+  }
+  
+  .box2 .span5 b {
+    position: absolute;
+    top: 37%;
+    right: 4%;
+    transform: rotate(-20deg);
+  }
+  
+  /* .box2 .span6 b {
+    position: absolute;
+    top: 37%;
+    right: 2%;
+    transform: rotate(-20deg);
+  }
+  
+  .box2 .span7 b {
+    position: absolute;
+    top: 35%;
+    right: 12%;
+    transform: rotate(-29deg);
+  }
+  
+  .box2 .span8 b {
+    position: absolute;
+    top: 30%;
+    right: 12%;
+    transform: rotate(-17deg);
+  } */
+
+
+  /* @medai for mobile  */
+  @media screen and (max-width: 992px) {      
+  .box1 .span1 b {
+    position: absolute !important;
+    top: 38% !important;
+    right: 72%!important; 
+    transform: rotate(196deg) !important;
+
+  }
+  
+  .box1 .span2 b {
+    position: absolute;
+    top: 23%;
+    right: 45%;
+    transform: rotate(-130deg);
+  }
+  
+  .box1 .span3 b {
+    position: absolute;
+    top: 17%;
+    right: 32%;
+    transform: rotate(-90deg);
+  }
+  
+  .box1 .span4 b {
+    position: absolute;
+    top: 20%;
+    right: 16%;
+    transform: rotate(-45deg);
+  }
+  
+  .box1 .span5 b {
+    position: absolute;
+    top: 40%;
+    right: 2%;
+    transform: rotate(-15deg);
+  }
+  
+  .box2 .span1 b {
+    position: absolute;
+    top: 35%;
+    right: 82%;
+    transform: rotate(197deg);
+  }
+  
+  .box2 .span2 b {
+    position: absolute;
+    top: 22%;
+    right: 53%;
+    transform: rotate(-126deg);
+  }
+  
+  .box2 .span3 b {
+    position: absolute;
+    top: 12%;
+    right: 38%;
+    transform: rotate(270deg);
+  }
+  
+  .box2 .span4 b {
+    position: absolute;
+    top: 15%;
+    right: 19%;
+    transform: rotate(310deg);
+  }
+  
+  .box2 .span5 b {
+    position: absolute;
+    top: 37%;
+    right: 2%;
+    transform: rotate(-20deg);
+  }
+
+  }
+
+
+  .spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 4px solid #a98888;
+    background-color: #ef3d52;
+    color: #fff;
+    box-shadow: 0 5px 20px #000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  
+  .spin:active {
+    width: 70px;
+    height: 70px;
+    font-size: 20px;
+    color:black;
+  }
+  
+  .mainbox.animate:after {
+    animation: animateArrow 0.7s ease infinite;
+  }
+  
+  audio {
+    display: none;
+  }
+  
+  @keyframes animateArrow {
+    50% {
+      right: -50px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .mainbox {
+      width: 100%;
+      height: 50%;
+    }
+  }
+  
+
+.lotteryInfo {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto ;
+  gap: 5px;
+}
+
+@media (max-width:920px) {
+  .lotteryInfo {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 5px;
+  }
+  
+}
+
+.lotteryInfo > span {
+  background-color: rgba(236, 230, 230, 0.8);
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.lotteryInformation {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 5px;
+}
+@media (max-width:920px) {
+  .lotteryInformation {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 5px;
+  }
+}
+
+.lotteryInformation .lotteryDesc{
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.lotteryInformation .lotteryDesc:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.discountBag {
+  display: grid;
+  grid-template-columns:auto;
+  gap: 5px;
+}
+
+@media (max-width:920px) {
+  .discountBag {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 5px;
+  }
+}
+
+.discountBag .discountBagDesc{
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 2px;
+  box-shadow: 0 4px 8px 0 #f50303cc;
+  transition: 0.3s;
+  text-align: center;
+  background-color: rgb(228, 218, 218);
+}
+
+.discountBag .discountBagDesc:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.showEmtyaz {
+  background: #ece6e6cc;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 5px;
+  margin: 0 auto;
+  border: 1px solid rgb(180, 93, 93);
+  color:red;
+  font-weight: bold;
+}
+
+.lists .itemList {
+  list-style-type: circle;
+  list-style-position: inside;
+  text-align: right;
+
+}
+
+.spin-animation {
+  transition: all ease 5s;
+}
+
