@@ -1788,15 +1788,14 @@ ul li a.active {
 
 #chechIcon, #crossIcon {
     font-size: 33px;
-    padding-top: 25px;
+    padding-top: 30px;
 }
 
 .crossIcon {
     font-size: 33px;
-    padding-top: 25px;
 }
 
-.curren-day {
+.current-day {
     border: 3px solid #ffc845;
     box-shadow: 0 4px 4px rgba(255,203,44,.24)
 }
@@ -1822,3 +1821,45 @@ ul li a.active {
     font-size: 1rem;
     color: #7763fa;
 }
+
+
+/* invite code style */
+
+.my-discount-code {
+    padding:5px;
+    border:1px dotted red;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight:bold;
+    margin: 5px;
+}
+#coppied {
+   position:fixed;
+   bottom:10%;
+   left:0;
+   background-color: #404040;
+   border-radius: 5px;
+   padding:10px;
+   text-align:center;
+   display:none;
+}
+
+.coppied-code {
+    color: white;
+}
+
+.copyText {
+    font-weight:bold;
+    font-size:18px;
+}
+
+.span-for-p1, .span-for-p2{
+    color: red;
+    font-size: 20px;
+}
+
+.paragraph-for-invite{
+    text-align: justify;
+    font-size: 1rem;
+}
+

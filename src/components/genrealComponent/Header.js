@@ -18,6 +18,7 @@ function Header() {
       }
     }
   };
+
   window.addEventListener('resize', () => {
     setScreenWidth(window.innerWidth);
   });
@@ -59,7 +60,7 @@ if(localStorage.getItem("isLogedIn")){
                 </div>
                 
                 <div className="flex-item-right mt-2" id="headerStaff">
-                    <Link to="/lottery" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faPeopleArrows} /> &nbsp;  </Link>    
+                    <Link to="/inviteCode" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faPeopleArrows} /> &nbsp;  </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} ><FontAwesomeIcon className="faIcon" icon={faShoppingCart} /> &nbsp; <span className="badge text-bg-dark cartNotification">{localStorage.getItem("buyAmount")}</span> </Link> 
                 </div>  
             </div>

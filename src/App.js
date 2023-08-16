@@ -31,6 +31,7 @@ import Privacy from "./components/pages/Privacy";
 import GamerList from "./components/game/GamerList";
 import DiscountAndPrice from "./components/pages/DiscountAndPrice";
 import Lottery from "./components/pages/Lottery";
+import InviteCode from "./components/pages/InviteCode";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -103,6 +104,7 @@ function App() {
         <Route path="gamerList"                     element={<GamerList />}> </Route>
         <Route path="disAndPrice"                   element={<DiscountAndPrice />}> </Route>
         <Route path="lottery"                       element={<Lottery />}> </Route>
+        <Route path="inviteCode"                    element={ <InviteCode />}> </Route>
 
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>

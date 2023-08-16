@@ -185,6 +185,7 @@
         setTimeout(() => {
             box.style.transition = 'initial';
             box.style.transform = 'rotate(90deg)';
+            setWonPrize('');
         }, 6000);
     };
 
@@ -192,7 +193,7 @@
         <>
         <div className="row p-3 lucky-wheel">
             <div id="jquery-script-menu">
-            <div className={`mainbox ${rotation === 90 ? '' : 'spin-animation'}`} id="mainbox">
+              <div className={`mainbox ${rotation === 90 ? '' : 'spin-animation'}`} id="mainbox">
                 <div id="box" className="box boxBorder">
                   <div className="box1">
                     {selectedItem.firstPrize.length>0?
@@ -219,10 +220,9 @@
                     {selectedItem.sixthPrize.length>0?
                     <span className="font span1"> <b> {selectedItem.sixteenthPrize} </b> </span>
                     :''}
-                    
                 </div>
                 <div className="box2">
-                {selectedItem.sixthPrize.length>0?
+                  {selectedItem.sixthPrize.length>0?
                     <span className="font span1"> <b> {selectedItem.sixthPrize.trim() } </b> </span>
                     :''}
                     {selectedItem.seventhPrize.length>0?
