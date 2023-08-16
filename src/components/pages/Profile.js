@@ -37,16 +37,11 @@ export default function Profile(props) {
                     <td>{new Date(element.TimeStamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
                     <td>{element.OrderDate}</td><td> {parseInt(element.Price / 10).toLocaleString()} </td>
                     <td>  پرداخت در محل  </td>
-                    <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SnOrder) }}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
+                    <td> <Link to="/orderDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SnOrder) }}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
             setCustomerName(data.data.profile.Name)
             setIntroducerCode(data.data.profile.selfIntroCode)
             setCustomerMobile((data.data.profile.PhoneStr.split("-"))[0])
             setCustomerPhone((data.data.profile.PhoneStr.split("-"))[1])
-
-            let factorDetails = () => {
-
-            }
-
         });
       
     },[])
