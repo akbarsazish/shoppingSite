@@ -5,6 +5,8 @@ import Footer from "../genrealComponent/Footer";
 
 export default function InviteCode() {
   const [copied, setCopied] = useState(false);
+  let intviteCode = localStorage.getItem("selftIntroCod");
+  let userName = localStorage.getItem("userName");
 
   function getMobileOperatingSystem() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -40,11 +42,9 @@ export default function InviteCode() {
           <div className="row">
               <div className="col-lg-7 col-7">
                 <span className="fs-6">کد دعوت :</span>
-                <span
-                  className="my-discount-code p-1"  id="textToCopyId"
-                  onClick={copyTakhfifCode}>
-                  2222
-                </span>{" "}
+                <span role='button' className="my-discount-code p-1" id="textToCopyId" onClick={copyTakhfifCode}>
+                  {intviteCode}
+                </span>
                 <span className="copyText">کپی</span>
               </div>
               <div className="col-lg-5 col-5 text-start">
@@ -52,7 +52,7 @@ export default function InviteCode() {
                   {deviceType === "ios" && (
                     <a
                       className="button btn btn-danger btn-sm txt-ios"
-                      href={`sms:&body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: {{$profile->selfIntroCode}}\nکلیک نمایید: https://starfoods.ir\n{{Session::get('username')}}`}
+                      href={`sms:&body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: ${intviteCode}\nکلیک نمایید: https://starfoods.ir\n${userName}`}
                     >
                       ارسال
                     </a>
@@ -60,7 +60,7 @@ export default function InviteCode() {
                   {deviceType === "android" && (
                     <a
                       className="button btn btn-danger btn-sm txt-android"
-                      href={`sms:?body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: {{$profile->selfIntroCode}}\nکلیک نمایید: https://starfoods.ir\n{{Session::get('username')}}`}
+                      href={`sms:?body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: ${intviteCode}\nکلیک نمایید: https://starfoods.ir\n${userName}`}
                     >
                       ارسال
                     </a>

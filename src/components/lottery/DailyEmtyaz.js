@@ -3,14 +3,8 @@ import axios from 'axios';
 import { faCalendarCheck, faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function DailyEmtyaz({ presentInfo }) {
-  const [isPresentToday, setIsPresentToday] = useState('none');
-  const [isNotPresentToday, setIsNotPresentToday] = useState('inline');
-  const [isPresentOtherday, setIsPresentOtherday] = useState('none');
-  const [isNotPresentOtherday, setIsNotPresentOtherday] = useState('inline');
+function DailyEmtyaz() {
   const [today, setToday] = useState('FirstPr');
-  const [bonus, setBonus] = useState(5);
-
   const [starfoodStarInfo, setStarfoodStarInfo]=useState({Fifth:null,FifthB:"0",FifthPr:"0",First:"",FirstB:"0"
     ,FirstPr:"0",Fourth:null, FourthB:"10", FourthPr : "0",
     PresentCycleSn : "0", Second : null,  SecondB : "0", SecondPr : "0",
@@ -33,26 +27,24 @@ function DailyEmtyaz({ presentInfo }) {
     })
 }, [])
 
-  function checkCheckboxPresent() {
-    document.getElementById("checkDay").checked = true;
-    document.getElementById("crossIcon").style.display = 'none';
-    document.getElementById("chechIcon").style.display = 'inline';
-    let dayDate=document.getElementById("#checkDay").value();
 
-    axios.get('http://192.168.10.33:8080/api/getLotteryInfoApi', {
-      params: { psn: localStorage.getItem('psn'), currentDay:dayDate },
-    }).then(() => {
-    window.location.reload();
-  })
-  }
+ function checkCheckboxPresent() {
+  document.getElementById("checkDaycurrent-day").checked = true;
+  let todayInputValue=document.getElementById("todayInput").value;
+   axios.get('http://192.168.10.33:8080/api/setWeeklyPresentApi', {
+     params: { psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0],bonus:todayInputValue.split("_")[1] },
+   }).then(() => {
+     window.location.reload();
+  });
+ }
 
   return (
     <section className="weekly-calendar-container my-3" id="weely-calendar">
-        <div className="row">
-            <div className="col-lg-12 p-4">
-                <h3 className='dialy-credit'>  امتیاز روزانه </h3>
-            </div>
-        </div>
+      <div className="row">
+          <div className="col-lg-12 p-4">
+              <h3 className='dialy-credit'>  امتیاز روزانه </h3>
+          </div>
+      </div>
     <div className="weekly-calendar">
       {daysOfWeek.map((currentDay, i) => {
         let todayClass='';
@@ -92,7 +84,7 @@ function DailyEmtyaz({ presentInfo }) {
                   {i==4?(i==4 &&starfoodStarInfo.FifthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
                   {i==5?(i==5 &&starfoodStarInfo.SixthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
                   {i==6?(i==6 &&starfoodStarInfo.SeventhPr==1? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  <input className="form-check-input" style={{ display: 'none' }} type="checkbox" value={`${y}_${today}`} id="checkDay" />
+                  <input className="form-check-input check-day"  type="checkbox" id={"checkDay"+todayClass} />
                 </div>
             </div>
             <p className="day-label">
@@ -104,6 +96,14 @@ function DailyEmtyaz({ presentInfo }) {
                 {i==5?(i==5 && starfoodStarInfo.Sixth == today?'امروز':'روز'+(i+1)):''}
                 {i==6?(i==6 && starfoodStarInfo.Seventh == today ?'امروز':'روز'+(i+1)):''}
             </p>
+
+                {i==0?(i==0 && starfoodStarInfo.First == today?<input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" />:''):''}
+                {i==1?(i==1 && starfoodStarInfo.Second == today ?<input type="text" value={"FirstPr_"+starfoodStarInfo.SecondB} id="todayInput" />:''):''}
+                {i==2?(i==2 && starfoodStarInfo.Third == today ?<input type="text" value={"FirstPr_"+starfoodStarInfo.ThirdB} id="todayInput" />:''):''}
+                {i==3?(i==3 && starfoodStarInfo.Fourth == today  ?<input type="text" value={"FirstPr_"+starfoodStarInfo.FourthB} id="todayInput" />:''):''}
+                {i==4?(i==4 && starfoodStarInfo.Fifth == today  ?<input type="text" value={"FirstPr_"+starfoodStarInfo.FifthB} id="todayInput" />:''):''}
+                {i==5?(i==5 && starfoodStarInfo.Sixth == today?<input type="text" value={"FirstPr_"+starfoodStarInfo.SixthB} id="todayInput" />:''):''}
+                {i==6?(i==6 && starfoodStarInfo.Seventh == today ?<input type="text" value={"FirstPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
           </div>
         );
       })}
@@ -111,7 +111,7 @@ function DailyEmtyaz({ presentInfo }) {
     <div className="row">
           <div className="col-lg-12 p-2 text-center">
              <p className="calendar-info" > هفت روز پشت سر هم مراجعه کنید و ستاره های بیشتری را به دست آورید! جایزه‌های ارزشمندی را برای شما در نظر داریم! </p> 
-             <button className="btn btn-info" id="receivedEmtyaz" onClick={() => checkCheckboxPresent()}> دریافت امتیاز </button> 
+             <button className="btn btn-info" id="receivedEmtyaz" onClick={checkCheckboxPresent}> دریافت امتیاز </button> 
           </div>
       </div>
      </section>

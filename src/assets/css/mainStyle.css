@@ -141,13 +141,14 @@ span {
     padding: 3px;
     flex-direction: row;
     text-align: center;
+    justify-content: space-between;
 }
 
 .categoryItem {
     flex-basis:19%;
-    padding: 2px;
+    padding: 1px;
     background-color: #fff;
-    margin: 5px;
+    margin: 2px;
     border-radius: 6px;
 }
 
@@ -1308,22 +1309,22 @@ ul li a.active {
     justify-content:center;
     min-height: 111px;
     border-radius: 5px;
-    margin: 0 auto;
     border-bottom: 1px solid #edf;
+    margin: 0 auto;
 }
 
 .round-menu-items{
-    flex:24%;
-    width:24%;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+  flex:24%;
+  width:24%;
+  align-items:center;
+  justify-content:space-between;
+  text-align:center;
+  margin: 0 auto;
 }
 
 .round-item {
-    border-radius:50%;
-    text-align:center;
-    text-align:center;
+  border-radius:50%;
+  text-align:center;
 }
 
 .round-menu-info {
@@ -1584,19 +1585,19 @@ ul li a.active {
 }
 
 #coppied {
-   position:fixed;
-   bottom:10%;
-   left:0%;
-   background-color: #404040;
-   border-radius: 5px;
-   padding:10px;
-   text-align:center;
-   color: red;
-   width: 100%;
+  position:fixed;
+  bottom:10%;
+  left:0%;
+  background-color: #404040;
+  border-radius: 5px;
+  padding:10px;
+  text-align:center;
+  color: red;
+  width: 100%;
 }
 
 .coppied-code {
-    color: white;
+  color: white;
 }
 
 .recievd-prize-des {
@@ -1859,7 +1860,10 @@ ul li a.active {
 }
 
 .paragraph-for-invite{
-    text-align: justify;
-    font-size: 1rem;
+  text-align: justify;
+  font-size: 1rem;
 }
 
+#todayInput, .check-day{
+  display: none;
+}
