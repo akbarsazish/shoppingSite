@@ -28,6 +28,8 @@ function DailyEmtyaz({ presentInfo }) {
     }).then((data)=> {
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0])
+        console.log(data.data.presentInfo[0])
+        console.log(data.data.todayDate.date.split(" ")[0])
     })
 }, [])
 
@@ -57,22 +59,22 @@ function DailyEmtyaz({ presentInfo }) {
         if(i==0 && starfoodStarInfo.First==today){
           todayClass='current-day'
         }
-        if(i==0 && starfoodStarInfo.Second==today){
+        if(i==1 && starfoodStarInfo.Second==today){
           todayClass='current-day'
         }
-        if(i==0 && starfoodStarInfo.Third==today){
+        if(i==2 && starfoodStarInfo.Third==today){
           todayClass='current-day'
         }
-        if(i==0 && starfoodStarInfo.Fourth==today){
+        if(i==3 && starfoodStarInfo.Fourth==today){
           todayClass='current-day'
         }
-        if(i==0 && starfoodStarInfo.Fifth==today){
+        if(i==4 && starfoodStarInfo.Fifth==today){
           todayClass='current-day'
         }
-        if(i==0 && starfoodStarInfo.Sixth==today){
+        if(i==5 && starfoodStarInfo.Sixth==today){
           todayClass='current-day'
         }
-        if(i==0 && starfoodStarInfo.Seventh==today){
+        if(i==6 && starfoodStarInfo.Seventh==today){
           todayClass='current-day'
         }
         const dayNumber = i + 1;
@@ -80,8 +82,7 @@ function DailyEmtyaz({ presentInfo }) {
 
         return (
           <div className="week-day" key={i}>
-            <div className={`day-content `+todayClass}>
-              
+            <div className={"day-content "+todayClass}>
               <div className="top">{i==0?starfoodStarInfo.FirstB:(i==1?starfoodStarInfo.SecondB:(i==2?starfoodStarInfo.ThirdB:(i==3?starfoodStarInfo.FourthB:(i==4?starfoodStarInfo.FifthB:(i==5?starfoodStarInfo.SixthB:(i==6?starfoodStarInfo.SeventhB:5))))))}</div>
                 <div className="daily-bottom">
                   {i==0?(i==0 &&starfoodStarInfo.FirstPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
