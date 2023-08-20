@@ -29,6 +29,7 @@
     "react-scripts": "^5.0.1",
     "react-wheel-of-prizes": "^1.0.9",
     "redux": "^4.2.1",
+    "sweetalert2": "^11.7.26",
     "swiper": "^9.1.1",
     "web-vitals": "^2.1.4"
   },

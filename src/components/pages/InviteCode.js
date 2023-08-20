@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 
 export default function InviteCode() {
   const [copied, setCopied] = useState(false);
-  let intviteCode = localStorage.getItem("selftIntroCod");
-  let userName = localStorage.getItem("userName");
+  const [invitInfo, setInviteInfo] = useState("");
+  const [ invitedCustomer, setInvitedCustomer] =  useState({invitedCustomers: []});
+
+  useEffect( () =>{
+      axios.get("http://192.168.10.33:8080/api/getInviteCodeApi",{
+         params:{psn:localStorage.getItem("psn")}}).then((response)=>{
+          setInviteInfo(response.data.profile);
+          setInvitedCustomer(response.data);
+         })
+  }, []);
 
   function getMobileOperatingSystem() {
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
     if (userAgent.match(/iPad|iPhone|iPod/i)) {
       return "ios";
     } else if (userAgent.match(/Android/i)) {
@@ -43,7 +51,7 @@ export default function InviteCode() {
               <div className="col-lg-7 col-7">
                 <span className="fs-6">کد دعوت :</span>
                 <span role='button' className="my-discount-code p-1" id="textToCopyId" onClick={copyTakhfifCode}>
-                  {intviteCode}
+                  {invitInfo.selfIntroCode}
                 </span>
                 <span className="copyText">کپی</span>
               </div>
@@ -52,7 +60,7 @@ export default function InviteCode() {
                   {deviceType === "ios" && (
                     <a
                       className="button btn btn-danger btn-sm txt-ios"
-                      href={`sms:&body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: ${intviteCode}\nکلیک نمایید: https://starfoods.ir\n${userName}`}
+                      href={`sms:&body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: ${invitInfo.selfIntroCode}\nکلیک نمایید: https://starfoods.ir\n${invitInfo.Name}`}
                     >
                       ارسال
                     </a>
@@ -60,7 +68,7 @@ export default function InviteCode() {
                   {deviceType === "android" && (
                     <a
                       className="button btn btn-danger btn-sm txt-android"
-                      href={`sms:?body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: ${intviteCode}\nکلیک نمایید: https://starfoods.ir\n${userName}`}
+                      href={`sms:?body=استار فود رو توصیه میکنم! کالاهایی که نیاز داری رو با سرعت و قیمت مناسب و اصالت بخر. ثبت نام رایگان و کیف پول هم داره. از کد دعوت زیر استفاده کن: ${invitInfo.selfIntroCode}\nکلیک نمایید: https://starfoods.ir\n${invitInfo.Name}`}
                     >
                       ارسال
                     </a>
@@ -98,25 +106,27 @@ export default function InviteCode() {
               صفحه مراجعه کنید.
             </p>
             <br />
-            <h5> اشخاص که از کد دعوت شما استفاده کرده اند </h5>
-            <table class="table table-bordered border-gray">
+            <h5> اشخاص که از کد دعوت شما استفاده کرده اند: </h5>
+            <table className="table table-bordered border-gray table-sm">
                 <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col"> اسم  </th>
-                    </tr>
+                  <tr>
+                    <th> ردیف </th>
+                    <th> اسم  </th>
+                  </tr>
                 </thead>
                 <tbody>
+                  {invitedCustomer.invitedCustomers.map((user, index) => (
                     <tr>
-                      <th> 1</th>
-                       <td> hh </td>
+                      <td> {index + 1} </td>
+                      <td> {user.Name} </td>
                     </tr>
+                    ))}
                 </tbody>
              </table>
           </div>
-          <div className="col-lg-12" id="coppied">
-            {copied && <span className="coppied-code"> کپی شد!</span>}
-          </div>
+          {copied &&  <div className="col-lg-12" id="coppied">
+            <span className="coppied-code"> کپی شد!</span>
+          </div>}
         </div>
       </div>
     </div>

@@ -1,6 +1,4 @@
-
 import React from "react";
-
 import starImg from "../../assets/images/aboutUs/starGif.gif";
 import starImg1 from "../../assets/images/aboutUs/2.jpg";
 import starImg2 from "../../assets/images/aboutUs/3.jpg";

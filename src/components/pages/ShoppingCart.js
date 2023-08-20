@@ -163,12 +163,10 @@ export default function ShoppingCart(props) {
     props.setAllProfitToLocaleStorage(allProfit);
 
     if(localStorage.getItem("isLogedIn")){
-        
         return (
             <>
                 <Header />
                 <Sidebar />
-
                 <div className="container marginTop">
                     <h5 className="fw-bold"> سبد خرید : </h5>
                     <div className="shoppingCart p-2">
@@ -187,17 +185,16 @@ export default function ShoppingCart(props) {
                                     {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
                                     :( allMoney <= minSalePriceFactor?
-                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
+                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
                                         :
                                         <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
-                                    )
-                                    }
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="yourBenefit">
-                        <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
+                      <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
                     </div>
                 </div>
                 <Footer />

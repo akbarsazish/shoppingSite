@@ -1,6 +1,7 @@
     import React, { useState, useEffect } from 'react';
     import axios from 'axios';
     import '../../assets/lottery/lotteryStyle.css';
+    import Swal from 'sweetalert2';
 
     function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -54,7 +55,15 @@
         if (wonPrize) {
             setTimeout(() => {
                 // applause.play();
-                alert(`تبریک! شما برنده ${wonPrize} شده‌اید.`);
+                Swal.fire({
+                    title: `تبریک! شما برنده ${wonPrize} شده‌اید.`,
+                    showClass: {
+                      popup: 'animate__animated animate__fadeInDown'
+                    },
+                    hideClass: {
+                      popup: 'animate__animated animate__fadeOutUp'
+                    }
+                  });
             }, 5500);
         }
     }, [wonPrize]);

@@ -16,6 +16,7 @@ function DailyEmtyaz() {
     "FirstPr", "SecondPr", "ThirdPr", "FourthPr", "FifthPr", "SixthPr", "SeventhPr"
   ];
 
+
   useEffect(()=> {
     axios.get('http://192.168.10.33:8080/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
@@ -23,18 +24,16 @@ function DailyEmtyaz() {
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0])
         console.log(data.data.presentInfo[0])
-        console.log(data.data.todayDate.date.split(" ")[0])
     })
-}, [])
-
+}, []);
 
  function checkCheckboxPresent() {
-  document.getElementById("checkDaycurrent-day").checked = true;
-  let todayInputValue=document.getElementById("todayInput").value;
-   axios.get('http://192.168.10.33:8080/api/setWeeklyPresentApi', {
-     params: { psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0],bonus:todayInputValue.split("_")[1] },
-   }).then(() => {
-     window.location.reload();
+   document.getElementById("checkDaycurrent-day").checked = true;
+   let todayInputValue=document.getElementById("todayInput").value;
+     axios.get('http://192.168.10.33:8080/api/setWeeklyPresentApi', {
+       params: { psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0],bonus:todayInputValue.split("_")[1] },
+     }).then(() => {
+       window.location.reload();
   });
  }
 
@@ -42,7 +41,7 @@ function DailyEmtyaz() {
     <section className="weekly-calendar-container my-3" id="weely-calendar">
       <div className="row">
           <div className="col-lg-12 p-4">
-              <h3 className='dialy-credit'>  امتیاز روزانه </h3>
+            <h3 className='dialy-credit'>  امتیاز روزانه </h3>
           </div>
       </div>
     <div className="weekly-calendar">
@@ -109,12 +108,12 @@ function DailyEmtyaz() {
       })}
     </div>
     <div className="row">
-          <div className="col-lg-12 p-2 text-center">
-             <p className="calendar-info" > هفت روز پشت سر هم مراجعه کنید و ستاره های بیشتری را به دست آورید! جایزه‌های ارزشمندی را برای شما در نظر داریم! </p> 
-             <button className="btn btn-info" id="receivedEmtyaz" onClick={checkCheckboxPresent}> دریافت امتیاز </button> 
-          </div>
-      </div>
-     </section>
+        <div className="col-lg-12 p-2 text-center">
+          <p className="calendar-info" > هفت روز پشت سر هم مراجعه کنید و ستاره های بیشتری را به دست آورید! جایزه‌های ارزشمندی را برای شما در نظر داریم! </p> 
+          <button className="btn btn-info" id="receivedEmtyaz" onClick={checkCheckboxPresent}> دریافت امتیاز</button>
+        </div>
+    </div>
+  </section>
   );
 }
 

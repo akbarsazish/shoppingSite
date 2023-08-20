@@ -17,8 +17,7 @@ export default function Profile(props) {
     const [introducerCode, setIntroducerCode] = useState(0)
     const [customerMobile, setCustomerMobile] = useState(0)
     const [customerPhone, setCustomerPhone] = useState(0)
-    localStorage.setItem("selftIntroCod", introducerCode)
-    localStorage.setItem("userName", customerName)
+    
     useEffect(() => {
         axios.get("http://192.168.10.33:8080/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             setSendedFactors(data.data.factors.map((element, index) =>
@@ -76,7 +75,7 @@ export default function Profile(props) {
                             </div>
                             <div className="profileFooter text-center">
                                 <div className="profileItems">
-                                    <Link className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>
+                                    <Link to="/inviteCode" className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>
                                 </div>
                                 <div className="profileItems">
                                     <Link className="profileFooterIcon" to="/returnedFactor">  فاکتورهای برگشتی  <FontAwesomeIcon icon={faHistory}></FontAwesomeIcon> </Link>

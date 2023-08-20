@@ -222,4 +222,20 @@
     .award-container-item {
         width: 98%;
     }
+
+    #weely-calendar {
+        background: url("../images/daily-mobile.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size:contain;
+        padding: 1%;
+        max-width: 100%;
+    }
+
+    .weekly-calendar {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 3px;
+        margin: 3px;
+        gap: 3px;
+     }
 }

@@ -41,7 +41,6 @@ function Header() {
 
     const searchKala=(event)=>{
         if (event.keyCode === 13) {
-            
             window.location = 'searchKala/'+event.target.value;
         }
     }
@@ -54,7 +53,7 @@ if(localStorage.getItem("isLogedIn")){
                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon" icon={faChevronRight} />
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
-                        <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="faIcon" id="searchIcon" icon={faSearch} />
+                        <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />
                         {showSearchInput && ( <input className="txtsearch" id="searchTextInput" type="text" onKeyUp={(e)=>searchKala(e)} placeholder="چی لازم داری ؟  ..." />  )}
                     </form>
                 </div>

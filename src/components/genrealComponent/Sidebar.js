@@ -21,7 +21,6 @@ function Sidebar() {
                 </div >
             </Link>
             <div className="offcanvas-body px-0">
-                <Link className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faUser} />  نام یوزر  </Link>
                 <Link to="/profile" element={<Profile />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faInfoCircle} />  وضعیت من  </Link>
                 <Link to="/grouping" element={<Grouping />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faListAlt} /> دسته بندی </Link>
                 <Link to="/favorite" element={<Favorite />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faHeart} />  مورد علاقه  </Link>

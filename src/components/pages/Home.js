@@ -59,7 +59,7 @@ export default function Home() {
                         <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} className="smallSlider" alt={smallSlider.firstPic} />
                     </div>
                 </div>
-            </div >
+            </div>
             <div className="row" style={{boxShadow: "0px 0px 1px 1px #DEF"}}>
                 <SecondMenu /> 
                 <div className="categories">
@@ -374,17 +374,18 @@ export default function Home() {
             </div>
 
             <div className="flex-enamad">
-                <div className="enamadItem">
-                    <Link referrerPolicy="origin" to="https://trustseal.enamad.ir/?id=220841&amp;code=dgsiolxgvdofskzzy34r">
-                        <img referrerPolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=220841&amp;Code=dGSIolXgVdoFskzzY34R"
-                            alt="" style={{ cursor: "pointer" }} id="dGSIolXgVdoFskzzY34R" />
-                    </Link>
+              <div className="enamadItem">
+                 <Link referrerPolicy="origin" to="https://trustseal.enamad.ir/?id=220841&amp;code=dgsiolxgvdofskzzy34r">
+                    <img referrerPolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=220841&amp;Code=dGSIolXgVdoFskzzY34R"
+                        alt='logo-enamad' style={{ cursor: "pointer" }} id="dGSIolXgVdoFskzzY34R" />
+                 </Link>
                     <img referrerPolicy='origin' id='nbqewlaosizpjzpefukzrgvj'
                         style={{ cursor: "pointer" }} onClick='window.open("https://logo.samandehi.ir/Verify.aspx?id=249763&p=uiwkaodspfvljyoegvkaxlao",
         "Popup", "toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
                         alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=249763&p=odrfshwlbsiyyndtwlbqqfti' />
                 </div>
             </div>
+
             <div className="flex-enamad">
                 <div className="enamadItem">
                     <Link to="/about" className="siteInfo" >درباره استارفود</Link> &nbsp;
@@ -393,9 +394,7 @@ export default function Home() {
                     <Link to="/privacy" className="siteInfo" >شرایط و قوانین</Link>
                 </div>
             </div>
-
         </div >
-
     )
 }else{
     window.location.href="/login"

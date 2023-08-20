@@ -113,7 +113,7 @@ if(localStorage.getItem("isLogedIn")){
         <>
             <Header />
             <Sidebar />
-            <div className="container marginTop">
+            <div className="container marginTop mb-4">
                 <div className="shipigContainer">
                     <div className="shippingPart">
                         <div className="row">
@@ -163,12 +163,12 @@ if(localStorage.getItem("isLogedIn")){
                     (currentHour >= 7 && currentHour < 19)?
 
                     <div className="shippingPart">
-                        <div className="row">
+                        <div className="row w-100">
                             <div className="col-2">
                                 <p className="weekDay"> ارسال سریع  </p>
                             </div>
-                            <div className="col-10">
-                                <div className="form-check">
+                            <div className="col-10 px-0 pt-2">
+                                <div className="form-check px-0">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                         <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(1); justPayOnline()}} type="radio" name="factorDay" />
                                         <p id="fastSendText" style={{display:"inline"}}>هزینه حمل در زمان هماهنگی اعلان می شود.</p>
@@ -178,23 +178,22 @@ if(localStorage.getItem("isLogedIn")){
                         </div>
                     </div>
                     : ""
-}
-
-
+                }
                 </div>
+
                 <div className="shipigContainer">
                     <div className="shippingPart">
-                        <div className="row">
-                            <div className="col-4">
+                        <div className="row w-100">
+                            <div className="col-3">
                                 <p className="weekDay">   تاریخ دلخواه   </p>
                             </div>
-                            <div className="col-8">
-                                <input className="form-control form-control-sm mt-2 mt-0" type="text" aria-label=".form-control-sm example" />
+                            <div className="col-5 pe-0">
+                                <input className="form-control form-control-sm mt-2 mt-0" type="date" aria-label=".form-control-sm example" />
                             </div>
                         </div>
                     </div>
                     <div className="shippingPart">
-                        <div className="row">
+                        <div className="row w-100">
                             <div className="col-4">
                                 <p className="weekDay">  انتخاب آدرس </p>
                             </div>
@@ -216,7 +215,7 @@ if(localStorage.getItem("isLogedIn")){
                         <div className="form-check">
                             <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                 <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
-                                حضوری  <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faTruck} />
+                                حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faTruck} />
                             </label>
                         </div>
                     </div>
@@ -224,7 +223,7 @@ if(localStorage.getItem("isLogedIn")){
                         <div className="form-check mt-2">
                             <label className="form-check-label text-start timeLabel" for="">
                                 <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");}} type="radio" name="payTypeRadio" id="payOnline" />
-                                غیر حضوری  <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
+                                غیر حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
                             </label>
                         </div>
                     </div>
@@ -236,7 +235,7 @@ if(localStorage.getItem("isLogedIn")){
                         <p className="factorInfo"> کیف تخفیف </p>
                         <p className="factorInfo"> تخفیف کالا ها </p>
                         <p className="factorInfo"> مبلغ قابل پرداخت</p>
-                        <button className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#takhfifCodeModal">استفاده از کد تخفیف</button>
+                        <button className="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#takhfifCodeModal"> استفاده از کد تخفیف % </button>
                     </div>
                     <div className="shippingPartBottom mt-2">
                         <p className="factorInfo"> {parseInt(parseInt(allMoney)+parseInt(allProfit)).toLocaleString("fa-IR")} تومان </p>
