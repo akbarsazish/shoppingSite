@@ -16,22 +16,28 @@ export default function Favorite(props) {
     const [buyOption, setBuyOption]=useState(0)
     useEffect(()=>{
         renewFavorite();
-    },[])
+    },[]);
 
-        const renewFavorite=()=>{
-        axios.get("http://192.168.10.33:8080/api/favoritKalaApi",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
-            setKalaItem(data.data.favorits.map((element,index)=>     
-            <div key={index} className="groupingItem">
+    console.log(kalaItem[0])
+
+    const renewFavorite=()=>{
+    axios.get("http://192.168.10.33:8080/api/favoritKalaApi",
+           {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+            //    {console.log(data.data.favorits)}
+            setKalaItem(data.data.favorits.map((element,index)=>
+
+        <div key={index} className="groupingItem">
             <img className="topLeft" src={starfood} alt="slider" />
             {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
-            <Link to={"/descKala/"+element.GoodSn+"/"} className="groupingItemLink">
+            <Link to={"/descKala/"+element.GoodSn+ "/" + element.id} className="groupingItemLink">
                 <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider" />
             </Link>
+
             <Link to={"/descKala/"+element.GoodSn+"/"} className="groupingItemTitleLink">
                 <p className="groupingItemTitle"> {element.GoodName} </p>
             </Link>
             <div className="groupingItemBottomInfo">
-                <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+               <div className="groupingItemInfo"> <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
                         
                 </div>
                 <div className="groupingItemInfo">
@@ -45,9 +51,9 @@ export default function Favorite(props) {
                                 ''
                                 :(
                                     element.requested===0?
-                                        <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                            <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
-                                        </span>
+                                      <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
+                                         <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                      </span>
                                     :
                                         <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
                                             <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(localStorage.getItem("psn"),element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>

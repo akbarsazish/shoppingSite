@@ -30,9 +30,8 @@ export default function DescKala(props) {
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
-                
             })
-    }
+         }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
         fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
@@ -69,7 +68,6 @@ export default function DescKala(props) {
         })
     }
 
-
     useEffect(() => {
         renewDescKala();
     },[goodSn])
@@ -77,11 +75,11 @@ export default function DescKala(props) {
     const updateBuy=(orderId,amountUnit,goodSn)=>{
         axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
             {
-                params: {
-                    kalaId: goodSn,
-                    amountUnit: amountUnit,
-                    orderBYSSn: orderId
-                }
+            params: {
+              kalaId: goodSn,
+              amountUnit: amountUnit,
+              orderBYSSn: orderId
+            }
             }
         ).then((response) => {
             renewDescKala();
@@ -169,7 +167,7 @@ export default function DescKala(props) {
             <div className="container marginTop mb-5">
                 <div className="kalaDescibe mt-2 p-2">
                     <div className="kalaImg">
-                        <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite==='YES') ? 'defaultHeartColor' :''} icon={faHeart}  ></FontAwesomeIcon>
+                        <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite==='YES') ? 'defaultHeartColor heartIcon' :'heartIcon'} icon={faHeart}></FontAwesomeIcon>
                         <img className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
                     </div>
 

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faSquareCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import yourStar from '../../assets/images/siteImage/your-star.png'
 
-export default function Instruction() {
+export default function Instruction(props) {
   return (
     <>
       <div className="container marginTop">
@@ -33,7 +33,7 @@ export default function Instruction() {
             </div>
             <div className="your-star p-2">
                 <img src={yourStar} alt="star" className="star-img"/>
-                <div className="your-star-text" id="allBonusDiv"> 44 <br /> ستاره شما  </div>
+                <div className="your-star-text" id="allBonusDiv"> {props.mybonus}<br /> ستاره شما  </div>
             </div>
             <hr />
         </div>

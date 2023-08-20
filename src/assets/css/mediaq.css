@@ -1,26 +1,25 @@
 @media (max-width: 920px) {
     .categoryItem {
-        flex: 32%;
-        max-width: 32%;
+        flex: 31.5%;
+        max-width: 31.5%;
     }
 }
 
 
 @media (max-width: 920px) {
     .profileRightPart {
-        flex: 99%;
-        max-width: 100%;
+      flex: 99%;
+      max-width: 100%;
     }
-
     .profileLeftPart {
-        flex: 99%;
-        max-width: 100%;
+      flex: 99%;
+      max-width: 100%;
     }
 }
 
 @media (max-width: 920px) {
     .footer {
-        display: block;
+      display: block;
     }
 }
 

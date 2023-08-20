@@ -50,15 +50,15 @@ if(localStorage.getItem("isLogedIn")){
         <div className="row topMenu ">
             <div className="flex-container">
                 <div className="flex-item-left">
-                    <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon" icon={faChevronRight} />
+                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
-                        <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />
+                    <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />
                         {showSearchInput && ( <input className="txtsearch" id="searchTextInput" type="text" onKeyUp={(e)=>searchKala(e)} placeholder="چی لازم داری ؟  ..." />  )}
                     </form>
                 </div>
                 
-                <div className="flex-item-right mt-2" id="headerStaff">
+                <div className="flex-item-right mt-1" id="headerStaff">
                     <Link to="/inviteCode" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faPeopleArrows} /> &nbsp;  </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} ><FontAwesomeIcon className="faIcon" icon={faShoppingCart} /> &nbsp; <span className="badge text-bg-dark cartNotification">{localStorage.getItem("buyAmount")}</span> </Link> 
                 </div>  

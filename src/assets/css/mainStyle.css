@@ -60,16 +60,21 @@ span {
     cursor: pointer;
 }
 
+.chevron-icon-right {
+    margin-top: 0.2rem;
+}
+
 .headerLink {
     text-decoration: none;
     color: #fff;
 }
 
 .txtsearch {
-    margin: 4px 10px;
+    margin: 0.1rem 1rem 1rem;
     border-radius: 2px;
     font-size: 12px;
     padding: 6px;
+    max-width: 100%;
 }
 
 .cartNotification {
@@ -145,18 +150,17 @@ span {
 }
 
 .categoryItem {
-    flex-basis:19%;
+    flex-basis:19.3%;
     padding: 1px;
     background-color: #fff;
-    margin: 2px;
-    border-radius: 6px;
+    margin: 3px;
+    border-radius: 5px;
 }
 
 .categoryImg {
     padding: 5px;
     margin: 5px;
     box-shadow: inset;
-    border-radius: 10px;
     vertical-align: middle;
     width: 90%;
 }
@@ -590,6 +594,12 @@ img.topLeft {
 
 .defaultHeartColor {
     color: red !important;
+}
+
+.heartIcon {
+    top: 0.6rem;
+    right: 1rem;
+    position: absolute;
 }
 
 .modalBackdrop {
