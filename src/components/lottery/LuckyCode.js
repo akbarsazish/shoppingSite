@@ -2,6 +2,8 @@
     import axios from 'axios';
     import '../../assets/lottery/lotteryStyle.css';
     import Swal from 'sweetalert2';
+    import sound from '../../assets/lottery/applause.mp3';
+    import wheel from '../../assets/lottery/wheel.mp3';
 
     function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -14,6 +16,11 @@
     }
 
     export default function LuckyCode({mybonus, minBonus}) {
+      
+        const audio = new Audio(sound);
+        const wheelAudio = new Audio(wheel);
+
+
       const [wonPrize, setWonPrize]=useState('');
       const [rotation, setRotation] = useState(180);
 
@@ -58,6 +65,7 @@
         if (wonPrize) {
            setTimeout(() => {
               // applause.play();
+              audio.play()
             Swal.fire({
               title: `تبریک! شما برنده ${wonPrize} شده‌اید.`,
                   showClass: {
@@ -160,6 +168,7 @@
 
     const handleSpin = () => {
         // Animation logic
+        wheelAudio.play();
         const randomRotation = Math.floor(Math.random() * 360); 
          setRotation(rotation + randomRotation);
         const box = document.getElementById('box');

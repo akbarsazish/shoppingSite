@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faListAlt, faHeart, faShoppingCart, faEnvelope, faPhone, faSignOut, faUser, faBuilding } from '@fortawesome/free-solid-svg-icons'
@@ -11,13 +11,34 @@ import Contact from "../pages/Contact";
 import GamerList from "../game/GamerList";
 
 function Sidebar() {
+
+    useEffect(() => {
+        const handleMenuItemClick = () => {
+          const backdrop = document.querySelector(".offcanvas-backdrop.fade.show");
+          if (backdrop) {
+            backdrop.classList.remove("show");
+          }
+        };
+    
+        const menuItems = document.querySelectorAll(".menuItem");
+        menuItems.forEach(item => {
+          item.addEventListener("click", handleMenuItemClick);
+        });
+    
+        return () => {
+          menuItems.forEach(item => {
+            item.removeEventListener("click", handleMenuItemClick);
+          });
+        };
+      }, []);
+
     return (
         <>
         <div className="offcanvas offcanvas-end customeOffcanvas" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
             <Link to="/home">
                 <div className="offcanvas-header dri-left" dir="ltr">
-                    <button type="button" className="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
-                    <img width="177px" src={logo} className="me-1 logo" alt="لوگو" />
+                    <button type="button" className="btn-close bg-white" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
+                    <img width="155px" src={logo} className="me-1 logo" alt="لوگو" />
                 </div >
             </Link>
             <div className="offcanvas-body px-0">
@@ -30,8 +51,7 @@ function Sidebar() {
                 <Link to="/contact" element={<Contact />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faPhone} /> تماس با ما </Link>
                 <Link to="/login" onClick={()=>{localStorage.removeItem("isLogedIn")}} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faSignOut} /> خروج </Link>
             </div>
-            </div>
-
+        </div>
         </>
     )
 }

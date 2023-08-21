@@ -31,9 +31,7 @@ export default function ShoppingCart(props) {
                 accomulator += parseInt(currentValue.Price / currency)
                 
                 return accomulator;
-            }, 0))
-
-            console.log(data.data.orders)
+            }, 0));
 
             let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 accomulator += parseInt(currentValue.Price1 / currency)
@@ -65,7 +63,6 @@ export default function ShoppingCart(props) {
 
     const changeCartsPrice = (snHDS) => {
         axios.get("http://192.168.10.33:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
-
             renewCarts();
 
         })
@@ -92,7 +89,8 @@ export default function ShoppingCart(props) {
                     accomulator += parseInt(currentValue.Price1 / currency)
                 }
                 return accomulator;
-            }, 0))
+            }, 0));
+
             setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
@@ -161,7 +159,6 @@ export default function ShoppingCart(props) {
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
-
     if(localStorage.getItem("isLogedIn")){
         return (
             <>
@@ -182,9 +179,9 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
+                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState==0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
-                                    :( allMoney <= minSalePriceFactor?
+                                    :( (allMoney <= minSalePriceFactor)?
                                         <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
                                         :
                                         <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>

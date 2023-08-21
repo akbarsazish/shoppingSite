@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import './assets/css/mainStyle.css';
 import './assets/css/mediaq.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js'
+import 'bootstrap/dist/js/bootstrap.js';
 import './components/genrealComponent/Sidebar';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/genrealComponent/Layout';
@@ -32,6 +32,7 @@ import GamerList from "./components/game/GamerList";
 import DiscountAndPrice from "./components/pages/DiscountAndPrice";
 import Lottery from "./components/pages/Lottery";
 import InviteCode from "./components/pages/InviteCode";
+import PayOnlineForm from "./components/pages/PayOnlineForm";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -105,7 +106,7 @@ function App() {
         <Route path="disAndPrice"                   element={<DiscountAndPrice />}> </Route>
         <Route path="lottery"                       element={<Lottery />}> </Route>
         <Route path="inviteCode"                    element={ <InviteCode />}> </Route>
-
+        <Route path="getPaymentFormApi"                    element={ <PayOnlineForm />}> </Route>
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>
     </>
