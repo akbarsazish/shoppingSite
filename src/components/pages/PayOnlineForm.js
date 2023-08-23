@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function PayOnlineForm() {
     useEffect(() => {
-        axios.get('http://192.168.10.33:8080/api/getPaymentFormApi',{params:{psn:localStorage.getItem("psn")
+        axios.get('https://starfoods.ir/api/getPaymentFormApi',{params:{psn:localStorage.getItem("psn")
           }
           }).then((data) => {
             console.log(data.data)

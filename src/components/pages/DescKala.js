@@ -20,7 +20,7 @@ export default function DescKala(props) {
     const [buyOption, setBuyOption] = useState(0)
     // fetching data form backend
     const showBuyModal = (goodSn, event) => {
-        fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 console.log(data)
@@ -34,7 +34,7 @@ export default function DescKala(props) {
          }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -47,7 +47,7 @@ export default function DescKala(props) {
             })
     }
     const requestProduct = (psn, goodSn, event) => {
-        axios.get("http://192.168.10.33:8080/api/addRequestedProduct", {
+        axios.get("https://starfoods.ir/api/addRequestedProduct", {
             params: {
                 customerId: psn,
                 productId: goodSn
@@ -58,7 +58,7 @@ export default function DescKala(props) {
     }
 
     const cancelRequestKala = (psn, goodSn, event) => {
-        axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct", {
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct", {
             params: {
                 psn: psn,
                 gsn: goodSn
@@ -73,7 +73,7 @@ export default function DescKala(props) {
     },[goodSn])
 
     const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
             {
             params: {
               kalaId: goodSn,
@@ -97,7 +97,7 @@ export default function DescKala(props) {
                     alert(costError);
                 }
             }
-            axios.get('http://192.168.10.33:8080/api/buySomething',
+            axios.get('https://starfoods.ir/api/buySomething',
                 {
                     params: {
                         kalaId: goodSn,
@@ -113,7 +113,7 @@ export default function DescKala(props) {
     }
 
     const renewDescKala = () => {
-        axios.get("http://192.168.10.33:8080/api/descKala", {
+        axios.get("https://starfoods.ir/api/descKala", {
             params: {
                 id: goodSn,
                 groupId: groupId,

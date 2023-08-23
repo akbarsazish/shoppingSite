@@ -54,7 +54,7 @@ export default function Shiping(props) {
     }
 
     useEffect(() => {
-        axios.get("http://192.168.10.33:8080/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
+        axios.get("https://starfoods.ir/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
         .then((data) => {
             setTakhfifCase(data.data.takhfifCase/10)
             setWeekDay1(data.data.date1);
@@ -80,7 +80,7 @@ export default function Shiping(props) {
         if(isUsedTakhfifCode === 1){
             takhfifCode=localStorage.getItem("takhfifCode");
         }
-        axios.get("http://192.168.10.33:8080/api/setPayOnlineSessions",{params:{
+        axios.get("https://starfoods.ir/api/setPayOnlineSessions",{params:{
             recivedTime:selectdPayType,
             takhfif:selectdFactorDate,
             takhfifCodeMoney:0,
@@ -94,7 +94,7 @@ export default function Shiping(props) {
         })
     }
     const addFactorToSefarish=()=>{
-    axios.get("http://192.168.10.33:8080/api/addFactorApi",{params:{
+    axios.get("https://starfoods.ir/api/addFactorApi",{params:{
         pardakhtType:selectdPayType,
         recivedTime:selectdFactorDate,
         customerAddress:selectdAddress,
@@ -110,7 +110,7 @@ const calculateTakhfifCode=()=>{
     if(element.checked){
         document.getElementById("errorContainer").textContent=" استفاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.";
     }else{
-        axios.get("http://192.168.10.33:8080/api/checkTakhfifCodeReliablity",
+        axios.get("https://starfoods.ir/api/checkTakhfifCodeReliablity",
         {params:{
             psn:localStorage.getItem("psn"),
             code:localStorage.getItem("takhfifCode")

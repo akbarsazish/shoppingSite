@@ -10,7 +10,7 @@ export default function InviteCode() {
   const [ invitedCustomer, setInvitedCustomer] =  useState({invitedCustomers: []});
 
   useEffect( () =>{
-      axios.get("http://192.168.10.33:8080/api/getInviteCodeApi",{
+      axios.get("https://starfoods.ir/api/getInviteCodeApi",{
          params:{psn:localStorage.getItem("psn")}}).then((response)=>{
           setInviteInfo(response.data.profile);
           setInvitedCustomer(response.data);

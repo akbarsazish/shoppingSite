@@ -22,13 +22,13 @@ export default function Home() {
 
     useEffect(() => {
 
-        axios.get("http://192.168.10.33:8080/api/getSlidersApi").then((data) => {
+        axios.get("https://starfoods.ir/api/getSlidersApi").then((data) => {
 
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })
 
-    axios.get("http://192.168.10.33:8080/api/getMainGroups").then((data) => {
+    axios.get("https://starfoods.ir/api/getMainGroups").then((data) => {
             setMainGroups(data.data.map((element,index)=><MainGroupItem key={index
             } title={element.title} id={element.id} ></MainGroupItem>))
         })

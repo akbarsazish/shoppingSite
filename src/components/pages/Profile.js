@@ -19,7 +19,7 @@ export default function Profile(props) {
     const [customerPhone, setCustomerPhone] = useState(0)
     
     useEffect(() => {
-        axios.get("http://192.168.10.33:8080/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("https://starfoods.ir/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             setSendedFactors(data.data.factors.map((element, index) =>
                 <tr>
                     <th>{index + 1}</th>

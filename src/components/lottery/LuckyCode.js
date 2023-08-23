@@ -56,7 +56,7 @@
       }
 
       useEffect(() => {
-        axios.get('http://192.168.10.33:8080/api/getLotteryInfoApi', {
+        axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
           params: { psn: localStorage.getItem('psn') },
         }).then((data) => {
             setSelectedItem(data.data.products[0]);
@@ -77,7 +77,7 @@
             }, 5000);
 
             // send data to the server
-            axios.get('http://192.168.10.33:8080/api/setCustomerLotteryHistory', {
+            axios.get('https://starfoods.ir/api/setCustomerLotteryHistory', {
                 params: {product:wonPrize, customerId: localStorage.getItem('psn')},
             }).then((res)=>{
                 if(res.data=="success"){

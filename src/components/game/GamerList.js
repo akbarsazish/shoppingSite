@@ -7,6 +7,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import CountDownTimer from "./CountDownTimer";
+import { Link } from "react-router-dom";
 
 export default function GamerList (){
   const [showAll, setShowAll] = useState(false);
@@ -89,7 +90,9 @@ export default function GamerList (){
                <button onClick={toggleShowAll} className="btn btn-danger"> نمایش همه </button>
             )}
          </div>
-         <button id="playButton" className="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button> 
+         <Link to='https://starfoods.ir/resources/assets/tower/index.html'>
+           <button id="playButton" className="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button>
+         </Link>
       </div>
       <Footer />
     </>

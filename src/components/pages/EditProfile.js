@@ -14,31 +14,12 @@ export default function EditProfile() {
     const [haqiqiCustomerInfo, setHaqiqiCustomerInfo] = useState(0)
     const [hoquqiCustomerInfo, setHoquqiCustomerInfo] = useState(0)
     useEffect(() => {
-        axios.get("http://192.168.10.33:808/profile").then((data) => {
+        axios.get("https://starfoods.ir/profile").then((data) => {
             setHaqiqiCustomerInfo(data.data.exactHoqoqi)
             setHoquqiCustomerInfo([data.data.exactHaqiqi])
             
         })},[])
 
-        // "exactHoqoqi": {
-        //     "id": "119",
-        //     "customerName": null,
-        //     "familyName": null,
-        //     "codeMilli": null,
-        //     "codeEqtisadi": "                ",
-        //     "codeNaqsh": "2423423432      ",
-        //     "address": "جنت اباد شمالي                                                                                      ",
-        //     "registerNo": "                ",
-        //     "codePosti": "2342343243",
-        //     "email": "                                                                                                    ",
-        //     "companyName": "جواد1                                                                                               ",
-        //     "shenasahMilli": "2141232131      ",
-        //     "customerType": "hoqoqi                                                                                              ",
-        //     "customerShopSn": "3609",
-        //     "phoneNo": "",
-        //     "shenasNamahNo": null,
-        //     "sabetPhoneNo": ""
-        // }
 
 if(localStorage.getItem("isLogedIn")){
     return (

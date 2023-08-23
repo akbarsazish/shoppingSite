@@ -20,7 +20,7 @@ export default function GroupingItems(props) {
     const [buyOption, setBuyOption]=useState(0)
     //
     useEffect(() => {
-        fetch("http://192.168.10.33:8080/api/getSubGroupList/?mainGrId=" + id)
+        fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId=" + id)
             .then(response => response.json())
             .then((groups) => {
                 setSubGroups(groups.map((element, index) => <SwiperSlide key={index}>
@@ -37,7 +37,7 @@ export default function GroupingItems(props) {
         },[id])
 
         const requestProduct=(psn,goodSn,event)=>{
-            axios.get("http://192.168.10.33:8080/api/addRequestedProduct",{params:{
+            axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
               customerId:psn,
               productId:goodSn
             }}).then((data)=>{
@@ -46,7 +46,7 @@ export default function GroupingItems(props) {
           }
           
           const cancelRequestKala=(psn,goodSn,event)=>{
-            axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct",{params:{
+            axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
               psn:psn,
               gsn:goodSn
             }}).then((data)=>{
@@ -56,7 +56,7 @@ export default function GroupingItems(props) {
 
 
     const renewGroupItems=()=>{
-        axios.get("http://192.168.10.33:8080/api/getMainGroupKala",{params:{
+        axios.get("https://starfoods.ir/api/getMainGroupKala",{params:{
             psn:localStorage.getItem('psn'),
             mainGrId:id
         }})
@@ -120,7 +120,7 @@ export default function GroupingItems(props) {
 
     const showBuyModal=(goodSn,event)=>{
 
-        axios.get("http://192.168.10.33:8080/api/getUnitsForUpdate",{params:{
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -136,7 +136,7 @@ export default function GroupingItems(props) {
     }
 
         const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-        axios.get("http://192.168.10.33:8080/api/getUnitsForUpdate",{params:{
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -151,7 +151,7 @@ export default function GroupingItems(props) {
         })
         }
         const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
         {params:{
             kalaId: goodSn,
             amountUnit: amountUnit,
@@ -174,7 +174,7 @@ export default function GroupingItems(props) {
                     alert(costError);
                 }
                 }
-                axios.get('http://192.168.10.33:8080/api/buySomething',
+                axios.get('https://starfoods.ir/api/buySomething',
                 {params:{
                 kalaId: goodSn,
                 amountUnit: amountUnit,

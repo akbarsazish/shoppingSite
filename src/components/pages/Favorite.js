@@ -21,7 +21,7 @@ export default function Favorite(props) {
     console.log(kalaItem[0])
 
     const renewFavorite=()=>{
-    axios.get("http://192.168.10.33:8080/api/favoritKalaApi",
+    axios.get("https://starfoods.ir/api/favoritKalaApi",
            {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             //    {console.log(data.data.favorits)}
             setKalaItem(data.data.favorits.map((element,index)=>
@@ -90,7 +90,7 @@ export default function Favorite(props) {
 
 
     const requestProduct=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.33:8080/api/addRequestedProduct",{params:{
+        axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
           customerId:psn,
           productId:goodSn
         }}).then((data)=>{
@@ -99,7 +99,7 @@ export default function Favorite(props) {
       }
       
       const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct",{params:{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
           psn:psn,
           gsn:goodSn
         }}).then((data)=>{
@@ -109,7 +109,7 @@ export default function Favorite(props) {
 
     const showBuyModal=(goodSn,event)=>{
     
-        axios.get("http://192.168.10.33:8080/api/getUnitsForUpdate",{params:{
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -125,7 +125,7 @@ export default function Favorite(props) {
     }
 
       const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-        axios.get("http://192.168.10.33:8080/api/getUnitsForUpdate",{params:{
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -140,7 +140,7 @@ export default function Favorite(props) {
         })
       }
       const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
         {params:{
           kalaId: goodSn,
           amountUnit: amountUnit,
@@ -163,7 +163,7 @@ export default function Favorite(props) {
                   alert(costError);
                 }
               }
-              axios.get('http://192.168.10.33:8080/api/buySomething',
+              axios.get('https://starfoods.ir/api/buySomething',
               {params:{
                 kalaId: goodSn,
                 amountUnit: amountUnit,

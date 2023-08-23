@@ -53,7 +53,7 @@ function App() {
   }
 
   const changeHeartIconColor = (goodSn, event) => {
-    axios.get('http://192.168.10.33:8080/api/setFavorite', {
+    axios.get('https://starfoods.ir/api/setFavorite', {
       params: {
         goodSn: goodSn,
         psn:localStorage.getItem("psn")

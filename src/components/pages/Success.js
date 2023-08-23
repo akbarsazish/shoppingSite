@@ -11,7 +11,7 @@ export default function Success() {
     localStorage.setItem("buyAmount",0)
     const [succedFactorData,setSuccedFactorData]=useState(0)
     useEffect(()=>{
-        axios.get("http://192.168.10.33:8080/api/successFactorInfo",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+        axios.get("https://starfoods.ir/api/successFactorInfo",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             setSuccedFactorData( data.data.factorBYS.map((element,index)=><tr><td> {(index+1)} </td><td>{element.GoodName}</td><td>{parseInt(element.PackAmount).toLocaleString()}</td><td>{parseInt(element.Fi/10).toLocaleString()}</td><td>{parseInt(element.Price/10).toLocaleString()}</td></tr>))
         })
     },[])

@@ -15,9 +15,9 @@ function DailyEmtyaz() {
   const daysOfWeek = [
     "FirstPr", "SecondPr", "ThirdPr", "FourthPr", "FifthPr", "SixthPr", "SeventhPr"
   ];
-
+  
   useEffect(()=> {
-    axios.get('http://192.168.10.33:8080/api/getLotteryInfoApi', {
+    axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
         setToday(data.data.todayDate.date.split(" ")[0]);
@@ -29,7 +29,7 @@ function DailyEmtyaz() {
    document.getElementById("checkDaycurrent-day").checked = true;
    let todayInputValue=document.getElementById("todayInput").value;
    console.log(todayInputValue);
-     axios.get('http://192.168.10.33:8080/api/setWeeklyPresentApi', {
+     axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
        params: { psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0],bonus:todayInputValue.split("_")[1] },
      }).then(() => {
        window.location.reload();

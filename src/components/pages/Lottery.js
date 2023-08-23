@@ -11,7 +11,7 @@ export default function Lottery() {
   const [bonus, setBonus] = useState(0);
   useEffect(() => {
     axios
-    .get('http://192.168.10.33:8080/api/getLotteryInfoApi', {
+    .get('https://starfoods.ir/api/getLotteryInfoApi', {
         params: { psn: localStorage.getItem('psn') },
     })
     .then((data) => {
