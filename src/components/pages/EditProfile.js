@@ -40,11 +40,6 @@ export default function EditProfile() {
         //     "sabetPhoneNo": ""
         // }
 
-
-
-
-
-
 if(localStorage.getItem("isLogedIn")){
     return (
         <>
@@ -198,8 +193,7 @@ if(localStorage.getItem("isLogedIn")){
                     </div >
                 </div >
             </div >
-
-            <Footer />
+          <Footer />
         </>
     )
 }else{

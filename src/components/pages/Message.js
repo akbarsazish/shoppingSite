@@ -47,10 +47,12 @@ export default function Message() {
                 <span className="messageText"> <span className="messageDate"> {new Date(message.messageDate).toLocaleString('fa-IR')} </span> {message.messageContent} </span>
             </span>
             <br/>
-            {message.replay.map((replay)=><><br/><span className="messageContentRecevier">
-                                            <img className="profilePic" alt="عکس یوزر" src={profile} />
-                                            <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
-                                            </span><br/><br/></>)}
+            {message.replay.map((replay)=>
+              <><br/><span className="messageContentRecevier">
+                    <img className="profilePic" alt="عکس یوزر" src={profile} />
+                    <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
+                    </span><br/><br/>
+             </>)}
         </>   
         ))
 

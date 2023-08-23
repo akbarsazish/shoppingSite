@@ -36,7 +36,7 @@ function Header() {
             localStorage.getItem("buyAmount")
             setBonusResult(data.data.bonusResult)
             settakhfifMoney(data.data.takhfifMoney)
-        })
+        });
     },[])
 
     const searchKala=(event)=>{
@@ -50,7 +50,7 @@ if(localStorage.getItem("isLogedIn")){
         <div className="row topMenu ">
             <div className="flex-container">
                 <div className="flex-item-left">
-                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
+                    <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
                     <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />

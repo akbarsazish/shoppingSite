@@ -229,7 +229,6 @@ export default function ShoppingCart(props) {
                         </div>
                     </div>
                 </div>
-
             </>
         )
     }else{

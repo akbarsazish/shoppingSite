@@ -11,7 +11,6 @@ import Contact from "../pages/Contact";
 import GamerList from "../game/GamerList";
 
 function Sidebar() {
-
     useEffect(() => {
         const handleMenuItemClick = () => {
           const backdrop = document.querySelector(".offcanvas-backdrop.fade.show");
@@ -35,7 +34,7 @@ function Sidebar() {
     return (
         <>
         <div className="offcanvas offcanvas-end customeOffcanvas" data-bs-scroll="true" tabIndex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-            <Link to="/home">
+            <Link to="/home" className="menuItem">
                 <div className="offcanvas-header dri-left" dir="ltr">
                     <button type="button" className="btn-close bg-white" data-bs-dismiss="offcanvas" aria-label="Close"> </button>
                     <img width="155px" src={logo} className="me-1 logo" alt="لوگو" />
@@ -52,8 +51,8 @@ function Sidebar() {
                 <Link to="/login" onClick={()=>{localStorage.removeItem("isLogedIn")}} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faSignOut} /> خروج </Link>
             </div>
         </div>
-        </>
-    )
+      </>
+    );
 }
 
 export default Sidebar

@@ -18,7 +18,8 @@ export default function ReturnedFactor(props) {
                 <td>{element.FactDate}</td>
                 <td>وضعیت پرداخت</td>
                 <td>{parseInt(element.TotalPriceHDS/10).toLocaleString()}</td>
-                <td>جزئیات</td></tr>))
+                <td>جزئیات</td>
+            </tr>))
         })
     },[])
 

@@ -18,8 +18,8 @@ export default function Grouping() {
     if(localStorage.getItem("isLogedIn")){
         return (
             <>
-                <Header />
-                <Sidebar />
+              <Header />
+               <Sidebar />
                 <div className="container grouping">
                     <ul className="groupingPart">
                         {mainGroups}

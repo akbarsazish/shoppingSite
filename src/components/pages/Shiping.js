@@ -6,8 +6,17 @@ import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { DatePicker } from "zaman";
 
 export default function Shiping(props) {
+
+    const myStyle = {
+        color: "white",
+        backgroundColor: "DodgerBlue",
+        padding: "10px",
+        border: "1px solid red"
+      };
+
     let now = new Date();
     const currentHour = now.getHours();
     const[weekDay1,setWeekDay1]=useState(0)
@@ -66,6 +75,24 @@ export default function Shiping(props) {
             alert("لطفا تاریخ فاکتور را انتخاب کنید.")
         }
     }
+    const sendOnlinePayStuff=()=>{
+        let takhfifCode="";
+        if(isUsedTakhfifCode === 1){
+            takhfifCode=localStorage.getItem("takhfifCode");
+        }
+        axios.get("http://192.168.10.33:8080/api/setPayOnlineSessions",{params:{
+            recivedTime:selectdPayType,
+            takhfif:selectdFactorDate,
+            takhfifCodeMoney:0,
+            receviedAddress:selectdAddress,
+            allMoneyToSend:allMoney,
+            takhfifCode:takhfifCode,
+            psn:localStorage.getItem("psn"),
+            allMoney:allMoney}
+        }).then((data)=>{
+            alert(data.data)
+        })
+    }
     const addFactorToSefarish=()=>{
     axios.get("http://192.168.10.33:8080/api/addFactorApi",{params:{
         pardakhtType:selectdPayType,
@@ -82,8 +109,6 @@ const calculateTakhfifCode=()=>{
     let element=document.getElementById("takhfifSwitch");
     if(element.checked){
         document.getElementById("errorContainer").textContent=" استفاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.";
-        
-        
     }else{
         axios.get("http://192.168.10.33:8080/api/checkTakhfifCodeReliablity",
         {params:{
@@ -113,7 +138,7 @@ if(localStorage.getItem("isLogedIn")){
         <>
             <Header />
             <Sidebar />
-            <div className="container marginTop mb-4">
+            <div className="container marginTop mb-4 p-3 rounded">
                 <div className="shipigContainer">
                     <div className="shippingPart">
                         <div className="row">
@@ -184,11 +209,13 @@ if(localStorage.getItem("isLogedIn")){
                 <div className="shipigContainer">
                     <div className="shippingPart">
                         <div className="row w-100">
-                            <div className="col-3">
-                                <p className="weekDay">   تاریخ دلخواه   </p>
+                            <div className="col-lg-3 col-4">
+                                <p className="weekDay"> تاریخ دلخواه </p>
                             </div>
-                            <div className="col-5 pe-0">
-                                <input className="form-control form-control-sm mt-2 mt-0" type="date" aria-label=".form-control-sm example" />
+                            <div className="col-lg-5 col-8 pe-0">
+                               <div className="date-picker"> 
+                                <DatePicker round="x2" onChange={(d) => console.log(d)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -222,7 +249,7 @@ if(localStorage.getItem("isLogedIn")){
                     <div className="shippingPartBottom">
                         <div className="form-check mt-2">
                             <label className="form-check-label text-start timeLabel" for="">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");}} type="radio" name="payTypeRadio" id="payOnline" />
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");sendOnlinePayStuff();}} type="radio" name="payTypeRadio" id="payOnline" />
                                 غیر حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
                             </label>
                         </div>

@@ -28,7 +28,6 @@ export default function FactoreDetails(props){
     },[])
 
   
-
 if(localStorage.getItem("isLogedIn")){
     return(
         <>
@@ -36,28 +35,26 @@ if(localStorage.getItem("isLogedIn")){
         <Sidebar />
             <div className="container marginTop" style={{ borderRadius: "10px 10px 5px 5px" }}>
                 <div className="row p-2">
-                         <h4 className="p-3"> تعداد کالا: 8 </h4>
-                        <div className="factorView">
-                            
-                           {factorItem}
+                    <h4 className="p-3"> تعداد کالا: 8 </h4>
+                     <div className="factorView">  
+                        {factorItem}
 
-                            <div className="factorsResult card">
-                                    <div className="factorDetailPart">
-                                        <span className="factorDetailItems"> <b>  قیمت کالا  : </b> {parseInt(allPrice/10).toLocaleString()} </span>
-                                        <span className="factorDetailItems"> <b>  تخفیف کالا    : </b> 0 </span>
-                                    </div>
-                                    <div className="factorDetailPart">
-                                        <span className="factorDetailItems"> <b>  جمع: </b>  {parseInt(allPrice/10).toLocaleString()} </span>
-                                        <span className="factorDetailItems"> <b>  هزینه    : </b> 0 </span>
-                                    </div>
-                                    <div className="factorDetailPart">
-                                        <span className="factorDetailItems"> <b>  مبلغ قابل پرداخت  : </b> {parseInt(allPrice/10).toLocaleString()} </span>
-                                    </div>
+                        <div className="factorsResult card">
+                            <div className="factorDetailPart">
+                                <span className="factorDetailItems"> <b>  قیمت کالا  : </b> {parseInt(allPrice/10).toLocaleString()} </span>
+                                <span className="factorDetailItems"> <b>  تخفیف کالا    : </b> 0 </span>
+                            </div>
+                            <div className="factorDetailPart">
+                                <span className="factorDetailItems"> <b>  جمع: </b>  {parseInt(allPrice/10).toLocaleString()} </span>
+                                <span className="factorDetailItems"> <b>  هزینه    : </b> 0 </span>
+                            </div>
+                            <div className="factorDetailPart">
+                                <span className="factorDetailItems"> <b>  مبلغ قابل پرداخت  : </b> {parseInt(allPrice/10).toLocaleString()} </span>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
-   
            <Footer />
        </>
     )

@@ -52,7 +52,6 @@ function App() {
     })
   }
 
-
   const changeHeartIconColor = (goodSn, event) => {
     axios.get('http://192.168.10.33:8080/api/setFavorite', {
       params: {
@@ -110,8 +109,7 @@ function App() {
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
       </Routes>
     </>
-  )
-
+  );
 }
 
 export default App;

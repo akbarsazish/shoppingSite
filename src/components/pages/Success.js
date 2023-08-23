@@ -19,8 +19,8 @@ export default function Success() {
     if(localStorage.getItem("isLogedIn")){
         return (
             <>
-                <Header />
-                <Sidebar />
+              <Header />
+              <Sidebar />
                 <div className="container  marginTop text-center rounded">
                     <FontAwesomeIcon style={{ textAlign: "center", fontSize: "55px" }} className="text-info p-2" icon={faCheckCircle} />
                     <h5 className="fw-bold" style={{ textAlign: "center", padding: "10px" }}>  شماره فاکتور  6356 </h5>
@@ -35,11 +35,11 @@ export default function Success() {
                             <table className="table table-bordered ">
                                 <thead>
                                     <tr>
-                                        <th>ردیف</th>
-                                        <th>نام کالا </th>
-                                        <th>تعداد</th>
-                                        <th>قیمت واحد</th>
-                                        <th>مبلغ کل</th>
+                                      <th>ردیف</th>
+                                      <th>نام کالا </th>
+                                      <th>تعداد</th>
+                                      <th>قیمت واحد</th>
+                                      <th>مبلغ کل</th>
                                     </tr>
                                 </thead>
                                 <tbody>

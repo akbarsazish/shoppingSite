@@ -43,11 +43,8 @@ export default function Login(props) {
             token:localStorage.getItem("isLogedIn")
         }
         axios.get("http://192.168.10.33:8080/api/loginApi", {params:data}).then(res => {
-            console.log(res);
-
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
-                    console.log(res.data)
                     setUserToken(res.data.token)
                     localStorage.setItem("isLogedIn",res.data.token);
                     setCustomerId(res.data.psn)
@@ -104,12 +101,11 @@ export default function Login(props) {
         introducerDialog.close();
     }
 
-    const confirmBrowserLogOut=()=>{
+    const confirmBrowserLogOut=()=> {
         axios.get("http://192.168.10.33:8080/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken
         }}).then(res => {
-
             localStorage.setItem("isLogedIn",res.data.token);
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);
