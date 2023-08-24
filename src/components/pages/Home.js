@@ -21,9 +21,7 @@ export default function Home() {
     }, [showModal]);
 
     useEffect(() => {
-
         axios.get("https://starfoods.ir/api/getSlidersApi").then((data) => {
-
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })

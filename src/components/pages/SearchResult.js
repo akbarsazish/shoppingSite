@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart,faBell } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
-
 export default function GroupingItems(props) {
 const [items, setItems] = useState(0);
 const [buyOption, setBuyOption]=useState(0)

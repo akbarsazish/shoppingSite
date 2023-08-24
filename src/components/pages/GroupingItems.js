@@ -240,7 +240,6 @@ export default function GroupingItems(props) {
                         </div>
                     </div>
                 </div>
-
             </>
         )
     }else{

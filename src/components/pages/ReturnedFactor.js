@@ -75,7 +75,6 @@ export default function ReturnedFactor(props) {
                     </div>
                 </div>
             </div >
-
             <Footer />
         </>
     )
