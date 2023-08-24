@@ -23,7 +23,7 @@ export default function GamerList (){
   });
  
   useEffect(() => {
-      axios.get("http://192.168.10.33:8080/api/getGamerList", {
+      axios.get("https://starfoods.ir/api/getGamerList", {
       params: { gameId: 2, psn: localStorage.getItem("psn") }
       }).then((response) => {
           setGamerLest(response.data);

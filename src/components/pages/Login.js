@@ -21,6 +21,7 @@ export default function Login(props) {
         password: '',
         error_list: [],
     });
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const hideModal=()=>{
         deviceDialog.close("animalNotChosen");
@@ -50,10 +51,10 @@ export default function Login(props) {
                     setCustomerId(res.data.psn)
                     setDeviceInfo(res.data.loginInfo.map((element,index)=>
                     <>
-                       <tr>
+                       <tr key={index}>
                         <td>{element.platform}</td>
                         <td>{element.browser}</td>
-                        <td><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></td>
+                        <td><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
                        </tr>
                     </>))
                     deviceDialog.showModal();
@@ -110,9 +111,11 @@ export default function Login(props) {
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);
             localStorage.setItem("buyAmount",res.data.buyAmount);
-            window.location.href="/home"
+            window.location.href="/home";
+            
         })
     }
+
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
@@ -154,7 +157,7 @@ export default function Login(props) {
                 </table>   
              <div>
                <button className="btn btn-sm btn-danger" id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
-                <button className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
+              <button id="continue" disabled={isButtonDisabled} className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
             </div>
             </dialog>
 

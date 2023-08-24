@@ -18,6 +18,7 @@ export default function ShoppingCart(props) {
     const [changedItems, setChanedItems] = useState(0)
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
+
     useEffect(() => {
         axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
@@ -28,8 +29,7 @@ export default function ShoppingCart(props) {
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
             let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                accomulator += parseInt(currentValue.Price / currency)
-                
+                accomulator += parseInt(currentValue.Price / currency);
                 return accomulator;
             }, 0));
 
@@ -64,7 +64,6 @@ export default function ShoppingCart(props) {
     const changeCartsPrice = (snHDS) => {
         axios.get("https://starfoods.ir/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
             renewCarts();
-
         })
     }
 
@@ -108,7 +107,7 @@ export default function ShoppingCart(props) {
             </div>))
             setChanedItems(data.data.orders.map((element) => {
                 if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
+                    return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
                 }
             }))
         })

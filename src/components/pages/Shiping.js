@@ -9,7 +9,6 @@ import axios from "axios";
 import { DatePicker } from "zaman";
 
 export default function Shiping(props) {
-
     const myStyle = {
         color: "white",
         backgroundColor: "DodgerBlue",
@@ -36,7 +35,8 @@ export default function Shiping(props) {
     const[allMoney,setAllMoney]=useState(localStorage.getItem("allMoney"))
     const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
     const[takhfifCase,setTakhfifCase]=useState(0)
-    const[sendFast,setFastFactor]=useState(0)
+    const[sendFast,setFastFactor]=useState(0);
+    const[payUrl, setPayUrl] = useState('');
 
     const changePayMoneyAndTakhfif=()=>{
         let element =document.getElementById("takhfifSwitch");
@@ -68,7 +68,18 @@ export default function Shiping(props) {
             setOtherAddresses(data.data.addresses.map((element)=><option value={element.AddressPeopel+'_'+element.SnPeopelAddress}>{element.AddressPeopel}</option>))
             // used for takhfifcode updating
         })
-    },[])
+    },[]);
+
+    useEffect(() => {
+        axios.get('https://starfoods.ir/api/getPaymentFormApi', {
+          params: {
+            psn: localStorage.getItem("psn")
+          }
+        }).then((data) => {
+            setPayUrl(data.data)
+        });
+    
+      }, []);
 
     const checkSelectedFactorDay=(factorDay)=>{
         if(!factorDay){
@@ -276,8 +287,8 @@ if(localStorage.getItem("isLogedIn")){
                             <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
                        )
                        :((payType==="online" && factorDay)?
-                        <Link  to="/getPaymentFormApi"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn"> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
-                       :<Link  to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                        <Link id="payOnlineForm" to={payUrl} target={"_blank"}><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn"> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                       :<Link to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
                         )
                        }
                     </div>
