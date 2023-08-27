@@ -45,15 +45,14 @@ export default function GroupingItems(props) {
             })
           }
           
-          const cancelRequestKala=(psn,goodSn,event)=>{
-            axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
-              psn:psn,
-              gsn:goodSn
-            }}).then((data)=>{
-                renewGroupItems();
-            })
-          }
-
+        const cancelRequestKala=(psn,goodSn,event)=>{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
+            psn:psn,
+            gsn:goodSn
+         }}).then((data)=>{
+            renewGroupItems();
+         })
+        }
 
     const renewGroupItems=()=>{
         axios.get("https://starfoods.ir/api/getMainGroupKala",{params:{
@@ -108,18 +107,17 @@ export default function GroupingItems(props) {
                                         <div className="c-product__add mt-0">
                                         <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
                                         </div>   
-                                    )
+                                     )
                                 )
                             )
                         : 'Result3' 
                     }
                 </div>
             </div>))
-            })
+        })
 }
 
     const showBuyModal=(goodSn,event)=>{
-
         axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
@@ -131,7 +129,6 @@ export default function GroupingItems(props) {
             }
             const items=modalItems.map((item)=>item)
             setBuyOption(items)
-            
         })
     }
 
@@ -161,7 +158,6 @@ export default function GroupingItems(props) {
         ).then((response)=> {
             renewGroupItems();
         })
-    
     }
     
     const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
@@ -242,7 +238,7 @@ export default function GroupingItems(props) {
                 </div>
             </>
         )
-    }else{
+     }else {
         window.location.href="/login"
     }
 }

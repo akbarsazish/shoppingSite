@@ -18,18 +18,16 @@ export default function Favorite(props) {
         renewFavorite();
     },[]);
 
-    console.log(kalaItem[0])
 
     const renewFavorite=()=>{
     axios.get("https://starfoods.ir/api/favoritKalaApi",
            {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
-            //    {console.log(data.data.favorits)}
             setKalaItem(data.data.favorits.map((element,index)=>
 
         <div key={index} className="groupingItem">
             <img className="topLeft" src={starfood} alt="slider" />
             {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
-            <Link to={"/descKala/"+element.GoodSn+ "/" + element.id} className="groupingItemLink">
+            <Link to={"/descKala/"+element.GoodSn+"/"+element.GoodGroupSn} className="groupingItemLink">
                 <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider" />
             </Link>
 
