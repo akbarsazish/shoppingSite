@@ -17,9 +17,7 @@ export default function EditProfile() {
         axios.get("https://starfoods.ir/profile").then((data) => {
             setHaqiqiCustomerInfo(data.data.exactHoqoqi)
             setHoquqiCustomerInfo([data.data.exactHaqiqi])
-            
         })},[])
-
 
 if(localStorage.getItem("isLogedIn")){
     return (

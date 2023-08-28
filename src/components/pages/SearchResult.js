@@ -50,7 +50,7 @@ const reNewSearchResult=()=>{
                     <p className="groupingItemTitle"> {element.GoodName} </p>
                 </Link>
                 <div className="groupingItemBottomInfo">
-                    <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==='YES') ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+                    <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==='YES') ? 'favHeartIcon' :'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
                             
                     </div>
                     <div className="groupingItemInfo">

@@ -44,7 +44,6 @@ function Sidebar() {
                 <Link to="/profile" element={<Profile />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faInfoCircle} />  وضعیت من  </Link>
                 <Link to="/grouping" element={<Grouping />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faListAlt} /> دسته بندی </Link>
                 <Link to="/favorite" element={<Favorite />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faHeart} />  مورد علاقه  </Link>
-                <Link to="/shoppingCart" element={<faShoppingCart />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faShoppingCart} />  سبد خرید </Link>
                 <Link to="/message" element={<Message />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faEnvelope} /> پیام ها  </Link>
                 <Link to="/gamerList" element={<GamerList />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faBuilding} />  برج سازی  </Link>
                 <Link to="/contact" element={<Contact />} className="menuItem">  <FontAwesomeIcon className="menuFaIcon" icon={faPhone} /> تماس با ما </Link>

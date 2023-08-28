@@ -383,7 +383,6 @@ export default function Home() {
                         alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=249763&p=odrfshwlbsiyyndtwlbqqfti' />
                 </div>
             </div>
-
             <div className="flex-enamad">
                 <div className="enamadItem">
                     <Link to="/about" className="siteInfo" >درباره استارفود</Link> &nbsp;

@@ -54,7 +54,7 @@ export default function Login(props) {
                        <tr key={index}>
                         <td>{element.platform}</td>
                         <td>{element.browser}</td>
-                        <td><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
+                        <td><input className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
                        </tr>
                     </>))
                     deviceDialog.showModal();
@@ -135,14 +135,14 @@ export default function Login(props) {
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">
                                 <Link to="" className="btn btn-dark btn-sm m-1">
-                                    <img className="downloadImg" src={gPlay} />  <img className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
+                                    <img className="downloadImg" alt="download-img" src={gPlay} />  <img alt="download-img" className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
                                 </Link>
                                 <Link to="" className="btn btn-dark btn-sm">
                                     IOS  <FontAwesomeIcon className="downloadIcon" icon={faApple} /> <br /> دانلود نسخه ویب آپ
                                 </Link>
                             </div>
                             <Link className="loginContact" to="tel://02148286"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faPhone} />  <b>ارتباط :</b>  48286-021 </Link >
-                            <Link className="loginContact" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
+                            <Link className="loginContact mb-2" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
                         </div>
                     </div>
                 </div>
@@ -151,7 +151,7 @@ export default function Login(props) {
              <dialog id="favDialog" className="loginDialog">
                 <table className="table table-sm table-striped table-bordered">
                    <thead>
-                    <tr><th> انتخاب</th><th>مرورگر</th><th> سیستم عامل </th></tr>
+                    <tr> <th> سیستم عامل </th> <th>مرورگر</th> <th> انتخاب</th></tr>
                    </thead>
                    <tbody>{deviceInfo}</tbody>
                 </table>   

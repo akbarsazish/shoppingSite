@@ -272,12 +272,10 @@ p.price {
     display: flex;
     justify-content: center;
     margin: 50px 3px;
-
 }
 
 .enamadItem {
     text-align: center;
-
 }
 
 .enamadItem .siteInfo {
@@ -287,7 +285,6 @@ p.price {
     border: 1px solid red;
     font-size: 11px;
     border-radius: 3px;
-    color: black;
 }
 
 .siteInfo:hover {
@@ -571,187 +568,185 @@ tr {
 
 img.topLeft {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 6px;
+    left: 6px;
     width: 25px;
     height: 25px;
     z-index: 5;
 }
 
 .groupingTakhfif {
-    top: 5px;
-    right: 5px;
-    position: absolute;
-    font-size: 16px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: #cc2c2c;
-    color: #fff;
-    padding: 2px;
-    z-index: 5;
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  font-size: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #cc2c2c;
+  color: #fff;
+  padding: 2px;
+  z-index: 5;
+  text-align: center;
 }
 
-.defaultHeartColor {
-    color: red !important;
+.defaultHeartIcon {
+  color: rgb(235, 227, 227);
 }
 
-.heartIcon {
-    top: 0.6rem;
-    right: 1rem;
-    position: absolute;
+.favHeartIcon {
+  color: red;
+}
+
+.favoriteHeartIcon {
+  top: 0.6rem;
+  right: 1rem;
+  position: absolute;
+  color: #fff !important;
+  border: 1px solid red;
 }
 
 .modalBackdrop {
-    width: 100%;
-    padding: 50px;
-    background-color: rgb(0 0 0 / 35%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-
+  width: 100%;
+  padding: 50px;
+  background-color: rgb(0 0 0 / 35%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
 }
 
 .buyButtonDiv {
-    max-width: 200px;
-    background-color: #ffffff66;
-    padding: 5px;
-    width: 100%;
-    max-height: 85vh;
-    overflow: auto;
-    margin: 0 auto;
+  max-width: 200px;
+  background-color: #ffffff66;
+  padding: 5px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: auto;
+  margin: 0 auto;
 }
 
 .buyButton {
-    font-size: 10px !important;
-    width: 100%;
-    margin-bottom: 5px;
+  font-size: 10px !important;
+  width: 100%;
+  margin-bottom: 5px;
 }
 
-
 /* kala decription styles */
-
 .kalaDescibe {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
 }
 
 .kalaImg {
-    flex: 29%;
-    max-width: 29%;
-    text-align: center;
+  flex: 29%;
+  max-width: 29%;
+  text-align: center;
 }
 
 .kalaDescibtion {
-    flex: 69%;
-    max-width: 69%;
-    font-size: 9px;
+  flex: 69%;
+  max-width: 69%;
+  font-size: 9px;
 }
 
 .descHeader {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 5px;
-    border-bottom: 1px solid gray;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  border-bottom: 1px solid gray;
 }
 
-
 .desckTitle {
-    flex: 59%;
-    max-width: 59%;
-    padding-top: 8px;
+  flex: 59%;
+  max-width: 59%;
+  padding-top: 8px;
 }
 
 .desckBuyBtn {
-    flex: 39%;
-    max-width: 39%;
+  flex: 39%;
+  max-width: 39%;
 }
 
 .desciption {
-    text-align: justify;
+  text-align: justify;
 }
 
 .desckalaBody p.title {
-    margin-bottom: 3px;
-
+  margin-bottom: 3px;
 }
 
 .similarKala {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .similarKalaImg {
-    flex: 23%;
-    max-width: 23%;
-    justify-content: center;
-    box-shadow: 0px 1px 5px 1px #960d0d;
-    border-radius: 4px;
-    text-align: center;
-    margin: 4px;
-
+  flex: 23%;
+  max-width: 23%;
+  justify-content: center;
+  box-shadow: 0px 1px 5px 1px #960d0d;
+  border-radius: 4px;
+  text-align: center;
+  margin: 4px;
 }
 
 .similarKalaImg:hover {
-    box-shadow: 0px 2px 10px 1px #515151;
+  box-shadow: 0px 2px 10px 1px #515151;
 }
 
 .similarKalaImage {
-    width: 88%;
+  width: 88%;
 }
 
 .similarImgLink {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .similarKalaName {
-    font-size: 14px;
-    padding: 5px;
-    margin-top: 10px;
+  font-size: 14px;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 .kalaImg {
-    position: relative;
-    margin: 2px;
+  position: relative;
+  margin: 2px;
 }
 
-
-
 .descKalaIcon {
-    top: 5px;
-    right: 5px;
-    position: absolute;
-    font-size: 25px;
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  font-size: 25px;
 }
 
 /* shopping cart styles */
-
 .shoppingCart {
-    display: flex;
-    background-color: #fff;
-    border-radius: 6px;
+  display: flex;
+  background-color: #fff;
+  border-radius: 6px;
 }
 
 .shoppingRight {
-    flex: 69%;
-    max-width: 69%;
-    margin: 2px;
+  flex: 69%;
+  max-width: 69%;
+  margin: 2px;
 }
 
 .shoppingLeft {
-    flex: 29%;
-    max-width: 29%;
-    display: flex;
-    margin: 2px;
-    height: 70px;
-    border-radius: 5px;
-    padding: 8px;
-    background-color: #f5f5f5;
+  flex: 29%;
+  max-width: 29%;
+  display: flex;
+  margin: 2px;
+  height: 70px;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: #f5f5f5;
 }
 
 .shoppingLefFirst {
@@ -931,13 +926,13 @@ img.topLeft {
     text-align: center;
     margin-top: 10%;
     border-radius: 8px 0px 0px 8px;
-    box-shadow: -3px 0px 2px 3px black;
+    box-shadow: -3px 0px 2px 3px ;
     width: 80%;
 }
 
 .description {
     color: red;
-    text-shadow: 1px 1px black;
+    text-shadow: 1px 1px ;
 }
 
 .contactList {
@@ -1224,10 +1219,15 @@ ul li a.active {
 }
 
 .loginContact {
-    text-decoration: none;
-    color: #000;
-    font-size: 14px;
-    display: block;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  display: block;
+  margin-right: 1rem;
+}
+
+.select-to-logout {
+  padding: 33px !important;
 }
 
 .downloadIcon {
@@ -1890,6 +1890,24 @@ ul li a.active {
     width: 100%;
 }
 
-.css-15c7cx9 {
-    font-size: 12px;
+.css-817hxt {
+  width: 230px !important;
+  height: 282px !important;
+}
+
+.css-pw7rye {
+  width: 222px !important;
+  gap: 2px !important;
+  font-size: 11px;
+}
+
+.css-1vevspt {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.css-1n6ujgj {
+ height: 34px !important;
+ padding-right: 6px;
+ padding-left: 6px;
 }

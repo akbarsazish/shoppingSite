@@ -38,7 +38,6 @@ if(localStorage.getItem("isLogedIn")){
                     <h4 className="p-3"> تعداد کالا: 8 </h4>
                      <div className="factorView">  
                         {factorItem}
-
                         <div className="factorsResult card">
                             <div className="factorDetailPart">
                                 <span className="factorDetailItems"> <b>  قیمت کالا  : </b> {parseInt(allPrice/10).toLocaleString()} </span>

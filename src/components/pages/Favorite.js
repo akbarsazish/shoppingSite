@@ -10,7 +10,6 @@ import Footer from "../genrealComponent/Footer";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 
-
 export default function Favorite(props) {
     const [kalaItem,setKalaItem]=useState(0)
     const [buyOption, setBuyOption]=useState(0)
@@ -35,7 +34,7 @@ export default function Favorite(props) {
                 <p className="groupingItemTitle"> {element.GoodName} </p>
             </Link>
             <div className="groupingItemBottomInfo">
-               <div className="groupingItemInfo"> <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+               <div className="groupingItemInfo"> <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'favHeartIcon' :'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
                         
                 </div>
                 <div className="groupingItemInfo">

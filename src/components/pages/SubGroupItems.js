@@ -73,7 +73,7 @@ const requestProduct=(psn,goodSn,event)=>{
                     <p className="groupingItemTitle"> {element.GoodName} </p>
                 </Link>
                 <div className="groupingItemBottomInfo">
-                    <div className="groupingItemInfo"  onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite===1 ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
+                    <div className="groupingItemInfo"  onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite===1 ? 'favHeartIcon' : 'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
                     <div className="groupingItemInfo">
                       {element.Amount>0?
                          <>
