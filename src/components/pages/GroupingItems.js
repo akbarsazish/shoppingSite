@@ -10,7 +10,7 @@ import starfood from "../../assets/images/starfood.png"
 import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faShoppingCart, faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
 export default function GroupingItems(props) {
@@ -65,7 +65,6 @@ export default function GroupingItems(props) {
             
             setMainGroupKala(data.data.listKala.map((element,index)=>
             <div key={index} className="groupingItem">
-                {console.log(element.requested)}
                 <img className="topLeft" src={starfood} alt="slider" />
                 {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
                 <Link to={"/descKala/"+element.GoodSn+"/"+id} className="groupingItemLink">
@@ -98,7 +97,8 @@ export default function GroupingItems(props) {
                     ) : (element.Amount > 0 || element.activePishKharid > 0 || element.freeExistance > 0) ? (
                         ''
                     ) : (
-                        element.requested === 1 ? (
+                        
+                        parseInt(element.requested) === 0 ? 
                             <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request" + element.GoodSn}>
                                 <button
                                     value="0"
@@ -109,20 +109,18 @@ export default function GroupingItems(props) {
                                     خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon>
                                 </button>
                             </span>
-                        ) : (
+                         : 
                             <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest" + element.GoodSn}>
                                 <button
                                     value="1"
                                     id={"afterButton" + element.GoodSn}
                                     onClick={(event) => cancelRequestKala(localStorage.getItem("psn"), element.GoodSn, event)}
-                                    className="btn btn-sm btn-danger selectAmount"
+                                    className="btn btn-sm  selectAmount announced"
                                 >
-                                    اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon>
+                                    اعلام شد <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                                 </button>
                             </span>
-                        )
-                    )}
-
+                       )}
                     </div>
                 </div>
                 <div className="groupingItemBottomBtn">

@@ -1911,3 +1911,7 @@ ul li a.active {
  padding-right: 6px;
  padding-left: 6px;
 }
+
+.announced {
+  border: 2px solid red !important;
+}
