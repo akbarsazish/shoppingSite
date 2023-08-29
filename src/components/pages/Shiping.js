@@ -27,7 +27,7 @@ export default function Shiping(props) {
     const[selectdAddress,setSelectedAddress]=useState(defaultAddress)
     const[selectdPayType,setSelectedPayType]=useState(0)
     const[allMoney,setAllMoney]=useState(localStorage.getItem("allMoney"))
-    const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
+    const[allProfit, setAllProfit]=useState(localStorage.getItem("allProfit"))
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
 
@@ -266,7 +266,7 @@ if(localStorage.getItem("isLogedIn")){
                         <button className="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#takhfifCodeModal"> استفاده از کد تخفیف % </button>
                     </div>
                     <div className="shippingPartBottom mt-2">
-                        <p className="factorInfo"> {parseInt(parseInt(allMoney)+parseInt(allProfit)).toLocaleString("fa-IR")} تومان </p>
+                        <p className="factorInfo"> {parseInt(parseInt(allMoney) + parseInt(allProfit)).toLocaleString("fa-IR")} تومان </p>
                         <p className="factorInfo" style={{display:"inline"}}> {parseInt(takhfifCase).toLocaleString("fa-IR")} تومان  </p> 
                         <input type="checkbox" onChange={()=>changePayMoneyAndTakhfif()} id="takhfifSwitch" />
                         <p className="factorInfo text-danger"> {parseInt(allProfit).toLocaleString("fa-IR")} تومان </p>

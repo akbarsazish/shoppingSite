@@ -36,9 +36,11 @@ export default function ShoppingCart(props) {
             let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 accomulator += parseInt(currentValue.Price1 / currency)
                 
+                console.log(accomulator);
                 return accomulator;
             }, 0))
-            setAllProfit(parseInt(allMoneyProfit)-parseInt(allMoneyNoProfit))
+        
+            setAllProfit(parseInt(allMoneyProfit - allMoneyNoProfit))
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -70,24 +72,25 @@ export default function ShoppingCart(props) {
     const renewCarts = () => {
         axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
-            setMinSalePriceFactor(data.data.minSalePriceFactor)
-            setCurrencyName(data.data.currencyName)
-            setIntervalBetweenBuys(data.data.intervalBetweenBuys)
-            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
-            setChangePriceState(data.data.changePriceState)
-            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
+            setMinSalePriceFactor(data.data.minSalePriceFactor);
+            setCurrencyName(data.data.currencyName);
+            setIntervalBetweenBuys(data.data.intervalBetweenBuys);
+            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0));
+            setChangePriceState(data.data.changePriceState);
+            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0);
+
             let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
                     accomulator += parseInt(currentValue.Price / currency)
                 }
-                return accomulator;
-            }, 0))
+                    return accomulator;
+            }, 0));
 
             let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
                     accomulator += parseInt(currentValue.Price1 / currency)
                 }
-                return accomulator;
+                    return accomulator;
             }, 0));
 
             setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
@@ -105,6 +108,7 @@ export default function ShoppingCart(props) {
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
             </div>))
+
             setChanedItems(data.data.orders.map((element) => {
                 if (element.changedPrice === 0) {
                     return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
