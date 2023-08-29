@@ -46,7 +46,6 @@ export default function GroupingItems(props) {
           }
           
         const cancelRequestKala=(psn,goodSn,event)=>{
-
         axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
             psn:psn,
             gsn:goodSn
@@ -62,7 +61,6 @@ export default function GroupingItems(props) {
             mainGrId:id
         }})
         .then((data) => {
-            
             setMainGroupKala(data.data.listKala.map((element,index)=>
             <div key={index} className="groupingItem">
                 <img className="topLeft" src={starfood} alt="slider" />
@@ -140,7 +138,7 @@ export default function GroupingItems(props) {
                                      )
                                 )
                             )
-                        : 'Result3' 
+                        : 'Result3'
                     }
                 </div>
             </div>))

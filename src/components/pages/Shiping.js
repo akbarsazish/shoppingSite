@@ -9,12 +9,6 @@ import axios from "axios";
 import { DatePicker } from "zaman";
 
 export default function Shiping(props) {
-    const myStyle = {
-        color: "white",
-        backgroundColor: "DodgerBlue",
-        padding: "10px",
-        border: "1px solid red"
-      };
 
     let now = new Date();
     const currentHour = now.getHours();
@@ -36,6 +30,7 @@ export default function Shiping(props) {
     const[allProfit,setAllProfit]=useState(localStorage.getItem("allProfit"))
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
+
     const[payUrl, setPayUrl] = useState('');
 
     const changePayMoneyAndTakhfif=()=>{
@@ -48,7 +43,7 @@ export default function Shiping(props) {
                 setAllMoney(allMoney + takhfifCase)
             }
         }else{
-            alert("اسفتاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.");
+            alert("استفاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.");
             element.checked=false;
         }
     }
@@ -101,7 +96,7 @@ export default function Shiping(props) {
             psn:localStorage.getItem("psn"),
             allMoney:allMoney}
         }).then((data)=>{
-            alert(data.data)
+            // alert(data.data)
         })
     }
     const addFactorToSefarish=()=>{
@@ -136,12 +131,9 @@ const calculateTakhfifCode=()=>{
     }
 }
 
+let payOnline=document.getElementById("payOnline");
 let justPayOnline=()=>{
-        
-    let payOnline=document.getElementById("payOnline");
-    if(sendFast==1){
-        payOnline.checked=true;
-    }
+  payOnline.checked=true;
 }
 
 if(localStorage.getItem("isLogedIn")){
@@ -174,10 +166,10 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                     <div className="shippingPart">
                         <div className="row">
-                            <div className="col-2">
+                            <div className="col-lg-2 col-2">
                                 <p className="weekDay"> {weekDay2}  </p>
                             </div>
-                            <div className="col-10">
+                            <div className="col-lg-10 col-10">
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                     {moorningTimeContent}  &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px" }} icon={faSun} />
@@ -193,11 +185,10 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                         </div>
                     </div>
-                    {
+                    
 
-
-                    (currentHour >= 7 && currentHour < 19)?
-
+                 
+                {/* {  (currentHour >= 7 && currentHour < 19)? */}
                     <div className="shippingPart">
                         <div className="row w-100">
                             <div className="col-2">
@@ -205,16 +196,15 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-10 px-0 pt-2">
                                 <div className="form-check px-0">
-                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(1); justPayOnline()}} type="radio" name="factorDay" />
-                                        <p id="fastSendText" style={{display:"inline"}}>هزینه حمل در زمان هماهنگی اعلان می شود.</p>
+                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault">
+                                      <input className="form-check-input float-end mx-3 customRadio" id="fastErsalRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(1); justPayOnline();}} type="radio" name="factorDay"/>
+                                      {factorDay ?  <p id="fastSendText" style={{display:"inline"}}>هزینه حمل در زمان هماهنگی اعلان می شود.</p> : ""}
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    : ""
-                }
+                   {/* : "" } */}
                 </div>
 
                 <div className="shipigContainer">
@@ -302,11 +292,11 @@ if(localStorage.getItem("isLogedIn")){
                             <div className="modal-body">
                                 <label className="form-label">کد تخفیف</label>
                                 <input type="text" value={localStorage.getItem("takhfifCode")} className="form-control" name="takhfifCode"></input>
-                                <span id="errorContainer" style={{color:"red"}}></span>
+                                <span id="errorContainer" style={{color:"red", fontSize:"1rem"}}></span>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" onClick={()=>calculateTakhfifCode()} className="btn btn-success float-end"> استفاده شود <i className="fa fa-repeat"></i></button>
-                                <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal"> انصراف <i className="fa fa-xmark"></i></button>
+                                <button type="button" onClick={()=>calculateTakhfifCode()} className="btn btn-sm btn-success float-end"> استفاده شود <i className="fa fa-repeat"></i></button>
+                                <button type="button" className="btn btn-sm btn-danger float-end" data-bs-dismiss="modal"> انصراف <i className="fa fa-xmark"></i></button>
                             </div>
                         </div>
                     </div>

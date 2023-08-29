@@ -29,13 +29,14 @@ export default function Favorite(props) {
             <Link to={"/descKala/"+element.GoodSn+"/"+element.GoodGroupSn} className="groupingItemLink">
                 <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider" />
             </Link>
-
+           
+           
             <Link to={"/descKala/"+element.GoodSn+"/"} className="groupingItemTitleLink">
                 <p className="groupingItemTitle"> {element.GoodName} </p>
             </Link>
             <div className="groupingItemBottomInfo">
-               <div className="groupingItemInfo"> <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'favHeartIcon' :'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
-                        
+                <div className="groupingItemInfo">
+                   <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'favHeartIcon' :'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
                 </div>
                 <div className="groupingItemInfo">
                     {element.Amount>0?
@@ -105,8 +106,7 @@ export default function Favorite(props) {
       }
 
     const showBuyModal=(goodSn,event)=>{
-    
-        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
+      axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
         }})
@@ -125,8 +125,11 @@ export default function Favorite(props) {
         axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
-        }})
+        }
+      }
+      )
         .then((data) => {
+          
           let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
               modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
@@ -137,6 +140,7 @@ export default function Favorite(props) {
         })
       }
       const updateBuy=(orderId,amountUnit,goodSn)=>{
+
         axios.get('https://starfoods.ir/api/updateOrderBYS',
         {params:{
           kalaId: goodSn,
