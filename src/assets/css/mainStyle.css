@@ -453,6 +453,7 @@ tr {
     background-color: #fff;
     margin: 2px;
     border-radius: 3px;
+    padding: 0.3rem;
 }
 
 .groupingPartItem:hover {
@@ -548,11 +549,21 @@ tr {
     border-top: 1px solid #808080;
     padding: 2px;
     height: 48px;
+    justify-content: space-between;
 }
 
 .groupingItemInfo {
-    flex: 49%;
-    max-width: 49%;
+    flex: 48%;
+    max-width: 48%;
+    padding: 0rem 0.5rem;
+}
+
+.groupingItemInfo:nth-of-type(odd) {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+.groupingItemInfo:nth-of-type(even) {
+  text-align: left;
 }
 
 .groupingItemBottomBtn {
@@ -564,6 +575,7 @@ tr {
 
 .selectAmount {
     font-size: 12px !important;
+    font-weight: bold !important;
 }
 
 img.topLeft {
