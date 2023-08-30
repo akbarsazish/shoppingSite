@@ -132,8 +132,10 @@ const calculateTakhfifCode=()=>{
 }
 
 let payOnline=document.getElementById("payOnline");
+let payHozori=document.getElementById("payHozori");
 let justPayOnline=()=>{
   payOnline.checked=true;
+  payHozori.disabled=true;
 }
 
 if(localStorage.getItem("isLogedIn")){
@@ -151,14 +153,18 @@ if(localStorage.getItem("isLogedIn")){
                             <div className="col-10">
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                        {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px" }} icon={faSun} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0); justPayOnline()}} type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color:"orange", fontSize:"18px"}} icon={faSun} />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} 
+                                        onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0);}} 
+                                        type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                       {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", fontSize: "18px" }} icon={faMoon} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0); justPayOnline()}}  type="radio" name="factorDay" id="flexRadioDefault1" />
+                                       {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", fontSize:"18px"}} icon={faMoon} />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} 
+                                        onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}}  
+                                        type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
                             </div>
@@ -173,13 +179,13 @@ if(localStorage.getItem("isLogedIn")){
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                     {moorningTimeContent}  &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px" }} icon={faSun} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0); justPayOnline()}} type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}} type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
                                 <div className="form-check">
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                     {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faMoon} />
-                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0); justPayOnline()}} type="radio" name="factorDay"  />
+                                        <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}} type="radio" name="factorDay"  />
                                     </label>
                                 </div>
                             </div>
@@ -196,9 +202,9 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-10 px-0 pt-2">
                                 <div className="form-check px-0">
-                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault">
+                                    <label className="form-check-label text-start timeLabel" for="fastErsalRadio">
                                       <input className="form-check-input float-end mx-3 customRadio" id="fastErsalRadio" value={afteromorrowDate} onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(1); justPayOnline();}} type="radio" name="factorDay"/>
-                                      {factorDay ?  <p id="fastSendText" style={{display:"inline"}}>هزینه حمل در زمان هماهنگی اعلان می شود.</p> : ""}
+                                      {sendFast ?  <p id="fastSendText" style={{display:"inline"}}>هزینه حمل در زمان هماهنگی اعلان می شود.</p> : ""}
                                     </label>
                                 </div>
                             </div>
@@ -226,7 +232,9 @@ if(localStorage.getItem("isLogedIn")){
                                 <p className="weekDay">  انتخاب آدرس </p>
                             </div>
                             <div className="col-8">
-                                <select className="form-select form-select-sm mt-2" onChange={(e)=>setSelectedAddress(e.target.value)} style={{ width: "195px" }} aria-label=".form-select-sm example">
+                                <select className="form-select form-select-sm mt-2"
+                                  onChange={(e)=>setSelectedAddress(e.target.value)} style={{ width: "195px" }}
+                                  aria-label=".form-select-sm example">
                                     <option selected value={0+'_'+defaultAddress} className="text-end">  {defaultAddress}  </option>
                                     {otherAddresses}
                                 </select>
@@ -241,8 +249,10 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                     <div className="shippingPartBottom mt-2">
                         <div className="form-check">
-                            <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori")}} type="radio" name="payTypeRadio" id="flexRadioDefault1" />
+                            <label className="form-check-label text-start timeLabel" for="payHozori">
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio"
+                                onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori")}}
+                                type="radio" name="payTypeRadio" id="payHozori" />
                                 حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faTruck} />
                             </label>
                         </div>
@@ -250,8 +260,10 @@ if(localStorage.getItem("isLogedIn")){
                     <div className="shippingPartBottom">
                         <div className="form-check mt-2">
                             <label className="form-check-label text-start timeLabel" for="">
-                                <input className="form-check-input float-end mx-1 mt-2 customRadio" onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");sendOnlinePayStuff();}} type="radio" name="payTypeRadio" id="payOnline" />
-                                غیر حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
+                                <input className="form-check-input float-end mx-1 mt-2 customRadio"
+                                  onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");sendOnlinePayStuff();}}
+                                  type="radio" name="payTypeRadio" id="payOnline" />
+                                  غیر حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faIdCard} />
                             </label>
                         </div>
                     </div>

@@ -1915,3 +1915,8 @@ ul li a.active {
 .announced {
   border: 2px solid red !important;
 }
+
+.errorContainer {
+    color: red !important;
+    font-size: 0.6rem;
+}
