@@ -11,14 +11,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart,faBell } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
-
 export default function GroupingItems(props) {
 const [items, setItems] = useState(0);
 const [buyOption, setBuyOption]=useState(0)
 
     const {term}=useParams();
     const requestProduct=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.33:8080/api/addRequestedProduct",{params:{
+        axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
           customerId:psn,
           productId:goodSn
         }}).then((data)=>{
@@ -27,7 +26,7 @@ const [buyOption, setBuyOption]=useState(0)
       }
       
       const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct",{params:{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
           psn:psn,
           gsn:goodSn
         }}).then((data)=>{
@@ -35,7 +34,7 @@ const [buyOption, setBuyOption]=useState(0)
         })
       }
 const reNewSearchResult=()=>{
-        axios.get("http://192.168.10.33:8080/api/searchKala",{params:{
+        axios.get("https://starfoods.ir/api/searchKala",{params:{
             psn:localStorage.getItem("psn"),
             name:term
         }}).then((data)=>{
@@ -51,7 +50,7 @@ const reNewSearchResult=()=>{
                     <p className="groupingItemTitle"> {element.GoodName} </p>
                 </Link>
                 <div className="groupingItemBottomInfo">
-                    <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==='YES') ? 'defaultHeartColor' :''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+                    <div className="groupingItemInfo" > <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==='YES') ? 'favHeartIcon' :'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
                             
                     </div>
                     <div className="groupingItemInfo">
@@ -105,7 +104,7 @@ const reNewSearchResult=()=>{
 
 const showBuyModal=(goodSn,event)=>{
     
-    fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+    fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
   .then(response=>response.json())
   .then((data) => {
     console.log(data)
@@ -119,7 +118,7 @@ const showBuyModal=(goodSn,event)=>{
 }
 
   const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-    fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+    fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
     .then(response=>response.json())
     .then((data) => {
       let modalItems=[];
@@ -132,7 +131,7 @@ const showBuyModal=(goodSn,event)=>{
     })
   }
   const updateBuy=(orderId,amountUnit,goodSn)=>{
-    axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+    axios.get('https://starfoods.ir/api/updateOrderBYS',
     {params:{
       kalaId: goodSn,
       amountUnit: amountUnit,
@@ -155,7 +154,7 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
               alert(costError);
             }
           }
-          axios.get('http://192.168.10.33:8080/api/buySomething',
+          axios.get('https://starfoods.ir/api/buySomething',
           {params:{
             kalaId: goodSn,
             amountUnit: amountUnit

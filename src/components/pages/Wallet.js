@@ -10,7 +10,7 @@ import axios from "axios";
 
 
 export default function Wallet() {
-    const baseUrl = "http://192.168.10.33:8080/api";
+    const baseUrl = "https://starfoods.ir/api";
     const [yesNo, setYesNo] = useState(false);
     const [showQuestion, setShowQuestions] = useState(false);
     const [takhfifMoney,settakhfifMoney] = useState(0)

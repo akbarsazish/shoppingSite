@@ -17,9 +17,9 @@ export default function Profile(props) {
     const [introducerCode, setIntroducerCode] = useState(0)
     const [customerMobile, setCustomerMobile] = useState(0)
     const [customerPhone, setCustomerPhone] = useState(0)
+    
     useEffect(() => {
-        axios.get("http://192.168.10.33:8080/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
-
+        axios.get("https://starfoods.ir/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             setSendedFactors(data.data.factors.map((element, index) =>
                 <tr>
                     <th>{index + 1}</th>
@@ -29,7 +29,6 @@ export default function Profile(props) {
                     <td> {parseInt(element.TotalPriceHDS / 10).toLocaleString()} </td>
                     <td> پرداخت در محل </td>
                     <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > <FontAwesomeIcon icon={faEye} />  </Link> </td></tr>))
-
 
             setWaitingOrders(data.data.orders.map((element, index) =>
                 <tr><th>{index + 1}</th>
@@ -76,7 +75,7 @@ export default function Profile(props) {
                             </div>
                             <div className="profileFooter text-center">
                                 <div className="profileItems">
-                                    <Link className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>
+                                    <Link to="/inviteCode" className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>
                                 </div>
                                 <div className="profileItems">
                                     <Link className="profileFooterIcon" to="/returnedFactor">  فاکتورهای برگشتی  <FontAwesomeIcon icon={faHistory}></FontAwesomeIcon> </Link>

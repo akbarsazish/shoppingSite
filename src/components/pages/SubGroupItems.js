@@ -18,7 +18,7 @@ export default function GroupingItems(props) {
     const [buyOption, setBuyOption]=useState(0)
     
     useEffect(() => {
-    fetch("http://192.168.10.33:8080/api/getSubGroupList/?mainGrId="+mainId)
+    fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId="+mainId)
     .then(response=>response.json())
     .then((groups) => {
         setSubGroups(groups.map((element,index)=><SwiperSlide key={index} > 
@@ -32,7 +32,7 @@ export default function GroupingItems(props) {
 
 
 const requestProduct=(psn,goodSn,event)=>{
-    axios.get("http://192.168.10.33:8080/api/addRequestedProduct",{params:{
+    axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
       customerId:psn,
       productId:goodSn
     }}).then((data)=>{
@@ -41,21 +41,20 @@ const requestProduct=(psn,goodSn,event)=>{
   }
   
   const cancelRequestKala=(psn,goodSn,event)=>{
-    axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct",{params:{
+    axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
       psn:psn,
       gsn:goodSn
     }}).then((data)=>{
         renewSubGroupCarts();
     })
   }
-
     //
     useEffect(() => {
         renewSubGroupCarts();
     },[subId]);
 
     const renewSubGroupCarts=()=>{
-        axios.get("http://192.168.10.33:8080/api/appendSubGroupKala",{
+        axios.get("https://starfoods.ir/api/appendSubGroupKala",{
             params:{
                 mainGrId:mainId,
                 subKalaGroupId:subId,
@@ -64,66 +63,62 @@ const requestProduct=(psn,goodSn,event)=>{
         })
         .then((data) => {
             setMainGroupKala(data.data.listKala.map((element,index)=>
-                                                <div key={index} className="groupingItem">
-                                                    <img className="topLeft" src={starfood} alt="slider" />
-                                                    {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span> :''}
-                                                    <Link  to={"/descKala/"+element.GoodSn+"/"+mainId} className="groupingItemLink">
-                                                        <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider " />
-                                                    </Link>
-                                                    <Link  to={"/descKala/"+element.GoodSn+"/"+mainId} className="groupingItemTitleLink">
-                                                        <p className="groupingItemTitle"> {element.GoodName} </p>
-                                                    </Link>
-                                                    <div className="groupingItemBottomInfo">
-                                                        <div className="groupingItemInfo"  onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite===1 ? 'defaultHeartColor' : ''} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
-                                                        <div className="groupingItemInfo">
-                                                            {element.Amount>0?
-                                                                <>
-                                                                <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
-                                                                {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
-                                                                </>
-                                                                :
-                                                                    (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
-                                                                        ''
-                                                                        :(
-                                                                            element.requested===0?
-                                                                                <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                                                                    <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
-                                                                                </span>
-                                                                            :
-                                                                                <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
-                                                                                    <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
-                                                                                </span>
-                                                                        ) 
-                                                            }
-                                                        </div>
-                                                    </div>
-                                                    <div className="groupingItemBottomBtn">
-                                                    {element.activePishKharid<1 
-                                                    ?
-                                                        (element.bought==="Yes" ?
-                                                            <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.Amount)+" "+ element.UName} <FontAwesomeIcon icon={faShoppingCart} /></button>
-                                                            :(element.callOnSale>0?
-                                                                <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
-                                                                :(element.Amount>0 || element.freeExistance>0 
-                                                                    ?
-                                                                    <button className="btn btn-sm btn-danger selectAmount" id={element.GoodSn+'button'} onClick={()=>showBuyModal(element.GoodSn)}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
-                                                                    :
-                                                                    <div className="c-product__add mt-0">
-                                                                    <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
-                                                                    </div>   
-                                                                )
-                                                            )
-                                                        )
-                                                    : '' }
-                                                    </div>
-                                                </div>
-                                                ))
-                                            })
+            <div key={index} className="groupingItem">
+                <img className="topLeft" src={starfood} alt="slider" />
+                {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span> :''}
+                <Link  to={"/descKala/"+element.GoodSn+"/"+mainId} className="groupingItemLink">
+                    <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider " />
+                </Link>
+                <Link  to={"/descKala/"+element.GoodSn+"/"+mainId} className="groupingItemTitleLink">
+                    <p className="groupingItemTitle"> {element.GoodName} </p>
+                </Link>
+                <div className="groupingItemBottomInfo">
+                    <div className="groupingItemInfo"  onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite===1 ? 'favHeartIcon' : 'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
+                    <div className="groupingItemInfo">
+                      {element.Amount>0?
+                         <>
+                            <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
+                            {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
+                            </> :
+                            (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
+                            '' :(
+                                element.requested===0?
+                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
+                                        <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                    </span>
+                                :
+                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
+                                        <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                    </span>
+                            ) 
+                        }
+                    </div>
+                </div>
+                <div className="groupingItemBottomBtn">
+                {element.activePishKharid<1 
+                ?
+                    (element.bought==="Yes" ?
+                        <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.Amount)+" "+ element.UName} <FontAwesomeIcon icon={faShoppingCart} /></button>
+                        :(element.callOnSale>0?
+                            <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
+                            :(element.Amount>0 || element.freeExistance>0 
+                                ?
+                                <button className="btn btn-sm btn-danger selectAmount" id={element.GoodSn+'button'} onClick={()=>showBuyModal(element.GoodSn)}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
+                                :
+                                <div className="c-product__add mt-0">
+                                <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
+                                </div>   
+                            )
+                        )
+                    )
+                : '' }
+                </div>
+            </div>
+            ))
+        })
     }
-
         const showBuyModal=(goodSn,event)=>{
-
-            fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+            fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
             .then(response=>response.json())
             .then((data) => {
             console.log(data)
@@ -133,12 +128,11 @@ const requestProduct=(psn,goodSn,event)=>{
                 }
                 const items=modalItems.map((item)=>item)
                 setBuyOption(items)
-                
             })
         }
 
         const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-            fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode="+goodSn)
+            fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
             .then(response=>response.json())
             .then((data) => {
                 let modalItems=[];
@@ -147,22 +141,19 @@ const requestProduct=(psn,goodSn,event)=>{
                 }
                 const items=modalItems.map((item)=>item)
                 setBuyOption(items)
-                
             })
         }
 
         const updateBuy=(orderId,amountUnit,goodSn)=>{
-            axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+            axios.get('https://starfoods.ir/api/updateOrderBYS',
             {params:{
               kalaId: goodSn,
               amountUnit: amountUnit,
               orderBYSSn: orderId
             }
-            }
-            ).then((response)=> {
+            }).then((response)=> {
                 renewSubGroupCarts();
             })
-      
         }
       
         const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
@@ -170,12 +161,13 @@ const requestProduct=(psn,goodSn,event)=>{
           if((amountUnit > amountExist) && (freeExistance===0)){
             alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
           }else{
+            alert(amountUnit)
                   if (costLimit > 0) {
                     if (amountUnit >= costLimit) {
                       alert(costError);
                     }
                   }
-                  axios.get('http://192.168.10.33:8080/api/buySomething',
+                  axios.get('https://starfoods.ir/api/buySomething',
                   {params:{
                     kalaId: goodSn,
                     amountUnit: amountUnit,
@@ -192,7 +184,6 @@ const requestProduct=(psn,goodSn,event)=>{
       }
 
     if(localStorage.getItem("isLogedIn")){
-
         return (
             <>
                 <Header />
@@ -203,7 +194,6 @@ const requestProduct=(psn,goodSn,event)=>{
                             slidesPerView={1}
                             spaceBetween={10}
                             navigation={true}
-
                             breakpoints={{
                                 320: {
                                     slidesPerView: 2,

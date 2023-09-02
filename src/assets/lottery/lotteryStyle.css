@@ -49,7 +49,7 @@
     outline: 2px dashed #ffc134;
     overflow: hidden;
     transition: all ease-in-out 5s;
-    transform: rotate(90deg);
+    /* transform: rotate(90deg); */
     box-shadow: 0 0 0 8px #5d1544;
   }
  
@@ -448,5 +448,21 @@
 
 .spin-animation {
   transition: all ease 5s;
+}
+
+#swal2-title {
+  font-size: 1rem;
+}
+
+.swal2-popup {
+  background: rgb(238,174,202);
+  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+  width: 22rem;
+  height: 11rem;
+  border: 1px solid white;
+}
+
+.swal2-confirm {
+  background-color: red;
 }
 

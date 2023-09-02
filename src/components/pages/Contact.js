@@ -9,7 +9,7 @@ import Footer from "../genrealComponent/Footer";
 
 export default function Contact() {
     return (
-        <>
+      <>
             <Header />
             <Sidebar />
             <div className="container marginTop">
@@ -35,8 +35,7 @@ export default function Contact() {
                     </div>
                 </div>
             </div>
-
             <Footer /> 
-        </>
+      </>
     )
 }

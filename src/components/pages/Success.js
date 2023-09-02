@@ -11,7 +11,7 @@ export default function Success() {
     localStorage.setItem("buyAmount",0)
     const [succedFactorData,setSuccedFactorData]=useState(0)
     useEffect(()=>{
-        axios.get("http://192.168.10.33:8080/api/successFactorInfo",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+        axios.get("https://starfoods.ir/api/successFactorInfo",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
             setSuccedFactorData( data.data.factorBYS.map((element,index)=><tr><td> {(index+1)} </td><td>{element.GoodName}</td><td>{parseInt(element.PackAmount).toLocaleString()}</td><td>{parseInt(element.Fi/10).toLocaleString()}</td><td>{parseInt(element.Price/10).toLocaleString()}</td></tr>))
         })
     },[])
@@ -19,8 +19,8 @@ export default function Success() {
     if(localStorage.getItem("isLogedIn")){
         return (
             <>
-                <Header />
-                <Sidebar />
+              <Header />
+              <Sidebar />
                 <div className="container  marginTop text-center rounded">
                     <FontAwesomeIcon style={{ textAlign: "center", fontSize: "55px" }} className="text-info p-2" icon={faCheckCircle} />
                     <h5 className="fw-bold" style={{ textAlign: "center", padding: "10px" }}>  شماره فاکتور  6356 </h5>
@@ -35,11 +35,11 @@ export default function Success() {
                             <table className="table table-bordered ">
                                 <thead>
                                     <tr>
-                                        <th>ردیف</th>
-                                        <th>نام کالا </th>
-                                        <th>تعداد</th>
-                                        <th>قیمت واحد</th>
-                                        <th>مبلغ کل</th>
+                                      <th>ردیف</th>
+                                      <th>نام کالا </th>
+                                      <th>تعداد</th>
+                                      <th>قیمت واحد</th>
+                                      <th>مبلغ کل</th>
                                     </tr>
                                 </thead>
                                 <tbody>

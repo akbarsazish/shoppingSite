@@ -5,15 +5,14 @@ import Sidebar from './Header'
 import Header from './Sidebar';
 
 const Layout = () => {
-
     if(localStorage.getItem("isLogedIn")){
         return (
-            <>
-                <Header/>
-                <Home/>
-                <Sidebar/>
-                <Footer/>
-            </>
+         <>
+             <Header/>
+             <Home/>
+             <Sidebar/>
+             <Footer/>
+         </>
         )
     }else{
         window.location.href = '/login'

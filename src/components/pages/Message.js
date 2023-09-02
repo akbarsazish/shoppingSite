@@ -13,12 +13,12 @@ export default function Message() {
     const addNewMessage=()=>{
         setNewMessage(newMessage);
         document.getElementById("messageTextArea").value="";
-        axios.get("http://192.168.10.33:8080/api/doAddMessage",{params:{
+        axios.get("https://starfoods.ir/api/doAddMessage",{params:{
             pmContent:newMessage,
             psn:localStorage.getItem("psn")
         }}).then((data)=>{
             if(data.data==="good"){
-                axios.get("http://192.168.10.33:8080/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
+                axios.get("https://starfoods.ir/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
                 <>
                     <br/>
                     <span className="messageContentSender">
@@ -40,17 +40,19 @@ export default function Message() {
         })
     }
     useEffect(()=>{
-        axios.get("http://192.168.10.33:8080/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
+        axios.get("https://starfoods.ir/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
         <><br/>
             <span className="messageContentSender">
                 <img className="profilePic" alt="عکس یوزر" src={boy} />
                 <span className="messageText"> <span className="messageDate"> {new Date(message.messageDate).toLocaleString('fa-IR')} </span> {message.messageContent} </span>
             </span>
             <br/>
-            {message.replay.map((replay)=><><br/><span className="messageContentRecevier">
-                                            <img className="profilePic" alt="عکس یوزر" src={profile} />
-                                            <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
-                                            </span><br/><br/></>)}
+            {message.replay.map((replay)=>
+              <><br/><span className="messageContentRecevier">
+                    <img className="profilePic" alt="عکس یوزر" src={profile} />
+                    <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
+                    </span><br/><br/>
+             </>)}
         </>   
         ))
 

@@ -28,13 +28,13 @@ span {
 }
 
 .topMenu {
-    position: fixed;
-    top: 0;
-    z-index: 1;
-    width: 100%;
-    height: 58px;
-    background-color: #ef3d52;
-    z-index: 9;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 58px;
+  background-color: #ef3d52;
+  z-index: 9;
 }
 
 .flex-container {
@@ -60,16 +60,21 @@ span {
     cursor: pointer;
 }
 
+.chevron-icon-right {
+    margin-top: 0.2rem;
+}
+
 .headerLink {
     text-decoration: none;
     color: #fff;
 }
 
 .txtsearch {
-    margin-right: 10px;
+    margin: 0.1rem 1rem 1rem;
     border-radius: 2px;
     font-size: 12px;
-    padding: 5px;
+    padding: 6px;
+    max-width: 100%;
 }
 
 .cartNotification {
@@ -141,21 +146,21 @@ span {
     padding: 3px;
     flex-direction: row;
     text-align: center;
+    justify-content: space-between;
 }
 
 .categoryItem {
-    flex-basis:19%;
-    padding: 2px;
+    flex-basis:19.3%;
+    padding: 1px;
     background-color: #fff;
-    margin: 5px;
-    border-radius: 6px;
+    margin: 3px;
+    border-radius: 5px;
 }
 
 .categoryImg {
     padding: 5px;
     margin: 5px;
     box-shadow: inset;
-    border-radius: 10px;
     vertical-align: middle;
     width: 90%;
 }
@@ -267,12 +272,10 @@ p.price {
     display: flex;
     justify-content: center;
     margin: 50px 3px;
-
 }
 
 .enamadItem {
     text-align: center;
-
 }
 
 .enamadItem .siteInfo {
@@ -282,7 +285,6 @@ p.price {
     border: 1px solid red;
     font-size: 11px;
     border-radius: 3px;
-    color: black;
 }
 
 .siteInfo:hover {
@@ -448,13 +450,14 @@ tr {
 
 .groupingPartItem {
     flex-basis: 24%;
-    background-color: #000 !important;
+    background-color: #fff;
     margin: 2px;
     border-radius: 3px;
+    padding: 0.3rem;
 }
 
 .groupingPartItem:hover {
-    border: 0.5px solid rgb(148, 37, 37);
+    border: 0.5px solid rgb(243, 241, 241);
 }
 
 .groupingImg {
@@ -546,11 +549,21 @@ tr {
     border-top: 1px solid #808080;
     padding: 2px;
     height: 48px;
+    justify-content: space-between;
 }
 
 .groupingItemInfo {
-    flex: 49%;
-    max-width: 49%;
+    flex: 48%;
+    max-width: 48%;
+    padding: 0rem 0.5rem;
+}
+
+.groupingItemInfo:nth-of-type(odd) {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+.groupingItemInfo:nth-of-type(even) {
+  text-align: left;
 }
 
 .groupingItemBottomBtn {
@@ -562,202 +575,205 @@ tr {
 
 .selectAmount {
     font-size: 12px !important;
+    font-weight: bold !important;
 }
 
 img.topLeft {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 6px;
+    left: 6px;
     width: 25px;
     height: 25px;
     z-index: 5;
 }
 
 .groupingTakhfif {
-    top: 5px;
-    right: 5px;
-    position: absolute;
-    font-size: 16px;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    background-color: #cc2c2c;
-    color: #fff;
-    padding: 2px;
-    z-index: 5;
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  font-size: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #cc2c2c;
+  color: #fff;
+  padding: 2px;
+  z-index: 5;
+  text-align: center;
 }
 
-.defaultHeartColor {
-    color: red !important;
+.defaultHeartIcon {
+  color: rgb(235, 227, 227);
+}
+
+.favHeartIcon {
+  color: red;
+}
+
+.favoriteHeartIcon {
+  top: 0.6rem;
+  right: 1rem;
+  position: absolute;
+  font-size: 1.8rem;
 }
 
 .modalBackdrop {
-    width: 100%;
-    padding: 50px;
-    background-color: rgb(0 0 0 / 35%);
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    z-index: 2000;
-    align-items: center;
-    justify-content: center;
-
+  width: 100%;
+  padding: 50px;
+  background-color: rgb(0 0 0 / 35%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
 }
 
 .buyButtonDiv {
-    max-width: 200px;
-    background-color: #ffffff66;
-    padding: 5px;
-    width: 100%;
-    max-height: 85vh;
-    overflow: auto;
-    margin: 0 auto;
+  max-width: 200px;
+  background-color: #ffffff66;
+  padding: 5px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: auto;
+  margin: 0 auto;
 }
 
 .buyButton {
-    font-size: 10px !important;
-    width: 100%;
-    margin-bottom: 5px;
+  font-size: 10px !important;
+  width: 100%;
+  margin-bottom: 5px;
 }
 
-
 /* kala decription styles */
-
 .kalaDescibe {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
 }
 
 .kalaImg {
-    flex: 29%;
-    max-width: 29%;
-    text-align: center;
+  flex: 29%;
+  max-width: 29%;
+  text-align: center;
 }
 
 .kalaDescibtion {
-    flex: 69%;
-    max-width: 69%;
-    font-size: 9px;
+  flex: 69%;
+  max-width: 69%;
+  font-size: 9px;
 }
 
 .descHeader {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 5px;
-    border-bottom: 1px solid gray;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  border-bottom: 1px solid gray;
 }
 
-
 .desckTitle {
-    flex: 59%;
-    max-width: 59%;
-    padding-top: 8px;
+  flex: 59%;
+  max-width: 59%;
+  padding-top: 8px;
 }
 
 .desckBuyBtn {
-    flex: 39%;
-    max-width: 39%;
+  flex: 39%;
+  max-width: 39%;
 }
 
 .desciption {
-    text-align: justify;
+  text-align: justify;
 }
 
 .desckalaBody p.title {
-    margin-bottom: 3px;
-
+  margin-bottom: 3px;
 }
 
 .similarKala {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .similarKalaImg {
-    flex: 23%;
-    max-width: 23%;
-    justify-content: center;
-    box-shadow: 0px 1px 5px 1px #960d0d;
-    border-radius: 4px;
-    text-align: center;
-    margin: 4px;
-
+  flex: 23%;
+  max-width: 23%;
+  justify-content: center;
+  box-shadow: 0px 1px 5px 1px #960d0d;
+  border-radius: 4px;
+  text-align: center;
+  margin: 4px;
 }
 
 .similarKalaImg:hover {
-    box-shadow: 0px 2px 10px 1px #515151;
+  box-shadow: 0px 2px 10px 1px #515151;
 }
 
 .similarKalaImage {
-    width: 88%;
+  width: 88%;
 }
 
 .similarImgLink {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .similarKalaName {
-    font-size: 14px;
-    padding: 5px;
-    margin-top: 10px;
+  font-size: 14px;
+  padding: 5px;
+  margin-top: 10px;
 }
 
 .kalaImg {
-    position: relative;
-    margin: 2px;
+  position: relative;
+  margin: 2px;
 }
 
-
-
 .descKalaIcon {
-    top: 5px;
-    right: 5px;
-    position: absolute;
-    font-size: 25px;
+  top: 5px;
+  right: 5px;
+  position: absolute;
+  font-size: 25px;
 }
 
 /* shopping cart styles */
-
 .shoppingCart {
-    display: flex;
-    background-color: #fff;
-    border-radius: 6px;
+  display: flex;
+  background-color: #fff;
+  border-radius: 6px;
 }
 
 .shoppingRight {
-    flex: 69%;
-    max-width: 69%;
-    margin: 2px;
+  flex: 69%;
+  max-width: 69%;
+  margin: 2px;
 }
 
 .shoppingLeft {
-    flex: 29%;
-    max-width: 29%;
-    display: flex;
-    margin: 2px;
-    height: 70px;
-    border-radius: 5px;
-    padding: 8px;
-    background-color: #f5f5f5;
+  flex: 29%;
+  max-width: 29%;
+  display: flex;
+  margin: 2px;
+  height: 70px;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: #f5f5f5;
 }
 
 .shoppingLefFirst {
-    flex: 60%;
-    max-width: 60%;
+  flex: 60%;
+  max-width: 60%;
 }
 
 .shoppingLeftSecond {
-    flex: 38%;
-    max-width: 38%;
-    display: grid !important;
+  flex: 39%;
+  max-width: 39%;
+  display: grid !important;
 }
 
 .shoppingItems {
-    display: flex;
-    flex-wrap: wrap;
-
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .shoppingItem {
@@ -921,13 +937,13 @@ img.topLeft {
     text-align: center;
     margin-top: 10%;
     border-radius: 8px 0px 0px 8px;
-    box-shadow: -3px 0px 2px 3px black;
+    box-shadow: -3px 0px 2px 3px ;
     width: 80%;
 }
 
 .description {
     color: red;
-    text-shadow: 1px 1px black;
+    text-shadow: 1px 1px ;
 }
 
 .contactList {
@@ -1214,10 +1230,15 @@ ul li a.active {
 }
 
 .loginContact {
-    text-decoration: none;
-    color: #000;
-    font-size: 14px;
-    display: block;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  display: block;
+  margin-right: 1rem;
+}
+
+.select-to-logout {
+  padding: 33px !important;
 }
 
 .downloadIcon {
@@ -1293,12 +1314,28 @@ ul li a.active {
     background: #feaeca;
     background: radial-gradient(circle,#efaeca 0,#ff5555 100%);
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     margin: 0 auto;
     position: absolute;
-    top: 8%;
+    top: 6%;
     width: 333px;
     font-size: 14px;
+    min-height: 22vh;
+    padding: 1rem;
+}
+
+.loginDialog::-webkit-scrollbar {
+    width: 12px;
+}
+
+.loginDialog::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.loginDialog::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 
 .round-menu{
@@ -1308,22 +1345,22 @@ ul li a.active {
     justify-content:center;
     min-height: 111px;
     border-radius: 5px;
-    margin: 0 auto;
     border-bottom: 1px solid #edf;
+    margin: 0 auto;
 }
 
 .round-menu-items{
-    flex:24%;
-    width:24%;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+  flex:24%;
+  width:24%;
+  align-items:center;
+  justify-content:space-between;
+  text-align:center;
+  margin: 0 auto;
 }
 
 .round-item {
-    border-radius:50%;
-    text-align:center;
-    text-align:center;
+  border-radius:50%;
+  text-align:center;
 }
 
 .round-menu-info {
@@ -1453,7 +1490,6 @@ ul li a.active {
     z-index: auto;
 }
 
-
 .discount-container{
     display:flex;
     background-color: #ff3154;
@@ -1507,7 +1543,6 @@ ul li a.active {
    padding:5px;
    margin-top: 8px;
 }
-
 
 .remaind-time {
     justify-content: flex-end;
@@ -1584,19 +1619,19 @@ ul li a.active {
 }
 
 #coppied {
-   position:fixed;
-   bottom:10%;
-   left:0%;
-   background-color: #404040;
-   border-radius: 5px;
-   padding:10px;
-   text-align:center;
-   color: red;
-   width: 100%;
+  position:fixed;
+  bottom:10%;
+  left:0%;
+  background-color: #404040;
+  border-radius: 5px;
+  padding:10px;
+  text-align:center;
+  color: red;
+  width: 100%;
 }
 
 .coppied-code {
-    color: white;
+  color: white;
 }
 
 .recievd-prize-des {
@@ -1732,7 +1767,6 @@ ul li a.active {
 
   .use-lucky-well {
     width: 33%;
-
   }
 
   #weely-calendar {
@@ -1754,11 +1788,9 @@ ul li a.active {
     gap: 10px;
  }
 
-
  .week-day {
     text-align: center;
     font-weight: bold;
-
  }
 
  .day-content {
@@ -1777,7 +1809,6 @@ ul li a.active {
 .daily-bottom {
     height: 44px;
 }
-
 
 .day-label {
     margin-top: 5px;
@@ -1822,7 +1853,6 @@ ul li a.active {
     color: #7763fa;
 }
 
-
 /* invite code style */
 
 .my-discount-code {
@@ -1833,24 +1863,10 @@ ul li a.active {
     font-weight:bold;
     margin: 5px;
 }
-#coppied {
-   position:fixed;
-   bottom:10%;
-   left:0;
-   background-color: #404040;
-   border-radius: 5px;
-   padding:10px;
-   text-align:center;
-   display:none;
-}
-
-.coppied-code {
-    color: white;
-}
 
 .copyText {
     font-weight:bold;
-    font-size:18px;
+    font-size:1rem;
 }
 
 .span-for-p1, .span-for-p2{
@@ -1859,7 +1875,71 @@ ul li a.active {
 }
 
 .paragraph-for-invite{
-    text-align: justify;
-    font-size: 1rem;
+  text-align: justify;
+  font-size: 1rem;
 }
 
+#todayInput, .check-day{
+  display: none;
+}
+
+.less-than-amount {
+    font-size: 0.7rem !important;
+}
+
+#fastSendText {
+    font-size: 0.8rem !important;
+}
+
+.date-picker {
+    text-align: center;
+    border-radius: 4px;
+    border: 1px solid #cdd4da;
+    padding: 4px;
+    font-size: 12px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.css-817hxt {
+  width: 230px !important;
+  height: 282px !important;
+}
+
+.css-pw7rye {
+  width: 222px !important;
+  gap: 2px !important;
+  font-size: 11px;
+}
+
+.css-1vevspt {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.css-1n6ujgj {
+ height: 34px !important;
+ padding-right: 6px;
+ padding-left: 6px;
+}
+
+.announced {
+  border: 2px solid red !important;
+}
+
+.errorContainer {
+    color: red !important;
+    font-size: 0.6rem;
+}
+
+#endOfContract, #returnedCheck {
+    display:none;
+}
+
+.cheque-fieldset {
+  border: 1px dashed red !important;
+}
+
+.cheque-label {
+  margin-bottom: 1px !important;
+}

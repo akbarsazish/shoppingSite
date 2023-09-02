@@ -21,6 +21,7 @@ export default function Login(props) {
         password: '',
         error_list: [],
     });
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const hideModal=()=>{
         deviceDialog.close("animalNotChosen");
@@ -42,21 +43,18 @@ export default function Login(props) {
             password: loginInput.password,
             token:localStorage.getItem("isLogedIn")
         }
-        axios.get("http://192.168.10.33:8080/api/loginApi", {params:data}).then(res => {
-            console.log(res);
-
+        axios.get("https://starfoods.ir/api/loginApi", {params:data}).then(res => {
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
-                    console.log(res.data)
                     setUserToken(res.data.token)
                     localStorage.setItem("isLogedIn",res.data.token);
                     setCustomerId(res.data.psn)
                     setDeviceInfo(res.data.loginInfo.map((element,index)=>
                     <>
-                       <tr>
+                       <tr key={index}>
                         <td>{element.platform}</td>
                         <td>{element.browser}</td>
-                        <td><input type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId);}} name="removeDevice"></input></td>
+                        <td><input className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
                        </tr>
                     </>))
                     deviceDialog.showModal();
@@ -89,7 +87,7 @@ export default function Login(props) {
     }
 
     const saveIntroduceCode=()=>{
-        axios.get("http://192.168.10.33:8080/api/addIntroducerCode", {params:{
+        axios.get("https://starfoods.ir/api/addIntroducerCode", {params:{
             introCode:document.getElementById("introducerCode").value,
             customerId:customerId,
             token:userToken
@@ -104,19 +102,20 @@ export default function Login(props) {
         introducerDialog.close();
     }
 
-    const confirmBrowserLogOut=()=>{
-        axios.get("http://192.168.10.33:8080/api/logOutConfirm", {params:{
+    const confirmBrowserLogOut=()=> {
+        axios.get("https://starfoods.ir/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken
         }}).then(res => {
-
             localStorage.setItem("isLogedIn",res.data.token);
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);
             localStorage.setItem("buyAmount",res.data.buyAmount);
-            window.location.href="/home"
+            window.location.href="/home";
+            
         })
     }
+
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
@@ -136,14 +135,14 @@ export default function Login(props) {
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">
                                 <Link to="" className="btn btn-dark btn-sm m-1">
-                                    <img className="downloadImg" src={gPlay} />  <img className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
+                                    <img className="downloadImg" alt="download-img" src={gPlay} />  <img alt="download-img" className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
                                 </Link>
                                 <Link to="" className="btn btn-dark btn-sm">
                                     IOS  <FontAwesomeIcon className="downloadIcon" icon={faApple} /> <br /> دانلود نسخه ویب آپ
                                 </Link>
                             </div>
                             <Link className="loginContact" to="tel://02148286"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faPhone} />  <b>ارتباط :</b>  48286-021 </Link >
-                            <Link className="loginContact" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
+                            <Link className="loginContact mb-2" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
                         </div>
                     </div>
                 </div>
@@ -152,13 +151,13 @@ export default function Login(props) {
              <dialog id="favDialog" className="loginDialog">
                 <table className="table table-sm table-striped table-bordered">
                    <thead>
-                    <tr><th> انتخاب</th><th>مرورگر</th><th> سیستم عامل </th></tr>
+                    <tr> <th> سیستم عامل </th> <th>مرورگر</th> <th> انتخاب</th></tr>
                    </thead>
                    <tbody>{deviceInfo}</tbody>
                 </table>   
              <div>
                <button className="btn btn-sm btn-danger" id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
-                <button className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
+              <button id="continue" disabled={isButtonDisabled} className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
             </div>
             </dialog>
 

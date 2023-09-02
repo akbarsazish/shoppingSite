@@ -20,10 +20,9 @@ export default function DescKala(props) {
     const [buyOption, setBuyOption] = useState(0)
     // fetching data form backend
     const showBuyModal = (goodSn, event) => {
-        fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
-                console.log(data)
                 let modalItems = [];
                 for (let index = 1; index <= data.maxSale; index++) {
                     modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton" onClick={(e) => buySomething(data.amountExist, data.freeExistance, data.zeroExistance, data.costLimit, data.costError, data.amountUnit * index, data.kalaId, data.defaultUnit, e, event)}>{index + ' ' + data.secondUnit + ' معادل ' + ' ' + index * data.amountUnit + ' ' + data.defaultUnit}</button>)
@@ -31,10 +30,10 @@ export default function DescKala(props) {
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
             })
-    }
+         }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -47,7 +46,7 @@ export default function DescKala(props) {
             })
     }
     const requestProduct = (psn, goodSn, event) => {
-        axios.get("http://192.168.10.33:8080/api/addRequestedProduct", {
+        axios.get("https://starfoods.ir/api/addRequestedProduct", {
             params: {
                 customerId: psn,
                 productId: goodSn
@@ -58,7 +57,7 @@ export default function DescKala(props) {
     }
 
     const cancelRequestKala = (psn, goodSn, event) => {
-        axios.get("http://192.168.10.33:8080/api/cancelRequestedProduct", {
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct", {
             params: {
                 psn: psn,
                 gsn: goodSn
@@ -68,24 +67,22 @@ export default function DescKala(props) {
         })
     }
 
-
     useEffect(() => {
         renewDescKala();
     },[goodSn])
 
     const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
             {
-                params: {
-                    kalaId: goodSn,
-                    amountUnit: amountUnit,
-                    orderBYSSn: orderId
-                }
+            params: {
+              kalaId: goodSn,
+              amountUnit: amountUnit,
+              orderBYSSn: orderId
+            }
             }
         ).then((response) => {
             renewDescKala();
         })
-
     }
 
     const buySomething = (amountExist, freeExistance, zeroExistance, costLimit, costError, amountUnit, goodSn, defaultUnit, btnModalEvent, event) => {
@@ -98,7 +95,7 @@ export default function DescKala(props) {
                     alert(costError);
                 }
             }
-            axios.get('http://192.168.10.33:8080/api/buySomething',
+            axios.get('https://starfoods.ir/api/buySomething',
                 {
                     params: {
                         kalaId: goodSn,
@@ -114,7 +111,7 @@ export default function DescKala(props) {
     }
 
     const renewDescKala = () => {
-        axios.get("http://192.168.10.33:8080/api/descKala", {
+        axios.get("https://starfoods.ir/api/descKala", {
             params: {
                 id: goodSn,
                 groupId: groupId,
@@ -168,10 +165,9 @@ export default function DescKala(props) {
             <div className="container marginTop mb-5">
                 <div className="kalaDescibe mt-2 p-2">
                     <div className="kalaImg">
-                        <FontAwesomeIcon   onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite==='YES') ? 'defaultHeartColor' :''} icon={faHeart}  ></FontAwesomeIcon>
+                        <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite===1) ? 'favHeartIcon favoriteHeartIcon' :'favoriteHeartIcon'} icon={faHeart}></FontAwesomeIcon>
                         <img className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
                     </div>
-
                     <div className="kalaDescibtion">
                         <div className="descHeader">
                             <div className="desckTitle">

@@ -18,8 +18,9 @@ export default function ShoppingCart(props) {
     const [changedItems, setChanedItems] = useState(0)
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
+
     useEffect(() => {
-        axios.get("http://192.168.10.33:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -28,19 +29,18 @@ export default function ShoppingCart(props) {
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
             let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                accomulator += parseInt(currentValue.Price / currency)
-                
+                accomulator += parseInt(currentValue.Price / currency);
                 return accomulator;
-            }, 0))
-
-            console.log(data.data.orders)
+            }, 0));
 
             let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 accomulator += parseInt(currentValue.Price1 / currency)
                 
+                console.log(accomulator);
                 return accomulator;
             }, 0))
-            setAllProfit(parseInt(allMoneyProfit)-parseInt(allMoneyNoProfit))
+        
+            setAllProfit(parseInt(allMoneyProfit - allMoneyNoProfit))
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -64,35 +64,35 @@ export default function ShoppingCart(props) {
     }, []);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("http://192.168.10.33:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
-
+        axios.get("https://starfoods.ir/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
             renewCarts();
-
         })
     }
 
     const renewCarts = () => {
-        axios.get("http://192.168.10.33:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
-            setMinSalePriceFactor(data.data.minSalePriceFactor)
-            setCurrencyName(data.data.currencyName)
-            setIntervalBetweenBuys(data.data.intervalBetweenBuys)
-            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
-            setChangePriceState(data.data.changePriceState)
-            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
+            setMinSalePriceFactor(data.data.minSalePriceFactor);
+            setCurrencyName(data.data.currencyName);
+            setIntervalBetweenBuys(data.data.intervalBetweenBuys);
+            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0));
+            setChangePriceState(data.data.changePriceState);
+            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0);
+
             let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
                     accomulator += parseInt(currentValue.Price / currency)
                 }
-                return accomulator;
-            }, 0))
+                    return accomulator;
+            }, 0));
 
             let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
                     accomulator += parseInt(currentValue.Price1 / currency)
                 }
-                return accomulator;
-            }, 0))
+                    return accomulator;
+            }, 0));
+
             setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
@@ -108,16 +108,17 @@ export default function ShoppingCart(props) {
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
             </div>))
+
             setChanedItems(data.data.orders.map((element) => {
                 if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
+                    return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
                 }
             }))
         })
     }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("http://192.168.10.33:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -130,7 +131,7 @@ export default function ShoppingCart(props) {
     }
 
     const updateBuy = (orderId, amountUnit, goodSn) => {
-        axios.get('http://192.168.10.33:8080/api/updateOrderBYS',
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
             {
                 params: {
                     kalaId: goodSn,
@@ -144,7 +145,7 @@ export default function ShoppingCart(props) {
     }
 
     const deleteOrder=(orderBYSSn,goodSn)=>{
-        axios.get('http://192.168.10.33:8080/api/deleteOrderBYS',
+        axios.get('https://starfoods.ir/api/deleteOrderBYS',
         {params:{
             SnOrderBYS: orderBYSSn
         }
@@ -161,14 +162,11 @@ export default function ShoppingCart(props) {
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
-
     if(localStorage.getItem("isLogedIn")){
-        
         return (
             <>
                 <Header />
                 <Sidebar />
-
                 <div className="container marginTop">
                     <h5 className="fw-bold"> سبد خرید : </h5>
                     <div className="shoppingCart p-2">
@@ -184,20 +182,19 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState==0)?
+                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState==0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
-                                    :( allMoney <= minSalePriceFactor?
-                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
+                                    :( (allMoney <= minSalePriceFactor)?
+                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
                                         :
                                         <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
-                                    )
-                                    }
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="yourBenefit">
-                        <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
+                      <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
                     </div>
                 </div>
                 <Footer />
@@ -235,7 +232,6 @@ export default function ShoppingCart(props) {
                         </div>
                     </div>
                 </div>
-
             </>
         )
     }else{

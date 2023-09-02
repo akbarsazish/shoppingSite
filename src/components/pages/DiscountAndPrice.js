@@ -12,7 +12,7 @@ export default function DiscountAndPrice() {
    const [yourPrizes, setPrize] = useState([])
 
    useEffect(() => {
-    axios.get("http://192.168.10.33:8080/api/getTakhfifAndPrize", {
+    axios.get("https://starfoods.ir/api/getTakhfifAndPrize", {
     params: { psn: localStorage.getItem("psn") }
     }).then((response) => {
          setDiscount(response.data);
