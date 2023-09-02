@@ -614,8 +614,7 @@ img.topLeft {
   top: 0.6rem;
   right: 1rem;
   position: absolute;
-  color: #fff !important;
-  border: 1px solid red;
+  font-size: 1.8rem;
 }
 
 .modalBackdrop {
@@ -1931,4 +1930,16 @@ ul li a.active {
 .errorContainer {
     color: red !important;
     font-size: 0.6rem;
+}
+
+#endOfContract, #returnedCheck {
+    display:none;
+}
+
+.cheque-fieldset {
+  border: 1px dashed red !important;
+}
+
+.cheque-label {
+  margin-bottom: 1px !important;
 }

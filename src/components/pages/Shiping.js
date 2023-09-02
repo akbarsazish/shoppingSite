@@ -238,7 +238,7 @@ if(localStorage.getItem("isLogedIn")){
                             <div className="col-lg-5 col-8 pe-0">
                                <div className="date-picker"> 
                                 <DatePicker round="x2" onChange={(d) => console.log(d)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
-                            </div>
+                              </div>
                             </div>
                         </div>
                     </div>

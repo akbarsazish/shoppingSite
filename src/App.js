@@ -32,6 +32,7 @@ import GamerList from "./components/game/GamerList";
 import DiscountAndPrice from "./components/pages/DiscountAndPrice";
 import Lottery from "./components/pages/Lottery";
 import InviteCode from "./components/pages/InviteCode";
+import ChequeRequest from "./components/pages/ChequeRequest"
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -105,6 +106,7 @@ function App() {
         <Route path="lottery"                       element={<Lottery />}> </Route>
         <Route path="inviteCode"                    element={ <InviteCode />}> </Route>
         <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
+        <Route path="chequeRequest"                    element={ <ChequeRequest />}> </Route>
       </Routes>
     </>
   );

@@ -161,6 +161,7 @@ const requestProduct=(psn,goodSn,event)=>{
           if((amountUnit > amountExist) && (freeExistance===0)){
             alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
           }else{
+            alert(amountUnit)
                   if (costLimit > 0) {
                     if (amountUnit >= costLimit) {
                       alert(costError);
