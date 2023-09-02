@@ -28,8 +28,6 @@ function DailyEmtyaz({ presentInfo }) {
     }).then((data)=> {
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0])
-        console.log(data.data.presentInfo[0])
-        console.log(data.data.todayDate.date.split(" ")[0])
     })
 }, [])
 

@@ -30,7 +30,6 @@ export default function DescKala(props) {
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
-                
             })
     }
 
