@@ -1943,3 +1943,8 @@ ul li a.active {
 .cheque-label {
   margin-bottom: 1px !important;
 }
+
+.show-amount {
+    font-size: 12px;
+    color: red;
+}

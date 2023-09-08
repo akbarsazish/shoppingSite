@@ -167,7 +167,7 @@ export default function ChequeRequest(){
                             <div className="mb-1 mt-1">
                                 <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom">  تاریخ اتمام :</label>
                                 {/* <input  type="text" className="form-control form-control-sm" id="contractEndDate" /> */}
-                                <div className="date-picker"> 
+                                <div className="date-picker mt-0"> 
                                     <DatePicker round="x2" onChange={(d) => console.log(d)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
                                 </div>
                                 <input  type="hidden" id="contractEnEnd" name="contractDate" />
@@ -242,7 +242,7 @@ export default function ChequeRequest(){
                             </label>
                             <input type="text" className="form-control form-control-sm" name="reliablityMony" id="requestedAmount" onInput={(e) => requestAmountShowValue(this, 'checkDepositAmountContainer', e.target.value)} required />
                         </div>
-                        <span id="checkDepositAmountContainer"></span>
+                        <span className="show-amount" id="checkDepositAmountContainer"></span>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
@@ -266,7 +266,7 @@ export default function ChequeRequest(){
                                 <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> مبلغ (ریال)  :</label>
                                 <input  type="text" onInput={(e) => requestAmountShowValue(this, 'checkRetAmountContainer', e.target.value)} className="form-control form-control-sm" name="returnedCheckMoney" id="returnedCheckMoney"/>
                             </div>
-                            <span id="checkRetAmountContainer"></span>
+                            <span className="show-amount" id="checkRetAmountContainer"></span>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <div className="mb-1 mt-1">
