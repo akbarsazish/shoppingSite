@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,13 @@ import axios from "axios";
 import { data } from "jquery";
 
 export default function ChequeRequest(){
+    const [showForm,setShowForm]=useState(0);
+    const [acceptState,setAcceptState]=useState("Rejected");
+    useEffect(() => {
+        axios.get("https://starfoods.ir/api/getChequeReqState",{params:{customerId:localStorage.getItem("psn")}}).then((result)=>{
+            setShowForm(result.data.requestState)
+            setAcceptState(result.data.acceptState)
+    })},[]);
 
     function showHiddenDiv() {
         var selectElement = document.getElementById("ownershipStatus");
@@ -108,8 +115,10 @@ export default function ChequeRequest(){
 
     return (
     <>
-    <Header></Header>
-    <Sidebar></Sidebar>
+    <Header />
+    <Sidebar />
+    { showForm == 0 ?
+    <>
      <div className="container marginTop">
         <div className="row my-4">
             <div className="col-lg-12">
@@ -385,7 +394,18 @@ export default function ChequeRequest(){
          </div>
       </div>
     </div>
-    </>
+    </>:
+         <div className="container marginTop">
+         <div className="row my-4">
+             <div className="col-lg-12">
+                {acceptState=="Accepted"?
+                <h1>درخواست خرید چکی شما بعد از بررسی تأیید شد و از این پس مجاز به خریدهای چکی می‌باشید.</h1>
+                :<h2>درخواست خرید چکی شما بعد از بررسی اطلاع داده خواهد شد.</h2>
+                }
+             </div>
+       </div>
+     </div>
+    }</>
 
 )
 }

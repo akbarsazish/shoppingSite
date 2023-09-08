@@ -51,7 +51,7 @@ export default function Shiping(props) {
     useEffect(() => {
         axios.get("https://starfoods.ir/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
         .then((data) => {
-            setTakhfifCase(data.data.takhfifCase/10)
+            setTakhfifCase(data.data.takhfifCase/10);
             setWeekDay1(data.data.date1);
             setWeekDay2(data.data.date2);
             setTomorrowDate(data.data.tomorrowDate);

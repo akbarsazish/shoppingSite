@@ -32,7 +32,8 @@ import GamerList from "./components/game/GamerList";
 import DiscountAndPrice from "./components/pages/DiscountAndPrice";
 import Lottery from "./components/pages/Lottery";
 import InviteCode from "./components/pages/InviteCode";
-import ChequeRequest from "./components/pages/ChequeRequest"
+import ChequeRequest from "./components/pages/ChequeRequest";
+import SuccessPay from "./components/pages/SuccessPay";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -44,7 +45,6 @@ function App() {
       username,
       password
     }).then(response => {
-      console.log(response.data)
       if (response.data.accessToken) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -83,30 +83,31 @@ function App() {
         <Route path='/' element={<Layout />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/grouping' element={<Grouping />} />
-        <Route path='/groupingItems/:id'            element={<GroupingItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/shoppingCart'                 element={<ShoppingCart  cartRef={cartRef} setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}  />} />
-        <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/message'                      element={<Message />} />
-        <Route path='/contact'                      element={<Contact />} />
-        <Route path='/editProfile'                  element={<EditProfile />}> </Route>
-        <Route path='/returnedFactor'               element={<ReturnedFactor/>}> </Route>
-        <Route path='/shipping'                     element={<Shiping/>}></Route>
-        <Route path='/success'                      element={<Success/>}></Route>
-        <Route path='/wallet'                       element={<Wallet/>}></Route>
-        <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
-        <Route path='/orderDetails'                element={<OrderDetails/>}></Route>
-        <Route path='/login'                        element={<Login />}></Route>
-        <Route path="/about"                        element={<About />}> </Route>
-        <Route path="/policy"                       element={<Policy />}> </Route>
-        <Route path="privacy"                       element={<Privacy />}> </Route>
-        <Route path="gamerList"                     element={<GamerList />}> </Route>
-        <Route path="disAndPrice"                   element={<DiscountAndPrice />}> </Route>
-        <Route path="lottery"                       element={<Lottery />}> </Route>
-        <Route path="inviteCode"                    element={ <InviteCode />}> </Route>
-        <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
-        <Route path="chequeRequest"                    element={ <ChequeRequest />}> </Route>
+        <Route path='/groupingItems/:id'            element={<GroupingItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/shoppingCart'                 element={<ShoppingCart   cartRef={cartRef}  setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}/>}/>
+        <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/message'                      element={<Message/>}/>
+        <Route path='/contact'                      element={<Contact/>}/>
+        <Route path='/editProfile'                  element={<EditProfile/>}/> 
+        <Route path='/returnedFactor'               element={<ReturnedFactor/>}/>
+        <Route path='/shipping'                     element={<Shiping/>}/>
+        <Route path='/success'                      element={<Success/>}/>
+        <Route path='/wallet'                       element={<Wallet/>}/>
+        <Route path='/factorDetails'                element={<FactoreDetails/>}/>
+        <Route path='/orderDetails'                 element={<OrderDetails/>}/>
+        <Route path='/login'                        element={<Login/>}/>
+        <Route path="/about"                        element={<About/>}/>
+        <Route path="/policy"                       element={<Policy/>}/>
+        <Route path="privacy"                       element={<Privacy/>}/>
+        <Route path="gamerList"                     element={<GamerList/>}/>
+        <Route path="disAndPrice"                   element={<DiscountAndPrice/>}/>
+        <Route path="lottery"                       element={<Lottery/>}/>
+        <Route path="inviteCode"                    element={<InviteCode/>}/>
+        <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
+        <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
+        <Route path="successpayment/:test"                 element={<SuccessPay/>}/>
       </Routes>
     </>
   );

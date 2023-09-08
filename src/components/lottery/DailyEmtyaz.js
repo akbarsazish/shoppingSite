@@ -20,8 +20,10 @@ function DailyEmtyaz() {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
+      console.log(data.data.presentInfo)
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
+        
     })
 }, []);
 
@@ -85,6 +87,7 @@ function DailyEmtyaz() {
                   <input className="form-check-input check-day"  type="checkbox" id={"checkDay"+todayClass} />
                 </div>
             </div>
+            
             <p className="day-label">
                 {i==0?(i==0 && starfoodStarInfo.First == today?'امروز':'روز'+(i+1)):''}
                 {i==1?(i==1 && starfoodStarInfo.Second == today ?'امروز':'روز'+(i+1)):''}
@@ -95,13 +98,13 @@ function DailyEmtyaz() {
                 {i==6?(i==6 && starfoodStarInfo.Seventh == today ?'امروز':'روز'+(i+1)):''}
             </p>
 
-                {i==0?(i==0 && starfoodStarInfo.First == today ? <input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" /> :''):''}
-                {i==1?(i==1 && starfoodStarInfo.Second == today ? <input type="text" value={"SecondPr_"+starfoodStarInfo.SecondB} id="todayInput" /> :''):''}
-                {i==2?(i==2 && starfoodStarInfo.Third == today ? <input type="text" value={"ThirdPr_"+starfoodStarInfo.ThirdB} id="todayInput" /> :''):''}
-                {i==3?(i==3 && starfoodStarInfo.Fourth == today ? <input type="text" value={"FourthPr_"+starfoodStarInfo.FourthB} id="todayInput" /> :''):''}
-                {i==4?(i==4 && starfoodStarInfo.Fifth == today  ? <input type="text" value={"FifthPr_"+starfoodStarInfo.FifthB} id="todayInput" /> :''):''}
-                {i==5?(i==5 && starfoodStarInfo.Sixth == today ? <input type="text" value={"SixthPr_"+starfoodStarInfo.SixthB} id="todayInput" /> :''):''}
-                {i==6?(i==6 && starfoodStarInfo.Seventh == today ? <input type="text" value={"SeventhPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
+              {i==0?(i==0 && starfoodStarInfo.First == today ? <input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" /> :''):''}
+              {i==1?(i==1 && starfoodStarInfo.Second == today ? <input type="text" value={"SecondPr_"+starfoodStarInfo.SecondB} id="todayInput" /> :''):''}
+              {i==2?(i==2 && starfoodStarInfo.Third == today ? <input type="text" value={"ThirdPr_"+starfoodStarInfo.ThirdB} id="todayInput" /> :''):''}
+              {i==3?(i==3 && starfoodStarInfo.Fourth == today ? <input type="text" value={"FourthPr_"+starfoodStarInfo.FourthB} id="todayInput" /> :''):''}
+              {i==4?(i==4 && starfoodStarInfo.Fifth == today  ? <input type="text" value={"FifthPr_"+starfoodStarInfo.FifthB} id="todayInput" /> :''):''}
+              {i==5?(i==5 && starfoodStarInfo.Sixth == today ? <input type="text" value={"SixthPr_"+starfoodStarInfo.SixthB} id="todayInput" /> :''):''}
+              {i==6?(i==6 && starfoodStarInfo.Seventh == today ? <input type="text" value={"SeventhPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
           </div>
         );
       })}

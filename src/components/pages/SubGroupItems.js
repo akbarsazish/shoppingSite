@@ -21,10 +21,10 @@ export default function GroupingItems(props) {
     fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId="+mainId)
     .then(response=>response.json())
     .then((groups) => {
-        setSubGroups(groups.map((element,index)=><SwiperSlide key={index} > 
+        setSubGroups(groups.map((element,index)=><SwiperSlide key={index}> 
         <Link to={"/subGroupItems/"+element.selfGroupId+"/"+element.id} className="topSliderLink">
             <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/"+element.id+".jpg"} alt="slider"/>
-            <p className="topSliderTile"> {element.title} </p>
+            <p className="topSliderTile"> {element.title}</p>
         </Link>
     </SwiperSlide>))
     })
