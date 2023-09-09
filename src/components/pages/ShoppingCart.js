@@ -28,19 +28,36 @@ export default function ShoppingCart(props) {
             setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-            let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                accomulator += parseInt(currentValue.Price / currency);
-                return accomulator;
-            }, 0));
-
-            let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                accomulator += parseInt(currentValue.Price1 / currency)
-                
-                console.log(accomulator);
-                return accomulator;
-            }, 0))
         
-            setAllProfit(parseInt(allMoneyProfit - allMoneyNoProfit))
+
+            let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
+                const price1 = parseInt(currentValue.Price1);
+                if (!isNaN(price1)) {
+                  accumulator1 += price1 / parseInt(currency);
+                }
+                return accumulator1;
+              }, 0);
+
+              
+              let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
+                  const price = parseInt(currentValue.Price);
+                  if (!isNaN(price)) {
+                      accumulator += price / parseInt(currency);
+                    }
+                    return accumulator;
+                }, 0);
+                
+                console.log("allMoneyNoProfit:", allMoneyNoProfit);
+                console.log("allMoneyProfit:", allMoneyProfit);
+              
+              if (!isNaN(allMoneyProfit) && !isNaN(allMoneyNoProfit)) {
+                setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit));
+              } else {
+                console.error("Invalid data for profit calculation");
+              }
+              
+              
+
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -71,6 +88,7 @@ export default function ShoppingCart(props) {
 
     const renewCarts = () => {
         axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+            console.log(data.data.orders)
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor);
             setCurrencyName(data.data.currencyName);
@@ -79,6 +97,7 @@ export default function ShoppingCart(props) {
             setChangePriceState(data.data.changePriceState);
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0);
 
+            
             let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
                 if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
                     accomulator += parseInt(currentValue.Price / currency)
@@ -93,7 +112,8 @@ export default function ShoppingCart(props) {
                     return accomulator;
             }, 0));
 
-            setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
+            setAllProfit(parseInt(allMoneyProfit)-parseInt(allMoneyNoProfit))
+
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />

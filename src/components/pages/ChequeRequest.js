@@ -72,16 +72,59 @@ export default function ChequeRequest(){
     return formattedNumber;
   }
 
-  const submitRequestCheque=()=>{
-    let formdata={
+
+ 
+    const [formData, setFormData] = useState({
+        name : '',
+        customerId : '',
+        milliCode : '',
+        PhoneNumber : '',
+        milkState : '',
+        bankAccNum : '',
+        bankName : '',
+        branchName : '',
+        contractDate : '',
+        malikName : '',
+        depositAmount : '',
+        malikPhone : '',
+        homeAddress : '',
+        jawazState : '',
+        workExperience : '',
+        lastAddress : '',
+        reliablityMony : '',
+        returnedCheckState : 'خیر',
+        returnedCheckMoney : '',
+        returnedCheckCause : '',
+        zaminName : '',
+        zaminAddress : '',
+        zaminPhone : '',
+        zaminJob : '',
+        lastSuppName : '',
+        lastSuppPhone : '',
+        lastSuppAddress : '',
+    });
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const queryString = Object.keys(formData)
+        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(formData[key])}`)
+        .join('&');
+  
+   
+      axios.get(`https://starfoods.ir/api/addRequestCheck`,{params:{
         name : document.getElementById("name").value,
         customerId : document.getElementById("customerId").value,
         milliCode : document.getElementById("milliCode").value,
-        phone : document.getElementById("phone").value,
+        PhoneNumber : document.getElementById("phone").value,
         milkState : document.getElementById("ownershipStatus").value,
         bankAccNum : document.getElementById("accountNo").value,
         bankName : document.getElementById("bankName").value,
-        bankBrandName : document.getElementById("branchName").value,
+        branchName : document.getElementById("branchName").value,
         contractDate : document.getElementById("contractEnEnd").value,
         malikName : document.getElementById("malikName").value,
         depositAmount : document.getElementById("depositAmount").value,
@@ -100,61 +143,58 @@ export default function ChequeRequest(){
         zaminJob : document.getElementById("zaminJob").value,
         lastSuppName : document.getElementById("lastSuppName").value,
         lastSuppPhone : document.getElementById("lastSuppPhone").value,
-        lastSuppAddress : document.getElementById("lastSuppAddress").value,
-        accountNo : document.getElementById("accountNo").value};
-    axios.post("https://starfoods.ir/api/addRequestCheck",{
-        method:"POST",
-        headers:{
-            Accept:"application/json",
-            'Content-Type':"application/json"
-        },
-        body:JSON.stringify(formdata)}).then((result)=>{
-        alert(result);
-    });
-  }
+        lastSuppAddress : document.getElementById("lastSuppAddress").value
+      }})
+        .then((response) => {
+          console.log('Response:', response.data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
 
     return (
     <>
-    <Header />
-    <Sidebar />
-    { showForm == 0 ?
+     <Header />
+     <Sidebar />
+
+     { showForm == 0 ?
     <>
      <div className="container marginTop">
         <div className="row my-4">
             <div className="col-lg-12">
             <fieldset className="cheque-fieldset rounded p-2">
             <legend className="float-none w-auto legendLabel p-2 m-1 fw-bold"> در خواست خرید چکی  </legend>
-              <form action="{{url('/addRequestCheck')}}" method="post" id="addRequestCheckForm" className="p-3">
-                
+              <form onSubmit={handleSubmit} id="addRequestCheckForm" className="p-3">
                 <div className="row ">
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="roleNo" className="form-label check-request-label cheque-label"  data-toggle="tooltip" data-placement="bottom"> نام و نام خانوادگی :</label>
-                            <input type="text" className="form-control form-control-sm" id="name"  name="name" required />
-                            <input type="hidden"  id="customerId" name="customerId" value={localStorage.getItem("psn")} />
+                            <label htmlFor="roleNo" className="form-label check-request-label cheque-label" > نام و نام خانوادگی :</label>
+                            <input type="text" className="form-control form-control-sm" id="name" name="name" onChange={handleChange} value={formData.name} required  />
+                            <input type="hidden" id="customerId" name="customerId" onChange={handleChange} value={localStorage.getItem("psn")} />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="postalCode"  className="form-label check-request-label cheque-label"  data-toggle="tooltip" data-placement="bottom" >کد ملی :</label>
-                            <input  type="number"  className="form-control form-control-sm" id="milliCode"  name="milliCode" required />
+                            <label htmlFor="postalCode" className="form-label check-request-label cheque-label">کد ملی :</label>
+                            <input type="number" className="form-control form-control-sm" id="milliCode" name="milliCode" onChange={handleChange} value={formData.milliCode} required />
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> شماره تماس   :</label>
-                            <input  type="number"  className="form-control form-control-sm" id="phone" name="phone" required />
+                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> شماره تماس   :</label>
+                            <input type="number" className="form-control form-control-sm" id="phone" name="PhoneNumber" onChange={handleChange} value={formData.PhoneNumber} required />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="address " className="form-label check-request-label cheque-label"> وضعیت ملک :</label>
-                            <select className="form-select form-select-sm" id="ownershipStatus" name="milkState" onChange={()=>showHiddenDiv()}>
-                                <option value="sarqufli"> سر قفلی </option>
-                                <option value="malik"> صاحب ملک </option>
-                                <option value="mostager"> مستاجر </option>
+                            <label htmlFor="address" className="form-label check-request-label cheque-label"> وضعیت ملک :</label>
+                            <select className="form-select form-select-sm" id="ownershipStatus" name="milkState" value={formData.milkState} onChange={(e) => {showHiddenDiv(); handleChange(e);}}>
+                              <option value="sarqufli"> سر قفلی </option>
+                              <option value="malik"> صاحب ملک </option>
+                              <option value="mostager"> مستاجر </option>
                             </select>
                         </div>
                     </div>
@@ -165,31 +205,31 @@ export default function ChequeRequest(){
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom">  تاریخ اتمام :</label>
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label">  تاریخ اتمام :</label>
                                 {/* <input  type="text" className="form-control form-control-sm" id="contractEndDate" /> */}
                                 <div className="date-picker mt-0"> 
-                                    <DatePicker round="x2" onChange={(d) => console.log(d)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
+                                    <DatePicker round="x2" onChange={handleChange} name="contractDate" value={formData.contractDate} inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
                                 </div>
-                                <input  type="hidden" id="contractEnEnd" name="contractDate" />
+                                <input type="hidden" id="contractEnEnd" name="contractDate" />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> صاحب ملک  :</label>
-                                <input  type="text" className="form-control form-control-sm" id="malikName" name="malikName" />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> صاحب ملک  :</label>
+                                <input type="text" className="form-control form-control-sm" id="malikName" name="malikName" onChange={handleChange} value={formData.malikName} />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> مبلغ ودیعه (ریال) :</label>
-                                <input  type="text"  onInput={(e) => requestAmountShowValue(this, 'checkAmountContainer', e.target.value)} id="depositAmount" className="form-control form-control-sm" name="depositAmount" />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> مبلغ ودیعه (ریال) :</label>
+                                <input type="text" onInput={(e) => requestAmountShowValue(this, 'checkAmountContainer', e.target.value)} onChange={handleChange} id="depositAmount" className="form-control form-control-sm" name="depositAmount" value={formData.depositAmount} />
                             </div>
-                            <span id="checkAmountContainer"> </span>
+                            <span className="show-amount" id="checkAmountContainer"> </span>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> شماره تماس  :</label>
-                                <input  type="number"  className="form-control form-control-sm" name="malikPhone" id="malikPhone"/>
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> شماره تماس  :</label>
+                                <input type="number" className="form-control form-control-sm" onChange={handleChange} name="malikPhone" value={formData.malikPhone} id="malikPhone" />
                             </div>
                         </div>
                     </div>
@@ -198,14 +238,14 @@ export default function ChequeRequest(){
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> آدرس منزل :</label>
-                            <input  type="text" className="form-control form-control-sm" name="homeAddress" id="homeAddress" required />
+                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> آدرس منزل :</label>
+                            <input type="text" className="form-control form-control-sm" name="homeAddress" onChange={handleChange} value={formData.homeAddress} id="homeAddress" required />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
                             <label htmlFor="address" className="form-label check-request-label cheque-label">  جواز  :</label>
-                            <select className="form-select form-select-sm" name="jawazState" aria-label="form-select-sm example" id="jawazState">
+                            <select className="form-select form-select-sm" name="jawazState" value={formData.jawazState} onChange={handleChange} aria-label="form-select-sm example" id="jawazState">
                                 <option value="yes"> دارم </option>
                                 <option value="no" > ندارم </option>
                                 <option value="underWork"> در دست اقدام </option>
@@ -217,8 +257,8 @@ export default function ChequeRequest(){
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> چند سال است که در این حوزه فعال هستید؟ </label>
-                            <select className="form-select form-select-sm" name="workExperience" id="workExperience" required>
+                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> چند سال است که در این حوزه فعال هستید؟ </label>
+                            <select className="form-select form-select-sm" name="workExperience" value={formData.workExperience} onChange={handleChange} id="workExperience" required>
                                 <option value="یک تا سه سال "> یک تا سه سال </option>
                                 <option value="سه تا شش سال "> سه تا شش سال  </option>
                                 <option value="پنج تا ده سال"> پنج تا ده سال  </option>
@@ -228,8 +268,8 @@ export default function ChequeRequest(){
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> مکان قبلی فعالیت :</label>
-                            <input  type="text" className="form-control form-control-sm" id="lastAddress"  name="lastAddress" />
+                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> مکان قبلی فعالیت :</label>
+                            <input type="text" className="form-control form-control-sm" id="lastAddress" name="lastAddress" onChange={handleChange} value={formData.lastAddress} />
                         </div>
                     </div>
                 </div> 
@@ -237,17 +277,17 @@ export default function ChequeRequest(){
                 <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom">
+                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label">
                             مبلغ در خواستی اعتبار (ریال) :
                             </label>
-                            <input type="text" className="form-control form-control-sm" name="reliablityMony" id="requestedAmount" onInput={(e) => requestAmountShowValue(this, 'checkDepositAmountContainer', e.target.value)} required />
+                            <input type="text" className="form-control form-control-sm" name="reliablityMony" value={formData.reliablityMony} id="requestedAmount" onChange={handleChange} onInput={(e) => requestAmountShowValue(this, 'checkDepositAmountContainer', e.target.value)} required />
                         </div>
                         <span className="show-amount" id="checkDepositAmountContainer"></span>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
                             <label htmlFor="address" className="form-label check-request-label cheque-label"> آیا هنوز تجربه چک برگشتی داشته‌اید؟ </label>
-                            <select className="form-select form-select-sm" name="returnedCheckState" onChange={()=>showHiddenDiv()} id="returnCheckSelect">
+                            <select className="form-select form-select-sm" name="returnedCheckState" value={formData.returnedCheckState} onChange={()=>showHiddenDiv()} id="returnCheckSelect">
                                 <option value="no"> خیر </option>
                                 <option value="yes"> بله </option>
                             </select>
@@ -263,15 +303,15 @@ export default function ChequeRequest(){
                     <div className="row" >
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> مبلغ (ریال)  :</label>
-                                <input  type="text" onInput={(e) => requestAmountShowValue(this, 'checkRetAmountContainer', e.target.value)} className="form-control form-control-sm" name="returnedCheckMoney" id="returnedCheckMoney"/>
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> مبلغ (ریال)  :</label>
+                                <input type="text" onChange={handleChange} onInput={(e) => requestAmountShowValue(this, 'checkRetAmountContainer', e.target.value)} className="form-control form-control-sm" name="returnedCheckMoney" value={formData.returnedCheckMoney} id="returnedCheckMoney"/>
                             </div>
                             <span className="show-amount" id="checkRetAmountContainer"></span>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <div className="mb-1 mt-1">
                                 <label htmlFor="address" className="form-label check-request-label cheque-label"> علت برگشت :</label>
-                                <textarea className="form-control" name="returnedCheckCause" id="returnedCheckCause" rows="1"></textarea>
+                                <textarea className="form-control" name="returnedCheckCause" onChange={handleChange} value={formData.returnedCheckCause} id="returnedCheckCause" rows="1"></textarea>
                             </div>
                         </div>
                     </div> 
@@ -280,8 +320,8 @@ export default function ChequeRequest(){
                 <div className="row">
                     <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className="mb-1 mt-1">
-                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> اسم بانک :</label>
-                            <select className="form-select form-select-sm" name="bankName" onchange="showHiddenDiv()" id="bankName">
+                            <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" > اسم بانک :</label>
+                            <select className="form-select form-select-sm" name="bankName" onChange={handleChange} value={formData.bankName} id="bankName">
                                 <option value="بانک ملی">بانک ملی </option>
                                 <option value="بانک تجارت"> بانک تجارت </option>
                                 <option value=" بانک کشاورزی">  بانک کشاورزی </option>
@@ -324,13 +364,13 @@ export default function ChequeRequest(){
                     <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className="mb-1 mt-1">
                             <label htmlFor="address" className="form-label check-request-label cheque-label"> اسم شعبه - کد:</label>
-                            <input  type="text" className="form-control form-control-sm" name="branchName" id="branchName" required />
+                            <input type="text" className="form-control form-control-sm" name="branchName" onChange={handleChange} value={formData.branchName} id="branchName" required />
                         </div>
                     </div>
                     <div className="col-lg-4 col-md-4 col-sm-12">
                         <div className="mb-1 mt-1">
                             <label htmlFor="address" className="form-label check-request-label cheque-label"> شماره حساب: </label>
-                            <input  type="number" id="accountNo" className="form-control form-control-sm" name="accountNo" required />
+                            <input type="number" id="accountNo" className="form-control form-control-sm" name="bankAccNum" onChange={handleChange} value={formData.bankAccNum} required />
                         </div>
                     </div>
                 </div>
@@ -340,55 +380,55 @@ export default function ChequeRequest(){
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> نام   :</label>
-                                <input  type="text" className="form-control form-control-sm" id="zaminName"  name="zaminName" required />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> نام   :</label>
+                                <input type="text" className="form-control form-control-sm" id="zaminName" name="zaminName" onChange={handleChange} value={formData.zaminName} required />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> آدرس   :</label>
-                                <input  type="text"  className="form-control form-control-sm" id="zaminAddress"  name="zaminAddress" required />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> آدرس   :</label>
+                                <input type="text" className="form-control form-control-sm" id="zaminAddress" name="zaminAddress" onChange={handleChange} value={formData.zaminAddress} required />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> تلفن  :</label>
-                                <input  type="number" id="zaminPhone" className="form-control form-control-sm phoneNoLimit"  name="zaminPhone" required />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> تلفن  :</label>
+                                <input type="number" id="zaminPhone" className="form-control form-control-sm phoneNoLimit"  name="zaminPhone" onChange={handleChange} value={formData.zaminPhone} required />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> شغل :</label>
-                                <input  type="text" className="form-control form-control-sm" id="zaminJob" name="zaminJob" required />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> شغل :</label>
+                                <input type="text" className="form-control form-control-sm" id="zaminJob" name="zaminJob" onChange={handleChange} value={formData.zaminJob} required />
                             </div>
                         </div>
                     </div>
                 </fieldset>
 
-                <fieldset className="border rounded p-1" style={{border:"1px dashed red !important;"}}>
+                <fieldset className="border rounded p-1" style={{border:"1px dashed red !important"}}>
                 <legend  className="float-none w-auto legendLabel p-0 mb-0" style={{fontSize:"14px", fontWeight:"bold", color:"red"}}> تامین کننده قبلی، کالاهای مورد نیاز خویش  را نام ببرید  </legend>
                     <div className="row">
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> نام   :</label>
-                                <input  type="text" id="lastSuppName"  className="form-control form-control-sm"  name="lastSuppName" />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> نام   :</label>
+                                <input type="text" id="lastSuppName" className="form-control form-control-sm" name="lastSuppName" onChange={handleChange} value={formData.lastSuppName} />
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> تلفن    :</label>
-                                <input  type="text" id="lastSuppPhone"   className="form-control form-control-sm phoneNoLimit" name="lastSuppPhone" />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> تلفن    :</label>
+                                <input type="text" id="lastSuppPhone" className="form-control form-control-sm phoneNoLimit" name="lastSuppPhone" onChange={handleChange} value={formData.lastSuppPhone} />
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-6">
                             <div className="mb-1 mt-1">
-                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label" data-toggle="tooltip" data-placement="bottom"> آدرس  :</label>
-                                <input  type="text" className="form-control form-control-sm" id="lastSuppAddress" name="lastSuppAddress" />
+                                <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label"> آدرس  :</label>
+                                <input type="text" className="form-control form-control-sm" id="lastSuppAddress" name="lastSuppAddress" onChange={handleChange} value={formData.lastSuppAddress} />
                             </div>
                         </div>
                     </div>
                 </fieldset>
-                <button type="button" onClick={()=>submitRequestCheque()} className="btn btn-sm btn-danger m-2"> ثبت <FontAwesomeIcon icon={faCheckCircle} /> </button>
+                <button type="submit" className="btn btn-sm btn-danger m-2"> ثبت <FontAwesomeIcon icon={faCheckCircle} /> </button>
              </form>     
             </fieldset>
          </div>
@@ -406,6 +446,5 @@ export default function ChequeRequest(){
        </div>
      </div>
     }</>
-
 )
 }

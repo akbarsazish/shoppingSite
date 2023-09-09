@@ -151,10 +151,10 @@ export default function Login(props) {
              <dialog id="favDialog" className="loginDialog">
                 <table className="table table-sm table-striped table-bordered">
                    <thead>
-                    <tr> <th> سیستم عامل </th> <th>مرورگر</th> <th> انتخاب</th></tr>
+                    <tr><th> سیستم عامل </th><th>مرورگر</th><th> انتخاب</th></tr>
                    </thead>
                    <tbody>{deviceInfo}</tbody>
-                </table>   
+                </table>
              <div>
                <button className="btn btn-sm btn-danger" id="cancel" onClick={()=>hideModal()} style={{marginLeft:"10px"}} type="reset">خیر</button>
               <button id="continue" disabled={isButtonDisabled} className="btn btn-sm btn-success" onClick={()=>confirmBrowserLogOut()}>ادامه</button>
