@@ -107,7 +107,25 @@ function App() {
         <Route path="inviteCode"                    element={<InviteCode/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
-        <Route path="successpayment/:test"                 element={<SuccessPay/>}/>
+        {/* <Route path="successPayApi"    element={<SuccessPay/>}/> */}
+        {/* <Route
+          path="/successPayApi"
+          params={{
+            tref: "638298687031463098",
+            iN: "111154",
+            iD: "2023/09/09%2015:05:02",
+          }}
+          element={<SuccessPay/>}
+        /> */}
+        <Route
+          path="/successPayApi"
+          params={param => ({
+            tref: param.tref,
+            iN: param.iN,
+            iD: param.iD,
+          })}
+          element={<SuccessPay/>}
+        />
       </Routes>
     </>
   );

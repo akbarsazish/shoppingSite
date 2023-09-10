@@ -46,6 +46,9 @@ export default function ShoppingCart(props) {
                     return accumulator;
                 }, 0);
 
+                console.log("profit", allMoneyProfit);
+                console.log("no profit", allMoneyNoProfit);
+
                 if (allMoneyProfit > allMoneyNoProfit) {
                     setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
                 } else {

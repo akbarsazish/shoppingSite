@@ -14,25 +14,22 @@ export default function SuccessPay() {
     <td> </td>
     <td> </td></tr>]);
     const[currenyInfo,setCurrencyInfo]=useState({currncy:1,currencyName:"ریال"});
-    const[payInfo,setPaymentInfo]=useState(<tr>
-                                                <td> 1 </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                                <td> </td>
-                                            </tr>);
+    const[payInfo,setPaymentInfo]=useState(
+        <tr>
+            <td> 1 </td>                          
+            <td> 1 </td>                          
+            <td> 1 </td>                          
+            <td> 1 </td>                          
+            <td> 1 </td>                          
+            <td> 1 </td>                          
+            <td> 1 </td>                          
+        </tr>
+    );
     const[factorNo,setFactorNo]=useState(0);
     const[allProfit,setAllProfit]=useState(0);
 
-    //
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/sucessPayApi",{params:{psn:localStorage.getItem("psn"),tref:tref,iN:iN,iD:iD}})
+        axios.get("https://starfoods.ir/api/successPayApi",{params:{psn:localStorage.getItem("psn"),tref:tref,iN:iN,iD:iD}})
             .then((response)=>{
                 if(response.data.result === "OK"){
                 setAllProfit(response.data.profit);
@@ -42,19 +39,20 @@ export default function SuccessPay() {
                 <td>{element.PackAmount/1+' '+element.secondUnit+' معادل '+element.Amount/1+' '+element.firstUnit}</td>
                 <td>{element.Fi/response.data.currncy+' '+response.data.currencyName}</td>
                 <td>{element.Price/response.data.currncy+' '+response.data.currencyName}</td></tr>}));
-                setPaymentInfo(<tr>
-                                    <td> 1 </td>
-                                    <td> {response.data.payResults.TraceNumber}</td>
-                                    <td> {response.data.payResults.ReferenceNumber}</td>
-                                    <td> {response.data.payResultsTransactionDate}</td>
-                                    <td> {response.data.payResults.TransactionReferenceID}</td>
-                                    <td> {response.data.payResults.InvoiceNumber}</td>
-                                    <td> {response.data.payResultsInvoiceDate}</td>
-                                    <td> {response.data.payResults.Amount}</td>
-                                    <td> {response.data.payResults.TrxMaskedCardNumber}</td>
-                                    <td> {response.data.payResults.IsSuccess}</td>
-                                    <td> {response.data.payResults.Message}</td>
-                                </tr>);
+                setPaymentInfo(
+                  <tr>
+                    <td> 1 </td>
+                    <td> {response.data.payResults.TraceNumber}</td>
+                    <td> {response.data.payResults.ReferenceNumber}</td>
+                    <td> {response.data.payResultsTransactionDate}</td>
+                    <td> {response.data.payResults.TransactionReferenceID}</td>
+                    <td> {response.data.payResults.InvoiceNumber}</td>
+                    <td> {response.data.payResultsInvoiceDate}</td>
+                    <td> {response.data.payResults.Amount}</td>
+                    <td> {response.data.payResults.TrxMaskedCardNumber}</td>
+                    <td> {response.data.payResults.IsSuccess}</td>
+                    <td> {response.data.payResults.Message}</td>
+                </tr>);
                 }
                 setPaymentStat(response.data.result)
             });
@@ -84,12 +82,12 @@ export default function SuccessPay() {
     <div className="row">
         <div className="col-lg-3 col-md-3 col-sm-12">
             <div className="card text-dark p-3">
-                <h5>شماره فاکتور :  {factorNo} </h5>
-                <h5 className="">سود شما از این خرید : {allProfit} {currenyInfo.currencyName} </h5>
+                <h6>شماره فاکتور :  {factorNo} </h6>
+                <h6 className="">سود شما از این خرید : {allProfit} {currenyInfo.currencyName} </h6>
 
                 <div className="c-checkout-details__row">
                     <div className="c-checkout-details__col--text">
-                       <a  className="btn btn-info" href="https://star.starfoods.ir/home">  <i className="fa fa-back">  </i>  بازگشت به صفحه اصلی</a>
+                       <a  className="btn btn-danger btn-sm" href="https://star.starfoods.ir/home">  <i className="fa fa-back">  </i>  بازگشت به صفحه اصلی</a>
                     </div>
                </div>
             </div>
@@ -107,7 +105,6 @@ export default function SuccessPay() {
                             </tr>
                     </thead>
                     <tbody>
-                    
                     <tr>
                         {factorBYS}
                     </tr>
@@ -117,35 +114,33 @@ export default function SuccessPay() {
         </div>
     </div>
 	<div className="row">
-		            <table className='table table-bordered table-striped'>
-                                    <thead>
-                                    <tr>
-                                        <th >ردیف</th>
-                                        <th >شماره ارجاع</th>
-                                        <th > تاریخ تراکنش </th>
-                                        <th > شماره صورتحساب </th>
-                                        <th> تاریخ صورتحساب </th>
-                                        <th > مبلغ </th>
-										<th > شماره کارت با ماسک</th>
-										<th > وضعیت </th>
-										<th > پیام </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody className="select-highlight" id="customerListBody1">
-									
-                                        <tr>
-											{payInfo}
-                                        </tr>
-                                    </tbody>
-                                </table>
+        <table className='table table-bordered table-striped table-sm'>
+            <thead>
+            <tr>
+                <th >ردیف</th>
+                <th >شماره ارجاع</th>
+                <th > تاریخ تراکنش </th>
+                <th > شماره صورتحساب </th>
+                <th> تاریخ صورتحساب </th>
+                <th > مبلغ </th>
+                <th > شماره کارت با ماسک</th>
+                <th > وضعیت </th>
+                <th > پیام </th>
+            </tr>
+            </thead>
+            <tbody className="select-highlight" id="customerListBody1">
+                <tr>
+                    {payInfo}
+                </tr>
+            </tbody>
+        </table>
 	</div>
 </div>
-
-                </>:
-                (paymentRespond =="Not Varified"?<h2>not Varified</h2>:(paymentRespond =="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}
-            </div>
-        </div>
+        </>:
+        (paymentRespond =="Not Varified"?<h2>not Varified</h2>:(paymentRespond =="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}
     </div>
-    <Footer/>
-    </>)
+  </div>
+</div>
+<Footer/>
+</>)
 }
