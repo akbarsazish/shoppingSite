@@ -50,18 +50,23 @@ export default function SuccessPay() {
             ,takhfif:localStorage.getItem("takhfif")
             ,takhfifCode:localStorage.getItem("takhfifCode")
             ,receviedAddress:localStorage.getItem("receviedAddress")
+            ,allMoney:localStorage.getItem("allMoney")
         }})
             .then((response)=>{
-                console.log(response);
-                if(response.data.result === "OK"){
+                if(response.data.result == "OK"){
+                    localStorage.setItem("recivedTime","");
+                    localStorage.setItem("takhfif",0);
+                    localStorage.setItem("takhfifCode","");
+                    localStorage.setItem("receviedAddress","");
                     localStorage.setItem('buyAmount',0);
+                    setFactorNo(response.data.factorNo)
                     setAllProfit(response.data.profit);
                     setCurrencyInfo({currencyName:response.data.currencyName,currncy:response.data.currncy});
                     setFactorBYS(response.data.factorBYS.map((element,index)=>{return <tr><td>{index+1}</td>
                     <td>{element.GoodName}</td>
                     <td>{element.PackAmount/1+' '+element.secondUnit+' معادل '+element.Amount/1+' '+element.firstUnit}</td>
-                    <td>{element.Fi/response.data.currncy+' '+response.data.currencyName}</td>
-                    <td>{element.Price/response.data.currncy+' '+response.data.currencyName}</td></tr>}));
+                    <td>{parseInt(element.Fi/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td>
+                    <td>{parseInt(element.Price/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td></tr>}));
                     setPaymentInfo(
                         <tr>
                             <td> 1 </td>
@@ -87,7 +92,7 @@ export default function SuccessPay() {
     <div className="container  marginTop text-center rounded">
         <div className="row">
             <div className="col-sm-12">
-                {paymentRespond==="Not Connected"? <>
+                {paymentRespond=="OK"? <>
                 <ul class="c-checkout-steps d-none">
                     <li class="is-active is-completed">
                         <div className="c-checkout-steps__item c-checkout-steps__item--summary" data-title="اطلاعات ارسال"></div>
@@ -128,9 +133,7 @@ export default function SuccessPay() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
                                 {factorBYS}
-                                </tr>
                             </tbody>
                         </table>
                       </div>
@@ -153,7 +156,7 @@ export default function SuccessPay() {
                     </thead>
                     <tbody className="select-highlight" id="customerListBody1">
                         <tr>
-                            {payInfo}
+                          {payInfo}
                         </tr>
                     </tbody>
                 </table>

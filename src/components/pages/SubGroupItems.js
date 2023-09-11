@@ -103,10 +103,10 @@ const requestProduct=(psn,goodSn,event)=>{
                             <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
                             :(element.Amount>0 || element.freeExistance>0 
                                 ?
-                                <button className="btn btn-sm btn-danger selectAmount" id={element.GoodSn+'button'} onClick={()=>showBuyModal(element.GoodSn)}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
+                                  <button className="btn btn-sm btn-danger selectAmount" id={element.GoodSn+'button'} onClick={()=>showBuyModal(element.GoodSn)}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
                                 :
                                 <div className="c-product__add mt-0">
-                                <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
+                                  <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
                                 </div>   
                             )
                         )
