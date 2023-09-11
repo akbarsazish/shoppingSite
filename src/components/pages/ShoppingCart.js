@@ -46,8 +46,6 @@ export default function ShoppingCart(props) {
                     return accumulator;
                 }, 0);
 
-                console.log("profit", allMoneyProfit);
-                console.log("no profit", allMoneyNoProfit);
 
                 if (allMoneyProfit > allMoneyNoProfit) {
                     setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
@@ -86,7 +84,6 @@ export default function ShoppingCart(props) {
 
     const renewCarts = () => {
         axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
-            console.log(data.data.orders)
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor);
             setCurrencyName(data.data.currencyName);

@@ -111,10 +111,6 @@ export default function ChequeRequest(){
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      const queryString = Object.keys(formData)
-        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(formData[key])}`)
-        .join('&');
-  
    
       axios.get(`https://starfoods.ir/api/addRequestCheck`,{params:{
         name : document.getElementById("name").value,
@@ -171,7 +167,7 @@ export default function ChequeRequest(){
                         <div className="mb-1 mt-1">
                             <label htmlFor="roleNo" className="form-label check-request-label cheque-label" > نام و نام خانوادگی :</label>
                             <input type="text" className="form-control form-control-sm" id="name" name="name" onChange={handleChange} value={formData.name} required  />
-                            <input type="" id="customerId" name="customerId" onChange={handleChange} value={localStorage.getItem("psn")} />
+                            <input type="hidden" id="customerId" name="customerId" onChange={handleChange} value={localStorage.getItem("psn")} />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">

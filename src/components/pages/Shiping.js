@@ -30,6 +30,7 @@ export default function Shiping(props) {
     const[allProfit, setAllProfit]=useState(localStorage.getItem("allProfit"))
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const[payUrl, setPayUrl] = useState('');
 
@@ -68,7 +69,8 @@ export default function Shiping(props) {
     useEffect(() => {
         axios.get('https://starfoods.ir/api/getPaymentFormApi', {
           params: {
-            psn: localStorage.getItem("psn")
+            psn: localStorage.getItem("psn"),
+            allMoney:allMoney
           }
         }).then((data) => {
             setPayUrl(data.data)
@@ -103,18 +105,11 @@ export default function Shiping(props) {
         if(isUsedTakhfifCode === 1){
             takhfifCode=localStorage.getItem("takhfifCode");
         }
-        axios.get("https://starfoods.ir/api/setPayOnlineSessions",{params:{
-            recivedTime:selectdPayType,
-            takhfif:selectdFactorDate,
-            takhfifCodeMoney:0,
-            receviedAddress:selectdAddress,
-            allMoneyToSend:allMoney,
-            takhfifCode:takhfifCode,
-            psn:localStorage.getItem("psn"),
-            allMoney:allMoney}
-        }).then((data)=>{
-            // alert(data.data)
-        })
+        localStorage.setItem("recivedTime",selectdFactorDate);
+        localStorage.setItem("takhfif",0);
+        localStorage.setItem("takhfifCode",takhfifCode);
+        localStorage.setItem("receviedAddress",selectdAddress);
+        setIsButtonDisabled(false);
     }
     const addFactorToSefarish=()=>{
     axios.get("https://starfoods.ir/api/addFactorApi",{params:{
@@ -191,7 +186,7 @@ if(localStorage.getItem("isLogedIn")){
                                     <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
                                        {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px"}} icon={faSun} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} 
-                                        onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}} 
+                                        onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0);}} 
                                         type="radio" name="factorDay" id="flexRadioDefault1" />
                                     </label>
                                 </div>
@@ -302,11 +297,15 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                     <div className="shippingPartBottom">
                        {(payType==="hozori" && factorDay) ? (
-                            <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
                        )
                        :((payType==="online" && factorDay)?
-                        <Link id="payOnlineForm" to={payUrl} target={"_blank"}><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn"> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
-                       :<Link to="#"><button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button> </Link>
+                        <Link id="payOnlineForm" to={payUrl} target={"_blank"}>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
+                        </Link>
+                       :<Link to="#">
+                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
+                        </Link>
                         )
                        }
                     </div>

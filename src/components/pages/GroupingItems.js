@@ -50,7 +50,6 @@ export default function GroupingItems(props) {
             psn:psn,
             gsn:goodSn
          }}).then((data)=>{
-            console.log(data.data)
               renewGroupItems();
          })
         }

@@ -48,25 +48,25 @@ function DailyEmtyaz() {
     <div className="weekly-calendar">
       {daysOfWeek.map((currentDay, i) => {
         let todayClass='';
-        if(i==0 && starfoodStarInfo.First==today){
+        if(i==0 && starfoodStarInfo.First===today){
           todayClass='current-day'
         }
-        if(i==1 && starfoodStarInfo.Second==today){
+        if(i==1 && starfoodStarInfo.Second===today){
           todayClass='current-day'
         }
-        if(i==2 && starfoodStarInfo.Third==today){
+        if(i==2 && starfoodStarInfo.Third===today){
           todayClass='current-day'
         }
-        if(i==3 && starfoodStarInfo.Fourth==today){
+        if(i==3 && starfoodStarInfo.Fourth===today){
           todayClass='current-day'
         }
-        if(i==4 && starfoodStarInfo.Fifth==today){
+        if(i==4 && starfoodStarInfo.Fifth===today){
           todayClass='current-day'
         }
-        if(i==5 && starfoodStarInfo.Sixth==today){
+        if(i==5 && starfoodStarInfo.Sixth===today){
           todayClass='current-day'
         }
-        if(i==6 && starfoodStarInfo.Seventh==today){
+        if(i==6 && starfoodStarInfo.Seventh===today){
           todayClass='current-day'
         }
         const dayNumber = i + 1;
@@ -89,22 +89,22 @@ function DailyEmtyaz() {
             </div>
             
             <p className="day-label">
-                {i==0?(i==0 && starfoodStarInfo.First == today?'امروز':'روز'+(i+1)):''}
-                {i==1?(i==1 && starfoodStarInfo.Second == today ?'امروز':'روز'+(i+1)):''}
-                {i==2?(i==2 && starfoodStarInfo.Third == today ?'امروز':'روز'+(i+1)):''}
-                {i==3?(i==3 && starfoodStarInfo.Fourth == today  ?'امروز':'روز'+(i+1)):''}
-                {i==4?(i==4 && starfoodStarInfo.Fifth == today  ?'امروز':'روز'+(i+1)):''}
-                {i==5?(i==5 && starfoodStarInfo.Sixth == today?'امروز':'روز'+(i+1)):''}
-                {i==6?(i==6 && starfoodStarInfo.Seventh == today ?'امروز':'روز'+(i+1)):''}
+                {i==0?(i==0 && starfoodStarInfo.First === today?'امروز':'روز'+(i+1)):''}
+                {i==1?(i==1 && starfoodStarInfo.Second === today ?'امروز':'روز'+(i+1)):''}
+                {i==2?(i==2 && starfoodStarInfo.Third === today ?'امروز':'روز'+(i+1)):''}
+                {i==3?(i==3 && starfoodStarInfo.Fourth === today  ?'امروز':'روز'+(i+1)):''}
+                {i==4?(i==4 && starfoodStarInfo.Fifth === today  ?'امروز':'روز'+(i+1)):''}
+                {i==5?(i==5 && starfoodStarInfo.Sixth === today?'امروز':'روز'+(i+1)):''}
+                {i==6?(i==6 && starfoodStarInfo.Seventh === today ?'امروز':'روز'+(i+1)):''}
             </p>
 
-              {i==0?(i==0 && starfoodStarInfo.First == today ? <input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" /> :''):''}
-              {i==1?(i==1 && starfoodStarInfo.Second == today ? <input type="text" value={"SecondPr_"+starfoodStarInfo.SecondB} id="todayInput" /> :''):''}
-              {i==2?(i==2 && starfoodStarInfo.Third == today ? <input type="text" value={"ThirdPr_"+starfoodStarInfo.ThirdB} id="todayInput" /> :''):''}
-              {i==3?(i==3 && starfoodStarInfo.Fourth == today ? <input type="text" value={"FourthPr_"+starfoodStarInfo.FourthB} id="todayInput" /> :''):''}
-              {i==4?(i==4 && starfoodStarInfo.Fifth == today  ? <input type="text" value={"FifthPr_"+starfoodStarInfo.FifthB} id="todayInput" /> :''):''}
-              {i==5?(i==5 && starfoodStarInfo.Sixth == today ? <input type="text" value={"SixthPr_"+starfoodStarInfo.SixthB} id="todayInput" /> :''):''}
-              {i==6?(i==6 && starfoodStarInfo.Seventh == today ? <input type="text" value={"SeventhPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
+              {i==0?(i==0 && starfoodStarInfo.First === today ? <input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" /> :''):''}
+              {i==1?(i==1 && starfoodStarInfo.Second === today ? <input type="text" value={"SecondPr_"+starfoodStarInfo.SecondB} id="todayInput" /> :''):''}
+              {i==2?(i==2 && starfoodStarInfo.Third === today ? <input type="text" value={"ThirdPr_"+starfoodStarInfo.ThirdB} id="todayInput" /> :''):''}
+              {i==3?(i==3 && starfoodStarInfo.Fourth === today ? <input type="text" value={"FourthPr_"+starfoodStarInfo.FourthB} id="todayInput" /> :''):''}
+              {i==4?(i==4 && starfoodStarInfo.Fifth === today  ? <input type="text" value={"FifthPr_"+starfoodStarInfo.FifthB} id="todayInput" /> :''):''}
+              {i==5?(i==5 && starfoodStarInfo.Sixth === today ? <input type="text" value={"SixthPr_"+starfoodStarInfo.SixthB} id="todayInput" /> :''):''}
+              {i==6?(i==6 && starfoodStarInfo.Seventh === today ? <input type="text" value={"SeventhPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
           </div>
         );
       })}
