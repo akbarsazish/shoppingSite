@@ -63,9 +63,9 @@ const Header = ()=>{
 
     const searchKala=()=>{
         if (searchedValue.length < 1) {
-            window.location.href='http://localhost:3002/home';
+            window.location.href='https://star.starfoods.ir/home';
             } else {
-            window.location.href='http://localhost:3002/searchKala/'+searchedValue;
+            window.location.href='https://star.starfoods.ir/searchKala/'+searchedValue;
         }
     }
   
@@ -102,7 +102,7 @@ if(localStorage.getItem("isLogedIn")){
         <div className="search-container">
           {searchResults.map((element) => (
             <div className="search-item">
-                <a className="seach-anchor" href={`http://localhost:3002/searchKala/${element.GoodName}`}>
+                <a className="seach-anchor" href={`https://star.starfoods.ir/searchKala/${element.GoodName}`}>
                     <li className="list-group-item">
                         <img className="seached-img"
                             src={`https://starfoods.ir/resources/assets/images/kala/${element.GoodSn}_1.jpg`}
