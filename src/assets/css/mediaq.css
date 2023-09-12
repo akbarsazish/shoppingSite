@@ -237,4 +237,8 @@
         margin: 3px;
         gap: 3px;
      }
+
+     .contactList {
+        font-size:11px;
+    }
 }

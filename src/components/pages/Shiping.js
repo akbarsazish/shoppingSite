@@ -9,7 +9,6 @@ import axios from "axios";
 import { DatePicker } from "zaman";
 
 export default function Shiping(props) {
-
     let now = new Date();
     const currentHour = now.getHours();
     const[weekDay1,setWeekDay1]=useState(0)
@@ -37,7 +36,6 @@ export default function Shiping(props) {
     const changePayMoneyAndTakhfif=()=>{
         let element =document.getElementById("takhfifSwitch");
         if(isUsedTakhfifCode !=1){
-            
             if(element.checked){
                 setAllMoney(allMoney - takhfifCase)
             }else{
@@ -83,20 +81,21 @@ export default function Shiping(props) {
       let fastErsalRadio=document.getElementById("fastErsalRadio");
       
       let fastErsal = () => {
-          checkSelectedFactorDay(factorDay);
-          setpayType("online");
-          sendOnlinePayStuff(); 
-          payOnline.checked=true
-          payHozori.checked=false 
+        checkSelectedFactorDay(factorDay);
+        setpayType("online");
+        sendOnlinePayStuff(); 
+        payOnline.checked=true
+        payHozori.checked=false 
       }
       
       let payHozoriFun = () => {
-          fastErsalRadio.checked=false
+        fastErsalRadio.checked=false
+        setIsButtonDisabled(false);
       }
 
     const checkSelectedFactorDay=(factorDay)=>{
         if(!factorDay && payType ==="hozori"){
-            alert("لطفا تاریخ فاکتور را انتخاب کنید.")
+          alert("لطفا تاریخ فاکتور را انتخاب کنید.")
         }
     }
 
@@ -142,7 +141,6 @@ const calculateTakhfifCode=()=>{
         })
     }
 }
-
 
 if(localStorage.getItem("isLogedIn")){
     return (
@@ -202,7 +200,7 @@ if(localStorage.getItem("isLogedIn")){
                         </div>
                     </div>
                     
-                 
+
                 {  (currentHour >= 7 && currentHour < 19)?
                     <div className="shippingPart">
                         <div className="row w-100">

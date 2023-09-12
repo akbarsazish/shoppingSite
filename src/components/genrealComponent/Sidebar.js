@@ -1,4 +1,5 @@
-import React, {useState, useEffect } from "react";
+import React, {useEffect } from "react";
+import {memo} from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle, faListAlt, faHeart, faShoppingCart, faEnvelope, faPhone, faSignOut, faUser, faBuilding, faMoneyBill } from '@fortawesome/free-solid-svg-icons'
@@ -10,7 +11,7 @@ import Message from "../pages/Message";
 import Contact from "../pages/Contact";
 import GamerList from "../game/GamerList";
 import ChequeRequest from "../pages/ChequeRequest"
-function Sidebar() {
+const Sidebar = ()=> {
     useEffect(() => {
         const handleMenuItemClick = () => {
           const backdrop = document.querySelector(".offcanvas-backdrop.fade.show");
@@ -55,4 +56,4 @@ function Sidebar() {
           );
 }
 
-export default Sidebar
+export default memo(Sidebar)

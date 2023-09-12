@@ -4,7 +4,7 @@ import './assets/css/mediaq.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './components/genrealComponent/Sidebar';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Outlet } from 'react-router-dom';
 import Layout from './components/genrealComponent/Layout';
 import Profile from './components/pages/Profile';
 import Grouping from './components/pages/Grouping';
@@ -34,6 +34,7 @@ import Lottery from "./components/pages/Lottery";
 import InviteCode from "./components/pages/InviteCode";
 import ChequeRequest from "./components/pages/ChequeRequest";
 import SuccessPay from "./components/pages/SuccessPay";
+import PageNotFound from "./components/pages/PageNotFound";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -107,16 +108,7 @@ function App() {
         <Route path="inviteCode"                    element={<InviteCode/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
-        {/* <Route path="successPayApi"    element={<SuccessPay/>}/> */}
-        {/* <Route
-          path="/successPayApi"
-          params={{
-            tref: "638298687031463098",
-            iN: "111154",
-            iD: "2023/09/09%2015:05:02",
-          }}
-          element={<SuccessPay/>}
-        /> */}
+        <Route path="*"                             element={<PageNotFound />} />
         <Route
           path="/successPayApi"
           params={param => ({
@@ -127,6 +119,7 @@ function App() {
           element={<SuccessPay/>}
         />
       </Routes>
+      <Outlet />
     </>
   );
 }

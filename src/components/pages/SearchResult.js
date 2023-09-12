@@ -44,7 +44,7 @@ const reNewSearchResult=()=>{
                  <img className="topLeft" src={starfood} alt="slider" />
                 {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
                 <Link to={"/descKala/"+element.GoodSn+"/"+element.firstGroupId} className="groupingItemLink">
-                    <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider" />
+                    <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="slider" onError={(e)=>{e.target.src = starfood}} />
                 </Link>
                 <Link to={"/descKala/"+element.GoodSn+"/"+element.firstGroupId} className="groupingItemTitleLink">
                     <p className="groupingItemTitle"> {element.GoodName} </p>
@@ -56,24 +56,23 @@ const reNewSearchResult=()=>{
                     <div className="groupingItemInfo">
                         {element.Amount>0?
                             <>
-                            <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
-                            {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
-                            </>
-                            :
-                                (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
-                                    ''
-                                    :(
-                                        element.requested===0?
-                                            <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                                <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
-                                            </span>
+                             <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
+                              {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
+                             </>
+                              :
+                              (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
+                                ''
+                                  :(
+                                    element.requested===0?
+                                      <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
+                                          <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                        </span>
                                         :
-                                            <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
-                                                <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
-                                            </span>
+                                        <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
+                                          <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                        </span>
                                     ) 
                         }
-
                     </div>
                 </div>
                 <div className="groupingItemBottomBtn">
@@ -168,27 +167,29 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
     useEffect(()=>reNewSearchResult(),[])
 
     if(localStorage.getItem("isLogedIn")){
-      return (<>
-              <Header />
-              <Sidebar />
-              <div className="container">
-                  <div className="groupingItems">
-                      {items}
-                  </div>
-              </div >
-              
-              <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div className="modal-dialog buyModal">
-                      <div className="modal-content">
-                          <div className="modal-body">
-                              <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                  {buyOption}
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-      </>)
+      return (
+        <>
+            <Header />
+            <Sidebar />
+            <div className="container marginTop">
+                <div className="groupingItems">
+                    {items}
+                </div>
+            </div >
+            
+            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog buyModal">
+                    <div className="modal-content">
+                        <div className="modal-body">
+                            <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                {buyOption}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+      )
     }else{
       window.location.href="/login"
     }

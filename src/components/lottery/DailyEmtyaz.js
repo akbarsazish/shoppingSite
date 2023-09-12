@@ -4,6 +4,7 @@ import { faCalendarCheck, faCalendarTimes } from "@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function DailyEmtyaz() {
+  
   const [today, setToday] = useState('FirstPr');
   const [starfoodStarInfo, setStarfoodStarInfo]=useState({Fifth:null,FifthB:"0",FifthPr:"0",First:"",FirstB:"0"
     ,FirstPr:"0",Fourth:null, FourthB:"10", FourthPr : "0",
@@ -115,6 +116,7 @@ function DailyEmtyaz() {
           <button className="btn btn-info" id="receivedEmtyaz" onClick={checkCheckboxPresent}> دریافت امتیاز</button>
         </div>
     </div>
+    
   </section>
   );
 }

@@ -1,12 +1,13 @@
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import Header from "../genrealComponent/Header";
+import Sidebar from "../genrealComponent/Sidebar";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import starfood from "../../assets/images/starfood.png";
 
-import React, { useEffect, useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons"
-import { Link } from "react-router-dom"
-import Header from "../genrealComponent/Header"
-import Sidebar from "../genrealComponent/Sidebar"
-import { useParams } from "react-router-dom"
-import axios from "axios"
 export default function DescKala(props) {
     const { goodSn, groupId } = useParams();
     const [descKala, setDescKala] = useState("")
@@ -126,7 +127,7 @@ export default function DescKala(props) {
             setProductCode(data.data.product[0].GoodCde)
             setAsameKalas(data.data.assameKalas.map((element) => <div className="similarKalaImg ">
                 <Link to={"/descKala/" + element.GoodSn + "/" + groupId} className="similarImgLink">
-                    <img className="similarKalaImage" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="descKala" />
+                    <img onError={(e)=>{e.target.src=starfood}} className="similarKalaImage" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="descKala" />
                     <h6 className="similarKalaName"> {element.GoodName} </h6>
                 </Link>
             </div>))
@@ -166,7 +167,7 @@ export default function DescKala(props) {
                 <div className="kalaDescibe mt-2 p-2">
                     <div className="kalaImg">
                         <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite===1) ? 'favHeartIcon favoriteHeartIcon' :'favoriteHeartIcon'} icon={faHeart}></FontAwesomeIcon>
-                        <img className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
+                        <img  onError={(e)=>{e.target.src = starfood}} className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
                     </div>
                     <div className="kalaDescibtion">
                         <div className="descHeader">

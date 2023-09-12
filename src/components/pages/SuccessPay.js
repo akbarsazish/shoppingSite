@@ -68,19 +68,19 @@ export default function SuccessPay() {
                     <td>{parseInt(element.Fi/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td>
                     <td>{parseInt(element.Price/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td></tr>}));
                     setPaymentInfo(
-                        <tr>
-                            <td> 1 </td>
-                            <td> {response.data.payResults.TraceNumber}</td>
-                            <td> {response.data.payResults.ReferenceNumber}</td>
-                            <td> {response.data.payResultsTransactionDate}</td>
-                            <td> {response.data.payResults.TransactionReferenceID}</td>
-                            <td> {response.data.payResults.InvoiceNumber}</td>
-                            <td> {response.data.payResultsInvoiceDate}</td>
-                            <td> {response.data.payResults.Amount}</td>
-                            <td> {response.data.payResults.TrxMaskedCardNumber}</td>
-                            <td> {response.data.payResults.IsSuccess}</td>
-                            <td> {response.data.payResults.Message}</td>
-                        </tr>
+                      <tr>
+                         <td> 1 </td>
+                         <td> {response.data.payResults.TraceNumber}</td>
+                         <td> {response.data.payResults.ReferenceNumber}</td>
+                         <td> {response.data.payResultsTransactionDate}</td>
+                         <td> {response.data.payResults.TransactionReferenceID}</td>
+                         <td> {response.data.payResults.InvoiceNumber}</td>
+                         <td> {response.data.payResultsInvoiceDate}</td>
+                         <td> {response.data.payResults.Amount}</td>
+                         <td> {response.data.payResults.TrxMaskedCardNumber}</td>
+                         <td> {response.data.payResults.IsSuccess}</td>
+                         <td> {response.data.payResults.Message}</td>
+                      </tr>
                     );
                 }
                 setPaymentStat(response.data.result)

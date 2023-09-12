@@ -85,15 +85,16 @@ export default function ShoppingCart(props) {
     const renewCarts = () => {
         axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
             let currency = data.data.currency;
-            setMinSalePriceFactor(data.data.minSalePriceFactor);
-            setCurrencyName(data.data.currencyName);
-            setIntervalBetweenBuys(data.data.intervalBetweenBuys);
-            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0));
-            setChangePriceState(data.data.changePriceState);
-            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0);
-
+            setMinSalePriceFactor(data.data.minSalePriceFactor)
+            setCurrencyName(data.data.currencyName)
+            setIntervalBetweenBuys(data.data.intervalBetweenBuys)
+            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
+            setChangePriceState(data.data.changedPriceState)
+            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
+        
+        
             let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-              const price1 = parseInt(currentValue.Price1);
+                const price1 = parseInt(currentValue.Price1);
                 if(price1 > 0){
                   accumulator1 += price1 / parseInt(currency);
                 }
@@ -107,7 +108,7 @@ export default function ShoppingCart(props) {
                   }
                     return accumulator;
                 }, 0);
-                
+
 
                 if (allMoneyProfit > allMoneyNoProfit) {
                     setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
@@ -130,10 +131,9 @@ export default function ShoppingCart(props) {
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
             </div>))
-
             setChanedItems(data.data.orders.map((element) => {
                 if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
+                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
                 }
             }))
         })

@@ -1,11 +1,12 @@
 import React from "react";
+import { memo } from "react";
 import { faHouse, faListAlt, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Home from "../pages/Home";
 import ShoppingCart from "../pages/ShoppingCart";
 
-export default function Footer() {
+const Footer = ()=> {
   return (
     <div className="containerFluid px-0 mx-0">
         <div className="footer px-0 mx-0">
@@ -16,3 +17,5 @@ export default function Footer() {
     </div>
   )
 }
+
+export default memo(Footer)
