@@ -41,11 +41,12 @@ span {
     display: flex;
     flex-wrap: wrap;
     text-align: center;
+    justify-content: space-between;
 }
 
 .flex-item-left {
     padding: 5px;
-    flex: 50%;
+    flex: 49%;
     padding-top: 13px;
 }
 

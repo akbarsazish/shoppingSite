@@ -29,22 +29,22 @@ export default function ShoppingCart(props) {
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
         
-        
-            let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-                const price1 = parseInt(currentValue.Price1);
-                if(price1 > 0){
-                  accumulator1 += price1 / parseInt(currency);
-                }
-                return accumulator1;
-              }, 0);
-
-              let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
-                  const price = parseInt(currentValue.Price);
-                  if(price > 0){
-                     accumulator += price / parseInt(currency);
-                  }
-                    return accumulator;
+            if(data.data.orders[0].Price > 0 && data.data.orders[0].Price1){
+                let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
+                    const price1 = parseInt(currentValue.Price1);
+                    if(price1 > 0){
+                    accumulator1 += price1 / parseInt(currency);
+                    }
+                    return accumulator1;
                 }, 0);
+
+                let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
+                    const price = parseInt(currentValue.Price);
+                    if(price > 0){
+                        accumulator += price / parseInt(currency);
+                    }
+                        return accumulator;
+                    }, 0);
 
 
                 if (allMoneyProfit > allMoneyNoProfit) {
@@ -52,6 +52,7 @@ export default function ShoppingCart(props) {
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
+            }
             
 
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
@@ -92,13 +93,16 @@ export default function ShoppingCart(props) {
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
         
-        
-            let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-                const price1 = parseInt(currentValue.Price1);
-                if(price1 > 0){
-                  accumulator1 += price1 / parseInt(currency);
-                }
-                return accumulator1;
+            console.log(data.data.orders[0].Price1);
+            console.log(data.data.orders[0].Price);
+
+            if(data.data.orders[0].Price > 0 && data.data.orders[0].Price1){
+              let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
+                 const price1 = parseInt(currentValue.Price1);
+                 if(price1 > 0){
+                   accumulator1 += price1 / parseInt(currency);
+                 }
+                  return accumulator1;
               }, 0);
 
               let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
@@ -108,15 +112,15 @@ export default function ShoppingCart(props) {
                   }
                     return accumulator;
                 }, 0);
-
+            
 
                 if (allMoneyProfit > allMoneyNoProfit) {
                     setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
+            }
             
-
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -137,7 +141,7 @@ export default function ShoppingCart(props) {
                 }
             }))
         })
-    }
+      }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)

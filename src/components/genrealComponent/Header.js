@@ -73,7 +73,7 @@ if(localStorage.getItem("isLogedIn")){
     return (
         <>
         <div className="row mx-0 topMenu ">
-            <div className="flex-container">
+            <div className="container flex-container">
                 <div className="flex-item-left">
                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>

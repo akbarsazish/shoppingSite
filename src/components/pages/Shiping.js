@@ -132,7 +132,7 @@ const calculateTakhfifCode=()=>{
             psn:localStorage.getItem("psn"),
             code:localStorage.getItem("takhfifCode")
         }}).then((respond)=>{
-            if(respond.data[1]===0){
+            if(respond.data.takhfifCodeMoneyInToman===0){
                 document.getElementById("errorContainer").textContent="کد تخفیف شما استفاده و یا اینکه موعدش گذشته است.";
             }else{
                 document.getElementById("errorContainer").textContent="";
@@ -141,6 +141,7 @@ const calculateTakhfifCode=()=>{
         })
     }
 }
+
 
 if(localStorage.getItem("isLogedIn")){
     return (
