@@ -433,10 +433,10 @@ export default function ChequeRequest(){
     </>:
          <div className="container marginTop">
          <div className="row my-4">
-             <div className="col-lg-12">
+             <div className="col-lg-12 p-5 text-center">
                 {acceptState=="Accepted"?
-                <h1>درخواست خرید چکی شما بعد از بررسی تأیید شد و از این پس مجاز به خریدهای چکی می‌باشید.</h1>
-                :<h2>درخواست خرید چکی شما بعد از بررسی اطلاع داده خواهد شد.</h2>
+                <h2>درخواست خرید چکی شما بعد از بررسی تأیید شد و از این پس مجاز به خریدهای چکی می‌باشید.</h2>
+                :<h3>درخواست خرید چکی شما بعد از بررسی اطلاع داده خواهد شد.</h3>
                 }
              </div>
        </div>

@@ -72,7 +72,7 @@ const Header = ()=>{
 if(localStorage.getItem("isLogedIn")){
     return (
         <>
-        <div className="row topMenu ">
+        <div className="row mx-0 topMenu ">
             <div className="flex-container">
                 <div className="flex-item-left">
                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
