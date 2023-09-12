@@ -1224,7 +1224,7 @@ ul li a.active {
     max-width: 30%;
     min-height: 66vh;
     background: linear-gradient(#cedce9, #f44336, #db8e89);
-    border-radius: 9px;
+    border-radius: 4px;
     justify-content: center;
     align-items: center;
 }
@@ -2034,7 +2034,6 @@ ul li a.active {
     font-size: 18px;
     font-weight: bold;
 }
-
 
 .contactList a{
     text-decoration:none;

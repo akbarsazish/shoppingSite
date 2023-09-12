@@ -118,7 +118,7 @@ export default function Login(props) {
 
     return (
         <>
-            <div className="containerFluid" style={{ height: "100vh", width: "100%" }}>
+            <div className="containerFluid" style={{ height: "100vh", width: "100%", backgroundColor:"#ff0014"}}>
                 <div className="loginWaper p-5">
                     <div className="login">
                         <div className="loginHeader text-center">
