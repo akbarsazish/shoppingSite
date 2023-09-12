@@ -97,7 +97,7 @@ export default function Shiping(props) {
         if(!factorDay && payType ==="hozori"){
           alert("لطفا تاریخ فاکتور را انتخاب کنید.")
         }
-    }
+     }
 
     const sendOnlinePayStuff=()=>{
         let takhfifCode="";
@@ -157,7 +157,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-10">
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" for="dayOneMorining">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="dayOneMorining">
                                         {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color:"orange", fontSize:"18px"}} icon={faSun} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} 
                                         onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0);}} 
@@ -165,7 +165,7 @@ if(localStorage.getItem("isLogedIn")){
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="flexRadioDefault1">
                                        {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", fontSize:"18px"}} icon={faMoon} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} 
                                         onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}}  
@@ -182,7 +182,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-lg-10 col-10">
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="flexRadioDefault1">
                                        {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px"}} icon={faSun} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} 
                                         onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0);}} 
@@ -190,7 +190,7 @@ if(localStorage.getItem("isLogedIn")){
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" for="flexRadioDefault1">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="flexRadioDefault1">
                                        {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faMoon} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} 
                                         onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}} 
@@ -210,7 +210,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-10 px-0 pt-2">
                                 <div className="form-check px-0">
-                                    <label className="form-check-label text-start timeLabel" for="fastErsalRadio">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="fastErsalRadio">
                                       <input className="form-check-input float-end mx-3 customRadio" id="fastErsalRadio" value={afteromorrowDate} 
                                       onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(1); fastErsal();}} 
                                       type="radio" name="factorDay"/>
@@ -259,7 +259,7 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                     <div className="shippingPartBottom mt-2">
                         <div className="form-check">
-                            <label className="form-check-label text-start timeLabel" for="payHozori">
+                            <label className="form-check-label text-start timeLabel" htmlFor="payHozori">
                                 <input className="form-check-input float-end mx-1 mt-2 customRadio"
                                 onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori"); payHozoriFun();}}
                                 type="radio" name="payTypeRadio" id="payHozori" />
@@ -269,7 +269,7 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                     <div className="shippingPartBottom">
                         <div className="form-check mt-2">
-                            <label className="form-check-label text-start timeLabel" for="">
+                            <label className="form-check-label text-start timeLabel" htmlFor="payOnline">
                                 <input className="form-check-input float-end mx-1 mt-2 customRadio"
                                   onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("online");sendOnlinePayStuff(); setSelectedPayType("online");}}
                                   type="radio" name="payTypeRadio" id="payOnline" />
@@ -316,7 +316,7 @@ if(localStorage.getItem("isLogedIn")){
                                 <h6 className="modal-title text-center"> استفاده از کد تخفیف </h6>
                             </div>
                             <div className="modal-body">
-                                <label className="form-label">کد تخفیف</label>
+                                <label className="form-label" htmlFor="takhfif-code">کد تخفیف</label>
                                 <input type="text" value={localStorage.getItem("takhfifCode")} className="form-control" name="takhfifCode"></input>
                                 <span id="errorContainer" style={{color:"red", fontSize:"1rem"}}></span>
                             </div>
