@@ -17,7 +17,6 @@ export default function Favorite(props) {
         renewFavorite();
     },[]);
 
-
     const renewFavorite=()=>{
     axios.get("https://starfoods.ir/api/favoritKalaApi",
            {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
@@ -200,12 +199,10 @@ export default function Favorite(props) {
                     </div>
                 </div>
             </div>
-
             <Footer />
         </>
     )
     }else{
         window.location.href="/login"
     }
-
 }

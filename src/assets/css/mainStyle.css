@@ -382,6 +382,18 @@ p.userName {
     font-size: 12px;
 }
 
+.factor-details {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding: 1%;
+    border: 1px solid rgb(241, 239, 239);
+}
+
+.factor-details-item {
+    width: 49%;
+}
+
 .tableHeader {
     position: sticky !important;
     top: 0 !important;
@@ -403,6 +415,8 @@ tr {
     width: 100% !important;
     text-align: center;
 }
+
+
 
 .footer {
     text-align: center;
@@ -1275,14 +1289,12 @@ ul li a.active {
 /* style for factor view  */
 .factorView {
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
 .factors {
-    max-width: 70%;
-    flex: 70%; 
-   
+    max-width: 66%;
+    flex: 66%
 }
 
 .factorsResult {
@@ -2014,12 +2026,11 @@ ul li a.active {
  
  .four_zero_four_bg h1{
     font-size:6rem;
-    color: red;
+    color:#000;
  }
  
 .four_zero_four_bg h3{
 	font-size:6rem;
-    color: red;
  }
 			 
 .link_404{			 
@@ -2028,6 +2039,8 @@ ul li a.active {
     background: red;
     margin: 20px 0;
     display: inline-block;
+    text-decoration: none;
+    border-radius: 4px;
 }
 
 .error_paragraph{

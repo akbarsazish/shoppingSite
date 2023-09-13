@@ -1,4 +1,4 @@
-import { faEdit, faEye, faHeart, faHistory, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
+import { faEdit, faEye, faHeart, faHistory, faInfoCircle, faIdCard} from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -86,7 +86,7 @@ export default function Profile(props) {
                             </div>
                         </div>
                         <div className="profileLeftPart card">
-                            <h5 className="tableTitle"> فاکتور های ثبت شده </h5>
+                                <span className="tableTitle"> فاکتور هار پرداخت نشده </span>
                             <table class="table table-bordered table-sm factorTable">
                                 <thead className="tableHeader">
                                     <tr>
@@ -99,7 +99,7 @@ export default function Profile(props) {
                                         <th> جزئیات </th>
                                     </tr>
                                 </thead>
-                                <tbody className="tableBody">
+                                <tbody>
                                     {sendedFactors}
                                 </tbody>
                             </table>

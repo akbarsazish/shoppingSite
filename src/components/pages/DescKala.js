@@ -167,7 +167,7 @@ export default function DescKala(props) {
                 <div className="kalaDescibe mt-2 p-2">
                     <div className="kalaImg">
                         <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite===1) ? 'favHeartIcon favoriteHeartIcon' :'favoriteHeartIcon'} icon={faHeart}></FontAwesomeIcon>
-                        <img  onError={(e)=>{e.target.src = starfood}} className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
+                        <img onError={(e)=>{e.target.src = starfood}} className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
                     </div>
                     <div className="kalaDescibtion">
                         <div className="descHeader">

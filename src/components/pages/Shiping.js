@@ -296,14 +296,14 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                     <div className="shippingPartBottom">
                        {(payType==="hozori" && factorDay) ? (
-                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>addFactorToSefarish()} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>addFactorToSefarish()}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
                        )
                        :((payType==="online" && factorDay)?
                         <Link id="payOnlineForm" to={payUrl} target={"_blank"}>
-                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled}> <FontAwesomeIcon icon={faCheckCircle}/> ارسال فاکتور</button>
                         </Link>
                        :<Link to="#">
-                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")} > <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
                         </Link>
                         )
                        }
