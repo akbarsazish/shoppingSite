@@ -35,6 +35,7 @@ import InviteCode from "./components/pages/InviteCode";
 import ChequeRequest from "./components/pages/ChequeRequest";
 import SuccessPay from "./components/pages/SuccessPay";
 import PageNotFound from "./components/pages/PageNotFound";
+import PayFactor from "./components/pages/PayFactor";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -117,6 +118,15 @@ function App() {
             iD: param.iD,
           })}
           element={<SuccessPay/>}
+        />
+        <Route
+          path="/finalizeFactorPayApi"
+          params={param => ({
+            tref: param.tref,
+            iN: param.iN,
+            iD: param.iD,
+          })}
+          element={<PayFactor/>}
         />
       </Routes>
       <Outlet />

@@ -53,7 +53,7 @@ export default function Login(props) {
                        <tr key={index}>
                          <td>{element.platform}</td>
                          <td>{element.browser}</td>
-                         <td><input style={{width:"30px", height:"30px"}} className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
+                         <td><input style={{width:"28px", height:"28px"}} className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
                        </tr>
                     ))
                     deviceDialog.showModal();
@@ -164,10 +164,10 @@ export default function Login(props) {
             </div>
             </dialog>
 
-            <dialog id="introducerDialog" style={{width:'300px',margin:'0 auto'}}>
+            <dialog className="loginDialog" id="introducerDialog" style={{width:'300px',margin:'0 auto'}}>
                 <div>
                     <form>
-                        <div className="form-group">
+                        <div className="form-group my-2">
                             <label className="form-label">کد معرف</label>
                             <input className="form-control" id="introducerCode" ></input>
                         </div>

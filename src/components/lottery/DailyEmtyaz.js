@@ -78,13 +78,13 @@ function DailyEmtyaz() {
             <div className={"day-content "+todayClass}>
               <div className="top">{i===0?starfoodStarInfo.FirstB:(i===1?starfoodStarInfo.SecondB:(i===2?starfoodStarInfo.ThirdB:(i===3?starfoodStarInfo.FourthB:(i===4?starfoodStarInfo.FifthB:(i===5?starfoodStarInfo.SixthB:(i===6?starfoodStarInfo.SeventhB:5))))))}</div>
                 <div className="daily-bottom">
-                  {i===0?(i===0 &&starfoodStarInfo.FirstPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  {i===1?(i===1 &&starfoodStarInfo.SecondPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  {i===2?(i===2 &&starfoodStarInfo.ThirdPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  {i===3?(i===3 &&starfoodStarInfo.FourthPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  {i===4?(i===4 &&starfoodStarInfo.FifthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  {i===5?(i===5 &&starfoodStarInfo.SixthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
-                  {i===6?(i===6 &&starfoodStarInfo.SeventhPr==1? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===0?(i===0 &&starfoodStarInfo.FirstPr===1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===1?(i===1 &&starfoodStarInfo.SecondPr===1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===2?(i===2 &&starfoodStarInfo.ThirdPr===1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===3?(i===3 &&starfoodStarInfo.FourthPr===1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===4?(i===4 &&starfoodStarInfo.FifthPr===1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===5?(i===5 &&starfoodStarInfo.SixthPr===1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
+                  {i===6?(i===6 &&starfoodStarInfo.SeventhPr===1? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/>:<FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>):''}
                   <input className="form-check-input check-day"  type="checkbox" id={"checkDay"+todayClass} />
                 </div>
             </div>

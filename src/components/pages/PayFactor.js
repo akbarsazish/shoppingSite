@@ -5,7 +5,7 @@ import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import axios from "axios";
 
-export default function SuccessPay() {
+export default function PayFactor() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
   
@@ -41,7 +41,7 @@ export default function SuccessPay() {
     const[allProfit,setAllProfit]=useState(0);
 
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/finalizeFactorPayApi",{params:{
+        axios.get("https://starfoods.ir/api/successPayApi",{params:{
             psn:localStorage.getItem("psn")
             ,tref:tref
             ,iN:iN
@@ -164,7 +164,7 @@ export default function SuccessPay() {
 	     </div>
        </div>
      </>:
-        (paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}
+        (paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected1</h2>))}
     </div>
   </div>
 </div>
