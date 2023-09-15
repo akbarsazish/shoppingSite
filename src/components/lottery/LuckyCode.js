@@ -80,7 +80,7 @@
             axios.get('https://starfoods.ir/api/setCustomerLotteryHistory', {
                 params: {product:wonPrize, customerId: localStorage.getItem('psn')},
             }).then((res)=>{
-                if(res.data=="success"){
+                if(res.data==="success"){
                     mybonus = mybonus - 500;
                     console.log("data has been sent");
                 }else {
@@ -91,52 +91,52 @@
     }, [wonPrize]);
 
 
-        if(selectedItem.showfirstPrize ==1){
+        if(selectedItem.showfirstPrize ===1){
             FirstPrize = shuffle([(3766)]);
         }
-        if(selectedItem.showsecondPrize ==1){
+        if(selectedItem.showsecondPrize ===1){
             secondPrize = shuffle([(3730)]);
         }
-        if(selectedItem.showthirdPrize ==1){
+        if(selectedItem.showthirdPrize ===1){
             thirdPrize = shuffle([(3682)]);
         }    
-        if(selectedItem.showfourthPrize ==1){
+        if(selectedItem.showfourthPrize ===1){
             fourthPrize = shuffle([(3643)]);
         }    
-        if(selectedItem.showfifthPrize ==1){
+        if(selectedItem.showfifthPrize ===1){
             fifthPrize = shuffle([(3610)]);
         }    
-        if(selectedItem.showsixthPrize ==1){
+        if(selectedItem.showsixthPrize ===1){
             sixthPrize = shuffle([(3579)]);
         }    
-        if(selectedItem.showseventhPrize ==1){
+        if(selectedItem.showseventhPrize ===1){
             seventhPrize = shuffle([(3545)]);
         }    
-        if(selectedItem.showeightthPrize ==1){
+        if(selectedItem.showeightthPrize ===1){
             eightPrize = shuffle([(3510)]);
         }
-        if(selectedItem.showninethPrize ==1){
+        if(selectedItem.showninethPrize ===1){
             ninthPrize = shuffle([(3466)]);
         }
-        if(selectedItem.showteenthPrize ==1){
+        if(selectedItem.showteenthPrize ===1){
             teenthPrize = shuffle([(3433)]);
         }
-        if(selectedItem.showeleventhPrize ==1){
+        if(selectedItem.showeleventhPrize ===1){
             eleventhPrize = shuffle([(0)]);
         }
-        if(selectedItem.showtwelvthPrize ==1){
+        if(selectedItem.showtwelvthPrize ===1){
             twelvthPrize = shuffle([(0)]);
         }
-        if(selectedItem.showtherteenthPrize ==1){
+        if(selectedItem.showtherteenthPrize ===1){
             therteenthPrize = shuffle([(0)]);
         }
-        if(selectedItem.showfourteenthPrize ==1){
+        if(selectedItem.showfourteenthPrize ===1){
             fourteenthPrize = shuffle([(0)]);
         }
-        if(selectedItem.showfifteenthPrize ==1){
+        if(selectedItem.showfifteenthPrize ===1){
             fifteenthPrize = shuffle([(0)]);
         }
-        if(selectedItem.showsixteenthPrize ==1){
+        if(selectedItem.showsixteenthPrize ===1){
             sixteenthPrize = shuffle([(0)]);
         }
 

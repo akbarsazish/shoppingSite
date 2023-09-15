@@ -20,6 +20,7 @@ export default function DescKala(props) {
     const [boughtInf, setBoughtInfo] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
     // fetching data form backend
+
     const showBuyModal = (goodSn, event) => {
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
@@ -166,7 +167,7 @@ export default function DescKala(props) {
             <div className="container marginTop mb-5">
                 <div className="kalaDescibe mt-2 p-2">
                     <div className="kalaImg">
-                        <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite===1) ? 'favHeartIcon favoriteHeartIcon' :'favoriteHeartIcon'} icon={faHeart}></FontAwesomeIcon>
+                        <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(goodSn,e)} className={(isFavorite==='NO') ? 'favIcon-deskKala' :'favHeartIcon favIcon-deskKala'} icon={faHeart}></FontAwesomeIcon>
                         <img onError={(e)=>{e.target.src = starfood}} className="descKalaTakImg" src={"https://starfoods.ir/resources/assets/images/kala/"+goodSn+"_1.jpg"} alt="descKala" />
                     </div>
                     <div className="kalaDescibtion">

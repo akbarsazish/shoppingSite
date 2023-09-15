@@ -622,14 +622,14 @@ img.topLeft {
 }
 
 .defaultHeartIcon {
-  color: rgb(235, 227, 227);
+  color: #feaeca !important;
 }
 
 .favHeartIcon {
-  color: red;
+  color: red !important;
 }
 
-.favoriteHeartIcon {
+.favIcon-deskKala {
   top: 0.6rem;
   right: 1rem;
   position: absolute;
@@ -871,25 +871,38 @@ img.topLeft {
 }
 
 .messageBody {
-    height: 60vh;
+    height: 48vh;
     background-color: #fff;
     border-radius: 10px;
     width: 100%;
     padding: 10px;
     overflow-y: scroll;
-
 }
 
 
+.messageBody::-webkit-scrollbar {
+    width: 8px;
+}
+
+.messageBody::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(252, 0, 0, 0.3);
+    border-radius: 0.5rem;
+}
+
+.messageBody::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    -webkit-box-shadow: inset 0 0 6px rgba(250, 0, 0, 0.5);
+}
 
 .messageContentSender {
     direction: rtl;
+    display: block;
 }
 
 .messageContentRecevier {
     direction: ltr !important;
     float: left;
-
+    display: block;
 }
 
 .senderImg {
@@ -900,7 +913,7 @@ img.topLeft {
     font-size: 12px;
     padding: 15px;
     background-color: #39c0ed33;
-    border-radius: 15px;
+    border-radius: 8px;
     margin: 5px;
 }
 
@@ -911,11 +924,9 @@ img.topLeft {
 
 .messageFooter {
     position: fixed;
-    bottom: 100px;
+    bottom: 88px;
     width: 80%;
-
 }
-
 
 .contact {
     display: flex;
@@ -1256,9 +1267,7 @@ ul li a.active {
   margin-right: 1rem;
 }
 
-.select-to-logout {
-  padding: 33px !important;
-}
+
 
 .downloadIcon {
     font-size: 22px;
@@ -1334,10 +1343,11 @@ ul li a.active {
     border-radius: 6px;
     margin: 0 auto;
     position: absolute;
-    top: 6%;
+    top: 9vh;
     width: 333px;
     font-size: 14px;
     min-height: 22vh;
+    max-height: 78vh;
     padding: 1rem;
 }
 

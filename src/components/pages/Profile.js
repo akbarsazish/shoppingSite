@@ -27,7 +27,7 @@ export default function Profile(props) {
                     <td>{new Date(element.timestamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
                     <td>{element.FactDate}</td>
                     <td> {parseInt(element.TotalPriceHDS / 10).toLocaleString()} </td>
-                    <td> پرداخت در محل </td>
+                    <td> <Link to="/factorDetails" style={{textDecoration:'none'}} onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > پرداخت </Link> </td>
                     <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > <FontAwesomeIcon icon={faEye} />  </Link> </td></tr>))
 
             setWaitingOrders(data.data.orders.map((element, index) =>
@@ -95,7 +95,7 @@ export default function Profile(props) {
                                         <th>تاریخ </th>
                                         <th>تاریخ تحویل </th>
                                         <th> مبلغ (تومان) </th>
-                                        <th> عملیات پرداخت </th>
+                                        <th>  پرداخت </th>
                                         <th> جزئیات </th>
                                     </tr>
                                 </thead>

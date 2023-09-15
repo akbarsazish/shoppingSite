@@ -2,7 +2,7 @@ import React, {useEffect } from "react";
 import {memo} from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfoCircle, faListAlt, faHeart, faShoppingCart, faEnvelope, faPhone, faSignOut, faUser, faBuilding, faMoneyBill } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle, faListAlt, faHeart, faEnvelope, faPhone, faSignOut,  faBuilding, faMoneyBill } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../assets/images/logo.png'
 import Profile from "../pages/Profile";
 import Grouping from "../pages/Grouping";

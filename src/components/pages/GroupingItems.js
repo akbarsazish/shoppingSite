@@ -77,7 +77,8 @@ export default function GroupingItems(props) {
                 </Link>
                 <div className="groupingItemBottomInfo">
                     <div className="groupingItemInfo">
-                      <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite===1) ? 'favHeartIcon' :'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+                      <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==='NO') ? 'defaultHeartIcon' :'favHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
+                      
                     </div>
                     <div className="groupingItemInfo">
                     {parseInt(element.Amount) > 0 ? (

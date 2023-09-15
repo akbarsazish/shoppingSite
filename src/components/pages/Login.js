@@ -50,16 +50,19 @@ export default function Login(props) {
                     localStorage.setItem("isLogedIn",res.data.token);
                     setCustomerId(res.data.psn)
                     setDeviceInfo(res.data.loginInfo.map((element,index)=>
-                    <>
                        <tr key={index}>
-                        <td>{element.platform}</td>
-                        <td>{element.browser}</td>
-                        <td><input className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
+                         <td>{element.platform}</td>
+                         <td>{element.browser}</td>
+                         <td><input style={{width:"30px", height:"30px"}} className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
                        </tr>
-                    </>))
+                    ))
                     deviceDialog.showModal();
                 }
+                else {
+                    alert("Email or password is incorrect.");
+                }
             }
+            
             if(res.data.introducerCode){
                 setCustomerId(res.data.psn)
                 setUserToken(res.data.token)

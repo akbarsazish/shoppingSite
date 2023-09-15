@@ -56,13 +56,13 @@ export default function GamerList (){
 //add class to first, second and third gamer items
    const addingId = (index) => {
      let myClass="";
-     if(index == 0){
+     if(index === 0){
         return "firstPerson";
       }else {
-        if(index == 1){
+        if(index === 1){
             return "secondPerson";
         }
-        if(index == 2){
+        if(index === 2){
             return "thirdPerson";
         }
       }

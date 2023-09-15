@@ -54,7 +54,7 @@ export default function SuccessPay() {
         }})
             .then((response)=>{
                 console.log(response);
-                if(response.data.result == "OK"){
+                if(response.data.result === "OK"){
                     localStorage.setItem("recivedTime","");
                     localStorage.setItem("takhfif",0);
                     localStorage.setItem("takhfifCode","");
@@ -93,7 +93,7 @@ export default function SuccessPay() {
     <div className="container  marginTop text-center rounded">
         <div className="row">
             <div className="col-sm-12">
-                {paymentRespond=="OK"? <>
+                {paymentRespond==="OK"? <>
                 <ul class="c-checkout-steps d-none">
                     <li class="is-active is-completed">
                         <div className="c-checkout-steps__item c-checkout-steps__item--summary" data-title="اطلاعات ارسال"></div>
@@ -164,7 +164,7 @@ export default function SuccessPay() {
 	     </div>
        </div>
      </>:
-        (paymentRespond =="Not Varified"?<h2>not Varified</h2>:(paymentRespond =="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}
+        (paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}
     </div>
   </div>
 </div>

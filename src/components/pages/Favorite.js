@@ -81,9 +81,9 @@ export default function Favorite(props) {
                     }
                 </div>
             </div>
-                ))
-            })
-    }
+              ))
+          })
+       }
 
 
     const requestProduct=(psn,goodSn,event)=>{
@@ -116,7 +116,6 @@ export default function Favorite(props) {
           }
           const items=modalItems.map((item)=>item)
           setBuyOption(items)
-          
       })
     }
 
@@ -128,7 +127,6 @@ export default function Favorite(props) {
       }
       )
         .then((data) => {
-          
           let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
               modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)

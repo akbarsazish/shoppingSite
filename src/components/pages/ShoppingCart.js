@@ -209,7 +209,7 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState==0)?
+                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState===0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
                                     :( (allMoney <= minSalePriceFactor)?
                                         <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
