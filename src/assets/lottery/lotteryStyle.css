@@ -450,19 +450,7 @@
   transition: all ease 5s;
 }
 
-#swal2-title {
-  font-size: 1rem;
-}
 
-.swal2-popup {
-  background: rgb(238,174,202);
-  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
-  width: 22rem;
-  height: 11rem;
-  border: 1px solid white;
+.swal2-x-mark {
+  font-size: 0.7rem;
 }
-
-.swal2-confirm {
-  background-color: red;
-}
-

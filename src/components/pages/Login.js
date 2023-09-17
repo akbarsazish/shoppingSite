@@ -9,6 +9,7 @@ import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useState } from "react";
+import Swal from 'sweetalert2';
 
 export default function Login(props) {
     const [deviceInfo,setDeviceInfo]=useState('');
@@ -44,6 +45,7 @@ export default function Login(props) {
             token:localStorage.getItem("isLogedIn")
         }
         axios.get("https://starfoods.ir/api/loginApi", {params:data}).then(res => {
+
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
                     setUserToken(res.data.token)
@@ -68,7 +70,7 @@ export default function Login(props) {
                 setUserToken(res.data.token)
                 introducerDialog.showModal();
             }
-            if (res.data.isSuccessfull) {
+            if(res.data.isSuccessfull == 1) {
                 localStorage.setItem("isLogedIn",res.data.token);
                 localStorage.setItem('userName', res.data.username);
                 localStorage.setItem('psn', res.data.psn);
@@ -83,8 +85,12 @@ export default function Login(props) {
                window.location.href="/home"
             }
 
-            if (res.data.Allowed===0) {
-                alert(res.data.message)
+            if (res.data.isSuccessfull===0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'اوه ... ',
+                        text: res.data.message,
+                    });
             }
         });
     }
@@ -101,7 +107,6 @@ export default function Login(props) {
             localStorage.setItem("buyAmount",res.data.buyAmount);
             window.location.href="/home"
         })
-        
         introducerDialog.close();
     }
 
@@ -115,7 +120,6 @@ export default function Login(props) {
             localStorage.setItem('psn',customerId);
             localStorage.setItem("buyAmount",res.data.buyAmount);
             window.location.href="/home";
-            
         })
     }
 

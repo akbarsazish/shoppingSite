@@ -10,7 +10,7 @@ import Favorite from "../pages/Favorite";
 import Message from "../pages/Message";
 import Contact from "../pages/Contact";
 import GamerList from "../game/GamerList";
-import ChequeRequest from "../pages/ChequeRequest"
+import ChequeRequest from "../pages/ChequeRequest";
 const Sidebar = ()=> {
     useEffect(() => {
         const handleMenuItemClick = () => {

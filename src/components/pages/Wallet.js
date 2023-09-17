@@ -107,7 +107,7 @@ export default function Wallet() {
                                 </li>
                                 <span className="list-group-item question textn-end">
                                     <input type="hidden" name="takhfif" value="" />
-                                    <button id="sendAnswerBtn" className="walletbutton" type="submit" disabled="${takhfifMoney <= 0 ? 'disabled' : ''}"> ارسال </button>
+                                    <button id="sendAnswerBtn" className="walletbutton" type="submit"  disabled={takhfifMoney <= 0}>  ارسال </button>
                                 </span>
                              </form>
                             </ul>

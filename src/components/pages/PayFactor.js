@@ -41,7 +41,7 @@ export default function PayFactor() {
     const[allProfit,setAllProfit]=useState(0);
 
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/successPayApi",{params:{
+        axios.get("https://starfoods.ir/api/finalizeFactorPayApi",{params:{
             psn:localStorage.getItem("psn")
             ,tref:tref
             ,iN:iN
@@ -93,7 +93,7 @@ export default function PayFactor() {
     <div className="container  marginTop text-center rounded">
         <div className="row">
             <div className="col-sm-12">
-                {paymentRespond==="OK"? <>
+              
                 <ul class="c-checkout-steps d-none">
                     <li class="is-active is-completed">
                         <div className="c-checkout-steps__item c-checkout-steps__item--summary" data-title="اطلاعات ارسال"></div>
@@ -163,8 +163,6 @@ export default function PayFactor() {
                 </table>
 	     </div>
        </div>
-     </>:
-        (paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected1</h2>))}
     </div>
   </div>
 </div>

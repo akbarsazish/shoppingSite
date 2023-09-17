@@ -4,7 +4,7 @@ import './assets/css/mediaq.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 import './components/genrealComponent/Sidebar';
-import { Route, Routes, Outlet } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/genrealComponent/Layout';
 import Profile from './components/pages/Profile';
 import Grouping from './components/pages/Grouping';
@@ -62,7 +62,6 @@ function App() {
       }
     }).then((data) => {
       if (data.data.msg) {
-
         event.target.style.color = "red";
       } else {
         event.target.style.color = "black";
@@ -129,7 +128,6 @@ function App() {
           element={<PayFactor/>}
         />
       </Routes>
-      <Outlet />
     </>
   );
 }
