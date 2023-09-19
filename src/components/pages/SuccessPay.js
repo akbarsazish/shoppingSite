@@ -93,7 +93,8 @@ export default function SuccessPay() {
     <div className="container  marginTop text-center rounded">
         <div className="row">
             <div className="col-sm-12">
-                {paymentRespond==="OK"? <>
+                {paymentRespond==="OK"? 
+                <>
                 <ul class="c-checkout-steps d-none">
                     <li class="is-active is-completed">
                         <div className="c-checkout-steps__item c-checkout-steps__item--summary" data-title="اطلاعات ارسال"></div>

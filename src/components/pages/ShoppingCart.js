@@ -15,9 +15,9 @@ export default function ShoppingCart(props) {
     const [minSalePriceFactor, setMinSalePriceFactor] = useState(0)
     const [intervalBetweenBuys, setIntervalBetweenBuys] = useState(0)
     const [changePriceState, setChangePriceState] = useState(2)
-    const [changedItems, setChanedItems] = useState(0)
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
+    const [changedItems, setChanedItems] = useState(0);
 
     useEffect(() => {
         axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
@@ -53,7 +53,6 @@ export default function ShoppingCart(props) {
                     console.error("Invalid data for profit calculation");
                 }
             }
-            
 
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
@@ -68,12 +67,9 @@ export default function ShoppingCart(props) {
                 <div className="thirdItem">
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
-            </div>))
-            setChanedItems(data.data.orders.map((element) => {
-                if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
-                }
-            }))
+            </div>));
+        
+            setChanedItems(data.data.orders);
         })
     }, []);
 
@@ -135,11 +131,7 @@ export default function ShoppingCart(props) {
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
             </div>))
-            setChanedItems(data.data.orders.map((element) => {
-                if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
-                }
-            }))
+            setChanedItems(data.data.orders);
         })
       }
 
@@ -176,7 +168,7 @@ export default function ShoppingCart(props) {
             SnOrderBYS: orderBYSSn
         }
             }).then((data)=>{
-            let  countBought=parseInt(localStorage.getItem('buyAmount'));
+            let countBought=parseInt(localStorage.getItem('buyAmount'));
             if(countBought>0){
             localStorage.setItem('buyAmount',countBought-1);
             let cartDiv=document.getElementById(goodSn+"cartDiv")
@@ -247,7 +239,16 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="modal-body">
                                 <ul className="list-group list-group-flush">
-                                    {changedItems}
+                                  {
+                                  changedItems ?
+                                    
+                                    changedItems.map((element) => {
+                                        if (element.changedPrice === 0) {
+                                            return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
+                                        }
+                                    }): ""
+                                
+                                  }
                                 </ul>
                                 <hr/>
                                 <h6>در صورت ادامه با قیمت جدید ثبت خواهد شد.</h6>
