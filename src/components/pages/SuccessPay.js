@@ -93,7 +93,7 @@ export default function SuccessPay() {
     <div className="container  marginTop text-center rounded">
         <div className="row">
             <div className="col-sm-12">
-                {paymentRespond==="OK"? 
+                {/* {paymentRespond==="OK"?  */}
                 <>
                 <ul class="c-checkout-steps d-none">
                     <li class="is-active is-completed">
@@ -164,8 +164,8 @@ export default function SuccessPay() {
                 </table>
 	     </div>
        </div>
-     </>:
-        (paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}
+     </>
+     {/* :(paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))} */}
     </div>
   </div>
 </div>

@@ -2083,8 +2083,8 @@ ul li a.active {
    right: 1%;
    bottom: 5%;
    position: fixed;
-   width:66px;
-   height:66px;
+   width:55px;
+   height:55px;
    z-index: 99;
    background-color: #fff;
    border-radius: 50%;
@@ -2121,7 +2121,7 @@ ul li a.active {
 
 .live-chat {
    right: 1%;
-   bottom: 5%;
+   bottom: 4%;
    position: fixed;
    width: 28%;
    z-index: 99;
@@ -2265,7 +2265,7 @@ ul li a.active {
 
 .replied-message {
    font-size: 11px;
-   background-color: #f5f9fa;
+   background-color: #f7dada;
    border-radius: 10px;
    padding: 0.3rem;
    display: block;

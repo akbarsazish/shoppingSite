@@ -13,6 +13,7 @@ export default function ChatGroup() {
     const [customerText, setCustomerText] = useState('');
     const [customerReply, setCustomerReply] = useState('');
 
+
     // console.log("reply to :", replyTo)
 
     const showToggleChat = () => {
@@ -43,7 +44,7 @@ export default function ChatGroup() {
         const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}`;
         axios.get(apiUrl)
           .then(response => {
-            setCustomerText("")
+            setCustomerText("");
             console.log('Message sent successfully:', response.data);
           })
           .catch(error => {
@@ -56,6 +57,7 @@ export default function ChatGroup() {
         const apiUrl = `https://starfoods.ir/api/replayMessage?psn=${psn}&messageId=${msTobeRepliedId}&messageContent=${encodeURIComponent(customerReply)}`;
         axios.get(apiUrl)
           .then(response => {
+            setCustomerReply("");
             console.log('Message sent successfully:', response.data);
           })
           .catch(error => {
@@ -63,19 +65,17 @@ export default function ChatGroup() {
           });
       };
 
- 
     useEffect(()=>{
         const fetchData = async () => {
-            try {
-              const response = await axios.get('https://starfoods.ir/api/getChatMessages', {params:{psn:localStorage.getItem("psn")}});
-              setMessages(response.data);
-            } catch (error) {
-              console.error('Error fetching data:', error);
-            }
-          };
+          try {
+            const response = await axios.get('https://starfoods.ir/api/getChatMessages', {params:{psn:localStorage.getItem("psn")}});
+            setMessages(response.data);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
           fetchData();
     }, []);
-    
 
         return (
          <>
@@ -85,7 +85,7 @@ export default function ChatGroup() {
                     <div className="chat-header">
                         <FontAwesomeIcon onClick={()=> hideToggleChat()} className="chat-close" icon={faX} />
                     </div>
-                    <div className="chat-body">
+                    <div className="chat-body" id="chatBody">
                         { messages.map((message) =>
                          <>
                             <div className="message-body" key={message.MessageSn}>
@@ -93,7 +93,7 @@ export default function ChatGroup() {
                                     <p className="customer-name"> ❤️ {message.Name} ❤️</p>
                                     <span className="customer-message"> 
                                        {message.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(message)} id="replyIcon" icon={faReply} />
-                                       <p className="chat-date"> {message.TimeStamp}</p> 
+                                       <p className="chat-date"> {message.TimeStamp ? message.TimeStamp.toLocaleString('fa-IR') : ""}</p> 
                                     </span>
                                 </div>
                                 <div className="reply-part">
@@ -108,7 +108,7 @@ export default function ChatGroup() {
                                     <p className="reply-to-whom">  <b className="text-danger"> پاسخ </b> {firstReply.Name} <b className="text-danger"> به </b> {message.Name} </p>
                                         <span className="replied-message"> 
                                             {message.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(firstReply)} id="replyIcon" icon={faReply} />
-                                            <p className="chat-date"> {firstReply.TimeStamp}</p>
+                                            <p className="chat-date"> {firstReply.TimeStamp ? firstReply.TimeStamp.toLocaleString('fa-IR'): ""}</p>
                                         </span>
                                         <span className="reply-to-message">
                                           {firstReply.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(firstReply)} id="replyIcon" icon={faReply} />  
@@ -127,7 +127,7 @@ export default function ChatGroup() {
                                              <p className="reply-to-whom">  <b className="text-danger"> پاسخ </b> {secondReplay.Name} <b className="text-danger"> به </b> {firstReply.Name} </p>
                                              <span className="replied-message"> 
                                                  {firstReply.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(secondReplay)} id="replyIcon" icon={faReply} />
-                                                 <p className="chat-date"> {secondReplay.TimeStamp}</p>
+                                                 <p className="chat-date"> {secondReplay.TimeStamp ? secondReplay.TimeStamp.toLocaleString('fa-IR') : ""}</p>
                                              </span>
                                              <span className="reply-to-message">
                                              {secondReplay.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(secondReplay)} id="replyIcon" icon={faReply} />
@@ -146,7 +146,7 @@ export default function ChatGroup() {
                                                         <p className="reply-to-whom">  <b className="text-danger"> پاسخ </b> {thirdReplay.Name} <b className="text-danger"> به </b> {secondReplay.Name} </p>
                                                         <span className="replied-message"> 
                                                             {secondReplay.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(thirdReplay)} id="replyIcon" icon={faReply} />
-                                                            <p className="chat-date"> {thirdReplay.TimeStamp}</p>
+                                                            <p className="chat-date"> {thirdReplay.TimeStamp ? thirdReplay.TimeStamp.toLocaleString('fa-IR') : "" }</p>
                                                         </span>
                                                         <span className="reply-to-message">
                                                           {thirdReplay.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(thirdReplay)} id="replyIcon" icon={faReply} />
@@ -169,20 +169,20 @@ export default function ChatGroup() {
                 { redPlyDiv ?
                     <div className="reply-to-div" id="replyToDiv">
                         <FontAwesomeIcon onClick={()=> hideReplyDiv()} className="chat-close second-close-chat" icon={faX} /> 
-                       <span className="reply-to"> پاسخ به <b className="text-danger"> {replyTo.Name} </b> </span>
-                       <span className="replied"> {replyTo.MessageContent} </span>
+                        <span className="reply-to"> پاسخ به <b className="text-danger"> {replyTo.Name} </b> </span>
+                        <span className="replied"> {replyTo.MessageContent} </span>
                     </div>
                      :  "" }
                      
                 { !redPlyDiv ? 
                      <div className="chat-footer">
                         <textarea onChange={messageData} value={customerText} cols={30} className="customer-text" id="customerText" /> 
-                        <FontAwesomeIcon onClick={addMessage} className="send-icon" icon={faPaperPlane} /> 
+                        <FontAwesomeIcon onClick={()=>addMessage} className="send-icon" icon={faPaperPlane} /> 
                      </div> 
                 :
                     <div className="chat-footer">
                         <textarea onChange={replayMessageData} value={customerReply} cols={30} className="customer-text" id="customerText" /> 
-                        <FontAwesomeIcon onClick={()=>replayMessage(replyTo.MessageSn)} placeholder="update" className="send-icon" icon={faPaperPlane} /> 
+                        <FontAwesomeIcon onClick={()=>replayMessage(replyTo.MessageSn)} className="send-icon" icon={faPaperPlane} /> 
                     </div>
                 }
                  </div>
