@@ -7,9 +7,9 @@ import contactImage from '../../assets/images/contactImage.jpg'
 import MainGroupItem from './MainGroupItem'
 import axios from "axios";
 import SecondMenu from "./SecondMenu";
-import MoraqebatFardi from "./slider/MoraqebatFardi";
-import JadedTarenKala from "./slider/JadedTarenKala";
-import Brands from "./slider/Brands";
+import MoraqebatFardi from "../slider/MoraqebatFardi";
+import JadedTarenKala from "../slider/JadedTarenKala";
+import Brands from "../slider/Brands";
 
 export default function Home() {
     const [showModal, setShowModal] = useState(false);
@@ -66,10 +66,10 @@ export default function Home() {
                 <div className="categories">
                     {mainGroups}
                 </div>
-               <MoraqebatFardi />
-               <JadedTarenKala />
-                <Brands />
-
+                 <MoraqebatFardi />
+                 <JadedTarenKala />
+                 <Brands />
+    
                 <div className="row my-5 p-2 text-center">
                    <img className="fourColSliderImg" alt="تماس با ما" src={contactImage} />
                 </div>

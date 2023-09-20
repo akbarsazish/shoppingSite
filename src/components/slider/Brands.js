@@ -1,9 +1,9 @@
 
-import React, {useState, memo} from "react";
+import React, {memo} from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
-import brand from "../../../assets/images/brand.jpg";
+import brand from "../../assets/images/brand.jpg";
 
 const Brands = ()=>{
 
