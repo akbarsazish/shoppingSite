@@ -193,5 +193,5 @@ export default function ChatGroup() {
             </div>
             }
          </>
-        )
+      )
 }

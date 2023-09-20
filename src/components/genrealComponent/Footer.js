@@ -1,5 +1,4 @@
-import React from "react";
-import { memo } from "react";
+import React, { memo } from "react";
 import { faHouse, faListAlt, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
