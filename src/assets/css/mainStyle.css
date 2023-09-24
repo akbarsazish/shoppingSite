@@ -190,28 +190,40 @@ span {
 }
 
 .clickToBuy {
-    color: #ff0014;
-    font-size: 26px;
-    position: fixed;
-    top: 5;
-    right: 2%;
-    cursor: pointer;
+  color: #ff0014;
+  font-size: 26px;
+  position: relative;
+  float: right;
+  cursor: pointer;
+  margin: 2px;
 }
 
-.buyLabel {
-    color: #ff0014;
-    font-size: 14px;
-    position: fixed;
-    top: 5;
-    right: 13%;
-    color: rgb(222, 151, 151);
+.smallModalTobuy {
+  position: relative;
+  margin-right:30px;
+  margin-top: 2px;
+  height: 30px;
+  width: 6rem;
+  border-radius: 3%;
 }
+
+.buyButton {
+  font-size: 25px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.buy-amount {
+ display: inline-block;
+ margin: 2px;
+}
+
 
 .takhfif-round {
     background-color: red;
     border-radius: 100%;
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
     color: #fff;
     padding: 3px;
     font-size: 16px;
@@ -227,6 +239,7 @@ span {
 .bottommPartItem {
     flex: 49%;
     max-width: 50%;
+    height: 3rem;
 }
 
 .fourColBottomRight {
@@ -234,22 +247,29 @@ span {
     width: 48%;
 }
 
-p.price {
-    font-size: 12px;
-    margin: 5px 0px;
-}
-
 .fourColBottomLeft {
     font-size: 12px;
     width: 48%;
 }
 
+div.price {
+  height: 1rem;
+}
 
+.kala-name {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.kala-img-name-link {
+    text-decoration: none;
+    color: #000;
+}
 
 .buyModal {
     width: 200px !important;
-
 }
+
 
 #addTobuy,
 #minusTobuy {
@@ -257,26 +277,36 @@ p.price {
     color: #fff;
 }
 
+.brandImageAnchor {
+  height: 190px;
+  width: 190px !important;
+  border-radius: 190px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  flex-wrap: wrap;
+}
+
 .brandImage {
-    border-radius: 50%;
-    width: 90%;
-    height: 90%px;
-    padding: 20px;
+  width: 90%;
+  height: 90%;
+  padding: 20px;
 }
 
 .brandDiv {
-    background-color: #fff;
-    border-radius: 50%;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .flex-enamad {
-    display: flex;
-    justify-content: center;
-    margin: 50px 3px;
+  display: flex;
+  justify-content: center;
+  margin: 50px 3px;
 }
 
 .enamadItem {
-    text-align: center;
+  text-align: center;
 }
 
 .enamadItem .siteInfo {
@@ -659,11 +689,6 @@ img.topLeft {
   margin: 0 auto;
 }
 
-.buyButton {
-  font-size: 10px !important;
-  width: 100%;
-  margin-bottom: 5px;
-}
 
 /* kala decription styles */
 .kalaDescibe {
@@ -1973,8 +1998,8 @@ ul li a.active {
 }
 
 .show-amount {
-    font-size: 12px;
-    color: red;
+  font-size: 12px;
+  color: red;
 }
 
 .search-container {

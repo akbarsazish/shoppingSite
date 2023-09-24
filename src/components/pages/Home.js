@@ -7,15 +7,13 @@ import contactImage from '../../assets/images/contactImage.jpg'
 import MainGroupItem from './MainGroupItem'
 import axios from "axios";
 import SecondMenu from "./SecondMenu";
-import MoraqebatFardi from "../slider/MoraqebatFardi";
-import JadedTarenKala from "../slider/JadedTarenKala";
-import Brands from "../slider/Brands";
+import HomeSliders from "../slider/HomeSliders";
 
 export default function Home() {
     const [showModal, setShowModal] = useState(false);
     const [mainGroups, setMainGroups] = useState(0);
-    const [slides,setSlides]=useState([])
-    const [smallSlider,setSmallSlider]=useState([])
+    const [slides,setSlides]=useState([]);
+    const [smallSlider,setSmallSlider]=useState([]);
 
     useEffect(() => {
         setTimeout(function () {
@@ -66,10 +64,7 @@ export default function Home() {
                 <div className="categories">
                     {mainGroups}
                 </div>
-                 <MoraqebatFardi />
-                 <JadedTarenKala />
-                 <Brands />
-    
+                 <HomeSliders />
                 <div className="row my-5 p-2 text-center">
                    <img className="fourColSliderImg" alt="تماس با ما" src={contactImage} />
                 </div>
@@ -91,7 +86,7 @@ export default function Home() {
                 <div className="enamadItem">
                     <Link to="/about" className="siteInfo" >درباره استارفود</Link> &nbsp;
                     <Link to="/policy" className="siteInfo">حریم خصوصی</Link> &nbsp;
-                    <Link to="/constact" className="siteInfo" >اطلاعات فروشگاه</Link> &nbsp;
+                    <Link to="/contact" className="siteInfo" >اطلاعات فروشگاه</Link> &nbsp;
                     <Link to="/privacy" className="siteInfo" >شرایط و قوانین</Link>
                 </div>
             </div>

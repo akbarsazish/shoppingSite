@@ -36,6 +36,7 @@ import ChequeRequest from "./components/pages/ChequeRequest";
 import SuccessPay from "./components/pages/SuccessPay";
 import PageNotFound from "./components/pages/PageNotFound";
 import PayFactor from "./components/pages/PayFactor";
+import GetAllKala from "./components/pages/GetAllKala";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -108,26 +109,18 @@ function App() {
         <Route path="inviteCode"                    element={<InviteCode/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
+        <Route path='getAllKala/:id'                element={<GetAllKala />} />
         <Route path="*"                             element={<PageNotFound />} />
         <Route
           path="/successPayApi"
-          params={param => ({
-            tref: param.tref,
-            iN: param.iN,
-            iD: param.iD,
-          })}
-          element={<SuccessPay/>}
-        />
+          params={param => ({tref: param.tref, iN: param.iN, iD: param.iD})}
+          element={<SuccessPay/>}/>
         <Route
           path="/finalizeFactorPayApi"
-          params={param => ({
-            tref: param.tref,
-            iN: param.iN,
-            iD: param.iD,
-          })}
-          element={<PayFactor/>}
-        />
+          params={param => ({ tref: param.tref, iN: param.iN, iD: param.iD})}
+          element={<PayFactor/>}/>
       </Routes>
+
     </>
   );
 }

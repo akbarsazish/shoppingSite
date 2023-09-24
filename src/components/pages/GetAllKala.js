@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart, faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
-export default function GroupingItems(props) {
+export default function GetAllKala(props) {
     const [subGrups, setSubGroups] = useState(0);
     const [maingroupKala, setMainGroupKala] = useState(0);
     const {id}=useParams();
@@ -167,7 +167,6 @@ export default function GroupingItems(props) {
             }
             const items=modalItems.map((item)=>item)
             setBuyOption(items)
-            
         })
         }
         const updateBuy=(orderId,amountUnit,goodSn)=>{
@@ -184,14 +183,14 @@ export default function GroupingItems(props) {
     }
     
     const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
-    
         if((amountUnit > amountExist) && (freeExistance===0)){
         alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
         }else{
             if (costLimit > 0) {
                 if (amountUnit >= costLimit) {
                     alert(costError);
-                }}
+                }
+                }
                 axios.get('https://starfoods.ir/api/buySomething',
                 {params:{
                 kalaId: goodSn,
@@ -211,41 +210,11 @@ export default function GroupingItems(props) {
             <>
                 <Header />
                 <Sidebar />
-                <div className="container">
-                    <div className="groupingItemsTopSlider">
-                        <Swiper
-                            slidesPerView={1}
-                            spaceBetween={10}
-                            navigation={true}
-
-                            breakpoints={{
-                                320: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20,
-                                },
-                                640: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20,
-                                },
-                                768: {
-                                    slidesPerView: 4,
-                                    spaceBetween: 40,
-                                },
-                                1024: {
-                                    slidesPerView: 5,
-                                    spaceBetween: 50,
-                                },
-                            }}
-                            modules={[Navigation]}
-                            className="mySwiper">
-                            {subGrups}
-                        </Swiper>
-                    </div>
-
+                <div className="container marginTop">
                     <div className="groupingItems">
                         {maingroupKala}
                     </div>
-                </div >
+                </div>
                 
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog buyModal">
