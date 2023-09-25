@@ -78,7 +78,7 @@ export default function Wallet() {
                                 <Link to="/" type="button" className="btn btn-sm btn-danger"> خیر <FontAwesomeIcon icon={faXmarkCircle} /> </Link>
                             </div> : ""}
                         </div>
-                    </div >
+                    </div>
 
                     {showQuestion ? <div className="row rounded-3 mt-3" id="questionPart">
                         <div div className="col-lg-12 p-2" >
@@ -88,7 +88,7 @@ export default function Wallet() {
                                 <li className="list-group-item question">
                                     <div className="mb-3">
                                         <label htmlFor="question-text-area" className="form-label"> <b> سوال اول : {firstQuestions}</b></label>
-                                        <textarea   className="form-control" name="answer1" id="answer1" required  minLength="15" rows="3"></textarea>
+                                        <textarea className="form-control" name="answer1" id="answer1" required  minLength="15" rows="3"></textarea>
                                     </div>
                                 </li>
                                 <li className="list-group-item question">
@@ -114,7 +114,7 @@ export default function Wallet() {
                         </div >
                     </div > : ""
                     }
-                </div >
+                </div>
                 <Footer />
             </>
         )

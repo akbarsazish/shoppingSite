@@ -77,7 +77,7 @@ const requestProduct=(psn,goodSn,event)=>{
                     <div className="groupingItemInfo">
                       {element.Amount>0?
                          <>
-                            <p className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </p>
+                            <div className="price" style={{ color: "#39ae00" }}> {parseInt(element.Price3/10).toLocaleString()} تومان </div>
                             {element.overLine===1 && element.Price4>0 && <p className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </p>}
                             </> :
                             (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?

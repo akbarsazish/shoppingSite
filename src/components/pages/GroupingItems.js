@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {
-    Link,
-    useParams
-} from "react-router-dom"
+import {Link, useParams} from "react-router-dom";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { Swiper, SwiperSlide } from "swiper/react";
-import starfood from "../../assets/images/starfood.png"
+import starfood from "../../assets/images/starfood.png";
 import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart, faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios'
+import axios from 'axios';
 
 export default function GroupingItems(props) {
     const [subGrups, setSubGroups] = useState(0);
     const [maingroupKala, setMainGroupKala] = useState(0);
     const {id}=useParams();
     const [buyOption, setBuyOption]=useState(0);
-    //
+
     useEffect(() => {
         fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId=" + id)
             .then(response => response.json())
@@ -30,7 +27,7 @@ export default function GroupingItems(props) {
                     </Link>
                 </SwiperSlide>))
             })
-        },[id])
+        },[id]);
 
     useEffect(() => {
         renewGroupItems();
@@ -71,9 +68,11 @@ export default function GroupingItems(props) {
                         alt="slider"
                     />
                 </Link>
+
                 <Link to={"/descKala/"+element.GoodSn+"/"+id} className="groupingItemTitleLink">
                     <p className="groupingItemTitle"> {element.GoodName} </p>
                 </Link>
+                
                 <div className="groupingItemBottomInfo">
                     <div className="groupingItemInfo">
                       <FontAwesomeIcon onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)} className={(element.favorite==='NO') ? 'defaultHeartIcon' :'favHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} />
@@ -81,13 +80,13 @@ export default function GroupingItems(props) {
                     <div className="groupingItemInfo">
                     {parseInt(element.Amount) > 0 ? (
                         <>
-                            <p className="price" style={{ color: "#39ae00" }}>
+                            <div className="price" style={{ color: "#39ae00" }}>
                                 {parseInt(element.Price3 / 10).toLocaleString()}  تومان
-                            </p>
+                            </div>
                             {element.overLine === 1 && element.Price4 > 0 && (
-                                <p className="price" style={{ color: "#ff2c50" }}>
+                                <div className="price" style={{ color: "#ff2c50" }}>
                                     <del>{parseInt(element.Price4 / 10).toLocaleString()} تومان </del>
-                                </p>
+                                </div>
                             )}
                         </>
                     ) : (element.Amount > 0 || element.activePishKharid > 0 || element.freeExistance > 0) ? (
@@ -148,7 +147,9 @@ export default function GroupingItems(props) {
         .then((data) => {
         let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
-            modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton" onClick={(e) =>buySomething(data.data.amountExist,data.data.freeExistance,data.data.zeroExistance,data.data.costLimit,data.data.costError,data.data.amountUnit*index,data.data.kalaId,data.data.defaultUnit,e,event)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
+            modalItems.push(
+                <button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton"
+                 onClick={(e) =>buySomething(data.data.amountExist,data.data.freeExistance,data.data.zeroExistance,data.data.costLimit,data.data.costError,data.data.amountUnit*index,data.data.kalaId,data.data.defaultUnit,e,event)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
             }
             const items=modalItems.map((item)=>item)
             setBuyOption(items)
@@ -166,8 +167,7 @@ export default function GroupingItems(props) {
                 modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
             }
             const items=modalItems.map((item)=>item)
-            setBuyOption(items)
-            
+            setBuyOption(items);
         })
         }
         const updateBuy=(orderId,amountUnit,goodSn)=>{
@@ -184,7 +184,6 @@ export default function GroupingItems(props) {
     }
     
     const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
-    
         if((amountUnit > amountExist) && (freeExistance===0)){
         alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
         }else{
@@ -194,16 +193,16 @@ export default function GroupingItems(props) {
                 }}
                 axios.get('https://starfoods.ir/api/buySomething',
                 {params:{
-                kalaId: goodSn,
-                amountUnit: amountUnit,
-                psn:localStorage.getItem("psn")
-                }
-                }).then((response)=> {
-                let  countBought=parseInt(localStorage.getItem('buyAmount'));
+                  kalaId: goodSn,
+                  amountUnit: amountUnit,
+                  psn:localStorage.getItem("psn")
+                }})
+                .then((response)=> {
+                let countBought=parseInt(localStorage.getItem('buyAmount'));
                 localStorage.setItem('buyAmount',countBought+1);
                 renewGroupItems();
-                })
-            }   
+            })
+        }   
     }
 
     if(localStorage.getItem("isLogedIn")){
@@ -241,7 +240,6 @@ export default function GroupingItems(props) {
                             {subGrups}
                         </Swiper>
                     </div>
-
                     <div className="groupingItems">
                         {maingroupKala}
                     </div>
@@ -249,11 +247,11 @@ export default function GroupingItems(props) {
                 
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog buyModal">
-                        <div className="modal-content">
-                            <div className="modal-body">
-                                <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
-                                    {buyOption}
-                                </div>
+                      <div className="modal-content">
+                          <div className="modal-body">
+                              <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
+                                 {buyOption}
+                              </div>
                             </div>
                         </div>
                     </div>

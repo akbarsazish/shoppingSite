@@ -243,8 +243,8 @@ span {
 }
 
 .fourColBottomRight {
-    font-size: 12px;
-    width: 48%;
+  font-size: 12px;
+  width: 48%;
 }
 
 .fourColBottomLeft {
@@ -688,7 +688,6 @@ img.topLeft {
   overflow: auto;
   margin: 0 auto;
 }
-
 
 /* kala decription styles */
 .kalaDescibe {

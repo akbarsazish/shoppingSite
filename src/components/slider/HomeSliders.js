@@ -9,8 +9,8 @@ import axios from "axios";
 
 const HomeSliders = ()=> {
     const {id}=useParams();
-    const[kalaSliders, setAllKalaSlider] = useState([]);
-    const[purchasedItem, setPurchasedItem] = useState(0);
+    const [kalaSliders, setAllKalaSlider] = useState([]);
+    const [purchasedItems, setPurchasedItems] = useState({}); 
     const [clickedItemId, setClickedItemId] = useState(null);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const HomeSliders = ()=> {
                 ...kala,
                 isClicked: false,
               }));
-
+              console.log(initialKala)
               setAllKalaSlider(initialKala);
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -32,22 +32,47 @@ const HomeSliders = ()=> {
         fetchSliderData();
       }, []);
 
+
+       // Function to update purchasedItem for a specific kala
+        const updatePurchasedItem = (goodSn, count) => {
+            setPurchasedItems(prevPurchasedItems => ({
+            ...prevPurchasedItems,
+            [goodSn]: count
+            }));
+        };
+
+      // buy kala use effect
+    const purchaseKala = (goodSn) => {
+        axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
+        params: {
+            kalaId: goodSn,
+            amountUnit: purchasedItems[goodSn] || 0,
+            psn: localStorage.getItem("psn")
+        }
+        })
+        .then((response) => {
+        console.log("bought kala response", response);
+        let countBought = parseInt(localStorage.getItem('buyAmount'));
+        localStorage.setItem('buyAmount', countBought + 1);
+        });
+    }
+
 return(
     <>
     {kalaSliders.map((kalaTypes) => (
      <>
       <div className="wrapper-sliders">
           {/* جدیدترین کالا ها */ }
-          {parseInt(kalaTypes.partType)===2 ?
+          {parseInt(kalaTypes.partType) === 2 ?
              <>
-                 <div className="forTitle mt-2 p-2">
+                <div className="forTitle mt-2 p-2">
                     <div className="forTitleItem">
                         <h6> {kalaTypes.title} </h6>
                     </div>
                     <div className="forTitleItem text-start">
                       {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                     </div>
-                 </div>
+                </div>
 
                  <div className="fourColSide border-top py-1">
                     <Swiper className="mySwiper text-center mx-2"
@@ -70,19 +95,26 @@ return(
                                 slidesPerView: 4,
                                 spaceBetween: 50,
                             },
-                        }}
-                        modules={[Pagination]}>
+                        }} modules={[Pagination]}>
 
-                         {kalaTypes.allKalas && kalaTypes.allKalas.map((kala, index) => (
+                         {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                             <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
-                                <FontAwesomeIcon  onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
+                                <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className="clickToBuy" />
+                                
                                 {clickedItemId === kala.GoodSn && (
                                     <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                        <FontAwesomeIcon onClick={()=> setPurchasedItem(purchasedItem + 1)} className="buyButton" icon={faPlusCircle}/>
-                                          <span className="buy-amount"> {purchasedItem} </span>
-                                        <FontAwesomeIcon onClick={() => setPurchasedItem(Math.max(0, purchasedItem - 1))}  className="buyButton" icon={faMinusCircle}/>
+                                      <FontAwesomeIcon 
+                                        onClick={() => {setClickedItemId(kala.GoodSn);
+                                        setPurchasedItems(prevPurchasedItems => ({...prevPurchasedItems, [kala.GoodSn]: (prevPurchasedItems[kala.GoodSn] || 0) + 1 }));
+                                        purchaseKala(kala.GoodSn);  }} className="buyButton" icon={faPlusCircle} />
+                                        <span className="buy-amount"> {purchasedItems[kala.GoodSn] !== undefined ? purchasedItems[kala.GoodSn] : 0} </span>
+                                      <FontAwesomeIcon
+                                        onClick={() => { const updatedCount = Math.max(0, (purchasedItems[kala.GoodSn] || 0) - 1);
+                                        setPurchasedItems(prevPurchasedItems => ({ ...prevPurchasedItems, [kala.GoodSn]: updatedCount  }));
+                                        updatePurchasedItem(kala.GoodSn, updatedCount);}}  className="buyButton" icon={faMinusCircle}/>
                                     </div>
                                  )}
+
                                 <Link to={"/descKala/"+kala.GoodSn+"/"+kala.firstGroupId} className="kala-img-name-link">
                                     <img className="fourColSliderImg" alt="picture" src={`https://starfoods.ir/resources/assets/images/kala/${kala.GoodSn}_1.jpg`} onError={(e) => { e.target.src = starfood; }} />
                                     <p className="kala-name"> {kala.GoodName} </p>
@@ -149,13 +181,13 @@ return(
                    {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                     <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
                         <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className="clickToBuy"> </FontAwesomeIcon>
-                        {clickedItemId === kala.GoodSn && (
-                            <div className='smallModalTobuy' id="preBuyFromHome">
-                                <FontAwesomeIcon onClick={()=> setPurchasedItem(purchasedItem + 1)} className="buyButton" icon={faPlusCircle}/>
-                                    <span className="buy-amount"> {purchasedItem} </span>
-                                <FontAwesomeIcon onClick={() => setPurchasedItem(Math.max(0, purchasedItem - 1))}  className="buyButton" icon={faMinusCircle}/>
+                         {clickedItemId === kala.GoodSn && (
+                            <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
+                                <FontAwesomeIcon  onClick={() => {setClickedItemId(kala.GoodSn); setPurchasedItems(prevPurchasedItems => ({...prevPurchasedItems, [kala.GoodSn]: (prevPurchasedItems[kala.GoodSn] || 0) + 1 }));  purchaseKala(kala.GoodSn);  }} className="buyButton" icon={faPlusCircle} />
+                                <span className="buy-amount"> {purchasedItems[kala.GoodSn] !== undefined ? purchasedItems[kala.GoodSn] : 0} </span>
+                                <FontAwesomeIcon onClick={() => { const updatedCount = Math.max(0, (purchasedItems[kala.GoodSn] || 0) - 1);setPurchasedItems(prevPurchasedItems => ({ ...prevPurchasedItems, [kala.GoodSn]: updatedCount  }));  updatePurchasedItem(kala.GoodSn, updatedCount);}}  className="buyButton" icon={faMinusCircle}/>
                             </div>
-                        )}
+                         )}
                         <Link to={"/descKala/"+kala.GoodSn+"/"+kala.firstGroupId} className="kala-img-name-link">
                             <img className="fourColSliderImg" alt="شگفت انگیز" src={`https://starfoods.ir/resources/assets/images/kala/${kala.GoodSn}_1.jpg`} onError={(e) => { e.target.src = starfood; }} />
                             <p className="kala-name"> {kala.GoodName} </p>

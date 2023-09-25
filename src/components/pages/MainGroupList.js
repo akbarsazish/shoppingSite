@@ -11,7 +11,7 @@ export default function Grouping(props) {
                 <Link to={"/groupingItems/"+props.id} className="groupingTitleLink"> <p className="groupingTitle"> {props.title} </p> </Link>
             </li>
             </>
-        )
+          )
         }else{
             window.location.href="/login"
         }
