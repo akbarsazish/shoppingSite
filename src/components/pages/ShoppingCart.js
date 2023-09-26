@@ -6,6 +6,7 @@ import { faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom"
 import Footer from "../genrealComponent/Footer";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function ShoppingCart(props) {
     const [cartItems, setCartItems] = useState(0)
@@ -162,21 +163,37 @@ export default function ShoppingCart(props) {
         })
     }
 
-    const deleteOrder=(orderBYSSn,goodSn)=>{
-        axios.get('https://starfoods.ir/api/deleteOrderBYS',
-        {params:{
-            SnOrderBYS: orderBYSSn
-        }
-            }).then((data)=>{
-            let countBought=parseInt(localStorage.getItem('buyAmount'));
-            if(countBought>0){
-            localStorage.setItem('buyAmount',countBought-1);
-            let cartDiv=document.getElementById(goodSn+"cartDiv")
-            cartDiv.style.display="none";
-            renewCarts()
-            }
-        })
-    }
+    const deleteOrder = (orderBYSSn, goodSn) => {
+        Swal.fire({
+          title: '!آیا مطمئن هستید',
+          text: "دیگر قادر به بازیابی این کالا نیستید؟",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'بلی ',
+          cancelButtonText: 'خیر'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            axios.get('https://starfoods.ir/api/deleteOrderBYS',
+              {
+                params: {
+                  SnOrderBYS: orderBYSSn
+                }
+              }
+            ).then((data) => {
+              let countBought = parseInt(localStorage.getItem('buyAmount'));
+              if (countBought > 0) {
+                localStorage.setItem('buyAmount', countBought - 1);
+                let cartDiv = document.getElementById(goodSn + "cartDiv");
+                cartDiv.style.display = "none";
+                renewCarts();
+              }
+            });
+          }
+        });
+      };
+      
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);

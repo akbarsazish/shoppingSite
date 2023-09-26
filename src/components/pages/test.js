@@ -34,28 +34,20 @@ const HomeSliders = ()=> {
         fetchSliderData();
       }, []);
       
-
       const purchaseKala = (goodSn, kala) => {
         const updatedPurchasedItems = {
             ...purchasedItems,
             [kala.GoodSn]: (purchasedItems[kala.GoodSn] || 0) + 1
           };
-
           setPurchasedItems(updatedPurchasedItems);
 
-            let updatedValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
-        
-
-        console.log('Inner text:', updatedValue);
-
-         
-        // const updatedValue = purchasedItems[kala.GoodSn] || 0;
-        console.log("update value", updatedValue)
-        if (updatedValue === 0) {
+        const updatedValue = purchasedItems + 1;
+        console.log("purchased item ", updatedValue)
+        if (purchasedItems === 0) {
             axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
             params: {
                 kalaId: goodSn,
-                amountUnit: updatedValue+1,
+                amountUnit: updatedValue,
                 psn: localStorage.getItem("psn")
             }
             })
@@ -68,22 +60,8 @@ const HomeSliders = ()=> {
             });
         } else {
             // update the bought
-            updatedValue++;
-            axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
-                params: {
-                    kalaId: goodSn,
-                    amountUnit: updatedValue,
-                    psn: localStorage.getItem("psn")
-                }
-                })
-                .then((response) => {
-                    console.log("bought kala response", response);
-                    setboughtKalaResponse(response)
-                    setPurchasedItems(updatedValue)
-                    let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                    localStorage.setItem('buyAmount', countBought + 1);
-                });
             const orderId = boughtKalaResponse;
+            console.log("for update part", orderId)
           }
      }
 
@@ -117,34 +95,34 @@ return(
 
                          {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                             <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
-                             <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
+                              
+                                <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
                                 
-                            {clickedItemId === kala.GoodSn && (
-                                <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                    <FontAwesomeIcon onClick={() =>purchaseKala(kala.GoodSn, kala)} className="buyButton" icon={faPlusCircle}/>
-                                      <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {purchasedItems[kala.GoodSn] || 0} </span>
-                                    <FontAwesomeIcon onClick={() => setPurchasedItems(Math.max(0, purchasedItems - 1))}  className="buyButton" icon={faMinusCircle}/>
-                                </div>
-                            )}
+                                {clickedItemId === kala.GoodSn && (
+                                    <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
+                                        <FontAwesomeIcon onClick={() =>{setPurchasedItems(purchasedItems => purchasedItems + 1); purchaseKala(kala.GoodSn, kala);}} className="buyButton" icon={faPlusCircle}/>
+                                          <span className="buy-amount"> {purchasedItems[kala.GoodSn] || 0} </span>
+                                        <FontAwesomeIcon onClick={() => setPurchasedItems(Math.max(0, purchasedItems - 1))}  className="buyButton" icon={faMinusCircle}/>
+                                    </div>
+                                 )}
                                  
-                            <Link to={"/descKala/"+kala.GoodSn+"/"+kala.firstGroupId} className="kala-img-name-link">
-                                <img className="fourColSliderImg" alt="picture" src={`https://starfoods.ir/resources/assets/images/kala/${kala.GoodSn}_1.jpg`} onError={(e) => { e.target.src = starfood; }} />
-                                <p className="kala-name"> {kala.GoodName} </p>
-                            </Link>
-
-                            <div className="bottomPart border-top">
-                                <span className="bottommPartItem">
-                                    <p>  </p>
-                                    {(kala.Price4 > 0 && kala.Price3 > 0) ?
-                                    <span className="takhfif-round"> {Math.round(((kala.Price4 - kala.Price3) * 100) / kala.Price4)}%</span> :
-                                    <span className="takhfif-round"> 0% </span>
-                                    }
-                                </span>
-                                <span className="bottommPartItem">
-                                    <div className="price" style={{ color: "#ff2c50" }}> <del> {parseInt(kala.Price4) > 0 && (parseInt(kala.Price4) / 10 + " تومان")} </del></div>
-                                    <div className="price" style={{ color: "#39ae00" }}> {parseInt(kala.Price3)/10} تومان </div>
-                                </span>
-                            </div>
+                                <Link to={"/descKala/"+kala.GoodSn+"/"+kala.firstGroupId} className="kala-img-name-link">
+                                    <img className="fourColSliderImg" alt="picture" src={`https://starfoods.ir/resources/assets/images/kala/${kala.GoodSn}_1.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                                    <p className="kala-name"> {kala.GoodName} </p>
+                                </Link>
+                                <div className="bottomPart border-top">
+                                    <span className="bottommPartItem">
+                                      <p>  </p>
+                                      {(kala.Price4 > 0 && kala.Price3 > 0) ?
+                                        <span className="takhfif-round"> {Math.round(((kala.Price4 - kala.Price3) * 100) / kala.Price4)}%</span> :
+                                        <span className="takhfif-round"> 0% </span>
+                                      }
+                                    </span>
+                                    <span className="bottommPartItem">
+                                       <div className="price" style={{ color: "#ff2c50" }}> <del> {parseInt(kala.Price4) > 0 && (parseInt(kala.Price4) / 10 + " تومان")} </del></div>
+                                       <div className="price" style={{ color: "#39ae00" }}> {parseInt(kala.Price3)/10} تومان </div>
+                                    </span>
+                                </div>
                             </SwiperSlide>
                             ))}
                      </Swiper>

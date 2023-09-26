@@ -198,6 +198,16 @@ span {
   margin: 2px;
 }
 
+.clickToUpdateBuy {
+  color: green;
+  font-size: 26px;
+  position: relative;
+  float: right;
+  cursor: pointer;
+  margin: 2px;
+}
+
+
 .smallModalTobuy {
   position: relative;
   margin-right:30px;
@@ -220,26 +230,27 @@ span {
 
 
 .takhfif-round {
-    background-color: red;
-    border-radius: 100%;
-    width: 22px;
-    height: 22px;
-    color: #fff;
-    padding: 3px;
-    font-size: 16px;
+  background-color: red;
+  border-radius: 100%;
+  width: 22px;
+  height: 22px;
+  color: #fff;
+  padding: 3px;
+  font-size: 16px;
+  margin-top: 2rem;
 }
 
 
 .bottomPart {
-    display: flex;
-    flex-wrap: wrap;
-    font-size: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
 }
 
 .bottommPartItem {
-    flex: 49%;
-    max-width: 50%;
-    height: 3rem;
+  flex: 49%;
+  max-width: 50%;
+  height: 3rem;
 }
 
 .fourColBottomRight {
@@ -785,6 +796,8 @@ img.topLeft {
   background-color: #fff;
   border-radius: 6px;
 }
+
+
 
 .shoppingRight {
   flex: 69%;

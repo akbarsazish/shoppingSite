@@ -216,7 +216,6 @@ export default function GroupingItems(props) {
                             slidesPerView={1}
                             spaceBetween={10}
                             navigation={true}
-
                             breakpoints={{
                                 320: {
                                     slidesPerView: 2,
@@ -234,17 +233,14 @@ export default function GroupingItems(props) {
                                     slidesPerView: 5,
                                     spaceBetween: 50,
                                 },
-                            }}
-                            modules={[Navigation]}
-                            className="mySwiper">
-                            {subGrups}
+                            }} modules={[Navigation]} className="mySwiper">
+                              {subGrups}
                         </Swiper>
                     </div>
                     <div className="groupingItems">
                         {maingroupKala}
                     </div>
-                </div >
-                
+                </div>
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog buyModal">
                       <div className="modal-content">

@@ -47,14 +47,14 @@ export default function Favorite(props) {
                             (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
                               '' :(
                                     element.requested===0?
-                                      <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                         <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
-                                      </span>
+                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
+                                        <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                    </span>
                                     :
-                                      <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
-                                        <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(localStorage.getItem("psn"),element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
-                                      </span>
-                                )
+                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
+                                      <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(localStorage.getItem("psn"),element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                    </span>
+                              )
                     }
                 </div>
             </div>
