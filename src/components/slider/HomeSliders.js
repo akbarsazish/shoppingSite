@@ -12,6 +12,7 @@ const HomeSliders = ()=> {
     const [kalaSliders, setAllKalaSlider] = useState([]);
     const [clickedItemId, setClickedItemId] = useState(null);
     const [boughtKalaResponse, setboughtKalaResponse] = useState();
+    const [boughtKalaBYS, setboughtKalaOrderBYS] = useState(0);
     const [purchasedItems, setPurchasedItems] = useState({});
     
     useEffect(() => {
@@ -32,60 +33,79 @@ const HomeSliders = ()=> {
           } 
         };
         fetchSliderData();
-      }, []);
+    }, []);
       
 
-      const purchaseKala = (goodSn, kala) => {
-        const updatedPurchasedItems = {
-            ...purchasedItems,
-            [kala.GoodSn]: (purchasedItems[kala.GoodSn] || 0) + 1
-          };
-
-          setPurchasedItems(updatedPurchasedItems);
-
-            let updatedValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
-        
-
-        console.log('Inner text:', updatedValue);
-
-         
-        // const updatedValue = purchasedItems[kala.GoodSn] || 0;
-        console.log("update value", updatedValue)
+    const purchaseKala = (goodSn, kala) => {
+        const updatedValue =  parseInt(purchasedItems[kala.GoodSn] || 0);
+        const newUpdatedValue = updatedValue + 1;
+    
         if (updatedValue === 0) {
-            axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
-            params: {
-                kalaId: goodSn,
-                amountUnit: updatedValue+1,
-                psn: localStorage.getItem("psn")
-            }
-            })
-            .then((response) => {
-                console.log("bought kala response", response);
-                setboughtKalaResponse(response)
-                setPurchasedItems(updatedValue)
-                let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                localStorage.setItem('buyAmount', countBought + 1);
-            });
-        } else {
-            // update the bought
-            updatedValue++;
             axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
                 params: {
                     kalaId: goodSn,
-                    amountUnit: updatedValue,
+                    amountUnit: newUpdatedValue,
                     psn: localStorage.getItem("psn")
                 }
-                })
-                .then((response) => {
-                    console.log("bought kala response", response);
-                    setboughtKalaResponse(response)
-                    setPurchasedItems(updatedValue)
+            }).then((data) => {
+                // console.log(data.data)
+                setboughtKalaOrderBYS(data.data.snLastBYS);
+                setboughtKalaResponse(data.data.amountBought);
+
+                setPurchasedItems(prevPurchasedItems => ({
+                    ...prevPurchasedItems,
+                    [kala.GoodSn]: parseInt(data.data.amountBought)
+                }));
+
+                let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
+                localStorage.setItem('buyAmount', countBought + 1);
+            });
+
+        } else {
+             const boughtKala = purchasedItems[kala.GoodSn] || 0;
+            axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
+                params: {
+                    orderBYSSn: boughtKalaBYS,
+                    amountUnit: boughtKala,
+                    kalaId: goodSn,
+                }
+                }).then((data) => {
+                    setPurchasedItems((prevPurchasedItems) => ({
+                        ...prevPurchasedItems,
+                        [kala.GoodSn]: boughtKala + 1,
+                    }))
                     let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
                     localStorage.setItem('buyAmount', countBought + 1);
                 });
-            const orderId = boughtKalaResponse;
-          }
-     }
+        }
+    }
+
+    const decreaseKala = (kala) => {
+        const currentPurchasedItems = purchasedItems[kala.GoodSn] || 0;
+        const updatedValue = Math.max(0, currentPurchasedItems - 1);
+      
+        axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
+            params: {
+              orderBYSSn: boughtKalaBYS,
+              amountUnit: updatedValue,
+              kalaId: kala.GoodSn,
+            },
+          })
+          .then((data) => {
+            let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
+                countBought = Math.max(0, countBought - 1); 
+                localStorage.setItem('buyAmount', countBought);
+      
+            setPurchasedItems((prevPurchasedItems) => ({
+              ...prevPurchasedItems,
+              [kala.GoodSn]: updatedValue,
+            }));
+          })
+          .catch((error) => {
+            console.error('Error updating purchased item:', error);
+          });
+      };
+      
 
 return(
     <>
@@ -118,12 +138,12 @@ return(
                          {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                             <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
                              <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
-                                
                             {clickedItemId === kala.GoodSn && (
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                    <FontAwesomeIcon onClick={() =>purchaseKala(kala.GoodSn, kala)} className="buyButton" icon={faPlusCircle}/>
+                                    <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="buyButton" icon={faPlusCircle}/>
                                       <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {purchasedItems[kala.GoodSn] || 0} </span>
-                                    <FontAwesomeIcon onClick={() => setPurchasedItems(Math.max(0, purchasedItems - 1))}  className="buyButton" icon={faMinusCircle}/>
+                                      {console.log("i LOVE CONDIG", purchasedItems[kala.GoodSn])}
+                                    <FontAwesomeIcon onClick={() => decreaseKala(kala)}  className="buyButton" icon={faMinusCircle}/>
                                 </div>
                             )}
                                  
@@ -238,7 +258,103 @@ return(
                 </Swiper>
             </div>
             </> : "" }
-         </div>
+
+          {/* دو عکسی   */}
+          {parseInt(kalaTypes.partType)===7 ?
+            <>
+            {console.log(kalaTypes)}
+            <div className="forTitle mt-2 p-2">
+                <div className="forTitleItem">
+                    <h6> {kalaTypes.title} </h6>
+                </div>
+                <div className="forTitleItem text-start">
+                   {kalaTypes.showAll ? <Link to="/"> <h6> مشاهده همه  </h6> </Link> : "" }
+                </div>
+            </div>
+
+            <div className="fourColSide border-top">
+                <div className="twoPicDiv text-center mt-1">
+                    {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
+                        <Link to="/" className="twoPics">
+                            <img className="twoPic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/twoPics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                        </Link>
+                   ))}
+                </div>
+            </div>
+            </> : "" }
+
+          {/* سه عکسی   */}
+          {parseInt(kalaTypes.partType)===8?
+            <>
+            {console.log(kalaTypes)}
+            <div className="forTitle mt-2 p-2">
+                <div className="forTitleItem">
+                    <h6> {kalaTypes.title} </h6>
+                </div>
+                <div className="forTitleItem text-start">
+                   {kalaTypes.showAll ? <Link to="/"> <h6> مشاهده همه  </h6> </Link> : "" }
+                </div>
+            </div>
+
+            <div className="fourColSide border-top">
+                <div className="threePicDiv text-center mt-1">
+                    {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
+                        <Link to="/" className="threePics">
+                            <img className="threePic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/threePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                        </Link>
+                   ))}
+                </div>
+            </div>
+            </> : "" }
+
+          {/*چهار عکسی  عکسی   */}
+          {parseInt(kalaTypes.partType)===9?
+            <>
+            {console.log(kalaTypes)}
+            <div className="forTitle mt-2 p-2">
+                <div className="forTitleItem">
+                    <h6> {kalaTypes.title} </h6>
+                </div>
+                <div className="forTitleItem text-start">
+                   {kalaTypes.showAll ? <Link to="/"> <h6> مشاهده همه  </h6> </Link> : "" }
+                </div>
+            </div>
+
+            <div className="fourColSide border-top">
+                <div className="fourPicDiv text-center mt-1">
+                    {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
+                        <Link to="/" className="fourPics">
+                            <img className="fourPic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fourPics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                        </Link>
+                   ))}
+                </div>
+            </div>
+            </> : "" }
+
+          {/*چهار عکسی  عکسی   */}
+          {parseInt(kalaTypes.partType)===10?
+            <>
+            {console.log(kalaTypes)}
+            <div className="forTitle mt-2 p-2">
+                <div className="forTitleItem">
+                    <h6> {kalaTypes.title} </h6>
+                </div>
+                <div className="forTitleItem text-start">
+                   {kalaTypes.showAll ? <Link to="/"> <h6> مشاهده همه  </h6> </Link> : "" }
+                </div>
+            </div>
+
+            <div className="fourColSide border-top">
+                <div className="fivePicDiv text-center mt-1">
+                    {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
+                      <Link to="/" className="fivePics">
+                          <img className="fivePic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fivePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                      </Link>
+                   ))}
+                </div>
+            </div>
+            </> : "" }
+          </div>
        </>))}
     </>
                 

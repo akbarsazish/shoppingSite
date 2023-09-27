@@ -193,7 +193,6 @@ export default function ShoppingCart(props) {
           }
         });
       };
-      
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
@@ -220,7 +219,7 @@ export default function ShoppingCart(props) {
                                 <div>
                                     {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState===0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
-                                    :( (allMoney <= minSalePriceFactor)?
+                                    :((allMoney <= minSalePriceFactor)?
                                         <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
                                         :
                                         <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
@@ -233,7 +232,9 @@ export default function ShoppingCart(props) {
                       <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
                     </div>
                 </div>
+
                 <Footer />
+                
                 {true &&
                     <div className="modal fade " id="exampleModal" tabIndex="-1">
                         <div className="modal-dialog buyModal">

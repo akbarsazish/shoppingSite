@@ -212,9 +212,9 @@ span {
   position: relative;
   margin-right:30px;
   margin-top: 2px;
-  height: 30px;
   width: 6rem;
-  border-radius: 3%;
+  border-radius: 4%;
+  z-index: inherit;
 }
 
 .buyButton {
@@ -308,6 +308,85 @@ div.price {
 .brandDiv {
   background-color: #fff;
   border-radius: 50%;
+}
+
+.twoPicDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.twoPics{
+  width: 49%;
+}
+
+.twoPic{
+  width:100%;
+  height: 11rem;
+}
+
+
+.threePicDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.threePics{
+  width: 33%;
+}
+
+.threePic{
+  width:100%;
+  height: 11rem;
+}
+
+
+.fourPicDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.fourPics{
+  width: 33%;
+}
+
+.fourPic{
+  width:100%;
+  height: 11rem;
+}
+
+.fivePicDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* overflow-x:scroll; */
+}
+
+
+/* .fivePicDiv::-webkit-scrollbar {
+    width: 8px;
+}
+
+.fivePicDiv::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(252, 0, 0, 0.3);
+    border-radius: 0.5rem;
+}
+
+.fivePicDiv::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    -webkit-box-shadow: inset 0 0 6px rgba(250, 0, 0, 0.5);
+} */
+
+
+.fivePics{
+  width: 19%;
+}
+
+.fivePic{
+  width:100%;
+  height: 11rem;
 }
 
 .flex-enamad {
