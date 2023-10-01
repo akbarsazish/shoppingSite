@@ -38,7 +38,7 @@ const HomeSliders = ()=> {
 
     const purchaseKala = (goodSn, kala) => {
         const updatedValue =  parseInt(purchasedItems[kala.GoodSn] || 0);
-        const newUpdatedValue = updatedValue + 1;
+        const newUpdatedValue = updatedValue > 0 ? updatedValue + 1 : 1;
     
         if (updatedValue === 0) {
             axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
@@ -80,54 +80,32 @@ const HomeSliders = ()=> {
         }
     }
 
-        const decreaseKala = (kala) => {
-              const currentPurchasedItems = purchasedItems[kala.GoodSn] || 0;
-              const updatedValue = Math.max(0, currentPurchasedItems - 1);
-
-              if (updatedValue === 0) {
-                  axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
-                      params: {
-                          orderBYSSn: boughtKalaBYS,
-                          amountUnit: updatedValue,
-                          kalaId: kala.GoodSn,
-                        }
-                    }).then((data) => {
-                        setboughtKalaResponse(data.data);
-                        setPurchasedItems({
-                            ...purchasedItems,
-                            [kala.GoodSn]: updatedValue
-                        });
-                        let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                        localStorage.setItem('buyAmount', countBought - 1);
-                    });
-                } else {
-                    const updatedPurchasedItems = {
-                        ...purchasedItems,
-                        [kala.GoodSn]: updatedValue
-                    };
-                    setPurchasedItems(updatedPurchasedItems);
-                    
-                    alert(updatedValue)
-                axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
-                    params: {
-                        orderBYSSn: boughtKalaBYS,
-                        amountUnit: updatedValue,
-                        kalaId: kala.GoodSn,
-                    }
-                }).then((data) => {
-                  let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                  localStorage.setItem('buyAmount', countBought - 1);
-                  setPurchasedItems((prevPurchasedItems) => ({
-                    ...prevPurchasedItems,
-                    [kala.GoodSn]: updatedValue,
-                  }));
-                })
-                .catch((error) => {
-                    console.error('Error updating purchased item:', error);
-                  });
-            }
-        }
-    
+    const decreaseKala = (kala) => {
+        const currentPurchasedItems = purchasedItems[kala.GoodSn] || 0;
+        const updatedValue = Math.max(0, currentPurchasedItems - 1);
+      
+        axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
+            params: {
+              orderBYSSn: boughtKalaBYS,
+              amountUnit: updatedValue,
+              kalaId: kala.GoodSn,
+            },
+          })
+          .then((data) => {
+            let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
+                countBought = Math.max(0, countBought - 1); 
+                localStorage.setItem('buyAmount', countBought);
+      
+            setPurchasedItems((prevPurchasedItems) => ({
+              ...prevPurchasedItems,
+              [kala.GoodSn]: updatedValue,
+            }));
+          })
+          .catch((error) => {
+            console.error('Error updating purchased item:', error);
+          });
+      };
+      
 
 return(
     <>

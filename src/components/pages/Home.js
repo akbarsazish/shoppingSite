@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination } from "swiper";
-import 'swiper/swiper.min.css';
 import contactImage from '../../assets/images/contactImage.jpg'
 import MainGroupItem from './MainGroupItem'
 import axios from "axios";
@@ -28,39 +27,39 @@ export default function Home() {
         })
 
     axios.get("https://starfoods.ir/api/getMainGroups").then((data) => {
-            setMainGroups(data.data.map((element,index)=><MainGroupItem key={index
-            } title={element.title} id={element.id} ></MainGroupItem>))
+            setMainGroups(data.data.map((element,index)=>
+            <MainGroupItem key={index} title={element.title} id={element.id} ></MainGroupItem>))
         })
     },[])
 
     if(localStorage.getItem("isLogedIn")){    
     return (
-        <div className="container mainSliderContainer">
-            <div className="row">
-                <div className="col-lg-8 col-md-8 px-0 mx-0">
+        <div className="container rounded" style={{boxShadow: "0px 0px 1px 1px #fed"}}>
+            <div className="mainSliderContainer">
+                <div className="mainSlider-right">
                     <Swiper
-                        spaceBetween={30}
+                        spaceBetween={10}
                         pagination={{
                             clickable: true,
                         }}
                         modules={[Pagination]}
                         className="mySwiper mainSlider">
-                        <SwiperSlide><img src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.firstPic} className="me-1 logo" alt="لوگو" /></SwiperSlide>
-                        <SwiperSlide><img src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.secondPic} className="me-1 logo" alt="لوگو" /></SwiperSlide>
-                        <SwiperSlide><img src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.thirdPic} className="me-1 logo" alt="لوگو" /></SwiperSlide>
+                        <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.firstPic} alt="لوگو" /></SwiperSlide>
+                        <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.secondPic} alt="لوگو" /></SwiperSlide>
+                        <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.thirdPic} alt="لوگو" /></SwiperSlide>
                     </Swiper>
                 </div>
-                <div className="col-lg-4 px-0 mx-0">
+                <div className="mainSlider-left">
                     <div className="row">
-                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} className="smallSlider" alt={smallSlider.secondPic} />
+                        <img  className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} alt={smallSlider.secondPic} />
                     </div>
                     <div className="row">
-                        <img src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} className="smallSlider" alt={smallSlider.firstPic} />
+                        <img  className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} alt={smallSlider.firstPic} />
                     </div>
                 </div>
             </div>
-            <div className="row" style={{boxShadow: "0px 0px 1px 1px #DEF"}}>
-                <SecondMenu /> 
+            <SecondMenu /> 
+            <div className="row">
                 <div className="categories">
                     {mainGroups}
                 </div>
@@ -80,7 +79,7 @@ export default function Home() {
                          onClick='window.open("https://logo.samandehi.ir/Verify.aspx?id=249763&p=uiwkaodspfvljyoegvkaxlao",
           "Popup", "toolbar=no, scrollbars=no, location=no, statusbar=no, menubar=no, resizable=0, width=450, height=630, top=30")'
                         alt='logo-samandehi' src='https://logo.samandehi.ir/logo.aspx?id=249763&p=odrfshwlbsiyyndtwlbqqfti' />
-                </div>
+               </div>
             </div>
             <div className="flex-enamad">
                 <div className="enamadItem">
@@ -88,9 +87,9 @@ export default function Home() {
                     <Link to="/policy" className="siteInfo">حریم خصوصی</Link> &nbsp;
                     <Link to="/contact" className="siteInfo" >اطلاعات فروشگاه</Link> &nbsp;
                     <Link to="/privacy" className="siteInfo" >شرایط و قوانین</Link>
-                </div>
+                </div> <hr/>
             </div>
-        </div >
+        </div>
       )
     }else{
         window.location.href="/login"

@@ -202,12 +202,12 @@ export default function ShoppingCart(props) {
             <>
                 <Header />
                 <Sidebar />
-                <div className="container marginTop">
+                <div className="container marginTop rounded">
                     <h5 className="fw-bold"> سبد خرید : </h5>
                     <div className="shoppingCart p-2">
                         <div className="shoppingRight">
                             <div className="shoppingItems">
-                                {cartItems}
+                                {cartItems == "" || 0 ? <span className="empty-basket"> سبد خرید شما خالی است! </span> : cartItems}
                             </div>
                         </div>
                         <div className="shoppingLeft">
@@ -228,9 +228,11 @@ export default function ShoppingCart(props) {
                             </div>
                         </div>
                     </div>
+                   
                     <div className="yourBenefit">
-                      <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
+                        <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
                     </div>
+                       
                 </div>
 
                 <Footer />

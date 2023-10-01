@@ -13,15 +13,15 @@ export default function ChatGroup() {
     const [customerText, setCustomerText] = useState('');
     const [customerReply, setCustomerReply] = useState('');
 
-
     // console.log("reply to :", replyTo)
-
     const showToggleChat = () => {
         setLiveChat(true)
     }
+
     const hideToggleChat = () => {
         setLiveChat(false)
     }
+    
     const hideReplyDiv = () => {
         setReplyDiv(false)
     }

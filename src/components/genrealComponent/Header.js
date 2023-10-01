@@ -72,7 +72,7 @@ const Header = ()=>{
 if(localStorage.getItem("isLogedIn")){
     return (
         <>
-        <div className="row mx-0 topMenu ">
+        <div className="topMenu">
             <div className="container flex-container">
                 <div className="flex-item-left">
                     <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
@@ -90,7 +90,6 @@ if(localStorage.getItem("isLogedIn")){
                              placeholder="چی لازم داری ؟  ..." />  )}
                     </form>
                 </div>
-                
                 <div className="flex-item-right mt-1" id="headerStaff">
                     <Link to="/inviteCode" className="headerLink" > <span> {takhfifMoney} </span> <FontAwesomeIcon className="faIcon" icon={faPeopleArrows} /> &nbsp;  </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} ><FontAwesomeIcon className="faIcon" icon={faShoppingCart} /> &nbsp; <span className="badge text-bg-dark cartNotification">{localStorage.getItem("buyAmount")}</span> </Link> 

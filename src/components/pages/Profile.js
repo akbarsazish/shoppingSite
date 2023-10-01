@@ -1,16 +1,16 @@
-import { faEdit, faEye, faHeart, faHistory, faInfoCircle, faIdCard} from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import { Link } from "react-router-dom"
-import profile from "../../assets/images/profile.png"
-import Footer from "../genrealComponent/Footer"
-import Header from "../genrealComponent/Header"
-import Sidebar from "../genrealComponent/Sidebar"
-import axios from "axios"
-import { useEffect } from "react"
-import { useState } from "react"
-export default function Profile(props) {
+import { faEdit, faEye, faHeart, faHistory, faInfoCircle, faIdCard} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Link } from "react-router-dom";
+import profile from "../../assets/images/profile.png";
+import Footer from "../genrealComponent/Footer";
+import Header from "../genrealComponent/Header";
+import Sidebar from "../genrealComponent/Sidebar";
+import axios from "axios";
+import { useEffect } from "react";
+import { useState } from "react";
 
+export default function Profile(props) {
     const [sendedFactors, setSendedFactors] = useState(0);
     const [waitingOrders, setWaitingOrders] = useState(0);
     const [customerName, setCustomerName] = useState(0)
@@ -86,7 +86,7 @@ export default function Profile(props) {
                             </div>
                         </div>
                         <div className="profileLeftPart card">
-                                <span className="tableTitle"> فاکتور هار پرداخت نشده </span>
+                                <span className="tableTitle">فاکتور های ارسال شده </span>
                             <table class="table table-bordered table-sm factorTable">
                                 <thead className="tableHeader">
                                     <tr>
@@ -99,7 +99,7 @@ export default function Profile(props) {
                                         <th> جزئیات </th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style={{height:"5rem"}}>
                                     {sendedFactors}
                                 </tbody>
                             </table>
@@ -117,7 +117,7 @@ export default function Profile(props) {
                                         <th> جزئیات </th>
                                     </tr>
                                 </thead>
-                                <tbody className="tableBody">
+                                <tbody className="tableBody" style={{height:"5rem"}}>
                                     {waitingOrders}
                                 </tbody>
                             </table>

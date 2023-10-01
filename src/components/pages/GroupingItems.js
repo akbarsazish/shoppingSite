@@ -93,7 +93,7 @@ export default function GroupingItems(props) {
                         ''
                     ) : (
                         
-                        parseInt(element.requested) === 0 ? 
+                    parseInt(element.requested) === 0 ? 
                             <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request" + element.GoodSn}>
                                 <button
                                     value="0"
@@ -116,6 +116,7 @@ export default function GroupingItems(props) {
                        )}
                     </div>
                 </div>
+                
                 <div className="groupingItemBottomBtn">
                     {element.activePishKharid<1
                         ?
@@ -244,7 +245,7 @@ export default function GroupingItems(props) {
                 <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div className="modal-dialog buyModal">
                       <div className="modal-content">
-                          <div className="modal-body">
+                          <div className="modal-body p-2">
                               <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
                                  {buyOption}
                               </div>

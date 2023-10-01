@@ -196,7 +196,7 @@ export default function DescKala(props) {
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog buyModal">
                     <div className="modal-content">
-                        <div className="modal-body">
+                        <div className="modal-body p-2">
                             <div id='unitStuffContainer' className="alert alert-danger buyButtonDiv">
                                 {buyOption}
                             </div>

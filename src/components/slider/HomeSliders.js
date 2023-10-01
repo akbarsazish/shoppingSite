@@ -1,7 +1,8 @@
 import React, {memo, useEffect, useState} from "react";
 import { Link, useParams} from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import { Pagination, FreeMode, Navigation} from "swiper";
+import 'swiper/css/free-mode';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png";
@@ -38,7 +39,7 @@ const HomeSliders = ()=> {
 
     const purchaseKala = (goodSn, kala) => {
         const updatedValue =  parseInt(purchasedItems[kala.GoodSn] || 0);
-        const newUpdatedValue = updatedValue + 1;
+        const newUpdatedValue = updatedValue > 0 ? updatedValue + 1 : 1;
     
         if (updatedValue === 0) {
             axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
@@ -83,7 +84,6 @@ const HomeSliders = ()=> {
     const decreaseKala = (kala) => {
         const currentPurchasedItems = purchasedItems[kala.GoodSn] || 0;
         const updatedValue = Math.max(0, currentPurchasedItems - 1);
-      
         axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
             params: {
               orderBYSSn: boughtKalaBYS,
@@ -142,7 +142,7 @@ return(
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
                                     <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="buyButton" icon={faPlusCircle}/>
                                       <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {purchasedItems[kala.GoodSn] || 0} </span>
-                                      {console.log("i LOVE CONDIG", purchasedItems[kala.GoodSn])}
+                                      {/* {console.log("i LOVE CONDIG", purchasedItems[kala.GoodSn])} */}
                                     <FontAwesomeIcon onClick={() => decreaseKala(kala)}  className="buyButton" icon={faMinusCircle}/>
                                 </div>
                             )}
@@ -262,7 +262,7 @@ return(
           {/* دو عکسی   */}
           {parseInt(kalaTypes.partType)===7 ?
             <>
-            {console.log(kalaTypes)}
+            {/* {console.log(kalaTypes)} */}
             <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
@@ -286,7 +286,7 @@ return(
           {/* سه عکسی   */}
           {parseInt(kalaTypes.partType)===8?
             <>
-            {console.log(kalaTypes)}
+            {/* {console.log(kalaTypes)} */}
             <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
@@ -319,22 +319,41 @@ return(
                    {kalaTypes.showAll ? <Link to="/"> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
-
-            <div className="fourColSide border-top">
-                <div className="fourPicDiv text-center mt-1">
+            <Swiper
+                    slidesPerView={4}
+                    spaceBetween={30}
+                    breakpoints={{
+                        320: {slidesPerView: 2, spaceBetween: 5},
+                        640: {slidesPerView: 2, spaceBetween: 5},
+                        768: {slidesPerView: 3, spaceBetween: 5},
+                        1024: {slidesPerView: 4, spaceBetween:5},
+                    }}
+                      loop={true}
+                      pagination={{
+                      clickable: true,
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className="mySwiper">
+                        
+                 <div className="fourColSide border-top">
+                   <div className="fourPicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
-                        <Link to="/" className="fourPics">
-                            <img className="fourPic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fourPics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
-                        </Link>
-                   ))}
-                </div>
-            </div>
-            </> : "" }
+                        <SwiperSlide>
+                            <Link to={"/getAllKala/"+pictures.homepartId+"/"+pictures.id} className="fourPics">
+                                <img className="fourPic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fourPics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                            </Link>
+                        </SwiperSlide>
+                     ))}
+                   </div>
+             </div>
+            </Swiper>
+          </> : "" }
 
-          {/*چهار عکسی  عکسی   */}
-          {parseInt(kalaTypes.partType)===10?
+          {/*پنج عکسی  */}
+
+            {parseInt(kalaTypes.partType)===10?
             <>
-            {console.log(kalaTypes)}
             <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
@@ -343,17 +362,33 @@ return(
                    {kalaTypes.showAll ? <Link to="/"> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
+            <Swiper
+                slidesPerView={5}
+                spaceBetween={30}
+                breakpoints={{
+                    320: {slidesPerView: 3, spaceBetween: 5},
+                    640: {slidesPerView: 4, spaceBetween: 5},
+                    768: {slidesPerView: 4, spaceBetween: 5},
+                    1024: {slidesPerView: 5, spaceBetween: 5},
+                }}
+                freeMode={true}
+                pagination={{
+                clickable: true,
+                }} modules={[FreeMode, Pagination]} className="mySwiper">
 
-            <div className="fourColSide border-top">
-                <div className="fivePicDiv text-center mt-1">
+                 <div className="fourColSide border-top">
+                  <div className="fourPicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
-                      <Link to="/" className="fivePics">
-                          <img className="fivePic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fivePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
-                      </Link>
-                   ))}
+                        <SwiperSlide>
+                            <Link to="/" className="fivePics">
+                                <img className="fivePic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fivePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                            </Link>
+                        </SwiperSlide>
+                     ))}
+                   </div>
                 </div>
-            </div>
-            </> : "" }
+            </Swiper>
+          </> : "" }
           </div>
        </>))}
     </>

@@ -44,37 +44,37 @@ export default function Favorite(props) {
                         {element.overLine===1 && element.Price4>0 && <div className="price" style={{ color: "#ff2c50" }}> <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del> </div>}
                         </>
                         :
-                            (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
-                              '' :(
-                                    element.requested===0?
-                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                        <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
-                                    </span>
-                                    :
-                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
-                                      <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(localStorage.getItem("psn"),element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
-                                    </span>
-                              )
+                          (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
+                          '' :(
+                               element.requested===0?
+                                <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
+                                    <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                </span>
+                                :
+                                <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
+                                  <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(localStorage.getItem("psn"),element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                </span>
+                            )
                     }
                 </div>
             </div>
                 <div className="groupingItemBottomBtn">
                     {element.activePishKharid<1 
                         ?
-                            (element.bought==="Yes" ?
-                                <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.BoughtAmount)+" "+ element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
-                                :(element.callOnSale>0?
-                                    <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
-                                    :((element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0) 
-                                        ?
-                                        <button className="btn btn-sm btn-danger selectAmount" id={"buyButton"+element.GoodSn} onClick={(event)=>{showBuyModal(element.GoodSn,event)}}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
-                                        :
-                                        <div className="c-product__add mt-0">
-                                          <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
-                                        </div>   
-                                    )
-                                )
-                            )
+                          (element.bought==="Yes" ?
+                            <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.BoughtAmount)+" "+ element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
+                              :(element.callOnSale>0?
+                                <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
+                                  :((element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0) 
+                                    ?
+                                      <button className="btn btn-sm btn-danger selectAmount" id={"buyButton"+element.GoodSn} onClick={(event)=>{showBuyModal(element.GoodSn,event)}}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
+                                      :
+                                      <div className="c-product__add mt-0">
+                                        <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
+                                      </div>   
+                                  )
+                              )
+                          )
                         : 'Result3' 
                     }
                 </div>

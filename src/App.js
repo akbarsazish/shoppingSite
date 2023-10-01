@@ -109,7 +109,7 @@ function App() {
         <Route path="inviteCode"                    element={<InviteCode/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
-        <Route path='getAllKala/:id'                element={<GetAllKala />} />
+        <Route path='getAllKala/:homepartId/:id'    element={<GetAllKala changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
         <Route path="*"                             element={<PageNotFound />} />
         <Route
           path="/successPayApi"

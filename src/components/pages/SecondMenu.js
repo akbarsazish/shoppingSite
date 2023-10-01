@@ -7,7 +7,7 @@ import star from '../../assets/images/siteImage/star.png';
 
 export default function SecondMenu() {
     return(
-        <div className="row text-center my-2">
+        <div className="row">
             <div className="round-menu">
                <div className="round-menu-items" id="roundMenuItem">
                     <div className="round-item">
@@ -30,28 +30,28 @@ export default function SecondMenu() {
                     </div>
                </div>
         
-        <div className="round-menu-items" id="roundMenuItem">
-            <div className="round-item">
-                <Link to={"/disAndPrice"} className="round-link">
-                    <div className="round-menu-info">
-                        <img src={precentage} alt="star" className="round-menu-img" /> 
+                <div className="round-menu-items" id="roundMenuItem">
+                    <div className="round-item">
+                        <Link to={"/disAndPrice"} className="round-link">
+                            <div className="round-menu-info">
+                                <img src={precentage} alt="star" className="round-menu-img" /> 
+                            </div>
+                            <span className="rount-menu-text"> تخفیف ها   </span>
+                        </Link>
                     </div>
-                    <span className="rount-menu-text"> تخفیف ها   </span>
-                </Link>
-            </div>
-        </div>
-        <div className="round-menu-items" id="roundMenuItem">
-            <div className="round-item">
-                <Link to="/lottery" className="round-link">    
-                    <div className="round-menu-info">
-                        <img src={star} alt="star" className="round-menu-img" /> 
+                </div>
+                <div className="round-menu-items" id="roundMenuItem">
+                    <div className="round-item">
+                        <Link to="/lottery" className="round-link">    
+                            <div className="round-menu-info">
+                                <img src={star} alt="star" className="round-menu-img" /> 
+                            </div>
+                            <span className="rount-menu-text"> ستاره  </span>
+                        </Link>
                     </div>
-                    <span className="rount-menu-text"> ستاره  </span>
-                </Link>
-            </div>
-        </div>
-        </div>
-    </div>
+                </div>
+          </div>
+      </div>
     )
 }
 
