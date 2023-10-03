@@ -21,7 +21,11 @@ export default function ShoppingCart(props) {
     const [changedItems, setChanedItems] = useState(0);
 
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("https://starfoods.ir/api/cartsList",{
+            params:{
+                psn:localStorage.getItem("psn")}})
+            .then((data) => {
+                
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -75,23 +79,24 @@ export default function ShoppingCart(props) {
     }, []);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("https://starfoods.ir/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
+        axios.get("https://starfoods.ir/api/updateChangedPrice", { 
+            params: { SnHDS: snHDS,psn:localStorage.getItem("psn")}})
+            .then((data) => {
             renewCarts();
-        })
+          })  
     }
 
     const renewCarts = () => {
-        axios.get("https://starfoods.ir/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
-            let currency = data.data.currency;
-            setMinSalePriceFactor(data.data.minSalePriceFactor)
-            setCurrencyName(data.data.currencyName)
-            setIntervalBetweenBuys(data.data.intervalBetweenBuys)
-            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
-            setChangePriceState(data.data.changedPriceState)
-            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-        
-            console.log(data.data.orders[0].Price1);
-            console.log(data.data.orders[0].Price);
+        axios.get("https://starfoods.ir/api/cartsList",{
+            params:{psn:localStorage.getItem("psn")}})
+            .then((data) => {
+              let currency = data.data.currency;
+              setMinSalePriceFactor(data.data.minSalePriceFactor)
+              setCurrencyName(data.data.currencyName)
+              setIntervalBetweenBuys(data.data.intervalBetweenBuys)
+              setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
+              setChangePriceState(data.data.changedPriceState)
+              setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
 
             if(data.data.orders[0].Price > 0 && data.data.orders[0].Price1){
               let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
@@ -109,10 +114,9 @@ export default function ShoppingCart(props) {
                   }
                     return accumulator;
                 }, 0);
-            
 
-                if (allMoneyProfit > allMoneyNoProfit) {
-                    setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
+                if (parseInt(allMoneyProfit) > parseInt(allMoneyNoProfit)) {
+                    setAllProfit(allMoneyProfit - allMoneyNoProfit);
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
@@ -260,14 +264,11 @@ export default function ShoppingCart(props) {
                             <div className="modal-body">
                                 <ul className="list-group list-group-flush">
                                   {
-                                  changedItems ?
-                                    
-                                    changedItems.map((element) => {
-                                        if (element.changedPrice === 0) {
+                                  changedItems && changedItems.map((element) => {
+                                        if (element.changedPrice !== 0) {
                                             return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
                                         }
-                                    }): ""
-                                
+                                    })
                                   }
                                 </ul>
                                 <hr/>

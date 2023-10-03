@@ -38,22 +38,22 @@ span {
   margin-right: 0 !important;
 }
 
-.flex-container {
+.header-container {
     display: flex;
     flex-wrap: wrap;
-    text-align: center;
-    justify-content: space-between;
 }
 
 .flex-item-left {
     padding: 5px;
     flex: 49%;
     padding-top: 13px;
+    text-align: right;
 }
 
 .flex-item-right {
     padding: 3px;
     flex: 49%;
+    text-align: left;
 }
 
 .faIcon {
@@ -68,24 +68,27 @@ span {
 
 .headerLink {
     text-decoration: none;
-    color: #fff;
+    color: #000;
+}
+
+.fortest {
+    color: #000;
 }
 
 .txtsearch {
-    margin: 0.1rem 1rem 1rem;
-    border-radius: 2px;
-    font-size: 12px;
-    padding: 6px;
-    max-width: 100%;
+  margin: 0.1rem 1rem 1rem;
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 6px;
+  max-width: 100%;
 }
 
 .cartNotification {
-    top: 1%;
-    left: 22%;
-    font-size: 9px !important;
-    position: fixed;
+  top: 1%;
+  left: 11%;
+  font-size: 9px !important;
+  position: fixed;
 }
-
 
 .offcanvas-body,
 .offcanvas-header {
@@ -94,107 +97,105 @@ span {
 }
 
 .dri-left {
-    border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #fff;
 }
 
 .offcanvas-body a {
-    background: linear-gradient(#cc2c2c, #ff002b, #ff4444);
-    text-decoration: none;
-    color: #fff;
-    font-size: 14px;
-    text-align: right;
-    display: block;
-    border-bottom: 1px solid #fff;
-    padding: 6px 4px;
+  background: linear-gradient(#cc2c2c, #ff002b, #ff4444);
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  text-align: right;
+  display: block;
+  border-bottom: 1px solid #fff;
+  padding: 6px 4px;
 }
 
 .offcanvas-body a:hover {
-    font-weight: bold;
-    color: #000;
+  font-weight: bold;
+  color: #000;
 }
 
 .menuFaIcon {
-    font-size: 18px;
-    margin: 0px 10px 0px 8px;
+  font-size: 18px;
+  margin: 0px 10px 0px 8px;
 }
 
-
 .mainSlider {
-    height: 300px !important;
+  height: 300px !important;
 }
 
 .mainSliderContainer {
-    margin-top: 60px;
-    display: flex;
+  margin-top: 60px;
+  display: flex;
 }
 
 .mainSlider-right {
-    width: 66%;
+  width: 66%;
 }
 .mainSlider-left {
   width: 33%;
 }
 
 .smallSlider {
-    height: 150px !important;
+  height: 150px !important;
 }
 
 .socialMedia {
-    background-color: #fff;
-    border-radius: 50%;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .socialMedia:hover {
-    background-color: #f00;
-    border-radius: 10px;
+  background-color: #f00;
+  border-radius: 10px;
 }
 
 .categories {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 3px;
-    flex-direction: row;
-    text-align: center;
-    justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3px;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
 }
 
 .categoryItem {
-    flex-basis:19.3%;
-    padding: 1px;
-    background-color: #fff;
-    margin: 3px;
-    border-radius: 5px;
+  flex-basis:19.3%;
+  padding: 1px;
+  background-color: #fff;
+  margin: 3px;
+  border-radius: 5px;
 }
 
 .categoryImg {
-    padding: 5px;
-    margin: 5px;
-    box-shadow: inset;
-    vertical-align: middle;
-    width: 90%;
+  padding: 5px;
+  margin: 5px;
+  box-shadow: inset;
+  vertical-align: middle;
+  width: 90%;
 }
 
 .categoryTitle a {
-    text-decoration: none;
-    color: #000;
-    font-size: 14px;
-    font-weight: bold;
+  text-decoration: none;
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-
 .fourColSliderImg {
-    margin: 0px 5px;
-    width: 96%;
+  margin: 0px 5px;
+  width: 96%;
 }
 
 .forTitle {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .forTitleItem {
-    flex: 49%;
-    max-width: 50%;
+  flex: 49%;
+  max-width: 50%;
 }
 
 .clickToBuy {
@@ -219,7 +220,7 @@ span {
 .smallModalTobuy {
   position: relative;
   margin-right:30px;
-  margin-top: 2px;
+  margin-top: 1px;
   width: 6rem;
   border-radius: 4%;
   z-index: inherit;
@@ -256,6 +257,13 @@ span {
   display: inline-block;
   width: 160px;
   margin: 1px;
+}
+
+.home-buyButton {
+  cursor: pointer;
+  display: inline-block;
+  margin: 1px;
+  font-size: 1.6rem;
 }
 
 .buy-amount {
@@ -340,9 +348,29 @@ div.price {
   padding: 20px;
 }
 
+.groupsImage {
+  width: 96%;
+  height: 96%;
+  padding: 10px;
+  border-radius: 0.3rem;
+}
+
 .brandDiv {
   background-color: #fff;
   border-radius: 50%;
+}
+
+.groupsImageAnchor {
+  text-decoration: none;
+  color: #000;
+  font-size: 12px;
+  position: relative;
+}
+
+.special-group-title {
+    color: #000;
+    font-weight: bold;
+    font-size: 12px;
 }
 
 .twoPicDiv {

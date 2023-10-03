@@ -1,7 +1,8 @@
 import React, {memo, useEffect, useState} from "react";
 import { Link, useParams} from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper";
+import { Pagination, FreeMode, Navigation} from "swiper";
+import 'swiper/css/free-mode';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png";
@@ -11,7 +12,6 @@ const HomeSliders = ()=> {
     const {id}=useParams();
     const [kalaSliders, setAllKalaSlider] = useState([]);
     const [clickedItemId, setClickedItemId] = useState(null);
-    const [boughtKalaResponse, setboughtKalaResponse] = useState();
     const [boughtKalaBYS, setboughtKalaOrderBYS] = useState(0);
     const [purchasedItems, setPurchasedItems] = useState({});
     
@@ -21,12 +21,14 @@ const HomeSliders = ()=> {
             const response = await axios.get("https://starfoods.ir/api/getHomeParts", {
               params: { psn: localStorage.getItem('psn') }
             });
+
             const initialKala = response.data.parts.map((kala) => ({
                 ...kala,
                 isClicked: false,
-                purchasedItem: 0
+                purchasedItem: parseInt(localStorage.getItem(`boughtItem_${kala.GoodSn}`)) || 0,
+                
               }));
-              
+
               setAllKalaSlider(initialKala);
           } catch (error) {
             console.error('Error fetching data:', error);
@@ -34,78 +36,91 @@ const HomeSliders = ()=> {
         };
         fetchSliderData();
     }, []);
+
       
 
     const purchaseKala = (goodSn, kala) => {
-        const updatedValue =  parseInt(purchasedItems[kala.GoodSn] || 0);
-        const newUpdatedValue = updatedValue > 0 ? updatedValue + 1 : 1;
-    
+        const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
+        const updatedValue =  parseInt(spanValue);
+
         if (updatedValue === 0) {
             axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
                 params: {
                     kalaId: goodSn,
-                    amountUnit: newUpdatedValue,
+                    amountUnit: updatedValue + 1,
                     psn: localStorage.getItem("psn")
                 }
             }).then((data) => {
-                // console.log(data.data)
                 setboughtKalaOrderBYS(data.data.snLastBYS);
-                setboughtKalaResponse(data.data.amountBought);
+                let boughtItem = parseInt(data.data.amountBought);
 
+                localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtItem);
                 setPurchasedItems(prevPurchasedItems => ({
                     ...prevPurchasedItems,
-                    [kala.GoodSn]: parseInt(data.data.amountBought)
-                }));
-
+                    [kala.GoodSn]: updatedValue + 1
+                  }));
+                
                 let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
                 localStorage.setItem('buyAmount', countBought + 1);
+
             });
 
         } else {
-             const boughtKala = purchasedItems[kala.GoodSn] || 0;
+            let updateBoughtItem = localStorage.getItem(`boughtItem_${kala.GoodSn}`);
             axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
                 params: {
                     orderBYSSn: boughtKalaBYS,
-                    amountUnit: boughtKala,
+                    amountUnit: parseInt(updateBoughtItem) + 1,
                     kalaId: goodSn,
                 }
                 }).then((data) => {
-                    setPurchasedItems((prevPurchasedItems) => ({
-                        ...prevPurchasedItems,
-                        [kala.GoodSn]: boughtKala + 1,
-                    }))
+                    const boughtKalaUpdate = parseInt(data.data.boughtAmount);
+                    localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
                     let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
                     localStorage.setItem('buyAmount', countBought + 1);
+                    // localStorage.setItem(`boughtItem_${kala.GoodSn}`, countBought + 1);
+
+                    setPurchasedItems(prevPurchasedItems => ({
+                        ...prevPurchasedItems,
+                        [kala.GoodSn]: parseInt(updateBoughtItem) + 1,
+                      }));
+
                 });
         }
     }
 
-    const decreaseKala = (kala) => {
-        const currentPurchasedItems = purchasedItems[kala.GoodSn] || 0;
-        const updatedValue = Math.max(0, currentPurchasedItems - 1);
-      
+    const decreaseKala = (goodSn, kala) => {
+        const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
+        const updatedValue =  parseInt(spanValue);
+        
         axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
             params: {
               orderBYSSn: boughtKalaBYS,
-              amountUnit: updatedValue,
-              kalaId: kala.GoodSn,
+              amountUnit: updatedValue - 1,
+              kalaId: goodSn,
             },
           })
           .then((data) => {
+            const boughtKalaUpdate = parseInt(data.data.boughtAmount);
+                  localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
+                  
             let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
                 countBought = Math.max(0, countBought - 1); 
                 localStorage.setItem('buyAmount', countBought);
-      
-            setPurchasedItems((prevPurchasedItems) => ({
-              ...prevPurchasedItems,
-              [kala.GoodSn]: updatedValue,
-            }));
+
+            
+                setPurchasedItems(prevPurchasedItems => ({
+                    ...prevPurchasedItems,
+                    [kala.GoodSn]: Math.max(0, updatedValue - 1),
+                }));
+
+            localStorage.setItem(`boughtItem_${kala.GoodSn}`, Math.max(0,updatedValue - 1));
+            
           })
           .catch((error) => {
             console.error('Error updating purchased item:', error);
           });
       };
-      
 
 return(
     <>
@@ -138,14 +153,13 @@ return(
                          {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                             <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
                              <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
-                            {clickedItemId === kala.GoodSn && (
+                             {clickedItemId === kala.GoodSn && (
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                    <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="buyButton" icon={faPlusCircle}/>
-                                      <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {purchasedItems[kala.GoodSn] || 0} </span>
-                                      {console.log("i LOVE CONDIG", purchasedItems[kala.GoodSn])}
-                                    <FontAwesomeIcon onClick={() => decreaseKala(kala)}  className="buyButton" icon={faMinusCircle}/>
+                                    <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faPlusCircle}/>
+                                      <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {localStorage.getItem(`boughtItem_${kala.GoodSn}`) || 0} </span>
+                                    <FontAwesomeIcon onClick={() => decreaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faMinusCircle}/>
                                 </div>
-                            )}
+                             )}
                                  
                             <Link to={"/descKala/"+kala.GoodSn+"/"+kala.firstGroupId} className="kala-img-name-link">
                                 <img className="fourColSliderImg" alt="picture" src={`https://starfoods.ir/resources/assets/images/kala/${kala.GoodSn}_1.jpg`} onError={(e) => { e.target.src = starfood; }} />
@@ -171,6 +185,7 @@ return(
                    </div> 
                  </>
                 : "" }
+
           </div>
        </>))}
     </>

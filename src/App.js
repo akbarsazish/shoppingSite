@@ -37,6 +37,8 @@ import SuccessPay from "./components/pages/SuccessPay";
 import PageNotFound from "./components/pages/PageNotFound";
 import PayFactor from "./components/pages/PayFactor";
 import GetAllKala from "./components/pages/GetAllKala";
+import ShowAllKala from "./components/pages/ShowAllKala";
+import ShowAllBrand from "./components/pages/ShowAllBrand";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -119,6 +121,9 @@ function App() {
           path="/finalizeFactorPayApi"
           params={param => ({ tref: param.tref, iN: param.iN, iD: param.iD})}
           element={<PayFactor/>}/>
+
+          <Route path="showAllKala/:partId" element={<ShowAllKala  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
+          <Route path="showAllBrand/:brandId" element={<ShowAllBrand  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
       </Routes>
 
     </>

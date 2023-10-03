@@ -18,24 +18,24 @@ export default function SuccessPay() {
 
     const[factorBYS,setFactorBYS]=useState([
         <tr>
-            <td>1</td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
+          <td>1</td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
+          <td> </td>
         </tr>
    ]);
 
     const[payInfo,setPaymentInfo]=useState(
-        <tr>
-            <td> 1 </td>                          
-            <td> 1 </td>                          
-            <td> 1 </td>                          
-            <td> 1 </td>                          
-            <td> 1 </td>                          
-            <td> 1 </td>                          
-            <td> 1 </td>                          
-        </tr>
+      <tr>
+        <td> 1 </td>                          
+        <td> 1 </td>                          
+        <td> 1 </td>                          
+        <td> 1 </td>                          
+        <td> 1 </td>                          
+        <td> 1 </td>                          
+        <td> 1 </td>                          
+      </tr>
     );
     const[factorNo,setFactorNo]=useState(0);
     const[allProfit,setAllProfit]=useState(0);
@@ -52,39 +52,39 @@ export default function SuccessPay() {
             ,receviedAddress:localStorage.getItem("receviedAddress")
             ,allMoney:localStorage.getItem("allMoney")
         }})
-            .then((response)=>{
-                console.log(response);
-                if(response.data.result === "OK"){
-                    localStorage.setItem("recivedTime","");
-                    localStorage.setItem("takhfif",0);
-                    localStorage.setItem("takhfifCode","");
-                    localStorage.setItem("receviedAddress","");
-                    localStorage.setItem('buyAmount',0);
-                    setFactorNo(response.data.factorNo)
-                    setAllProfit(response.data.profit);
-                    setCurrencyInfo({currencyName:response.data.currencyName,currncy:response.data.currncy});
-                    setFactorBYS(response.data.factorBYS.map((element,index)=>{return <tr><td>{index+1}</td>
-                    <td>{element.GoodName}</td>
-                    <td>{element.PackAmount/1+' '+element.secondUnit+' معادل '+element.Amount/1+' '+element.firstUnit}</td>
-                    <td>{parseInt(element.Fi/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td>
-                    <td>{parseInt(element.Price/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td></tr>}));
-                    setPaymentInfo(
-                      <tr>
-                         <td> 1 </td>
-                         <td> {response.data.payResults.TraceNumber}</td>
-                         <td> {response.data.payResults.ReferenceNumber}</td>
-                         <td> {response.data.payResultsTransactionDate}</td>
-                         <td> {response.data.payResults.TransactionReferenceID}</td>
-                         <td> {response.data.payResults.InvoiceNumber}</td>
-                         <td> {response.data.payResultsInvoiceDate}</td>
-                         <td> {response.data.payResults.Amount}</td>
-                         <td> {response.data.payResults.TrxMaskedCardNumber}</td>
-                         <td> {response.data.payResults.IsSuccess}</td>
-                         <td> {response.data.payResults.Message}</td>
-                      </tr>
-                    );
-                }
-                setPaymentStat(response.data.result)
+        .then((response)=>{
+            console.log(response);
+            if(response.data.result === "OK"){
+                localStorage.setItem("recivedTime","");
+                localStorage.setItem("takhfif",0);
+                localStorage.setItem("takhfifCode","");
+                localStorage.setItem("receviedAddress","");
+                localStorage.setItem('buyAmount',0);
+                setFactorNo(response.data.factorNo)
+                setAllProfit(response.data.profit);
+                setCurrencyInfo({currencyName:response.data.currencyName,currncy:response.data.currncy});
+                setFactorBYS(response.data.factorBYS.map((element,index)=>{return <tr><td>{index+1}</td>
+                <td>{element.GoodName}</td>
+                <td>{element.PackAmount/1+' '+element.secondUnit+' معادل '+element.Amount/1+' '+element.firstUnit}</td>
+                <td>{parseInt(element.Fi/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td>
+                <td>{parseInt(element.Price/response.data.currency).toLocaleString("fa-ir")+' '+response.data.currencyName}</td></tr>}));
+                setPaymentInfo(
+                  <tr>
+                    <td> 1 </td>
+                    <td> {response.data.payResults.TraceNumber} </td>
+                    <td> {response.data.payResults.ReferenceNumber} </td>
+                    <td> {response.data.payResultsTransactionDate} </td>
+                    <td> {response.data.payResults.TransactionReferenceID} </td>
+                    <td> {response.data.payResults.InvoiceNumber} </td>
+                    <td> {response.data.payResultsInvoiceDate} </td>
+                    <td> {response.data.payResults.Amount} </td>
+                    <td> {response.data.payResults.TrxMaskedCardNumber} </td>
+                    <td> {response.data.payResults.IsSuccess} </td>
+                    <td> {response.data.payResults.Message} </td>
+                   </tr>
+                );
+            }
+            setPaymentStat(response.data.result)
             });
         },[]);
     return(<>

@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {
-    Link,
-    useParams
-} from "react-router-dom"
+import {Link, useParams} from "react-router-dom";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
-import { Swiper, SwiperSlide } from "swiper/react";
 import starfood from "../../assets/images/starfood.png"
-import { Navigation } from "swiper";
 import 'swiper/swiper.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShoppingCart, faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
 export default function GetAllKala(props) {
@@ -18,27 +13,6 @@ export default function GetAllKala(props) {
     const [maingroupKala,setMainGroupKala]=useState(0);
     const [buyOption, setBuyOption]=useState(0);
 
-    const requestProduct=(psn, goodSn, event)=>{
-        axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
-          customerId:psn,
-          productId:goodSn
-        }}).then((data)=>{
-            renewSubGroupCarts();
-        })
-      }
-      
-      const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
-          psn:psn,
-          gsn:goodSn
-        }}).then((data)=>{
-            renewSubGroupCarts();
-        });
-      }
-
-      useEffect(() => {
-        renewSubGroupCarts();
-    },[homepartId]);
     
       const renewSubGroupCarts=()=>{
         axios.get('https://starfoods.ir/api/listKalaOfPictureApi', {
@@ -48,7 +22,7 @@ export default function GetAllKala(props) {
               customerId: localStorage.getItem('psn') },
         })
         .then((data) => {
-            console.log(data.data.kala)
+            console.log("for troule shoting", data.data.kala)
             setMainGroupKala(data.data.kala.map((element,index)=>
             <div key={index} className="groupingItem rounded">
                 <img className="topLeft" src={starfood} alt="slider" />
@@ -72,15 +46,15 @@ export default function GetAllKala(props) {
                                 <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del>
                             </div>}
                         </> :
-                            (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?
-                            '' :(
+                            (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)?  '' 
+                            :(
                                 element.requested===0?
                                   <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                    <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)} className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                    <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3537,element.GoodSn,event)} className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
                                   </span>
                                 :
                                   <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
-                                    <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)} className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                    <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3537,element.GoodSn,event)} className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
                                   </span>
                                ) 
                           }
@@ -90,7 +64,9 @@ export default function GetAllKala(props) {
                     <div className="groupingItemBottomBtn">
                      {element.activePishKharid<1  ?
                         (element.bought==="Yes" ?
-                            <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.Amount)+" "+ element.UName} <FontAwesomeIcon icon={faShoppingCart} /></button>
+                            <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                 {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.Amount)+" "+ element.UName} <FontAwesomeIcon icon={faShoppingCart} />
+                            </button>
                             :(element.callOnSale>0?
                                 <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
                                 :(element.Amount>0 || element.freeExistance>0 
@@ -109,6 +85,28 @@ export default function GetAllKala(props) {
             ))
         })
     }
+
+    const requestProduct=(psn, goodSn, event)=>{
+        axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
+          customerId:psn,
+          productId:goodSn
+        }}).then((data)=>{
+            renewSubGroupCarts();
+        })
+      }
+      
+      const cancelRequestKala=(psn,goodSn,event)=>{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
+          psn:psn,
+          gsn:goodSn
+        }}).then((data)=>{
+            renewSubGroupCarts();
+        });
+      }
+
+      useEffect(() => {
+        renewSubGroupCarts();
+    },[homepartId]);
 
     const showBuyModal=(goodSn,event)=>{
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
