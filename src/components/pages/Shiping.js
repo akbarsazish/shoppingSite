@@ -114,7 +114,8 @@ export default function Shiping(props) {
         recivedTime:selectdFactorDate,
         customerAddress:selectdAddress,
         psn:localStorage.getItem("psn"),
-        allMoney:allMoney}
+        allMoney:allMoney
+    }
     }).then((data)=>{
         window.location.href = '/success'
     })    

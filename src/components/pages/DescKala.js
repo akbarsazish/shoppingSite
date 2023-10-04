@@ -44,7 +44,6 @@ export default function DescKala(props) {
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
-                
             })
     }
     const requestProduct = (psn, goodSn, event) => {
@@ -74,21 +73,18 @@ export default function DescKala(props) {
     },[goodSn])
 
     const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('https://starfoods.ir/api/updateOrderBYS',
-            {
+        axios.get('https://starfoods.ir/api/updateOrderBYS',{
             params: {
               kalaId: goodSn,
               amountUnit: amountUnit,
               orderBYSSn: orderId
             }
-            }
-        ).then((response) => {
+        }).then((response) => {
             renewDescKala();
         })
     }
 
-    const buySomething = (amountExist, freeExistance, zeroExistance, costLimit, costError, amountUnit, goodSn, defaultUnit, btnModalEvent, event) => {
-
+    const buySomething = (amountExist, freeExistance, zeroExistance, costLimit, costError, amountUnit, goodSn, defaultUnit, btnModalEvent, event) => { 
         if ((amountUnit > amountExist) && (freeExistance === 0)) {
             alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
         } else {
@@ -97,13 +93,12 @@ export default function DescKala(props) {
                     alert(costError);
                 }
             }
-            axios.get('https://starfoods.ir/api/buySomething',
-                {
-                    params: {
-                        kalaId: goodSn,
-                        amountUnit: amountUnit,
-                        psn:localStorage.getItem("psn")
-                    }
+            axios.get('https://starfoods.ir/api/buySomething', {
+                params: {
+                    kalaId: goodSn,
+                    amountUnit: amountUnit,
+                    psn:localStorage.getItem("psn")
+                }
                 }).then((response) => {
                     let countBought = parseInt(localStorage.getItem('buyAmount'));
                     localStorage.setItem('buyAmount', countBought + 1);
@@ -120,7 +115,7 @@ export default function DescKala(props) {
                 psn:localStorage.getItem("psn")
             }
         }).then((data) => {
-            console.log("desk kala", data.data.descKala)
+            console.log("checking the butmodal", data)
             setDescKala(data.data.descKala)
             setIsFavorite(data.data.favorite)
             setKalaName(data.data.GoodName)
@@ -133,8 +128,10 @@ export default function DescKala(props) {
                     <h6 className="similarKalaName"> {element.GoodName} </h6>
                 </Link>
             </div>))
-            setBoughtInfo(data.data.product.map((element) =>
-                <div className="desckBuyBtn text-start">
+           
+           
+            setBoughtInfo(data.data.map((element, index) =>
+                <div className="desckBuyBtn text-start" key={index}>
                     {element.activePishKharid < 1 ?
                         (element.bought === "Yes" ?
                             <button className="btn btn-sm btn-info selectAmount" onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount) + " " + element.secondUnit + " معادل " + parseInt(element.Amount) + " " + element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>

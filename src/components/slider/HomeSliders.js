@@ -215,7 +215,9 @@ return(
 
                     <SwiperSlide className="text-center shegoft-angez-first">
                         <h3 className="text-wrap" style={{padding:"5px 44px"}}> {kalaTypes.textLogo} </h3>
-                        <Link to={"/getAllKala/"+kalaTypes.partId} className="btn btn-md border text-decoration-none"> {kalaTypes.showAll ?  <h6> مشاهده همه </h6> : "" } </Link>
+                        <Link to={"/showAllKala/"+kalaTypes.partId} className="btn btn-md border text-decoration-none"> 
+                           {kalaTypes.showAll ?  <h6> مشاهده همه </h6> : "" }
+                        </Link>
                     </SwiperSlide>
 
                    {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
@@ -259,7 +261,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
 
@@ -293,7 +295,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
 
@@ -328,7 +330,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
 
@@ -351,7 +353,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
 
@@ -374,7 +376,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
             <Swiper
@@ -417,7 +419,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
             <Swiper
@@ -449,8 +451,7 @@ return(
           </> : "" }
           </div>
        </>))}
-    </>
-                
+    </>  
 )}
 
 export default memo(HomeSliders)

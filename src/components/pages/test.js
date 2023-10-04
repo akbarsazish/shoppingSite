@@ -1,195 +1,193 @@
-import React, {memo, useEffect, useState} from "react";
-import { Link, useParams} from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, FreeMode, Navigation} from "swiper";
-import 'swiper/css/free-mode';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from "react";
+import Header from "../genrealComponent/Header";
+import Sidebar from "../genrealComponent/Sidebar";
 import starfood from "../../assets/images/starfood.png";
-import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faShoppingCart, faBell } from "@fortawesome/free-solid-svg-icons";
+import {Link, useParams} from "react-router-dom";
+import axios from 'axios';
 
-const HomeSliders = ()=> {
-    const {id}=useParams();
-    const [kalaSliders, setAllKalaSlider] = useState([]);
-    const [clickedItemId, setClickedItemId] = useState(null);
-    const [boughtKalaBYS, setboughtKalaOrderBYS] = useState(0);
-    const [purchasedItems, setPurchasedItems] = useState({});
-    
-    useEffect(() => {
-        const fetchSliderData = async () => {
-          try {
-            const response = await axios.get("https://starfoods.ir/api/getHomeParts", {
-              params: { psn: localStorage.getItem('psn') }
-            });
+const ShowAllKala = (props)=> {
+    const {partId} = useParams();
+    const [showAllKala, setShowAllKala] = useState([]);
+    const [buyOption, setBuyOption]=useState(0);
 
-            const initialKala = response.data.parts.map((kala) => ({
-                ...kala,
-                isClicked: false,
-                purchasedItem: parseInt(localStorage.getItem(`boughtItem_${kala.GoodSn}`)) || 0,
-                
-              }));
-
-              setAllKalaSlider(initialKala);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          } 
-        };
-        fetchSliderData();
-    }, []);
-
-      
-
-    const purchaseKala = (goodSn, kala) => {
-        const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
-        const updatedValue =  parseInt(spanValue);
-
-        if (updatedValue === 0) {
-            axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
-                params: {
-                    kalaId: goodSn,
-                    amountUnit: updatedValue + 1,
-                    psn: localStorage.getItem("psn")
-                }
-            }).then((data) => {
-                setboughtKalaOrderBYS(data.data.snLastBYS);
-                let boughtItem = parseInt(data.data.amountBought);
-
-                localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtItem);
-                setPurchasedItems(prevPurchasedItems => ({
-                    ...prevPurchasedItems,
-                    [kala.GoodSn]: updatedValue + 1
-                  }));
-                
-                let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                localStorage.setItem('buyAmount', countBought + 1);
-
-            });
-
-        } else {
-            let updateBoughtItem = localStorage.getItem(`boughtItem_${kala.GoodSn}`);
-            axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
-                params: {
-                    orderBYSSn: boughtKalaBYS,
-                    amountUnit: parseInt(updateBoughtItem) + 1,
-                    kalaId: goodSn,
-                }
-                }).then((data) => {
-                    const boughtKalaUpdate = parseInt(data.data.boughtAmount);
-                    localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
-                    let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                    localStorage.setItem('buyAmount', countBought + 1);
-                    // localStorage.setItem(`boughtItem_${kala.GoodSn}`, countBought + 1);
-
-                    setPurchasedItems(prevPurchasedItems => ({
-                        ...prevPurchasedItems,
-                        [kala.GoodSn]: parseInt(updateBoughtItem) + 1,
-                      }));
-
-                });
-        }
+    const reNewShowKala = ()=>{
+        axios.get('https://starfoods.ir/api/getAllKalaOfPartApi',{
+          params: {
+            psn:localStorage.getItem('psn'),
+            partId:partId
+          }
+          }).then((response)=>{
+            setShowAllKala(response.data.kala)
+        })
     }
 
-    const decreaseKala = (goodSn, kala) => {
-        const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
-        const updatedValue =  parseInt(spanValue);
-        
-        axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
-            params: {
-              orderBYSSn: boughtKalaBYS,
-              amountUnit: updatedValue - 1,
-              kalaId: goodSn,
-            },
-          })
-          .then((data) => {
-            const boughtKalaUpdate = parseInt(data.data.boughtAmount);
-                  localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
-                  
-            let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                countBought = Math.max(0, countBought - 1); 
-                localStorage.setItem('buyAmount', countBought);
+    useEffect(() => {
+        reNewShowKala();
+    },[partId]);
 
-            
-                setPurchasedItems(prevPurchasedItems => ({
-                    ...prevPurchasedItems,
-                    [kala.GoodSn]: Math.max(0, updatedValue - 1),
-                }));
+    const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
+        if((amountUnit > amountExist) && (freeExistance===0)){
+        alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
+        }else{
+            if (costLimit > 0) {
+                if (amountUnit >= costLimit) {
+                    alert(costError);
+                }}
+                axios.get('https://starfoods.ir/api/buySomething',
+                {params:{
+                  kalaId: goodSn,
+                  amountUnit: amountUnit,
+                  psn:localStorage.getItem("psn")
+                }})
+                .then((response)=> {
+                let countBought=parseInt(localStorage.getItem('buyAmount'));
+                localStorage.setItem('buyAmount',countBought+1);
+                reNewShowKala();
+            })
+        }   
+    }
 
-            localStorage.setItem(`boughtItem_${kala.GoodSn}`, Math.max(0,updatedValue - 1));
-            
-          })
-          .catch((error) => {
-            console.error('Error updating purchased item:', error);
-          });
-      };
+    const showBuyModal=(goodSn, event)=>{
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
+            Pcode:goodSn,
+            psn:localStorage.getItem("psn")
+        }})
+        .then((data) => {
+          console.log("show bu modal clicked", data)
+        let modalItems=[];
+            for (let index = 1; index <= data.data.maxSale; index++) {
+            modalItems.push(
+                <button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton"
+                 onClick={(e) =>buySomething(data.data.amountExist,data.data.freeExistance,data.data.zeroExistance,data.data.costLimit,data.data.costError,data.data.amountUnit*index,data.data.kalaId,data.data.defaultUnit,e,event)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
+            }
+            const items=modalItems.map((item)=>item)
+            setBuyOption(items)
+        })
+    }
 
-return(
-    <>
-    {kalaSliders.map((kalaTypes) => (
-     <>
-      <div className="wrapper-sliders">
-          {/* جدیدترین کالا ها */ }
-          {parseInt(kalaTypes.partType) === 2 ?
-             <>
-                <div className="forTitle mt-2 p-2">
-                    <div className="forTitleItem">
-                        <h6> {kalaTypes.title} </h6>
-                    </div>
-                    <div className="forTitleItem text-start">
-                       {kalaTypes.showAll ? <Link to={"/getAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
-                    </div>
-                </div>
 
-                 <div className="fourColSide border-top py-1">
-                    <Swiper className="mySwiper text-center mx-2"
-                        slidesPerView={1}
-                        spaceBetween={10}
-                        breakpoints={{
-                           320: {slidesPerView: 2, spaceBetween: 20},
-                           640: {slidesPerView: 2, spaceBetween: 20},
-                           768: { slidesPerView: 3, spaceBetween: 40},
-                           1024: { slidesPerView: 4, spaceBetween: 50},
-                        }} modules={[Pagination]}>
+    const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
+          Pcode:goodSn,
+          psn:localStorage.getItem("psn")
+        }})
+        .then((data) => {
+          let modalItems=[];
+          for (let index = 1; index <= data.data.maxSale; index++) {
+              modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
+          }
+          const items=modalItems.map((item)=>item)
+          setBuyOption(items);
+        })
+      }
 
-                         {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
-                            <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
-                             <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
-                             {clickedItemId === kala.GoodSn && (
-                                <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                    <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faPlusCircle}/>
-                                      <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {localStorage.getItem(`boughtItem_${kala.GoodSn}`) || 0} </span>
-                                    <FontAwesomeIcon onClick={() => decreaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faMinusCircle}/>
-                                </div>
-                             )}
-                                 
-                            <Link to={"/descKala/"+kala.GoodSn+"/"+kala.firstGroupId} className="kala-img-name-link">
-                                <img className="fourColSliderImg" alt="picture" src={`https://starfoods.ir/resources/assets/images/kala/${kala.GoodSn}_1.jpg`} onError={(e) => { e.target.src = starfood; }} />
-                                <p className="kala-name"> {kala.GoodName} </p>
-                            </Link>
+      const updateBuy=(orderId,amountUnit,goodSn)=>{
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
+        {params:{
+          kalaId: goodSn,
+          amountUnit: amountUnit,
+          orderBYSSn: orderId
+        }
+       }
+      ).then((response)=> {
+        reNewShowKala();
+      })
+   }
 
-                            <div className="bottomPart border-top">
-                                <span className="bottommPartItem">
-                                    <p>  </p>
-                                    {(kala.Price4 > 0 && kala.Price3 > 0) ?
-                                    <span className="takhfif-round"> {Math.round(((kala.Price4 - kala.Price3) * 100) / kala.Price4)}%</span> :
-                                    <span className="takhfif-round"> 0% </span>
-                                    }
-                                </span>
-                                <span className="bottommPartItem">
-                                    <div className="price" style={{ color: "#ff2c50" }}> <del> {parseInt(kala.Price4) > 0 && (parseInt(kala.Price4) / 10 + " تومان")} </del></div>
-                                    <div className="price" style={{ color: "#39ae00" }}> {parseInt(kala.Price3)/10} تومان </div>
-                                </span>
+    const requestProduct=(psn, goodSn, event)=>{
+        axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
+          customerId:psn,
+          productId:goodSn
+        }}).then((data)=>{
+            reNewShowKala();
+        })
+      }
+
+      const cancelRequestKala=(psn,goodSn,event)=>{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
+          psn:psn,
+          gsn:goodSn
+        }}).then((data)=>{
+            reNewShowKala();
+        });
+      }
+
+  if(localStorage.getItem("isLogedIn")){
+    return (
+      <>
+        <Header />
+        <Sidebar />
+        <div className="container marginTop">
+          <div className="groupingItems">
+            {showAllKala && showAllKala.map((element, index)=>(
+              <div key={index} className="groupingItem rounded">
+                <img className="topLeft" src={starfood} alt="kala-image" />
+                {(element.price4 > 0 && element.Amount>0) ? <span className="groupingTakhfif">{parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
+                <Link to={"/descKala/"+element.GoodSn+"/"+partId} className="groupingItemLink">
+                    <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/"+element.GoodSn+"_1.jpg"} alt="kala-image " />
+                </Link>
+                <Link to="" className="groupingItemTitleLink">
+                    <p className="groupingItemTitle">  </p>
+                </Link>
+                <div className="groupingItemBottomInfo">
+                    <div className="groupingItemInfo" onClick={(e) => props.changeHeartIconColor(element.GoodSn,e)}> <FontAwesomeIcon className={element.favorite==="YES" ? 'favHeartIcon' : 'defaultHeartIcon'} style={{ fontSize: "25px", marginRight: "11px" }} icon={faHeart} /> </div>
+                     <div className="groupingItemInfo">
+                       {element.Amount > 0 ?
+                          <>
+                            <div style={{ color: "#39ae00" }}>
+                                {parseInt(element.Price3/10).toLocaleString()} تومان
                             </div>
-                            </SwiperSlide>
-                            ))}
-                     </Swiper>
-                   </div> 
-                 </>
-                : "" }
-
+                             {element.overLine===1 && element.Price4>0 &&
+                            <div style={{ color: "#ff2c50" }}>
+                                <del>{parseInt(element.Price4/10).toLocaleString()} تومان </del>
+                            </div>}
+                         </> :
+                            (element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0)? 
+                            ''  :(
+                                element.requested===0?
+                                  <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
+                                    <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)} className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                  </span>
+                                :
+                                  <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
+                                    <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)} className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                  </span>
+                               )
+                        }
+                      </div>
+                </div>
+                      
+                <div className="groupingItemBottomBtn">
+                  {element.activePishKharid<1
+                        ?
+                            (element.bought==="Yes" ?
+                                <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.BoughtAmount)+" "+ element.UName} <FontAwesomeIcon icon={faShoppingCart} /></button>
+                                :(element.callOnSale>0?
+                                    <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
+                                    :((element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0) 
+                                        ?
+                                        <button className="btn btn-sm btn-danger selectAmount" id={"buyButton"+element.GoodSn} onClick={(event)=>{showBuyModal(element.GoodSn,event)}}  data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
+                                        :
+                                       <div className="c-product__add mt-0">
+                                          <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
+                                       </div>   
+                                     )
+                                )
+                            )
+                        : 'Result3'
+                    }
+                </div>
+              </div>
+             ))}
           </div>
-       </>))}
+        </div>
     </>
-                
-)}
+  )
+}else {
+  window.location.href="/login"
+}
+}
 
-export default memo(HomeSliders)
+export default ShowAllKala;
