@@ -66,15 +66,12 @@ export default function Shiping(props) {
 
     useEffect(() => {
         axios.get('https://starfoods.ir/api/getPaymentFormApi', {
-          params: {
-            psn: localStorage.getItem("psn"),
-            allMoney:allMoney
-          }
-        }).then((data) => {
+          params: { psn: localStorage.getItem("psn"),allMoney:allMoney }
+          }).then((data) => {
             setPayUrl(data.data)
         });
-    
       }, []);
+
 
       let payOnline=document.getElementById("payOnline");
       let payHozori=document.getElementById("payHozori");
@@ -84,13 +81,14 @@ export default function Shiping(props) {
         checkSelectedFactorDay(factorDay);
         setpayType("online");
         sendOnlinePayStuff(); 
-        payOnline.checked=true
-        payHozori.checked=false 
+        payOnline.checked = true;
+        payHozori.checked = false;
       }
       
       let payHozoriFun = () => {
         fastErsalRadio.checked=false
         setIsButtonDisabled(false);
+        payHozori.checked = true;
       }
 
     const checkSelectedFactorDay=(factorDay)=>{

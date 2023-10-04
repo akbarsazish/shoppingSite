@@ -171,18 +171,15 @@ const ShowAllKala = (props)=> {
                                     <div className="c-product__add mt-0">
                                        <button className="btn btn-sm btn-dark selectAmount">ناموجود &nbsp; <i className="fas fa-ban"></i></button>
                                     </div>   
-                                )
-                            )
-                        )
+                            )))
                      : '' }
                 </div>
-            </div>
-            ))}
-            </div>
+              </div>
+             ))}
+          </div>
         </div>
     </>
   )
 }
-
 
 export default ShowAllKala;

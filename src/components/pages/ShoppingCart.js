@@ -25,7 +25,7 @@ export default function ShoppingCart(props) {
             params:{
                 psn:localStorage.getItem("psn")}})
             .then((data) => {
-                
+                console.log("check it", data)
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -34,29 +34,31 @@ export default function ShoppingCart(props) {
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
         
-            if(data.data.orders[0].Price > 0 && data.data.orders[0].Price1){
+            if(data.data.orders[0].Price3 > 0 && data.data.orders[0].Price4){
                 let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-                    const price1 = parseInt(currentValue.Price1);
-                    if(price1 > 0){
-                    accumulator1 += price1 / parseInt(currency);
+                    const firstPrice = parseInt(currentValue.Price3);
+                    if(firstPrice > 0){
+                    accumulator1 += firstPrice / parseInt(currency);
                     }
                     return accumulator1;
                 }, 0);
 
                 let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
-                    const price = parseInt(currentValue.Price);
-                    if(price > 0){
-                        accumulator += price / parseInt(currency);
+                    const secondPrice = parseInt(currentValue.Price4);
+                    if(secondPrice > 0){
+                        accumulator += secondPrice / parseInt(currency);
                     }
                         return accumulator;
                     }, 0);
-
 
                 if (allMoneyProfit > allMoneyNoProfit) {
                     setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
+
+                console.log("profit", allMoneyProfit)
+                console.log("No profit", allMoneyNoProfit)
             }
 
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
@@ -90,6 +92,7 @@ export default function ShoppingCart(props) {
         axios.get("https://starfoods.ir/api/cartsList",{
             params:{psn:localStorage.getItem("psn")}})
             .then((data) => {
+                console.log("list carts"+data)
               let currency = data.data.currency;
               setMinSalePriceFactor(data.data.minSalePriceFactor)
               setCurrencyName(data.data.currencyName)
@@ -115,11 +118,16 @@ export default function ShoppingCart(props) {
                     return accumulator;
                 }, 0);
 
+
                 if (parseInt(allMoneyProfit) > parseInt(allMoneyNoProfit)) {
                     setAllProfit(allMoneyProfit - allMoneyNoProfit);
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
+
+
+                console.log("profit", allMoneyProfit)
+                console.log("No profit", allMoneyNoProfit)
             }
             
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
@@ -216,12 +224,13 @@ export default function ShoppingCart(props) {
                         </div>
                         <div className="shoppingLeft">
                             <div className="shoppingLefFirst">
-                                <h6 className="payAbleTitle"> مبلغ قابل پرداخت </h6>
+                                
+                                <h6 className="payAbleTitle">  مبلغ قابل پرداخت </h6>
                                 <p className="payAbleAmount"> {parseInt(allMoney ).toLocaleString("fa-IR")} {currencyName} </p>
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys <= 12) & changePriceState===0)?
+                                    {((allMoney >= minSalePriceFactor | intervalBetweenBuys <= 12) & changePriceState==0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
                                     :((allMoney <= minSalePriceFactor)?
                                         <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
@@ -236,11 +245,8 @@ export default function ShoppingCart(props) {
                     <div className="yourBenefit">
                         <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
                     </div>
-                       
                 </div>
-
                 <Footer />
-                
                 {true &&
                     <div className="modal fade " id="exampleModal" tabIndex="-1">
                         <div className="modal-dialog buyModal">

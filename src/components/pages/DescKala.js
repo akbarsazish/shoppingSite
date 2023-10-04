@@ -120,13 +120,14 @@ export default function DescKala(props) {
                 psn:localStorage.getItem("psn")
             }
         }).then((data) => {
-            setDescKala(data.data.product[0].descKala)
-            setIsFavorite(data.data.product[0].favorite)
-            setKalaName(data.data.product[0].GoodName)
-            setMainPrice(data.data.product[0].Price3)
+            console.log("desk kala", data.data.descKala)
+            setDescKala(data.data.descKala)
+            setIsFavorite(data.data.favorite)
+            setKalaName(data.data.GoodName)
+            setMainPrice(data.data.Price3)
             setGroupName(data.data.groupName)
-            setProductCode(data.data.product[0].GoodCde)
-            setAsameKalas(data.data.assameKalas.map((element) => <div className="similarKalaImg ">
+            setProductCode(data.data.GoodCde)
+            setAsameKalas(data.data.assameKala.map((element) => <div className="similarKalaImg ">
                 <Link to={"/descKala/" + element.GoodSn + "/" + groupId} className="similarImgLink">
                     <img onError={(e)=>{e.target.src=starfood}} className="similarKalaImage" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="descKala" />
                     <h6 className="similarKalaName"> {element.GoodName} </h6>
@@ -134,8 +135,7 @@ export default function DescKala(props) {
             </div>))
             setBoughtInfo(data.data.product.map((element) =>
                 <div className="desckBuyBtn text-start">
-                    {element.activePishKharid < 1
-                        ?
+                    {element.activePishKharid < 1 ?
                         (element.bought === "Yes" ?
                             <button className="btn btn-sm btn-info selectAmount" onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount) + " " + element.secondUnit + " معادل " + parseInt(element.Amount) + " " + element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
                             : (element.callOnSale > 0 ?
@@ -177,7 +177,6 @@ export default function DescKala(props) {
                             </div>
                             {boughtInf}
                         </div>
-
                         <div className="desckalaBody">
                             <p className="title mt-2">  <b> گروه اصلی  :</b> {groupName} </p>
                             <p className="title">  <b> کد محصول :</b> {pcode} </p>

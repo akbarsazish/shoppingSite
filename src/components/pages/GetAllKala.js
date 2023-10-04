@@ -12,7 +12,6 @@ export default function GetAllKala(props) {
     const {homepartId, id} = useParams();
     const [maingroupKala,setMainGroupKala]=useState(0);
     const [buyOption, setBuyOption]=useState(0);
-
     
       const renewSubGroupCarts=()=>{
         axios.get('https://starfoods.ir/api/listKalaOfPictureApi', {
@@ -22,7 +21,7 @@ export default function GetAllKala(props) {
               customerId: localStorage.getItem('psn') },
         })
         .then((data) => {
-            console.log("for troule shoting", data.data.kala)
+            console.log("for troule shoting", data)
             setMainGroupKala(data.data.kala.map((element,index)=>
             <div key={index} className="groupingItem rounded">
                 <img className="topLeft" src={starfood} alt="slider" />
@@ -112,7 +111,7 @@ export default function GetAllKala(props) {
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
         .then(response=>response.json())
         .then((data) => {
-        console.log("show modal", data)
+        console.log("ShowBuyModal", data)
         let modalItems=[];
           for (let index = 1; index <= data.maxSale; index++) {
                modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton" onClick={(e) =>buySomething(data.amountExist,data.freeExistance,data.zeroExistance,data.costLimit,data.costError,data.amountUnit*index,data.kalaId,data.defaultUnit,e,event)}>{index+' '+data.secondUnit+' معادل '+' '+index*data.amountUnit+' '+data.defaultUnit}</button>)
@@ -125,7 +124,8 @@ export default function GetAllKala(props) {
     const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
         .then(response=>response.json())
-        .then((data) => {
+        .then((data) => { 
+          console.log("showUpdateByModal", data)
          let modalItems=[];
             for (let index = 1; index <= data.maxSale; index++) {
                 modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.amountUnit*index,data.kalaId)}>{index+' '+data.secondUnit+' معادل '+' '+index*data.amountUnit+' '+data.defaultUnit}</button>)

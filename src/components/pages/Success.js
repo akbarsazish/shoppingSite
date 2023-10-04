@@ -16,7 +16,16 @@ export default function Success() {
         axios.get("https://starfoods.ir/api/successFactorInfo",
         {params:{psn:localStorage.getItem("psn")}})
         .then((data)=>{
-            setSuccedFactorData(data.data.factorBYS.map((element,index)=><tr><td> {(index+1)} </td><td>{element.GoodName}</td><td>{parseInt(element.PackAmount).toLocaleString()}</td><td>{parseInt(element.Fi/10).toLocaleString()}</td><td>{parseInt(element.Price/10).toLocaleString()}</td></tr>))
+            console.log(data);
+            setSuccedFactorData(data.data.factorBYS.map((element,index)=>
+            <tr>
+                <td> {(index+1)} </td>
+                <td>{element.GoodName}</td>
+                <td>{parseInt(element.PackAmount).toLocaleString()}</td>
+                <td>{parseInt(element.Fi/10).toLocaleString()}</td>
+                <td>{parseInt(element.Price/10).toLocaleString()}</td>
+            </tr>
+            ))
             setFactorNo(data.data.factorNo)
             setAllprofit(localStorage.getItem("allProfit"))
             setAllprofit(localStorage.setItem("0"))
