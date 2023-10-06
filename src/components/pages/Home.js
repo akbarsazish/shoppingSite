@@ -64,7 +64,7 @@ export default function Home() {
                     {mainGroups}
                 </div>
                  <HomeSliders />
-                <div className="row my-5 p-2 text-center">
+                <div className="text-center mt-4">
                    <img className="fourColSliderImg" alt="تماس با ما" src={contactImage} />
                 </div>
             </div>

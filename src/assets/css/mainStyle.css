@@ -190,8 +190,7 @@ span {
 }
 
 .fourColSliderImg {
-  margin: 0px 5px;
-  width: 96%;
+  width: 100%;
 }
 
 .forTitle {
@@ -367,6 +366,12 @@ div.price {
   border-radius: 50%;
 }
 
+.groupsDiv {
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+
 .groupsImageAnchor {
   text-decoration: none;
   color: #000;
@@ -378,6 +383,7 @@ div.price {
     color: #000;
     font-weight: bold;
     font-size: 12px;
+    margin-bottom: 1rem;
 }
 
 .twoPicDiv {

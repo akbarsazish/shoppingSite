@@ -20,7 +20,6 @@ export default function Favorite(props) {
     const renewFavorite=()=>{
     axios.get("https://starfoods.ir/api/favoritKalaApi",
            {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
-            console.log("favorite", data)
             setKalaItem(data.data.favorits.map((element,index)=>
 
         <div key={index} className="groupingItem">

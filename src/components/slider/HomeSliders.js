@@ -1,7 +1,7 @@
 import React, {memo, useEffect, useState} from "react";
 import { Link, useParams} from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, FreeMode, Navigation} from "swiper";
+import {Autoplay, Pagination, FreeMode, Navigation} from "swiper";
 import 'swiper/css/free-mode';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
@@ -143,13 +143,20 @@ return(
                  <div className="fourColSide border-top py-1">
                     <Swiper className="mySwiper text-center mx-2"
                         slidesPerView={1}
+                        loop={true}
                         spaceBetween={10}
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                          }}
                         breakpoints={{
                            320: {slidesPerView: 2, spaceBetween: 20},
                            640: {slidesPerView: 2, spaceBetween: 20},
                            768: { slidesPerView: 3, spaceBetween: 40},
                            1024: { slidesPerView: 4, spaceBetween: 50},
-                        }} modules={[Pagination]}>
+                        }}
+                        
+                        modules={[Autoplay, Pagination]}>
 
                          {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                             <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
@@ -200,13 +207,19 @@ return(
               <div className="fourColSide border-top py-1" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
                  <Swiper className="mySwiper text-center mx-2"
                     slidesPerView={1}
+                    loop={true}
                     spaceBetween={3}
+                    autoplay={{
+                        delay: 2800,
+                        disableOnInteraction: false,
+                      }}
                     breakpoints={{
                         320: {slidesPerView: 2, spaceBetween: 10},
                         640: {slidesPerView: 3, spaceBetween: 10},
                         768: {slidesPerView: 3, spaceBetween: 10},
                         1024: {slidesPerView: 5, spaceBetween: 15},
-                    }}modules={[Pagination]} >
+                    }}
+                    modules={[Autoplay, Pagination]}>
 
                     <SwiperSlide className="text-center shegoft-angez-first">
                         <h3 className="text-wrap" style={{padding:"5px 44px"}}> {kalaTypes.textLogo} </h3>
@@ -263,13 +276,20 @@ return(
             <div className="fourColSide border-top">
                 <Swiper className="mySwiper text-center mx-2"
                     slidesPerView={1}
+                    loop={true}
                     spaceBetween={10}
+                    autoplay={{
+                        delay: 2800,
+                        disableOnInteraction: false,
+                      }}
                     breakpoints={{
                         320: {slidesPerView: 2, spaceBetween: 20},
                         640: {slidesPerView: 2, spaceBetween: 20},
                         768: {slidesPerView: 3, spaceBetween: 40},
                         1024: {slidesPerView: 5, spaceBetween: 50},
-                    }} modules={[Pagination]}>
+                    }}
+                    
+                    modules={[Autoplay, Pagination]}>
 
                     {kalaTypes.allBrands && kalaTypes.allBrands.map((brand) => (
                     <SwiperSlide className="brandDiv text-center mt-1">
@@ -298,12 +318,18 @@ return(
                 <Swiper className="mySwiper text-center mx-2"
                     slidesPerView={1}
                     spaceBetween={10}
+                    autoplay={{
+                        delay: 2500,
+                        disableOnInteraction: false,
+                      }}
                     breakpoints={{
                         320: {slidesPerView: 2, spaceBetween: 20},
                         640: {slidesPerView: 2, spaceBetween: 20},
                         768: {slidesPerView: 3, spaceBetween: 40},
                         1024: {slidesPerView: 5, spaceBetween: 50},
-                    }} modules={[Pagination]}>
+                    }}
+                    loop={true}
+                    modules={[Autoplay, Pagination]}>
 
                     {kalaTypes.allGroups && kalaTypes.allGroups.map((group) => (
                     <SwiperSlide className="groupsDiv text-center mt-1">
@@ -352,15 +378,31 @@ return(
                 </div>
             </div>
 
+            <Swiper
+                slidesPerView={4}
+                spaceBetween={30}
+                breakpoints={{
+                    320: {slidesPerView: 2, spaceBetween: 5},
+                    640: {slidesPerView: 2, spaceBetween: 5},
+                    768: {slidesPerView: 3, spaceBetween: 5},
+                    1024: {slidesPerView: 3, spaceBetween:5},
+                }}
+                navigation={true}
+                modules={[Autoplay, Navigation]}
+                className="mySwiper">
+
             <div className="fourColSide border-top">
                 <div className="threePicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
+                      <SwiperSlide>
                         <Link to={"/getAllKala/"+pictures.homepartId+"/"+pictures.id} className="threePics">
-                            <img className="threePic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/threePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                            <img className="threePic rounded" alt="سه عکسی" src={`https://starfoods.ir/resources/assets/images/threePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
                         </Link>
+                      </SwiperSlide>
                    ))}
                 </div>
             </div>
+            </Swiper>
             </> : "" }
 
           {/*چهار عکسی  عکسی   */}
@@ -375,21 +417,17 @@ return(
                 </div>
             </div>
             <Swiper
-                    slidesPerView={4}
-                    spaceBetween={30}
-                    breakpoints={{
-                        320: {slidesPerView: 2, spaceBetween: 5},
-                        640: {slidesPerView: 2, spaceBetween: 5},
-                        768: {slidesPerView: 3, spaceBetween: 5},
-                        1024: {slidesPerView: 4, spaceBetween:5},
-                    }}
-                      loop={true}
-                      pagination={{
-                      clickable: true,
-                    }}
-                    navigation={true}
-                    modules={[Pagination, Navigation]}
-                    className="mySwiper">
+                slidesPerView={4}
+                spaceBetween={30}
+                breakpoints={{
+                    320: {slidesPerView: 2, spaceBetween: 5},
+                    640: {slidesPerView: 2, spaceBetween: 5},
+                    768: {slidesPerView: 3, spaceBetween: 5},
+                    1024: {slidesPerView: 4, spaceBetween:5},
+                }}
+                navigation={true}
+                modules={[Autoplay, Navigation]}
+                className="mySwiper">
                         
                  <div className="fourColSide border-top">
                    <div className="fourPicDiv text-center mt-1">
@@ -401,7 +439,7 @@ return(
                         </SwiperSlide>
                      ))}
                    </div>
-             </div>
+               </div>
             </Swiper>
           </> : "" }
 
@@ -421,15 +459,13 @@ return(
                 slidesPerView={5}
                 spaceBetween={30}
                 breakpoints={{
-                    320: {slidesPerView: 3, spaceBetween: 5},
+                    320: {slidesPerView: 2, spaceBetween: 5},
                     640: {slidesPerView: 4, spaceBetween: 5},
                     768: {slidesPerView: 4, spaceBetween: 5},
                     1024: {slidesPerView: 5, spaceBetween: 5},
                 }}
                 freeMode={true}
-                pagination={{
-                clickable: true,
-                }} modules={[FreeMode, Pagination]} className="mySwiper">
+                modules={[Autoplay, FreeMode]} className="mySwiper">
 
                  <div className="fourColSide border-top">
                   <div className="fourPicDiv text-center mt-1">

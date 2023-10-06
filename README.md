@@ -139,10 +139,8 @@ You can deploy it with your hosting provider of your choise.
 ## 🔭 Future Features <a name="future-features"></a>
 
 - [ ] 
-- **[]**
-- **[]**
-- **[]**
-
+- [ ] 
+- [ ] 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

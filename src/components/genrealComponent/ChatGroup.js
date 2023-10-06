@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faPaperPlane, faReply, faX } from "@fortawesome/free-solid-svg-icons";
-import profile from "../../assets/images/profile.png";
-import userAvatar from "../../assets/images/siteImage/userAvatar.png";
 import axios from "axios";
 
 export default function ChatGroup() {
@@ -40,6 +38,7 @@ export default function ChatGroup() {
     };
 
       const addMessage = () => {
+        alert("clicckdee")
         const psn = localStorage.getItem("psn");
         const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}`;
         axios.get(apiUrl)
@@ -57,7 +56,6 @@ export default function ChatGroup() {
         const apiUrl = `https://starfoods.ir/api/replayMessage?psn=${psn}&messageId=${msTobeRepliedId}&messageContent=${encodeURIComponent(customerReply)}`;
         axios.get(apiUrl)
           .then(response => {
-            setCustomerReply("");
             console.log('Message sent successfully:', response.data);
           })
           .catch(error => {
@@ -177,7 +175,7 @@ export default function ChatGroup() {
                 { !redPlyDiv ? 
                      <div className="chat-footer">
                         <textarea onChange={messageData} value={customerText} cols={30} className="customer-text" id="customerText" /> 
-                        <FontAwesomeIcon onClick={()=>addMessage} className="send-icon" icon={faPaperPlane} /> 
+                        <FontAwesomeIcon onClick={()=>addMessage()} className="send-icon" icon={faPaperPlane} /> 
                      </div> 
                 :
                     <div className="chat-footer">
