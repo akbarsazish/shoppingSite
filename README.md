@@ -29,7 +29,7 @@
 
 # 📖 [Starfoods] <a name="about-project"></a>
 
-**[Starfoods]** Starfoods is an online platform where users can browse and buy various products or services conveniently from their homes or anywhere with internet access. It offers product descriptions, images, pricing details, customer reviews, and secure payment methods, making the buying process smooth and easy.
+ Starfoods is an online platform where users can browse and buy various products or services conveniently from their homes or anywhere with internet access. It offers product descriptions, images, pricing details, customer reviews, and secure payment methods, making the buying process smooth and easy.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -40,8 +40,8 @@
   <ul>
     <li><a href="#">HTML</a></li>
     <li><a href="#">CSS</a></li>
+    <li><a href="#">Bootstrap</a></li>
     <li><a href="#">React </a></li>
-    <li><a href="#">React Redux</a></li>
   </ul>
 </details>
 
