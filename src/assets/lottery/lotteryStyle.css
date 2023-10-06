@@ -170,8 +170,8 @@
 /* box 2 with 8 span style */
 .box2 .span1 b {
     position: absolute;
-    top: 34%;
-    right: 86%;
+    top: 38%;
+    right: 61%;
     transform: rotate(200deg);
   }
   
@@ -237,8 +237,8 @@
   
   .box1 .span2 b {
     position: absolute;
-    top: 23%;
-    right: 45%;
+    top: 24%;
+    right: 51%;
     transform: rotate(-130deg);
   }
   
@@ -265,8 +265,8 @@
   
   .box2 .span1 b {
     position: absolute;
-    top: 35%;
-    right: 82%;
+    top: 40%;
+    right: 49%;
     transform: rotate(197deg);
   }
   
