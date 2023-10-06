@@ -11,7 +11,6 @@ export default function ChatGroup() {
     const [customerText, setCustomerText] = useState('');
     const [customerReply, setCustomerReply] = useState('');
 
-    // console.log("reply to :", replyTo)
     const showToggleChat = () => {
         setLiveChat(true)
     }
@@ -38,7 +37,6 @@ export default function ChatGroup() {
     };
 
       const addMessage = () => {
-        alert("clicckdee")
         const psn = localStorage.getItem("psn");
         const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}`;
         axios.get(apiUrl)
