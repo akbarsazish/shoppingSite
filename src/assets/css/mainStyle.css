@@ -23,10 +23,6 @@ span {
     font-family: IRANSans;
 }
 
-.customeOffcanvas {
-    width: 244px !important;
-}
-
 .topMenu {
   position: fixed;
   top: 0;
@@ -69,10 +65,7 @@ span {
 .headerLink {
     text-decoration: none;
     color: #000;
-}
-
-.fortest {
-    color: #000;
+    position: relative;
 }
 
 .txtsearch {
@@ -84,16 +77,21 @@ span {
 }
 
 .cartNotification {
-  top: 1%;
-  left: 11%;
-  font-size: 9px !important;
-  position: fixed;
+  position: absolute;
+  top: 1;
+  right: 0;
+  background-color: #000; 
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px !important;
+  width: 16px;
+  height:16px;
+  text-align: center;
 }
 
-.offcanvas-body,
-.offcanvas-header {
-    background: linear-gradient(#cc2c2c, #ff002b, #ff4444);
-
+.customeOffcanvas {
+  width: 244px !important;
+  background: linear-gradient(#cc2c2c, #ff002b, #ff4444);
 }
 
 .dri-left {
@@ -141,14 +139,22 @@ span {
   height: 150px !important;
 }
 
+.social-div {
+  position: relative;
+  bottom: 2%;
+  display: flex;
+  justify-content: space-around;
+}
 .socialMedia {
-  background-color: #fff;
-  border-radius: 50%;
+  text-decoration: none;
 }
 
-.socialMedia:hover {
-  background-color: #f00;
-  border-radius: 10px;
+.social-media-icon {
+  color: #fff;
+}
+
+.social-media-icon:hover {
+  color: #000;
 }
 
 .categories {
@@ -308,6 +314,7 @@ span {
 
 div.price {
   height: 1rem;
+  font-size: 1rem;
 }
 
 .kala-name {
@@ -2159,7 +2166,7 @@ ul li a.active {
   width: 22rem;
   background-color: #fff;
   position: fixed;
-  right: 25%;
+  right: 18%;
   top: 9.5%;
   z-index: 9;
   border-radius: 0.1rem;

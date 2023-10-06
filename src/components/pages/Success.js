@@ -16,7 +16,6 @@ export default function Success() {
         axios.get("https://starfoods.ir/api/successFactorInfo",
         {params:{psn:localStorage.getItem("psn")}})
         .then((data)=>{
-            console.log(data);
             setSuccedFactorData(data.data.factorBYS.map((element,index)=>
             <tr>
                 <td> {(index+1)} </td>

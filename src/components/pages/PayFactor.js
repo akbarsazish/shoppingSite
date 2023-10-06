@@ -53,7 +53,6 @@ export default function PayFactor() {
             ,allMoney:localStorage.getItem("allMoney")
         }})
             .then((response)=>{
-                console.log(response);
                 if(response.data.result === "OK"){
                     localStorage.setItem("recivedTime","");
                     localStorage.setItem("takhfif",0);

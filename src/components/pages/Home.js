@@ -34,7 +34,7 @@ export default function Home() {
 
     if(localStorage.getItem("isLogedIn")){    
     return (
-        <div className="container rounded" style={{boxShadow: "0px 0px 1px 1px #fed"}}>
+        <div className="container">
             <div className="mainSliderContainer">
                 <div className="mainSlider-right">
                     <Swiper

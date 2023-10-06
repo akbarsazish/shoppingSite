@@ -25,7 +25,6 @@ export default function ShoppingCart(props) {
             params:{
                 psn:localStorage.getItem("psn")}})
             .then((data) => {
-                console.log("check it", data)
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -33,7 +32,6 @@ export default function ShoppingCart(props) {
             setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-        
             if(data.data.orders[0].Price3 > 0 && data.data.orders[0].Price4){
                 let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
                     const firstPrice = parseInt(currentValue.Price3);
@@ -48,7 +46,7 @@ export default function ShoppingCart(props) {
                     if(secondPrice > 0){
                         accumulator += secondPrice / parseInt(currency);
                     }
-                        return accumulator;
+                      return accumulator;
                     }, 0);
 
                 if (allMoneyProfit > allMoneyNoProfit) {
@@ -56,9 +54,6 @@ export default function ShoppingCart(props) {
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
-
-                console.log("profit", allMoneyProfit)
-                console.log("No profit", allMoneyNoProfit)
             }
 
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
@@ -81,18 +76,17 @@ export default function ShoppingCart(props) {
     }, []);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("https://starfoods.ir/api/updateChangedPrice", { 
-            params: { SnHDS: snHDS,psn:localStorage.getItem("psn")}})
-            .then((data) => {
+       axios.get("https://starfoods.ir/api/updateChangedPrice", { 
+          params: { SnHDS: snHDS,psn:localStorage.getItem("psn")}})
+          .then((data) => {
             renewCarts();
-          })  
+        })  
     }
 
     const renewCarts = () => {
         axios.get("https://starfoods.ir/api/cartsList",{
             params:{psn:localStorage.getItem("psn")}})
             .then((data) => {
-                console.log("list carts"+data)
               let currency = data.data.currency;
               setMinSalePriceFactor(data.data.minSalePriceFactor)
               setCurrencyName(data.data.currencyName)
@@ -101,33 +95,28 @@ export default function ShoppingCart(props) {
               setChangePriceState(data.data.changedPriceState)
               setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
 
-            if(data.data.orders[0].Price > 0 && data.data.orders[0].Price1){
-              let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-                 const price1 = parseInt(currentValue.Price1);
-                 if(price1 > 0){
-                   accumulator1 += price1 / parseInt(currency);
-                 }
-                  return accumulator1;
-              }, 0);
-
-              let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
-                  const price = parseInt(currentValue.Price);
-                  if(price > 0){
-                     accumulator += price / parseInt(currency);
-                  }
-                    return accumulator;
+              if(data.data.orders[0].Price3 > 0 && data.data.orders[0].Price4){
+                let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
+                    const firstPrice = parseInt(currentValue.Price3);
+                    if(firstPrice > 0){
+                    accumulator1 += firstPrice / parseInt(currency);
+                    }
+                    return accumulator1;
                 }, 0);
 
+                let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
+                    const secondPrice = parseInt(currentValue.Price4);
+                    if(secondPrice > 0){
+                        accumulator += secondPrice / parseInt(currency);
+                    }
+                        return accumulator;
+                    }, 0);
 
-                if (parseInt(allMoneyProfit) > parseInt(allMoneyNoProfit)) {
-                    setAllProfit(allMoneyProfit - allMoneyNoProfit);
+                if (allMoneyProfit > allMoneyNoProfit) {
+                    setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
                 } else {
                     console.error("Invalid data for profit calculation");
                 }
-
-
-                console.log("profit", allMoneyProfit)
-                console.log("No profit", allMoneyNoProfit)
             }
             
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
@@ -187,16 +176,18 @@ export default function ShoppingCart(props) {
           cancelButtonText: 'خیر'
         }).then((result) => {
           if (result.isConfirmed) {
-            axios.get('https://starfoods.ir/api/deleteOrderBYS',
-              {
+
+            axios.get('https://starfoods.ir/api/deleteOrderBYS',{
                 params: {
                   SnOrderBYS: orderBYSSn
-                }
-              }
-            ).then((data) => {
+            }})
+             .then((data) => {
               let countBought = parseInt(localStorage.getItem('buyAmount'));
+              let boughtFromHome = parseInt(localStorage.getItem(`boughtItem_${goodSn}`));
+
               if (countBought > 0) {
                 localStorage.setItem('buyAmount', countBought - 1);
+                localStorage.setItem(`boughtItem_${goodSn}`, boughtFromHome - 1);
                 let cartDiv = document.getElementById(goodSn + "cartDiv");
                 cartDiv.style.display = "none";
                 renewCarts();

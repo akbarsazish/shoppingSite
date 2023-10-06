@@ -20,6 +20,7 @@ export default function Favorite(props) {
     const renewFavorite=()=>{
     axios.get("https://starfoods.ir/api/favoritKalaApi",
            {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+            console.log("favorite", data)
             setKalaItem(data.data.favorits.map((element,index)=>
 
         <div key={index} className="groupingItem">
@@ -62,7 +63,9 @@ export default function Favorite(props) {
                     {element.activePishKharid<1 
                         ?
                           (element.bought==="Yes" ?
-                            <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.BoughtAmount)+" "+ element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
+                            <button className="btn btn-sm btn-info selectAmount" onClick={()=>showUpdateBuyModal(element.GoodSn,element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                               {parseInt(element.BoughtPackAmount)+" "+element.secondUnit +" معادل "+parseInt(element.BoughtAmount)+" "+ element.UNAME} <FontAwesomeIcon icon={faShoppingCart} />
+                               </button>
                               :(element.callOnSale>0?
                                 <button  className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
                                   :((element.Amount>0 || element.activePishKharid>0 || element.freeExistance>0) 

@@ -111,22 +111,19 @@ function App() {
         <Route path="inviteCode"                    element={<InviteCode/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
-        <Route path='getAllKala/:homepartId/:id'    element={<GetAllKala changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
+        <Route path='getAllKala/:homepartId/:id'    element={<GetAllKala buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
         <Route path="*"                             element={<PageNotFound />} />
         <Route
           path="/successPayApi"
           params={param => ({tref: param.tref, iN: param.iN, iD: param.iD})}
           element={<SuccessPay/>}/>
-
         <Route
           path="/finalizeFactorPayApi"
           params={param => ({ tref: param.tref, iN: param.iN, iD: param.iD})}
           element={<PayFactor/>}/>
-
           <Route path="showAllKala/:partId" element={<ShowAllKala  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
           <Route path="showAllBrand/:brandId" element={<ShowAllBrand  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
       </Routes>
-
     </>
   );
 }

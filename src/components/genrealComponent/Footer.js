@@ -9,7 +9,8 @@ const Footer = ()=> {
   return (
     <div className="containerFluid px-0 mx-0">
         <div className="footer px-0 mx-0">
-            <Link className="footerLink" to="/grouping"><span className="badge text-bg-danger notification">4</span><FontAwesomeIcon className="footerIcon text-light" icon={faListAlt} /></Link>
+            <Link className="footerLink" to="/grouping">
+              <span className="badge text-bg-danger notification"> {localStorage.getItem("buyAmount")} </span><FontAwesomeIcon className="footerIcon text-light" icon={faListAlt} /></Link>
             <Link className="footerLink" to="/" element={<Home />}><FontAwesomeIcon className="footerIcon text-light" icon={faHouse} /></Link>
             <Link className="footerLink" to="/shoppingCart" element={<ShoppingCart />}><FontAwesomeIcon className="footerIcon text-light" icon={faShoppingCart} /></Link>
         </div>

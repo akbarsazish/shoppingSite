@@ -8,40 +8,20 @@ import axios from "axios";
 export default function SuccessPay() {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-  
+    
     // Access specific query parameters
     const iN = queryParams.get('iN');
     const iD = queryParams.get('iD');
     const tref = queryParams.get('tref');
     const[currenyInfo,setCurrencyInfo]=useState({currncy:1,currencyName:"ریال"});
     const[paymentRespond,setPaymentStat]=useState("");
-
-    const[factorBYS,setFactorBYS]=useState([
-        <tr>
-          <td>1</td>
-          <td> </td>
-          <td> </td>
-          <td> </td>
-          <td> </td>
-        </tr>
-   ]);
-
-    const[payInfo,setPaymentInfo]=useState(
-      <tr>
-        <td> 1 </td>                          
-        <td> 1 </td>                          
-        <td> 1 </td>                          
-        <td> 1 </td>                          
-        <td> 1 </td>                          
-        <td> 1 </td>                          
-        <td> 1 </td>                          
-      </tr>
-    );
+    const[factorBYS,setFactorBYS]=useState([]);
+    const[payInfo,setPaymentInfo]=useState([]);
     const[factorNo,setFactorNo]=useState(0);
     const[allProfit,setAllProfit]=useState(0);
 
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/finalizeFactorPayApi",{params:{
+        axios.get("https://starfoods.ir/api/successPayApi",{params:{
             psn:localStorage.getItem("psn")
             ,tref:tref
             ,iN:iN
@@ -53,7 +33,6 @@ export default function SuccessPay() {
             ,allMoney:localStorage.getItem("allMoney")
         }})
         .then((response)=>{
-            console.log(response);
             if(response.data.result == "OK"){
                 localStorage.setItem("recivedTime","");
                 localStorage.setItem("takhfif",0);
@@ -87,13 +66,14 @@ export default function SuccessPay() {
             setPaymentStat(response.data.result)
             });
         },[]);
-    return(<>
+    return(
+    <>
     <Header/>
     <Sidebar/>
     <div className="container  marginTop text-center rounded">
         <div className="row">
             <div className="col-sm-12">
-                {paymentRespond==="OK"? 
+              {paymentRespond==="OK"? 
                 <>
                 <ul class="c-checkout-steps d-none">
                     <li class="is-active is-completed">
@@ -157,12 +137,10 @@ export default function SuccessPay() {
                     </tr>
                     </thead>
                     <tbody className="select-highlight" id="customerListBody1">
-                        <tr>
-                          {payInfo}
-                        </tr>
+                        {payInfo}
                     </tbody>
                 </table>
-	     </div>
+	      </div>
        </div>
      </>
      :(paymentRespond ==="Not Varified"?<h2>not Varified</h2>:(paymentRespond ==="Not Payed"?<h2>not payed</h2>:<h2>not connected</h2>))}

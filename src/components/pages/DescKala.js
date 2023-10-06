@@ -19,8 +19,8 @@ export default function DescKala(props) {
     const [isFavorite, setIsFavorite] = useState("NO")
     const [boughtInf, setBoughtInfo] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
+    
     // fetching data form backend
-
     const showBuyModal = (goodSn, event) => {
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
@@ -115,49 +115,24 @@ export default function DescKala(props) {
                 psn:localStorage.getItem("psn")
             }
         }).then((data) => {
-            console.log("checking the butmodal", data)
             setDescKala(data.data.descKala)
             setIsFavorite(data.data.favorite)
             setKalaName(data.data.GoodName)
             setMainPrice(data.data.Price3)
             setGroupName(data.data.groupName)
             setProductCode(data.data.GoodCde)
+            setBoughtInfo(data.data)
+
             setAsameKalas(data.data.assameKala.map((element) => <div className="similarKalaImg ">
                 <Link to={"/descKala/" + element.GoodSn + "/" + groupId} className="similarImgLink">
                     <img onError={(e)=>{e.target.src=starfood}} className="similarKalaImage" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="descKala" />
                     <h6 className="similarKalaName"> {element.GoodName} </h6>
                 </Link>
             </div>))
-           
-           
-            setBoughtInfo(data.data.map((element, index) =>
-                <div className="desckBuyBtn text-start" key={index}>
-                    {element.activePishKharid < 1 ?
-                        (element.bought === "Yes" ?
-                            <button className="btn btn-sm btn-info selectAmount" onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount) + " " + element.secondUnit + " معادل " + parseInt(element.Amount) + " " + element.UNAME} <FontAwesomeIcon icon={faShoppingCart} /></button>
-                            : (element.callOnSale > 0 ?
-                                <button className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
-                                : (element.AmountExist > 0 || element.freeExistance > 0
-                                    ?
-                                    <button className="btn btn-sm btn-danger selectAmount" id={"buyButton" + element.GoodSn} onClick={(event) => { showBuyModal(element.GoodSn, event) }} data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
-                                    :
-                                    (element.requested === 0 ?
-                                        <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request" + element.GoodSn}>
-                                            <button value="0" id={"preButton" + element.GoodSn} onClick={(event) => requestProduct(3609, element.GoodSn, event)} className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
-                                        </span>
-                                        :
-                                        <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest" + element.GoodSn}>
-                                            <button value="1" id={"afterButton" + element.GoodSn} onClick={(event) => cancelRequestKala(3609, element.GoodSn, event)} className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
-                                        </span>)
-                                )
-                            )
-                        )
-                        : ''}
-                </div>))
         })
     }
     if(localStorage.getItem("isLogedIn")){
-    return (
+      return (
         <>
             <Header />
             <Sidebar />
@@ -172,7 +147,32 @@ export default function DescKala(props) {
                             <div className="desckTitle">
                                 <span className="title" > <b> {kalaName}:</b>  {parseInt(mainPrice/10).toLocaleString()} تومان </span>
                             </div>
-                            {boughtInf}
+                            <div className="desckBuyBtn text-start">
+                                
+                                {boughtInf.activePishKharid < 1 ?
+                                    (boughtInf.bought === "Yes" ?
+                                        <button className="btn btn-sm btn-info selectAmount" onClick={() => showUpdateBuyModal(boughtInf.GoodSn, boughtInf.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                             {parseInt(boughtInf.PackAmount) + " " + boughtInf.secondUnit + " معادل " + parseInt(boughtInf.Amount) + " " + boughtInf.UNAME} <FontAwesomeIcon icon={faShoppingCart} />
+                                        </button>
+                                        : (boughtInf.callOnSale > 0 ?
+                                            <button className="btn-add-to-cart">برای خرید تماس بگیرید <i className="far fa-shopping-cart text-white ps-2"></i></button>
+                                            : (boughtInf.AmountExist > 0 || boughtInf.freeExistance > 0
+                                                ?
+                                                <button className="btn btn-sm btn-danger selectAmount" id={"buyButton" + boughtInf.GoodSn} onClick={(event) => { showBuyModal(boughtInf.GoodSn, event) }} data-bs-toggle="modal" data-bs-target="#exampleModal"> انتخاب تعداد  <FontAwesomeIcon icon={faShoppingCart} /></button>
+                                                :
+                                                (boughtInf.requested === 0 ?
+                                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request" + boughtInf.GoodSn}>
+                                                        <button value="0" id={"preButton" + boughtInf.GoodSn} onClick={(event) => requestProduct(3609, boughtInf.GoodSn, event)} className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                                    </span>
+                                                    :
+                                                    <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest" + boughtInf.GoodSn}>
+                                                        <button value="1" id={"afterButton" + boughtInf.GoodSn} onClick={(event) => cancelRequestKala(3609, boughtInf.GoodSn, event)} className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                                    </span>)
+                                            )
+                                        )
+                                    )
+                                    : 'ok'}
+                            </div>
                         </div>
                         <div className="desckalaBody">
                             <p className="title mt-2">  <b> گروه اصلی  :</b> {groupName} </p>

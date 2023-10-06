@@ -123,7 +123,6 @@ const requestProduct=(psn,goodSn,event)=>{
             fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
             .then(response=>response.json())
             .then((data) => {
-            console.log(data)
             let modalItems=[];
                 for (let index = 1; index <= data.maxSale; index++) {
                 modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-danger buyButton" onClick={(e) =>buySomething(data.amountExist,data.freeExistance,data.zeroExistance,data.costLimit,data.costError,data.amountUnit*index,data.kalaId,data.defaultUnit,e,event)}>{index+' '+data.secondUnit+' معادل '+' '+index*data.amountUnit+' '+data.defaultUnit}</button>)

@@ -85,9 +85,6 @@ const HomeSliders = ()=> {
                         ...prevPurchasedItems,
                         [kala.GoodSn]: parseInt(updateBoughtItem) + 1,
                       }));
-
-                    let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                    localStorage.setItem('buyAmount', countBought + 1);
                 });
         }
     }
@@ -95,7 +92,6 @@ const HomeSliders = ()=> {
     const decreaseKala = (goodSn, kala) => {
         const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
         const updatedValue =  parseInt(spanValue);
-
         const updatedPurchasedItems = { ...purchasedItems, [kala.GoodSn]: Math.max(0, updatedValue - 1)};
         setPurchasedItems(updatedPurchasedItems);
         
@@ -113,7 +109,6 @@ const HomeSliders = ()=> {
             let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
                 countBought = Math.max(0, countBought - 1); 
                 localStorage.setItem('buyAmount', countBought);
-                
                 
             setPurchasedItems((prevPurchasedItems) => ({
                 ...prevPurchasedItems,

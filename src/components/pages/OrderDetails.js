@@ -26,7 +26,6 @@ export default function FactoreDetails(props){
 
         const totalPrice = data.data.orders.reduce((total, item) => total + parseFloat(item.Price), 0);
         setAllPrice(totalPrice);
-
         })
     },[])
 

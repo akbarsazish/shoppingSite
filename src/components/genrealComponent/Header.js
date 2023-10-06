@@ -14,6 +14,12 @@ const Header = ()=>{
     const [searchedValue, setSearchedValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
+    const [currentPage, setCurrentPage] = useState('home');
+
+    const pageChange = (page) => {
+    setCurrentPage(page);
+    };
+
   const handleSearchIcon = () => {
     setShowSearchInput(!showSearchInput);
     if (screenWidth < 768) {
@@ -29,8 +35,6 @@ const Header = ()=>{
   });
 
     const navigate = useNavigate();
-    const [bonusResult,setBonusResult] = useState(0)
-    const [takhfifMoney,settakhfifMoney] = useState(0)
 
     useEffect(()=>{
         axios.get('https://starfoods.ir/api/checkLogin',{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
@@ -38,11 +42,6 @@ const Header = ()=>{
                localStorage.removeItem("isLogedIn")
             }
         })
-        axios.get('https://starfoods.ir/api/getHeaderInfo',{psn:localStorage.getItem("psn")}).then((data)=>{
-            localStorage.getItem("buyAmount")
-            setBonusResult(data.data.bonusResult)
-            settakhfifMoney(data.data.takhfifMoney)
-        });
     },[]);
 
     // for searching kala
@@ -50,7 +49,6 @@ const Header = ()=>{
         if (searchedValue.length > 0) {
             axios.get('https://starfoods.ir/api/publicSearchKalaApi',{params: {psn:localStorage.getItem("psn"), name:searchedValue}
             }).then((response)=>{
-                console.log(response);
                 setSearchResults(response.data);
             }).catch((error) => {
                 console.error('Error fetching data:', error);
@@ -75,7 +73,9 @@ if(localStorage.getItem("isLogedIn")){
         <div className="topMenu">
             <div className="container header-container">
                 <div className="flex-item-left">
-                    <FontAwesomeIcon onClick={() => navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
+                   {window.location.pathname !== '/home' && (
+                    <FontAwesomeIcon onClick={() =>navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
+                    )}
                     <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
                     <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />
@@ -91,12 +91,12 @@ if(localStorage.getItem("isLogedIn")){
                     </form>
                 </div>
                 <div className="flex-item-right mt-1" id="headerStaff">
-                    <Link to="/inviteCode" className="headerLink" > <span> {takhfifMoney} </span>
+                    <Link to="/inviteCode" className="headerLink" >
                       <FontAwesomeIcon className="faIcon" icon={faPeopleArrows} /> &nbsp;
                     </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} >
                         <FontAwesomeIcon className="faIcon" icon={faShoppingCart} /> &nbsp; 
-                        <span className="badge text-bg-dark cartNotification">{localStorage.getItem("buyAmount")}</span>
+                        <span className="badge cartNotification">{localStorage.getItem("buyAmount")}</span>
                     </Link>
                 </div>  
             </div>

@@ -21,10 +21,8 @@ function DailyEmtyaz() {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
-      console.log(data.data.presentInfo)
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
-        
     })
 }, []);
 
