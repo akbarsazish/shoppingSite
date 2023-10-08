@@ -267,4 +267,9 @@
       height: 1rem;
       font-size: 0.8rem;
     }
+
+    .shegoftAngizFirstItem {
+        width: 44% !important;
+      }
+      
 }

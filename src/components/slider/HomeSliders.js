@@ -204,7 +204,13 @@ return(
                 <div className="forTitleItem text-start"> </div>
             </div>
 
-              <div className="fourColSide border-top py-1" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
+              <div className="fourColSide border-top py-1 shegoftAndgez" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
+                   <div className="text-center shegoftAngizFirstItem">
+                        <h4 className="text-wrap" style={{padding:"5px 33px"}}> {kalaTypes.textLogo} </h4>
+                        <Link to={"/showAllKala/"+kalaTypes.partId} className="btn btn-md border text-decoration-none"> 
+                           {kalaTypes.showAll ?  <h6> مشاهده همه </h6> : "" }
+                        </Link>
+                   </div>
                  <Swiper className="mySwiper text-center mx-2"
                     slidesPerView={1}
                     loop={true}
@@ -214,19 +220,14 @@ return(
                         disableOnInteraction: false,
                       }}
                     breakpoints={{
-                        320: {slidesPerView: 2, spaceBetween: 10},
-                        640: {slidesPerView: 3, spaceBetween: 10},
-                        768: {slidesPerView: 3, spaceBetween: 10},
-                        1024: {slidesPerView: 5, spaceBetween: 15},
+                        320: {slidesPerView: 1, spaceBetween: 2},
+                        640: {slidesPerView: 2, spaceBetween: 2},
+                        768: {slidesPerView: 3, spaceBetween: 2},
+                        1024: {slidesPerView: 4, spaceBetween: 5},
                     }}
                     modules={[Autoplay, Pagination]}>
 
-                    <SwiperSlide className="text-center shegoft-angez-first">
-                        <h3 className="text-wrap" style={{padding:"5px 44px"}}> {kalaTypes.textLogo} </h3>
-                        <Link to={"/showAllKala/"+kalaTypes.partId} className="btn btn-md border text-decoration-none"> 
-                           {kalaTypes.showAll ?  <h6> مشاهده همه </h6> : "" }
-                        </Link>
-                    </SwiperSlide>
+                   
 
                    {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
                     <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>

@@ -72,11 +72,11 @@ if(localStorage.getItem("isLogedIn")){
         <>
         <div className="topMenu">
             <div className="container header-container">
-                <div className="flex-item-left">
+                <div className="flex-item-left mt-1">
                    {window.location.pathname !== '/home' && (
-                    <FontAwesomeIcon onClick={() =>navigate(-1)} className="faIcon chevron-icon-right" icon={faChevronRight} />
+                    <FontAwesomeIcon onClick={() =>navigate(-1)} className="faIcon chevron-icon-right ms-2" icon={faChevronRight} />
                     )}
-                    <span className="mx-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
+                    <span className="ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
                     <form className="d-inline">
                     <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />
                         {showSearchInput && ( 
@@ -90,7 +90,7 @@ if(localStorage.getItem("isLogedIn")){
                              placeholder="چی لازم داری ؟  ..." />  )}
                     </form>
                 </div>
-                <div className="flex-item-right mt-1" id="headerStaff">
+                <div className="flex-item-right mt-1 ps-0" id="headerStaff">
                     <Link to="/inviteCode" className="headerLink" >
                       <FontAwesomeIcon className="faIcon mt-2" icon={faPeopleArrows} /> &nbsp;
                     </Link>    

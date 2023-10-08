@@ -32,6 +32,8 @@ span {
   z-index: 9;
   margin-left: 0 !important;
   margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }
 
 .header-container {
@@ -69,7 +71,7 @@ span {
 }
 
 .txtsearch {
-  margin: 0.1rem 1rem 1rem;
+  margin: 0rem 1rem 1rem;
   border-radius: 2px;
   font-size: 12px;
   padding: 6px;
@@ -126,13 +128,14 @@ span {
 .mainSliderContainer {
   margin-top: 60px;
   display: flex;
+  margin: 0 auto;
 }
 
 .mainSlider-right {
-  width: 66%;
+  width: 70%;
 }
 .mainSlider-left {
-  width: 33%;
+  width: 30%;
 }
 
 .smallSlider {
@@ -145,6 +148,7 @@ span {
   display: flex;
   justify-content: space-around;
 }
+
 .socialMedia {
   text-decoration: none;
 }
@@ -191,6 +195,15 @@ span {
 
 .fourColSliderImg {
   width: 100%;
+}
+
+.shegoftAndgez {
+  display: flex;
+  border-radius: 5px;
+}
+
+.shegoftAngizFirstItem {
+  width: 15%;
 }
 
 .forTitle {

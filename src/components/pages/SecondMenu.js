@@ -7,7 +7,7 @@ import star from '../../assets/images/siteImage/star.png';
 
 export default function SecondMenu() {
     return(
-        <div className="row">
+       
             <div className="round-menu">
                <div className="round-menu-items" id="roundMenuItem">
                     <div className="round-item">
@@ -51,7 +51,6 @@ export default function SecondMenu() {
                     </div>
                 </div>
           </div>
-      </div>
     )
 }
 

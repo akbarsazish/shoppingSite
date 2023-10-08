@@ -34,7 +34,7 @@ export default function Home() {
 
     if(localStorage.getItem("isLogedIn")){    
     return (
-        <div className="container">
+        <div className="container bg-light marginTop">
             <div className="mainSliderContainer">
                 <div className="mainSlider-right">
                     <Swiper
@@ -58,8 +58,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <SecondMenu /> 
             <div className="row">
+                <SecondMenu /> 
                 <div className="categories">
                     {mainGroups}
                 </div>
