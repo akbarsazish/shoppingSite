@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 export default function Grouping(props) {
-    console.log("props from parent", props)
-    if(localStorage.getItem("isLogedIn")){
+  if(localStorage.getItem("isLogedIn")){
         return (
             <>
             <li className="groupingPartItem shadow">
@@ -13,7 +13,7 @@ export default function Grouping(props) {
             </li>
             </>
           )
-        }else{
-            window.location.href="/login"
-        }
+    }else{
+        window.location.href="/login"
+    }
 }

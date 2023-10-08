@@ -33,7 +33,6 @@ export default function EditProfile() {
     };
 
     const submitHaqiqiCustomer = (e) => {
-        console.log("submitHaqiqiCustomer called");
         e.preventDefault();
         axios.get(`https://starfoods.ir/api/storeHaqiqiCustomerApi`,{params:{
             customerName : document.getElementById("haqiqiName").value,
@@ -87,7 +86,6 @@ export default function EditProfile() {
     };
 
     const submitHoqoqiCustomer = (e) => {
-        console.log("submitاخCustomer called");
         e.preventDefault();
         axios.get(`https://starfoods.ir/api/storeHoqoqiCustomerApi`,{params:{
             companyName : document.getElementById("company").value,
@@ -222,7 +220,6 @@ if(localStorage.getItem("isLogedIn")){
                     </div>
                 </div>
                 
-
                 <div className={`tab-pane fade p-3 ${activeTab === 1 ? 'show active' : ''}`} id="tab2">
                     <div className="row mt-2">
                       <form onSubmit={submitHoqoqiCustomer}>
