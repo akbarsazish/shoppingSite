@@ -72,7 +72,6 @@ export default function ChequeRequest(){
     return formattedNumber;
   }
 
-
  
     const [formData, setFormData] = useState({
         name : '',

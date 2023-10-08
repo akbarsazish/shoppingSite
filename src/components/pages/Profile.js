@@ -16,7 +16,7 @@ export default function Profile(props) {
     const [customerName, setCustomerName] = useState(0)
     const [introducerCode, setIntroducerCode] = useState(0)
     const [customerMobile, setCustomerMobile] = useState(0)
-    const [customerPhone, setCustomerPhone] = useState(0)
+    const [customerPhone, setCustomerPhone] = useState(0);
     
     useEffect(() => {
         axios.get("https://starfoods.ir/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
@@ -42,8 +42,9 @@ export default function Profile(props) {
             setCustomerMobile((data.data.profile.PhoneStr.split("-"))[0])
             setCustomerPhone((data.data.profile.PhoneStr.split("-"))[1])
         });
-      
+
     },[])
+
 
     if(localStorage.getItem("isLogedIn")){
         return (
@@ -65,14 +66,16 @@ export default function Profile(props) {
                                     تلفن ثابت : { customerPhone }
                                 </div>
                             </div>
+
                             <div className="profileInfo border-top mx-2">
                                 <div className="profileInfoItems">
                                     شناس نامه
                                 </div>
                                 <div className="profileInfoItems">
-                                    <Link className="editProfile" to="/editProfile">  ویرایش <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> </Link>
+                                    <Link className="editProfile" to={`/editProfile`}>  ویرایش <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon> </Link>
                                 </div>
                             </div>
+
                             <div className="profileFooter text-center">
                                 <div className="profileItems">
                                     <Link to="/inviteCode" className="profileFooterIcon">  کد معرف: {introducerCode} <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon> </Link>

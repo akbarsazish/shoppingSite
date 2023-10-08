@@ -48,8 +48,9 @@ export default function Shiping(props) {
     }
 
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/shippingData",{params:{psn:localStorage.getItem("psn")}})
-        .then((data) => {
+        axios.get("https://starfoods.ir/api/shippingData",{
+         params:{psn:localStorage.getItem("psn")}})
+        .then((data) =>{
             setTakhfifCase(data.data.takhfifCase/10);
             setWeekDay1(data.data.date1);
             setWeekDay2(data.data.date2);
@@ -57,8 +58,8 @@ export default function Shiping(props) {
             setAfterTomorrowDate(data.data.afterTomorrowDate);
             setMoorningTimeContent(data.data.setting.moorningTimeContent);
             setaAternoonTimeContent(data.data.setting.afternoonTimeContent);
-            setDefaultAddress(data.data.customer.peopeladdress)
-            setSelectedAddress(0+'_'+data.data.customer.peopeladdress)
+            setDefaultAddress(data.data.customer.peopeladdress);
+            setSelectedAddress(0+'_'+data.data.customer.peopeladdress);
             setOtherAddresses(data.data.addresses.map((element)=><option value={element.AddressPeopel+'_'+element.SnPeopelAddress}>{element.AddressPeopel}</option>))
             // used for takhfifcode updating
         })
@@ -71,7 +72,6 @@ export default function Shiping(props) {
             setPayUrl(data.data)
         });
       }, []);
-
 
       let payOnline=document.getElementById("payOnline");
       let payHozori=document.getElementById("payHozori");
@@ -141,7 +141,6 @@ const calculateTakhfifCode=()=>{
     }
 }
 
-
 if(localStorage.getItem("isLogedIn")){
     return (
         <>
@@ -200,7 +199,6 @@ if(localStorage.getItem("isLogedIn")){
                         </div>
                     </div>
                     
-
                 {  (currentHour >= 7 && currentHour < 19)?
                     <div className="shippingPart">
                         <div className="row w-100">
@@ -331,6 +329,6 @@ if(localStorage.getItem("isLogedIn")){
         </>
     )
     }else{
-        window.location.href="/login"
+      window.location.href="/login"
     }
 }

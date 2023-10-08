@@ -4,16 +4,19 @@ import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Swal from 'sweetalert2';
 
 
 export default function EditProfile() {
     const [activeTab, setActiveTab] = useState(0);
+    const [haqiqiCustomerInfo, setHaqiqiCustomerInfo] = useState(0);
     const [customerSn, setcustomerSn] = useState(localStorage.getItem("psn"));
     const [haqiqiType, sethaqiqiType] = useState('haqiqi');
-    const [hoqoqiType, sethoqoiType] = useState('hoqoqi');
-    
-    const [haqiqiCustomerInfo, setHaqiqiCustomerInfo] = useState({
+
+    console.log("target", haqiqiCustomerInfo)
+
+  
+
+    const [haqiqiData, sethaqiqiData] = useState({
         customerName: '',
         familyName: '',
         codeMilli: '',
@@ -24,16 +27,17 @@ export default function EditProfile() {
         email: ''
     });
 
+    const [updateHqiqiData, setUpdateHqiqiData] = useState({});
+
     const haqiqiInputChange = (e) => {
     const { name, value } = e.target;
-        setHaqiqiCustomerInfo({
-            ...haqiqiCustomerInfo,
+        sethaqiqiData({
+            ...haqiqiData,
             [name]: value
         });
     };
 
     const submitHaqiqiCustomer = (e) => {
-        console.log("submitHaqiqiCustomer called");
         e.preventDefault();
         axios.get(`https://starfoods.ir/api/storeHaqiqiCustomerApi`,{params:{
             customerName : document.getElementById("haqiqiName").value,
@@ -48,77 +52,13 @@ export default function EditProfile() {
             email : document.getElementById("haqiqiEmail").value,
         }})
           .then((response) => {
-              setHaqiqiCustomerInfo(response.data.exacHaqiqi);
-              Swal.fire({
-                title: 'آیا معلومات ذخیره گردد؟',
-                showDenyButton: true,
-                showCancelButton: true,
-                cancelButtonText: 'لغو',
-                confirmButtonText: 'بلی',
-                denyButtonText: `خیر`,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  Swal.fire('ذخیره شد!', '', 'success')
-                } else if (result.isDenied) {
-                  Swal.fire('تغییرات ذخیره نگردید', '', 'info')
-                }
-              })
+              setUpdateHqiqiData(response.data.exacHaqiqi)
           })
           .catch((error) => {
               console.error('Error:', error);
           });
       };
-
-    // Hoqoqi customer 
-    const [hoqoqiCustomerInfo, setHoqoqiCustomerInfo]=useState({
-       companyName: '',
-       shenasahMilli: '',
-       codeNaqsh: '',
-       codePosti: '',
-       address: ''
-    });
-
-    const hoqoqiInputChange = (e) => {
-    const { name, value } = e.target;
-    setHoqoqiCustomerInfo({
-            ...hoqoqiCustomerInfo,
-            [name]: value
-        });
-    };
-
-    const submitHoqoqiCustomer = (e) => {
-        console.log("submitاخCustomer called");
-        e.preventDefault();
-        axios.get(`https://starfoods.ir/api/storeHoqoqiCustomerApi`,{params:{
-            companyName : document.getElementById("company").value,
-            psn: document.getElementById("hoqoqiPsn").value,
-            customerType : document.getElementById("hoqoqiType").value,
-            shenasahMilli : document.getElementById("hoqoqiShenasahmilli").value,
-            codeNaqsh : document.getElementById("hoqoqiCodeNaqsh").value,
-            codePosti : document.getElementById("hoqoqiCostalCode").value,
-            address : document.getElementById("address").value
-        }})
-          .then((response) => {
-            setHoqoqiCustomerInfo(response.data.exactHoqoqi);
-              Swal.fire({
-                title: 'آیا معلومات ذخیره گردد؟',
-                showDenyButton: true,
-                showCancelButton: true,
-                cancelButtonText: 'لغو',
-                confirmButtonText: 'بلی',
-                denyButtonText: `خیر`,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  Swal.fire('ذخیره شد!', '', 'success')
-                } else if (result.isDenied) {
-                  Swal.fire('تغییرات ذخیره نگردید', '', 'info')
-                }
-              })
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-          });
-      };
+      
 
     const handleSelect = (index) => {
         setActiveTab(index);
@@ -128,10 +68,9 @@ export default function EditProfile() {
         axios.get("https://starfoods.ir/api/getCustomerOfficialInfo", {
             params: { psn: localStorage.getItem("psn") }
         })
-        .then((data) => {
-            setHaqiqiCustomerInfo(data.data.exacHaqiqi)
-            setHoqoqiCustomerInfo(data.data.exactHoqoqi)
-        })
+            .then((data) => {
+              setHaqiqiCustomerInfo(data.data.exacHaqiqi)
+            })
     }, []);
 
 if(localStorage.getItem("isLogedIn")){
@@ -218,64 +157,20 @@ if(localStorage.getItem("isLogedIn")){
                                     <input type="submit" className="btn btn-sm btn-danger" value="ذخیره " />
                                 </div>
                             </div>
-                         </form>
-                    </div>
-                </div>
-                
+                            </form>
+                            
+                            </div>
+                        </div>
 
-                <div className={`tab-pane fade p-3 ${activeTab === 1 ? 'show active' : ''}`} id="tab2">
-                    <div className="row mt-2">
-                      <form onSubmit={submitHoqoqiCustomer}>
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                <div className="mt-2">
-                                    <label htmlFor="company" className="form-label">نام شرکت :</label>
-                                    <input type="company" className="form-control form-control-sm" value={hoqoqiCustomerInfo && hoqoqiCustomerInfo.companyName} onChange={hoqoqiInputChange} id="company"  name="companyName"/>
-                                    <input id="hoqoqiPsn" type="hidden" value={customerSn} onChange={hoqoqiInputChange} name="customerShopSn" />
-                                    <input id="hoqoqiType" type="hidden" value={hoqoqiType} onChange={hoqoqiInputChange} name="customerType"/>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                <div className="mt-2">
-                                    <label htmlFor="shenasahmilli" className="form-label"> شناسه ملی   :</label>
-                                    <input type="number" className="form-control form-control-sm" value={hoqoqiCustomerInfo && hoqoqiCustomerInfo.shenasahMilli} onChange={hoqoqiInputChange}  id="hoqoqiShenasahmilli" name="shenasahMilli" />
-                                </div>
-                            </div>
+                        <div className={`tab-pane fade p-3 ${activeTab === 1 ? 'show active' : ''}`} id="tab2">
+                           
                         </div>
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                <div className="mt-2">
-                                    <label htmlFor="roleNo" className="form-label"> کد نقش :</label>
-                                    <input type="number" className="form-control form-control-sm" value={hoqoqiCustomerInfo && hoqoqiCustomerInfo.codeNaqsh} onChange={hoqoqiInputChange}  id="hoqoqiCodeNaqsh" name="codeNaqsh" />
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6 col-sm-12">
-                                <div className="mt-2">
-                                    <label htmlFor="postalCode" className="form-label">کد پستی :</label>
-                                    <input type="number" className="form-control form-control-sm" value={hoqoqiCustomerInfo && hoqoqiCustomerInfo.codePosti} onChange={hoqoqiInputChange} id="hoqoqiCostalCode" name="codePosti" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                <div className="mt-2">
-                                    <label htmlFor="address" className="form-label"> آدرس :</label>
-                                    <input type="text" className="form-control form-control-sm" value={hoqoqiCustomerInfo && hoqoqiCustomerInfo.address} onChange={hoqoqiInputChange} id="address" name="address" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="mt-2">
-                            <input type="submit" className="btn btn-sm btn-danger" value="ذخیره" />
-                        </div>
-                    </form>
-                  </div>
-              </div>
+                    </div >
+                </div >
             </div >
-        </div >
-    </div >
-    <Footer />
-</>
-)
+          <Footer />
+        </>
+    )
 }else{
     window.location.href="/login"
 }
