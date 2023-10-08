@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 import contactImage from '../../assets/images/contactImage.jpg'
 import MainGroupItem from './MainGroupItem'
 import axios from "axios";
@@ -39,10 +39,14 @@ export default function Home() {
                 <div className="mainSlider-right">
                     <Swiper
                         spaceBetween={10}
+                        autoplay={{
+                            delay: 2800,
+                            disableOnInteraction: false,
+                          }}
                         pagination={{
                             clickable: true,
                         }}
-                        modules={[Pagination]}
+                        modules={[Autoplay, Pagination]}
                         className="mySwiper mainSlider">
                         <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.firstPic} alt="لوگو" /></SwiperSlide>
                         <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.secondPic} alt="لوگو" /></SwiperSlide>

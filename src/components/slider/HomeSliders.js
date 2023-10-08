@@ -146,7 +146,7 @@ return(
                         loop={true}
                         spaceBetween={10}
                         autoplay={{
-                            delay: 2500,
+                            delay: 3500,
                             disableOnInteraction: false,
                           }}
                         breakpoints={{
@@ -216,7 +216,7 @@ return(
                     loop={true}
                     spaceBetween={3}
                     autoplay={{
-                        delay: 2800,
+                        delay: 3000,
                         disableOnInteraction: false,
                       }}
                     breakpoints={{
@@ -280,7 +280,7 @@ return(
                     loop={true}
                     spaceBetween={10}
                     autoplay={{
-                        delay: 2800,
+                        delay: 3200,
                         disableOnInteraction: false,
                       }}
                     breakpoints={{
