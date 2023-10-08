@@ -6,7 +6,7 @@ import yourStar from '../../assets/images/siteImage/your-star.png'
 export default function Instruction(props) {
   return (
     <>
-      <div className="container marginTop">
+      <div className="container">
         <div className="instruction-container">
             <h5> شیوه‌ی کسب ستاره از هرکدام از این فعالیت‌ها به شرح زیر است </h5>
             <div className="instruction-item">

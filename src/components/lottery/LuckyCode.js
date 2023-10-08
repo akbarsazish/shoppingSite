@@ -16,11 +16,8 @@
     }
 
     export default function LuckyCode({mybonus, minBonus}) {
-      
-        const audio = new Audio(sound);
-        const wheelAudio = new Audio(wheel);
-
-
+      const audio = new Audio(sound);
+      const wheelAudio = new Audio(wheel);
       const [wonPrize, setWonPrize]=useState('');
       const [rotation, setRotation] = useState(180);
 
@@ -33,7 +30,7 @@
         showtwelvthPrize:'0',sixteenthPrize:'0',sixthPrize:'0',teenthPrize:'0',therteenthPrize:'0',                                                                                                                                               
         thirdPrize:'',timestam:'2022-12-06 11:44:16.207',twelvthPrize:''});
 
-      let FirstPrize= shuffle([(0)]) ;
+      let firstPrize= shuffle([(0)]) ;
       let secondPrize= shuffle([(0)]) ;
       let thirdPrize= shuffle([(0)]) ;
       let fourthPrize= shuffle([(0)]) ;
@@ -49,8 +46,8 @@
       let fourteenthPrize= shuffle([(0)]) ;
       let fifteenthPrize= shuffle([(0)]) ;
       let sixteenthPrize= shuffle([(0)]) ;
-
       let wheelBtn = document.getElementById("spinnerBtn");
+
       if(mybonus < minBonus){
         wheelBtn.disabled = true;
       }
@@ -59,6 +56,7 @@
         axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
           params: { psn: localStorage.getItem('psn') },
         }).then((data) => {
+            console.log(data)
             setSelectedItem(data.data.products[0]);
         });
       
@@ -92,7 +90,7 @@
 
 
         if(selectedItem.showfirstPrize ===1){
-            FirstPrize = shuffle([(3766)]);
+            firstPrize = shuffle([(3766)]);
         }
         if(selectedItem.showsecondPrize ===1){
             secondPrize = shuffle([(3730)]);
@@ -142,7 +140,7 @@
 
        let hasil=[];
        let primaryPrizeList = shuffle([
-         FirstPrize[0],
+         firstPrize[0],
          secondPrize[0],
          thirdPrize[0],
          fourthPrize[0],
@@ -174,7 +172,7 @@
         const box = document.getElementById('box');
         const element = document.getElementById('mainbox');
         
-        box.style.transition = 'all ease 5s';
+        box.style.transition = 'all ease 3s';
         box.style.transform = `rotate(${hasil[0]}deg)`;
         element.classList.remove('animate');
 
@@ -183,7 +181,7 @@
         }, 5000);
 
         // Calculate selectedItem based on hasil array
-        if (FirstPrize.includes(hasil[0])) setWonPrize(selectedItem.firstPrize);
+        if (firstPrize.includes(hasil[0])) setWonPrize(selectedItem.firstPrize);
         if (secondPrize.includes(hasil[0])) setWonPrize(selectedItem.secondPrize);
         if (thirdPrize.includes(hasil[0])) setWonPrize(selectedItem.thirdPrize);
         if (fourthPrize.includes(hasil[0])) setWonPrize(selectedItem.fourthPrize);
@@ -223,6 +221,7 @@
                     {selectedItem.thirdPrize.length>0?
                     <span className="font span3"> <b> {selectedItem.thirdPrize} </b> </span>
                     :''}
+                   
                     {selectedItem.fourthPrize.length>0?
                     <span className="font span4"> <b> {selectedItem.fourthPrize} </b> </span>
                     :''}
@@ -249,8 +248,8 @@
                     {selectedItem.eightthPrize.length>0?
                     <span className="font span3"> <b> {selectedItem.eightthPrize } </b> </span>
                     :''}
-                    {selectedItem.twelvthPrize.length>0?
-                    <span className="font span4"> <b> {selectedItem.twelvthPrize } </b> </span>
+                    {selectedItem.ninethPrize.length>0?
+                    <span className="font span4"> <b> {selectedItem.ninethPrize } </b> </span>
                     :''}
                     {selectedItem.teenthPrize.length>0?
                     <span className="font span5"> <b> {selectedItem.teenthPrize } </b> </span>
