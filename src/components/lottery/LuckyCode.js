@@ -30,22 +30,22 @@
         showtwelvthPrize:'0',sixteenthPrize:'0',sixthPrize:'0',teenthPrize:'0',therteenthPrize:'0',                                                                                                                                               
         thirdPrize:'',timestam:'2022-12-06 11:44:16.207',twelvthPrize:''});
 
-      let firstPrize= shuffle([(0)]) ;
-      let secondPrize= shuffle([(0)]) ;
-      let thirdPrize= shuffle([(0)]) ;
-      let fourthPrize= shuffle([(0)]) ;
-      let fifthPrize= shuffle([(0)]) ;
-      let sixthPrize= shuffle([(0)]) ;
-      let seventhPrize= shuffle([(0)]) ;
-      let eightPrize= shuffle([(0)]) ;
-      let ninthPrize= shuffle([(0)]) ;
-      let teenthPrize= shuffle([(0)]) ;
-      let eleventhPrize= shuffle([(0)]) ;
-      let twelvthPrize= shuffle([(0)]) ;
-      let therteenthPrize= shuffle([(0)]) ;
-      let fourteenthPrize= shuffle([(0)]) ;
-      let fifteenthPrize= shuffle([(0)]) ;
-      let sixteenthPrize= shuffle([(0)]) ;
+      let firstPrize= shuffle([(0)]);
+      let secondPrize= shuffle([(0)]);
+      let thirdPrize= shuffle([(0)]);
+      let fourthPrize= shuffle([(0)]);
+      let fifthPrize= shuffle([(0)]);
+      let sixthPrize= shuffle([(0)]);
+      let seventhPrize= shuffle([(0)]);
+      let eightPrize= shuffle([(0)]);
+      let ninthPrize= shuffle([(0)]);
+      let teenthPrize= shuffle([(0)]);
+      let eleventhPrize= shuffle([(0)]);
+      let twelvthPrize= shuffle([(0)]);
+      let therteenthPrize= shuffle([(0)]);
+      let fourteenthPrize= shuffle([(0)]);
+      let fifteenthPrize= shuffle([(0)]);
+      let sixteenthPrize= shuffle([(0)]);
       let wheelBtn = document.getElementById("spinnerBtn");
 
       if(mybonus < minBonus){
@@ -56,7 +56,6 @@
         axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
           params: { psn: localStorage.getItem('psn') },
         }).then((data) => {
-            console.log(data)
             setSelectedItem(data.data.products[0]);
         });
       
@@ -212,8 +211,8 @@
               <div className={`mainbox ${rotation === 0 ? '' : 'spin-animation'}`} id="mainbox">
                 <div id="box" className="box boxBorder">
                   <div className="box1">
-                    {selectedItem.firstPrize.length>0?
-                    <span className="font span1"> <b> {selectedItem.firstPrize} </b> </span>
+                    {selectedItem.firstPrize>0?
+                    <span className="font span1" style={{backgroundColor:"red !important"}}> <b> {selectedItem.firstPrize} </b> </span>
                     :''}
                     {selectedItem.secondPrize.length>0?
                     <span className="font span2"> <b> {selectedItem.secondPrize} </b> </span>
@@ -238,6 +237,7 @@
                     <span className="font span1"> <b> {selectedItem.sixteenthPrize} </b> </span>
                     :''}
                 </div>
+                
                 <div className="box2">
                   {selectedItem.sixthPrize.length>0?
                     <span className="font span1"> <b> {selectedItem.sixthPrize.trim() } </b> </span>
