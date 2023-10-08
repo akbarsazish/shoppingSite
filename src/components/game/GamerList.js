@@ -73,7 +73,7 @@ export default function GamerList (){
      <>
       <Header/>
       <Sidebar />
-      <div className="container-fluid marginTop" style={{backgroundColor:"#f8f9f9"}}>
+      <div className="container-fluid marginTop" style={{backgroundColor:"#f5f5f5"}}>
         <CountDownTimer />
          <div className="gamer-container">
            {gamerList.players.map((gamer, index) => (
@@ -81,7 +81,7 @@ export default function GamerList (){
               <div className="gamer-item" id="gamerItem" key={index}>
                 <span className="gamer-prize" id={addingId(index)}> {getGamerPrize(index)} </span>
                 <img src={userAvatar} alt="userAvatar" className="gamer-image" id={addingId(index)} />
-                <p className="gamer-score"> {gamer.score} </p>
+                <p className="gamer-score">  {gamer.score} </p>
                 <p className="gamer-name"> {gamer.Name} </p>
               </div>
             )

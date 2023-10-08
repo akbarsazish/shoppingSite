@@ -1699,9 +1699,11 @@ ul li a.active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #000;
-  font-weight: bold;
+  color: #fff;
   font-size: 1rem;
+  background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%);
+  border-radius: 50%;
+  padding: 3px;
 }
 
 .buttonGame {
