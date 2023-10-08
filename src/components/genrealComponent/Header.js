@@ -72,7 +72,7 @@ if(localStorage.getItem("isLogedIn")){
         <>
         <div className="topMenu">
             <div className="container header-container">
-                <div className="flex-item-left mt-1">
+                <div className="flex-item-left">
                    {window.location.pathname !== '/home' && (
                     <FontAwesomeIcon onClick={() =>navigate(-1)} className="faIcon chevron-icon-right ms-2" icon={faChevronRight} />
                     )}
