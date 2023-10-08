@@ -120,7 +120,7 @@ export default function Profile(props) {
                                         <th> جزئیات </th>
                                     </tr>
                                 </thead>
-                                <tbody className="tableBody" style={{height:"5rem"}}>
+                                <tbody className="tableBody"style={{height:"5rem"}}>
                                     {waitingOrders}
                                 </tbody>
                             </table>

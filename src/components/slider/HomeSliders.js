@@ -176,7 +176,7 @@ return(
 
                             <div className="bottomPart border-top">
                                 <span className="bottommPartItem">
-                                    <p>  </p>
+                                    <div className="mb-2">  </div>
                                     {(kala.Price4 > 0 && kala.Price3 > 0) ?
                                     <span className="takhfif-round"> {Math.round(((kala.Price4 - kala.Price3) * 100) / kala.Price4)}%</span> :
                                     <span className="takhfif-round"> 0% </span>
