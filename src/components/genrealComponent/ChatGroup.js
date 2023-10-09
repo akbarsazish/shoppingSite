@@ -37,11 +37,11 @@ export default function ChatGroup() {
     };
 
       const addMessage = () => {
+        setCustomerText('');
         const psn = localStorage.getItem("psn");
         const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}`;
         axios.get(apiUrl)
           .then(response => {
-            setCustomerText("");
             console.log('Message sent successfully:', response.data);
           })
           .catch(error => {
@@ -50,6 +50,7 @@ export default function ChatGroup() {
       };
 
       const replayMessage = (msTobeRepliedId) => {
+        setCustomerReply('');
         const psn = localStorage.getItem("psn");
         const apiUrl = `https://starfoods.ir/api/replayMessage?psn=${psn}&messageId=${msTobeRepliedId}&messageContent=${encodeURIComponent(customerReply)}`;
         axios.get(apiUrl)
@@ -60,6 +61,8 @@ export default function ChatGroup() {
             console.error('Error sending message:', error);
           });
       };
+
+      
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -88,7 +91,8 @@ export default function ChatGroup() {
                                 <div className="message">
                                     <p className="customer-name"> ❤️ {message.Name} ❤️</p>
                                     <span className="customer-message"> 
-                                       {message.MessageContent} <FontAwesomeIcon onClick={()=>showReplyDiv(message)} id="replyIcon" icon={faReply} />
+                                       {message.MessageContent}
+                                       <FontAwesomeIcon onClick={()=>showReplyDiv(message)} id="replyIcon" icon={faReply} />
                                        <p className="chat-date"> {message.TimeStamp ? message.TimeStamp.toLocaleString('fa-IR') : ""}</p> 
                                     </span>
                                 </div>

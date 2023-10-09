@@ -91,13 +91,13 @@ if(localStorage.getItem("isLogedIn")){
                     </form>
                 </div>
                 <div className="flex-item-right mt-1 ps-0" id="headerStaff">
-                    <Link to="/inviteCode" className="headerLink" >
-                      <FontAwesomeIcon className="faIcon mt-2" icon={faPeopleArrows} /> &nbsp;
-                    </Link>    
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} >
                         <FontAwesomeIcon className="faIcon mt-2" icon={faShoppingCart} /> &nbsp; 
                         <span className="badge cartNotification">{localStorage.getItem("buyAmount")}</span>
                     </Link>
+                    <Link to="/inviteCode" className="headerLink" >
+                      <FontAwesomeIcon className="faIcon mt-2" icon={faPeopleArrows} /> &nbsp;
+                    </Link> 
                 </div>  
             </div>
         </div>
