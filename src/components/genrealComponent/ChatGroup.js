@@ -12,20 +12,20 @@ export default function ChatGroup() {
     const [customerReply, setCustomerReply] = useState('');
 
     const showToggleChat = () => {
-        setLiveChat(true)
+      setLiveChat(true)
     }
 
     const hideToggleChat = () => {
-        setLiveChat(false)
+      setLiveChat(false)
     }
     
     const hideReplyDiv = () => {
-        setReplyDiv(false)
+      setReplyDiv(false)
     }
 
     const showReplyDiv = (messageToreplay) => {
-        setReplyTo(messageToreplay)
-        setReplyDiv(true)
+      setReplyTo(messageToreplay)
+      setReplyDiv(true)
     }
 
     const messageData = (event) => {
@@ -36,33 +36,35 @@ export default function ChatGroup() {
         setCustomerReply(event.target.value);
     };
 
-      const addMessage = () => {
+    const addMessage = () => {
         setCustomerText('');
+        setMessages([]);
         const psn = localStorage.getItem("psn");
         const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}`;
         axios.get(apiUrl)
           .then(response => {
+            setMessages(response.data);
             console.log('Message sent successfully:', response.data);
           })
           .catch(error => {
             console.error('Error sending message:', error);
           });
-      };
+    };
 
       const replayMessage = (msTobeRepliedId) => {
         setCustomerReply('');
+        setMessages([]);
         const psn = localStorage.getItem("psn");
         const apiUrl = `https://starfoods.ir/api/replayMessage?psn=${psn}&messageId=${msTobeRepliedId}&messageContent=${encodeURIComponent(customerReply)}`;
         axios.get(apiUrl)
           .then(response => {
+            setMessages(response.data);
             console.log('Message sent successfully:', response.data);
           })
           .catch(error => {
             console.error('Error sending message:', error);
           });
       };
-
-      
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -78,7 +80,7 @@ export default function ChatGroup() {
 
         return (
          <>
-            {liveChat ?
+           {liveChat ?
              <div className="live-chat">
                <div className="live-chat-content">
                     <div className="chat-header">
