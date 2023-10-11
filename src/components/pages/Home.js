@@ -21,7 +21,9 @@ export default function Home() {
     }, [showModal]);
 
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/getSlidersApi",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("https://starfoods.ir/api/getSlidersApi",{
+            params:{psn:localStorage.getItem("psn")}})
+            .then((data) => {
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })
@@ -36,7 +38,7 @@ export default function Home() {
     return (
         <div className="container bg-light marginTop">
             <div className="mainSliderContainer">
-                <div className="mainSlider-right">
+                <div className={`${smallSlider.activeOrNot == 1 ? 'mainSlider-right' : 'mainSlider-full-page'}`}>
                     <Swiper
                         spaceBetween={10}
                         autoplay={{
@@ -53,6 +55,7 @@ export default function Home() {
                         <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.thirdPic} alt="لوگو" /></SwiperSlide>
                     </Swiper>
                 </div>
+                {smallSlider.activeOrNot==1 ?
                 <div className="mainSlider-left">
                     <div className="row">
                         <img  className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} alt={smallSlider.secondPic} />
@@ -61,6 +64,8 @@ export default function Home() {
                         <img  className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} alt={smallSlider.firstPic} />
                     </div>
                 </div>
+                :""}
+
             </div>
             <div className="row">
                 <SecondMenu /> 

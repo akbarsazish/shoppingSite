@@ -1,5 +1,5 @@
 const CACHE_NAME = "version-1";
-const urlsToCache = ["https://star.starfoods.ir", "index.html", "offline.html", "main.css", "script.js"];
+const urlsToCache = ["https://star.starfoods.ir", "index.html", "offline.html", "mainStyle.css", "script.js", "mediaq.css"];
 const self = this;
 
 // Installation

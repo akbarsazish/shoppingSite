@@ -134,6 +134,11 @@ span {
 .mainSlider-right {
   width: 70%;
 }
+
+.mainSlider-full-page{
+  width: 100%;
+}
+
 .mainSlider-left {
   width: 30%;
 }
@@ -788,9 +793,9 @@ tr {
 }
 
 .groupingItemInfo {
-    flex: 48%;
-    max-width: 48%;
-    padding: 0rem 0.5rem;
+    flex: 49%;
+    max-width: 49%;
+    padding: 0rem 0.2rem;
 }
 
 .groupingItemInfo:nth-of-type(odd) {
