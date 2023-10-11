@@ -53,6 +53,8 @@ export default function Home() {
                         <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.firstPic} alt="لوگو" /></SwiperSlide>
                         <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.secondPic} alt="لوگو" /></SwiperSlide>
                         <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.thirdPic} alt="لوگو" /></SwiperSlide>
+                        <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.fourthPic} alt="لوگو" /></SwiperSlide>
+                        <SwiperSlide><img className="img-responsive me-1 logo" src={"https://starfoods.ir/resources/assets/images/mainSlider/"+slides.fifthPic} alt="لوگو" /></SwiperSlide>
                     </Swiper>
                 </div>
                 {smallSlider.activeOrNot==1 ?
