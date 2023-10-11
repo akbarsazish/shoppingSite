@@ -32,29 +32,23 @@ export default function ShoppingCart(props) {
             setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-            if(data.data.orders[0].Price3 > 0 && data.data.orders[0].Price4){
-                let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-                    const firstPrice = parseInt(currentValue.Price3);
-                    if(firstPrice > 0){
-                    accumulator1 += firstPrice / parseInt(currency);
-                    }
-                    return accumulator1;
-                }, 0);
-
-                let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
-                    const secondPrice = parseInt(currentValue.Price4);
-                    if(secondPrice > 0){
-                        accumulator += secondPrice / parseInt(currency);
-                    }
-                      return accumulator;
-                    }, 0);
-
-                if (allMoneyProfit > allMoneyNoProfit) {
-                    setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
-                } else {
+        
+            data.data.orders.forEach((orderProfit) => {
+                const { Price, Price1 } = orderProfit;
+                const parsedPrice = parseInt(Price, 10);
+                const parsedPrice1 = parseInt(Price1, 10);
+              
+                if (!isNaN(parsedPrice) && !isNaN(parsedPrice1) && parsedPrice > 0 && parsedPrice1 > 0) {
+                  const firstPrices = parsedPrice / currency;
+                  const secondPrices = parsedPrice1 / currency;
+              
+                  if (secondPrices > firstPrices) {
+                    setAllProfit(parseInt(secondPrices - firstPrices));
+                  } else {
                     console.error("Invalid data for profit calculation");
-                }
-            }
+                  }
+                } 
+              });
 
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
@@ -95,30 +89,24 @@ export default function ShoppingCart(props) {
               setChangePriceState(data.data.changedPriceState)
               setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
 
-              if(data.data.orders[0].Price3 > 0 && data.data.orders[0].Price4){
-                let allMoneyProfit = data.data.orders.reduce((accumulator1, currentValue) => {
-                    const firstPrice = parseInt(currentValue.Price3);
-                    if(firstPrice > 0){
-                    accumulator1 += firstPrice / parseInt(currency);
-                    }
-                    return accumulator1;
-                }, 0);
-
-                let allMoneyNoProfit = data.data.orders.reduce((accumulator, currentValue) => {
-                    const secondPrice = parseInt(currentValue.Price4);
-                    if(secondPrice > 0){
-                        accumulator += secondPrice / parseInt(currency);
-                    }
-                        return accumulator;
-                    }, 0);
-
-                if (allMoneyProfit > allMoneyNoProfit) {
-                    setAllProfit(parseInt(allMoneyProfit) - parseInt(allMoneyNoProfit));
-                } else {
+              data.data.orders.forEach((orderProfit) => {
+                const { Price, Price1 } = orderProfit;
+                const parsedPrice = parseInt(Price, 10);
+                const parsedPrice1 = parseInt(Price1, 10);
+              
+                if (!isNaN(parsedPrice) && !isNaN(parsedPrice1) && parsedPrice > 0 && parsedPrice1 > 0) {
+                  const firstPrices = parsedPrice / currency;
+                  const secondPrices = parsedPrice1 / currency;
+              
+                  if (secondPrices > firstPrices) {
+                    setAllProfit(parseInt(secondPrices - firstPrices));
+                  } else {
                     console.error("Invalid data for profit calculation");
-                }
-            }
-            
+                  }
+                } 
+              });
+
+
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -215,9 +203,9 @@ export default function ShoppingCart(props) {
                         </div>
                         <div className="shoppingLeft">
                             <div className="shoppingLefFirst">
-                                
                                 <h6 className="payAbleTitle">  مبلغ قابل پرداخت </h6>
                                 <p className="payAbleAmount"> {parseInt(allMoney ).toLocaleString("fa-IR")} {currencyName} </p>
+                                <div className="hazenah-hamle"> هزینه بسته بندی و حمل کالا: <span className="free-delivery"> رایگان </span> </div>
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>

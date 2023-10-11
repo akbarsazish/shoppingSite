@@ -973,7 +973,7 @@ img.topLeft {
   max-width: 29%;
   display: flex;
   margin: 2px;
-  height: 70px;
+  min-height: 70px;
   border-radius: 5px;
   padding: 8px;
   background-color: #f5f5f5;
@@ -988,6 +988,16 @@ img.topLeft {
   flex: 39%;
   max-width: 39%;
   display: grid !important;
+}
+
+.hazenah-hamle {
+  font-size: 0.8rem;
+  color: red;
+}
+.free-delivery {
+  animation-name: iconAnimation;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
 }
 
 .shoppingItems {
@@ -1214,11 +1224,11 @@ img.topLeft {
     }
 
     50% {
-        color: #f00;
+        color: #000;
     }
 
     100% {
-        color: white;
+        color: #00f;
     }
 }
 

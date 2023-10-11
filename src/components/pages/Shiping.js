@@ -30,6 +30,7 @@ export default function Shiping(props) {
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+    const [date, setDate] = useState(null);
 
     const[payUrl, setPayUrl] = useState('');
 
@@ -199,7 +200,7 @@ if(localStorage.getItem("isLogedIn")){
                         </div>
                     </div>
                     
-                {  (currentHour >= 7 && currentHour < 19)?
+                {(currentHour >= 7 && currentHour < 19)?
                     <div className="shippingPart">
                         <div className="row w-100">
                             <div className="col-2">
@@ -228,7 +229,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-lg-5 col-8 pe-0">
                                <div className="date-picker"> 
-                                <DatePicker round="x2" onChange={(d) => console.log(d)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
+                                <DatePicker round="x2"  selected={date} onChange={(date) => setDate(date)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
                               </div>
                             </div>
                         </div>
