@@ -42,7 +42,7 @@ export default function Login(props) {
             password: loginInput.password,
             token:localStorage.getItem("isLogedIn")
         }
-        axios.get("http://192.168.10.27:8080/api/loginApi", {params:data}).then(res => {
+        axios.get("http://192.168.10.33:8080/api/loginApi", {params:data}).then(res => {
 
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
@@ -81,7 +81,7 @@ export default function Login(props) {
     }
 
     const saveIntroduceCode=()=>{
-        axios.get("http://192.168.10.27:8080/api/addIntroducerCode", {params:{
+        axios.get("http://192.168.10.33:8080/api/addIntroducerCode", {params:{
             introCode:document.getElementById("introducerCode").value,
             customerId:customerId,
             token:userToken
@@ -97,7 +97,7 @@ export default function Login(props) {
     }
 
     const confirmBrowserLogOut=()=>{
-        axios.get("http://192.168.10.27:8080/api/logOutConfirm", {params:{
+        axios.get("http://192.168.10.33:8080/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken
         }}).then(res => {
