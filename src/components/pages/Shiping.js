@@ -6,7 +6,6 @@ import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { DatePicker } from "zaman";
 
 export default function Shiping(props) {
     let now = new Date();
@@ -229,7 +228,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-lg-5 col-8 pe-0">
                                <div className="date-picker"> 
-                                <DatePicker round="x2"  selected={date} onChange={(date) => setDate(date)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
+                                {/* <DatePicker round="x2"  selected={date} onChange={(date) => setDate(date)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} /> */}
                               </div>
                             </div>
                         </div>
