@@ -44,11 +44,7 @@ export default function Login(props) {
             password: loginInput.password,
             token:localStorage.getItem("isLogedIn")
         }
-<<<<<<< HEAD
-        axios.get("http://192.168.10.33:8080/api/loginApi", {params:data}).then(res => {
-=======
         axios.get("https://starfoods.ir/api/loginApi", {params:data}).then(res => {
->>>>>>> f83647e99b3e1e000c20e6f29e0afa46abf509e1
 
             if(res.data.loginInfo){
                 if(res.data.loginInfo.length>0){
@@ -100,11 +96,7 @@ export default function Login(props) {
     }
 
     const saveIntroduceCode=()=>{
-<<<<<<< HEAD
-        axios.get("http://192.168.10.33:8080/api/addIntroducerCode", {params:{
-=======
         axios.get("https://starfoods.ir/api/addIntroducerCode", {params:{
->>>>>>> f83647e99b3e1e000c20e6f29e0afa46abf509e1
             introCode:document.getElementById("introducerCode").value,
             customerId:customerId,
             token:userToken
@@ -118,13 +110,8 @@ export default function Login(props) {
         introducerDialog.close();
     }
 
-<<<<<<< HEAD
-    const confirmBrowserLogOut=()=>{
-        axios.get("http://192.168.10.33:8080/api/logOutConfirm", {params:{
-=======
     const confirmBrowserLogOut=()=> {
         axios.get("https://starfoods.ir/api/logOutConfirm", {params:{
->>>>>>> f83647e99b3e1e000c20e6f29e0afa46abf509e1
             customerId:customerId,
             token:userToken
         }}).then(res => {

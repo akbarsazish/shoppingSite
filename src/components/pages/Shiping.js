@@ -6,7 +6,6 @@ import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { DatePicker } from "zaman";
 
 export default function Shiping(props) {
     let now = new Date();

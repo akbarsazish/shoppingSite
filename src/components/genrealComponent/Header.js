@@ -5,16 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faShoppingCart, faSearch, faChevronRight, faPeopleArrows } from '@fortawesome/free-solid-svg-icons'
 import ShoppingCart from "../pages/ShoppingCart";
 import axios from "axios";
-<<<<<<< HEAD
-function Header() {
-    const [searchInput, setSearchInput] = useState(false)
-    const navigate = useNavigate();
-    const [bonusResult,setBonusResult] = useState(0)
-    const [takhfifMoney,settakhfifMoney] = useState(0)
-    useEffect(()=>{
-        axios.get("http://192.168.10.33:8080/api/checkLogin",{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
-=======
->>>>>>> f83647e99b3e1e000c20e6f29e0afa46abf509e1
 
 
 const Header = ()=>{
@@ -52,16 +42,7 @@ const Header = ()=>{
                localStorage.removeItem("isLogedIn")
             }
         })
-<<<<<<< HEAD
-        axios.get("http://192.168.10.33:8080/api/getHeaderInfo",{psn:localStorage.getItem("psn")}).then((data)=>{
-            localStorage.getItem("buyAmount")
-            setBonusResult(data.data.bonusResult)
-            settakhfifMoney(data.data.takhfifMoney)
-        })
-    },[])
-=======
     },[]);
->>>>>>> f83647e99b3e1e000c20e6f29e0afa46abf509e1
 
     // for searching kala
     useEffect(()=>{
