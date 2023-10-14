@@ -6,6 +6,7 @@ import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import {JBDateInput} from 'jb-date-input-react';
 
 export default function Shiping(props) {
     let now = new Date();
@@ -29,7 +30,19 @@ export default function Shiping(props) {
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const [date, setDate] = useState(null);
+
+    const [minDate, setMinDate] = useState(getTodayDate());
+  function getTodayDate() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  const handleDateChange = (event) => {
+    setMinDate(event.target.value);
+  };
 
     const[payUrl, setPayUrl] = useState('');
 
@@ -228,7 +241,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-lg-5 col-8 pe-0">
                                <div className="date-picker"> 
-                                {/* <DatePicker round="x2"  selected={date} onChange={(date) => setDate(date)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} /> */}
+                                <JBDateInput id="date" min={minDate} onChange={handleDateChange}  value=""> </JBDateInput>
                               </div>
                             </div>
                         </div>

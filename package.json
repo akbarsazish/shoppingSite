@@ -19,6 +19,7 @@
     "bootstrap": "^5.2.3",
     "cors": "^2.8.5",
     "font-awesome": "^4.7.0",
+    "jb-date-input-react": "^2.1.0",
     "jquery": "^3.6.4",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",

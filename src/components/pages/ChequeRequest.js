@@ -4,10 +4,11 @@ import Sidebar from "../genrealComponent/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { data } from "jquery";
+import {JBDateInput} from 'jb-date-input-react';
 
 export default function ChequeRequest(){
     const [showForm,setShowForm]=useState(0);
+    
     const [acceptState,setAcceptState]=useState("Rejected");
     useEffect(() => {
         axios.get("https://starfoods.ir/api/getChequeReqState",{params:{customerId:localStorage.getItem("psn")}}).then((result)=>{
@@ -200,9 +201,8 @@ export default function ChequeRequest(){
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
                                 <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label">  تاریخ اتمام :</label>
-                                {/* <input  type="text" className="form-control form-control-sm" id="contractEndDate" /> */}
                                 <div className="date-picker mt-0"> 
-                                    {/* <DatePicker round="x2" onChange={handleChange} name="contractDate" value={formData.contractDate} inputAttributes={{ placeholder: "انتخاب تاریخ "}} /> */}
+                                    <JBDateInput id="contractEndDate" onChange={handleChange} value={formData.contractDate}> </JBDateInput>
                                 </div>
                                 <input type="hidden" id="contractEnEnd" name="contractDate" />
                             </div>
