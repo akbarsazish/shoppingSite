@@ -31,21 +31,12 @@ export default function Shiping(props) {
     const[sendFast,setFastFactor]=useState(0);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-    const [minDate, setMinDate] = useState(getTodayDate());
-  function getTodayDate() {
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0');
-    const yyyy = today.getFullYear();
-    return `${yyyy}-${mm}-${dd}`;
-  }
+    const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 
-  const handleDateChange = (event) => {
-    setMinDate(event.target.value);
-  };
+  console.log("i love you", dateString)
 
     const[payUrl, setPayUrl] = useState('');
-
     const changePayMoneyAndTakhfif=()=>{
         let element =document.getElementById("takhfifSwitch");
         if(isUsedTakhfifCode !==1){
@@ -241,7 +232,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-lg-5 col-8 pe-0">
                                <div className="date-picker"> 
-                                <JBDateInput id="date" min={minDate} onChange={handleDateChange}  value=""> </JBDateInput>
+                                <JBDateInput id="date" calendarDefaultDateView={{dateString}} min={dateString} value=""> </JBDateInput>
                               </div>
                             </div>
                         </div>
