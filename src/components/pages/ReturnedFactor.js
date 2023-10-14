@@ -10,7 +10,7 @@ import axios from "axios";
 export default function ReturnedFactor(props) {
     const[returnedFactors,setReturnedFactors]=useState(0)
     useEffect(()=>{
-        axios.get("http://192.168.10.27:8080/api/listFactors",{data:{psn:localStorage.getItem('psn')}}).then((data)=>{
+        axios.get("https://starfoods.ir/api/listFactors",{data:{psn:localStorage.getItem('psn')}}).then((data)=>{
             setReturnedFactors(data.data.rejectedFactors.map((element,index)=>
             <tr>
                 <td>{index+1}</td>
@@ -18,7 +18,8 @@ export default function ReturnedFactor(props) {
                 <td>{element.FactDate}</td>
                 <td>وضعیت پرداخت</td>
                 <td>{parseInt(element.TotalPriceHDS/10).toLocaleString()}</td>
-                <td>جزئیات</td></tr>))
+                <td>جزئیات</td>
+            </tr>))
         })
     },[])
 
@@ -74,7 +75,6 @@ export default function ReturnedFactor(props) {
                     </div>
                 </div>
             </div >
-
             <Footer />
         </>
     )

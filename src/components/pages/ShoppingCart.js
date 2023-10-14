@@ -6,6 +6,7 @@ import { faShoppingCart, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom"
 import Footer from "../genrealComponent/Footer";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function ShoppingCart(props) {
     const [cartItems, setCartItems] = useState(0)
@@ -15,11 +16,15 @@ export default function ShoppingCart(props) {
     const [minSalePriceFactor, setMinSalePriceFactor] = useState(0)
     const [intervalBetweenBuys, setIntervalBetweenBuys] = useState(0)
     const [changePriceState, setChangePriceState] = useState(2)
-    const [changedItems, setChanedItems] = useState(0)
     const [snHDS, setSnHDS] = useState(0)
     const [buyOption, setBuyOption] = useState(0)
+    const [changedItems, setChanedItems] = useState(0);
+
     useEffect(() => {
-        axios.get("http://192.168.10.27:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
+        axios.get("https://starfoods.ir/api/cartsList",{
+            params:{
+                psn:localStorage.getItem("psn")}})
+            .then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
             setCurrencyName(data.data.currencyName)
@@ -27,20 +32,24 @@ export default function ShoppingCart(props) {
             setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
             setChangePriceState(data.data.changedPriceState)
             setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-            let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
-                    accomulator += parseInt(currentValue.Price / currency)
-                }
-                return accomulator;
-            }, 0))
+        
+            data.data.orders.forEach((orderProfit) => {
+                const { Price, Price1 } = orderProfit;
+                const parsedPrice = parseInt(Price, 10);
+                const parsedPrice1 = parseInt(Price1, 10);
+              
+                if (!isNaN(parsedPrice) && !isNaN(parsedPrice1) && parsedPrice > 0 && parsedPrice1 > 0) {
+                  const firstPrices = parsedPrice / currency;
+                  const secondPrices = parsedPrice1 / currency;
+              
+                  if (secondPrices > firstPrices) {
+                    setAllProfit(parseInt(secondPrices - firstPrices));
+                  } else {
+                    console.error("Invalid data for profit calculation");
+                  }
+                } 
+              });
 
-            let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
-                    accomulator += parseInt(currentValue.Price1 / currency)
-                }
-                return accomulator;
-            }, 0))
-            setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -54,46 +63,50 @@ export default function ShoppingCart(props) {
                 <div className="thirdItem">
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
-            </div>))
-            setChanedItems(data.data.orders.map((element) => {
-                if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
-                }
-            }))
+            </div>));
+        
+            setChanedItems(data.data.orders);
         })
     }, []);
 
     const changeCartsPrice = (snHDS) => {
-        axios.get("http://192.168.10.27:8080/api/updateChangedPrice", { params: { SnHDS: snHDS,psn:localStorage.getItem("psn") } }).then((data) => {
-
+       axios.get("https://starfoods.ir/api/updateChangedPrice", { 
+          params: { SnHDS: snHDS,psn:localStorage.getItem("psn")}})
+          .then((data) => {
             renewCarts();
-
-        })
+        })  
     }
 
     const renewCarts = () => {
-        axios.get("http://192.168.10.27:8080/api/cartsList",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
-            let currency = data.data.currency;
-            setMinSalePriceFactor(data.data.minSalePriceFactor)
-            setCurrencyName(data.data.currencyName)
-            setIntervalBetweenBuys(data.data.intervalBetweenBuys)
-            setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
-            setChangePriceState(data.data.changePriceState)
-            setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
-            let allMoneyProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
-                    accomulator += parseInt(currentValue.Price / currency)
-                }
-                return accomulator;
-            }, 0))
+        axios.get("https://starfoods.ir/api/cartsList",{
+            params:{psn:localStorage.getItem("psn")}})
+            .then((data) => {
+              let currency = data.data.currency;
+              setMinSalePriceFactor(data.data.minSalePriceFactor)
+              setCurrencyName(data.data.currencyName)
+              setIntervalBetweenBuys(data.data.intervalBetweenBuys)
+              setAllMoney(data.data.orders.reduce((accomulator, currentValue) => accomulator + parseInt(currentValue.Price / currency), 0))
+              setChangePriceState(data.data.changedPriceState)
+              setSnHDS(data.data.orders.length > 0 ? data.data.orders[0].SnHDS : 0)
 
-            let allMoneyNoProfit = (data.data.orders.reduce((accomulator, currentValue) => {
-                if ((currentValue.Price > 0 && currentValue.Price1 > 0) && (currentValue.Price1 > currentValue.Price)) {
-                    accomulator += parseInt(currentValue.Price1 / currency)
-                }
-                return accomulator;
-            }, 0))
-            setAllProfit(parseInt(allMoneyNoProfit) - parseInt(allMoneyProfit))
+              data.data.orders.forEach((orderProfit) => {
+                const { Price, Price1 } = orderProfit;
+                const parsedPrice = parseInt(Price, 10);
+                const parsedPrice1 = parseInt(Price1, 10);
+              
+                if (!isNaN(parsedPrice) && !isNaN(parsedPrice1) && parsedPrice > 0 && parsedPrice1 > 0) {
+                  const firstPrices = parsedPrice / currency;
+                  const secondPrices = parsedPrice1 / currency;
+              
+                  if (secondPrices > firstPrices) {
+                    setAllProfit(parseInt(secondPrices - firstPrices));
+                  } else {
+                    console.error("Invalid data for profit calculation");
+                  }
+                } 
+              });
+
+
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
                     <img className="shoppedImge" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} alt="slider " />
@@ -108,16 +121,12 @@ export default function ShoppingCart(props) {
                     <FontAwesomeIcon className="text-danger" onClick={() => deleteOrder(element.SnOrderBYS, element.GoodSn)} style={{ margin: "10px", cursor: "pointer", fontSize: "19px" }} icon={faTrashAlt} />
                 </div>
             </div>))
-            setChanedItems(data.data.orders.map((element) => {
-                if (element.changedPrice === 0) {
-                    return <li className="list-group-item" style={{ fontSize: "14px" }}>   {element.GoodName}  </li>
-                }
-            }))
+            setChanedItems(data.data.orders);
         })
-    }
+      }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("http://192.168.10.27:8080/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -130,7 +139,7 @@ export default function ShoppingCart(props) {
     }
 
     const updateBuy = (orderId, amountUnit, goodSn) => {
-        axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
+        axios.get('https://starfoods.ir/api/updateOrderBYS',
             {
                 params: {
                     kalaId: goodSn,
@@ -143,66 +152,82 @@ export default function ShoppingCart(props) {
         })
     }
 
-              const deleteOrder=(orderBYSSn,goodSn)=>{
-                axios.get('http://192.168.10.27:8080/api/deleteOrderBYS',
-                {params:{
-                 SnOrderBYS: orderBYSSn
-                }
-                 }).then((data)=>{
-                   let  countBought=parseInt(localStorage.getItem('buyAmount'));
-                   if(countBought>0){
-                   localStorage.setItem('buyAmount',countBought-1);
-                   let cartDiv=document.getElementById(goodSn+"cartDiv")
-                   cartDiv.style.display="none";
-                   renewCarts()
-                   }
-                 })
-             }
+    const deleteOrder = (orderBYSSn, goodSn) => {
+        Swal.fire({
+          title: '!آیا مطمئن هستید',
+          text: "دیگر قادر به بازیابی این کالا نیستید؟",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'بلی ',
+          cancelButtonText: 'خیر'
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            axios.get('https://starfoods.ir/api/deleteOrderBYS',{
+                params: {
+                  SnOrderBYS: orderBYSSn
+            }})
+             .then((data) => {
+              let countBought = parseInt(localStorage.getItem('buyAmount'));
+              let boughtFromHome = parseInt(localStorage.getItem(`boughtItem_${goodSn}`));
+
+              if (countBought > 0) {
+                localStorage.setItem('buyAmount', countBought - 1);
+                localStorage.setItem(`boughtItem_${goodSn}`, boughtFromHome - 1);
+                let cartDiv = document.getElementById(goodSn + "cartDiv");
+                cartDiv.style.display = "none";
+                renewCarts();
+              }
+            });
+          }
+        });
+      };
 
     props.setAllMoneyToLocaleStorage(allMoney);
     props.setAllProfitToLocaleStorage(allProfit);
 
     if(localStorage.getItem("isLogedIn")){
-        
         return (
             <>
                 <Header />
                 <Sidebar />
-
-                <div className="container marginTop">
+                <div className="container marginTop rounded">
                     <h5 className="fw-bold"> سبد خرید : </h5>
                     <div className="shoppingCart p-2">
                         <div className="shoppingRight">
                             <div className="shoppingItems">
-                                {cartItems}
+                                {cartItems == "" || 0 ? <span className="empty-basket"> سبد خرید شما خالی است! </span> : cartItems}
                             </div>
                         </div>
                         <div className="shoppingLeft">
                             <div className="shoppingLefFirst">
-                                <h6 className="payAbleTitle"> مبلغ قابل پرداخت </h6>
-                                <p className="payAbleAmount"> {parseInt(allMoney).toLocaleString("fa-IR")} {currencyName} </p>
+                                <h6 className="payAbleTitle">  مبلغ قابل پرداخت </h6>
+                                <p className="payAbleAmount"> {parseInt(allMoney ).toLocaleString("fa-IR")} {currencyName} </p>
+                                <div className="hazenah-hamle"> هزینه بسته بندی و حمل کالا: <span className="free-delivery"> رایگان </span> </div>
                             </div>
                             <div className="shoppingLeftSecond">
                                 <div>
-                                    {((allMoney >= minSalePriceFactor || intervalBetweenBuys<=12) & changePriceState===0)?
+                                    {((allMoney >= minSalePriceFactor | intervalBetweenBuys <= 12) & changePriceState==0)?
                                         <Link to="/shipping" type="button" className="btn btn-sm btn-danger mt-3 continueBtn"> ادامه خرید <FontAwesomeIcon icon={faShoppingCart}/></Link>
-                                    :( allMoney <= minSalePriceFactor?
-                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-3"> مبلغ کمتر از حداقل است </Link>
+                                    :((allMoney <= minSalePriceFactor)?
+                                        <Link to="#" type="button" className="btn btn-sm btn-danger mt-2 mx-0 px-1 less-than-amount"> مبلغ کمتر از حداقل است </Link>
                                         :
                                         <Link to="#" type="button"  data-bs-toggle="modal" data-bs-target="#myModal" className="btn btn-sm btn-danger mt-3"> ادامه خرید </Link>
-                                    )
-                                    }
+                                    )}
                                 </div>
                             </div>
                         </div>
                     </div>
+                   
                     <div className="yourBenefit">
                         <p className="benfitTitle mb-0"> سود شما از این خرید {allProfit.toLocaleString("fa-IR")} تومان  </p>
                     </div>
                 </div>
                 <Footer />
                 {true &&
-                    <div className="modal fade " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade " id="exampleModal" tabIndex="-1">
                         <div className="modal-dialog buyModal">
                             <div className="modal-content">
                                 <div className="modal-body">
@@ -215,7 +240,7 @@ export default function ShoppingCart(props) {
                     </div>
                 }
 
-                <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div id="myModal" className="modal fade" role="dialog"  tabIndex="-1">
                     <div className="modal-dialog modal-dialog-sm">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -223,7 +248,13 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="modal-body">
                                 <ul className="list-group list-group-flush">
-                                    {changedItems}
+                                  {
+                                  changedItems && changedItems.map((element) => {
+                                        if (element.changedPrice !== 0) {
+                                            return <li className="list-group-item" style={{ fontSize: "14px" }}> {element.GoodName}  </li>
+                                        }
+                                    })
+                                  }
                                 </ul>
                                 <hr/>
                                 <h6>در صورت ادامه با قیمت جدید ثبت خواهد شد.</h6>
@@ -235,7 +266,6 @@ export default function ShoppingCart(props) {
                         </div>
                     </div>
                 </div>
-
             </>
         )
     }else{

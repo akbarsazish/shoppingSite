@@ -1,33 +1,32 @@
 @media (max-width: 920px) {
     .categoryItem {
-        flex: 32%;
-        max-width: 32%;
+        flex: 31.5%;
+        max-width: 31.5%;
     }
 }
 
 
 @media (max-width: 920px) {
     .profileRightPart {
-        flex: 99%;
-        max-width: 100%;
+      flex: 99%;
+      max-width: 100%;
     }
-
     .profileLeftPart {
-        flex: 99%;
-        max-width: 100%;
+      flex: 99%;
+      max-width: 100%;
     }
 }
 
 @media (max-width: 920px) {
     .footer {
-        display: block;
+      display: block;
     }
 }
 
 @media (max-width: 920px) {
     .cartNotification {
         top: 1%;
-        left: 18%;
+        left: 10%;
     }
 }
 
@@ -81,8 +80,6 @@
         max-width: 47%;
         flex-basis: 47%;
     }
-
-
 }
 
 @media (max-width: 920px) {
@@ -95,7 +92,6 @@
         flex: 99%;
         max-width: 99%;
     }
-
     .shoppingLeft {
         border: 1px solid red;
         padding: 3px;
@@ -113,7 +109,6 @@
         display: flex;
         flex: 98%;
         max-width: 98%;
-
     }
 
     .yourBenefit {
@@ -135,6 +130,7 @@
         margin-top: 10px;
 
     }
+    
 
 }
 
@@ -151,28 +147,129 @@
         flex: 98%;
         max-width: 98%;
     }
-
     .login {
         flex: 98%;
         max-width: 98%;
     }
 
-
-
     .factors {
         max-width: 99%;
         flex: 99%;
     }
-
     .factorsResult {
         max-width: 99%;
         flex: 99%;
     }
-
     #wheel canvas {
         width: 100% !important;
     }
+}
 
+@media (max-width: 920px) {
+    .gamer-item {
+        width: 32%;
+    }
 
+    .gamer-image {
+        width: 99px;
+        height: 99px;
+    }
 
+    .gamer-container {
+        padding: 2px;
+     }
+
+     .gamer-prize {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 768px) { 
+    .prize-top-div {
+        width:100%;
+        display:flex;
+    }
+
+    .prize-top-div > .first {
+        width: 15%;
+    }
+
+    .prize-top-div > .second {
+        width: 82%;
+    }
+
+    .for-prize-info {
+        width: 100%;
+    }
+
+    .discount-info {
+        width: 98%;
+    }
+
+    .discounts {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) { 
+    .discount-content-items {
+        width: 98%;
+    }
+    .award-container-item {
+        width: 98%;
+    }
+
+    #weely-calendar {
+        background: url("../images/daily-mobile.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size:contain;
+        padding: 1%;
+        max-width: 100%;
+    }
+
+    .weekly-calendar {
+        grid-template-columns: repeat(4, 1fr);
+        padding: 3px;
+        margin: 3px;
+        gap: 3px;
+     }
+
+     .contactList {
+        font-size:11px;
+    }
+}
+
+@media (max-width: 768px) { 
+    .messageBody {
+      height: 66vh;
+      width: 100%;
+      padding: 5px;
+    }
+
+    .messageFooter {
+        width: 92%;
+        bottom: 60px;
+    }
+
+    .live-chat {
+        width: 93.5%;
+     }
+
+    .mainSlider-right {
+        width: 100%;
+    }
+    .mainSlider-left {
+      width: 100%;
+    }
+
+    div.price {
+      height: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .shegoftAngizFirstItem {
+        width: 44% !important;
+      }
+      
 }

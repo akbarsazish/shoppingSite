@@ -1,9 +1,8 @@
 import React, { useState, useRef } from "react";
-import './App.css';
 import './assets/css/mainStyle.css';
 import './assets/css/mediaq.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js'
+import 'bootstrap/dist/js/bootstrap.js';
 import './components/genrealComponent/Sidebar';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/genrealComponent/Layout';
@@ -19,7 +18,6 @@ import EditProfile from './components/pages/EditProfile';
 import ReturnedFactor from './components/pages/ReturnedFactor';
 import Shiping from './components/pages/Shiping';
 import Success from './components/pages/Success';
-import LuckyWheel from './components/pages/LuckWell';
 import Wallet from './components/pages/Wallet';
 import FactoreDetails from "./components/pages/FactorDetails";
 import OrderDetails from "./components/pages/OrderDetails";
@@ -30,9 +28,17 @@ import SearchResult from './components/pages/SearchResult'
 import About from "./components/pages/About";
 import Policy from "./components/pages/Policy";
 import Privacy from "./components/pages/Privacy";
-// import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
-
-
+import GamerList from "./components/game/GamerList";
+import DiscountAndPrice from "./components/pages/DiscountAndPrice";
+import Lottery from "./components/pages/Lottery";
+import InviteCode from "./components/pages/InviteCode";
+import ChequeRequest from "./components/pages/ChequeRequest";
+import SuccessPay from "./components/pages/SuccessPay";
+import PageNotFound from "./components/pages/PageNotFound";
+import PayFactor from "./components/pages/PayFactor";
+import GetAllKala from "./components/pages/GetAllKala";
+import ShowAllKala from "./components/pages/ShowAllKala";
+import ShowAllBrand from "./components/pages/ShowAllBrand";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -44,7 +50,6 @@ function App() {
       username,
       password
     }).then(response => {
-      console.log(response.data)
       if (response.data.accessToken) {
         localStorage.setItem('user', JSON.stringify(response.data));
       }
@@ -52,76 +57,20 @@ function App() {
     })
   }
 
-
-
-
-  // const updateBuy=(orderId,amountUnit,goodSn)=>{
-  //       axios.get('http://192.168.10.27:8080/api/updateOrderBYS',
-  //       {params:{
-  //         kalaId: goodSn,
-  //         amountUnit: amountUnit,
-  //         orderBYSSn: orderId
-  //       }
-  //       }
-  //       ).then((response)=> {
-
-  //       })
-
-  //   }
-
-  //   const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
-
-  //     if((amountUnit > amountExist) && (freeExistance==0)){
-  //       alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
-  //     }else{
-  //             if (costLimit > 0) {
-  //               if (amountUnit >= costLimit) {
-  //                 alert(costError);
-  //               }
-  //             }
-  //             axios.get('http://192.168.10.27:8080/api/buySomething',
-  //             {params:{
-  //               kalaId: goodSn,
-  //               amountUnit: amountUnit
-  //               }
-  //             }).then((response)=> {
-  //             let  countBought=parseInt(localStorage.getItem('buyAmount'));
-  //               localStorage.setItem('buyAmount',countBought+1);
-
-  //               // let modalCloser=document.querySelector("[data-bs-dismiss]");
-  //               // modalCloser.dispatchEvent(new Event("click"))
-
-  //               // const truck_modal = document.querySelector('#exampleModal');
-  //               // const modal = bootstrap.Modal.getInstance(truck_modal);    
-  //               // modal.hide();
-
-  //               event.target.textContent=btnModalEvent.target.textContent;
-  //               event.target.classList.remove("btn-danger");
-  //               event.target.classList.add("btn-info");
-
-  //             })
-  //           }   
-  // }
-
   const changeHeartIconColor = (goodSn, event) => {
-    axios.get('http://192.168.10.27:8080/api/setFavorite', {
+    axios.get('https://starfoods.ir/api/setFavorite', {
       params: {
         goodSn: goodSn,
         psn:localStorage.getItem("psn")
       }
     }).then((data) => {
       if (data.data.msg) {
-
         event.target.style.color = "red";
       } else {
         event.target.style.color = "black";
       }
-
     })
   };
-
-
-
 
   const setAllMoneyToLocaleStorage = (allMoney) => {
     localStorage.setItem("allMoney", allMoney)
@@ -138,30 +87,45 @@ function App() {
         <Route path='/' element={<Layout />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/grouping' element={<Grouping />} />
-        <Route path='/groupingItems/:id'            element={<GroupingItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/shoppingCart'                 element={<ShoppingCart  cartRef={cartRef} setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}  />} />
-        <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
-        <Route path='/message'                      element={<Message />} />
-        <Route path='/contact'                      element={<Contact />} />
-        <Route path='/editProfile'                  element={<EditProfile />}></Route>
-        <Route path='/returnedFactor'               element={<ReturnedFactor/>}></Route>
-        <Route path='/shipping'                     element={<Shiping/>}></Route>
-        <Route path='/success'                      element={<Success/>}></Route>
-        <Route path='/luckWell'                     element={<LuckyWheel/>}></Route>
-        <Route path='/wallet'                       element={<Wallet/>}></Route>
-        <Route path='/factorDetails'                element={<FactoreDetails/>}></Route>
-        <Route path='/orderDetails'                element={<OrderDetails/>}></Route>
-        <Route path='/login'                        element={<Login />}></Route>
-        <Route path="/about"                         element={<About />}> </Route>
-        <Route path="/policy"                      element={<Policy />}> </Route>
-        <Route path="privacy"                      element={<Privacy />}> </Route>
-        <Route path='/searchKala/:term'             element={<SearchResult  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}></Route>
+        <Route path='/groupingItems/:id'            element={<GroupingItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/shoppingCart'                 element={<ShoppingCart   cartRef={cartRef}  setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}/>}/>
+        <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/message'                      element={<Message/>}/>
+        <Route path='/contact'                      element={<Contact/>}/>
+        <Route path='/editProfile'                  element={<EditProfile/>}/> 
+        <Route path='/returnedFactor'               element={<ReturnedFactor/>}/>
+        <Route path='/shipping'                     element={<Shiping/>}/>
+        <Route path='/success'                      element={<Success/>}/>
+        <Route path='/wallet'                       element={<Wallet/>}/>
+        <Route path='/factorDetails'                element={<FactoreDetails/>}/>
+        <Route path='/orderDetails'                 element={<OrderDetails/>}/>
+        <Route path='/login'                        element={<Login/>}/>
+        <Route path="/about"                        element={<About/>}/>
+        <Route path="/policy"                       element={<Policy/>}/>
+        <Route path="privacy"                       element={<Privacy/>}/>
+        <Route path="gamerList"                     element={<GamerList/>}/>
+        <Route path="disAndPrice"                   element={<DiscountAndPrice/>}/>
+        <Route path="lottery"                       element={<Lottery/>}/>
+        <Route path="inviteCode"                    element={<InviteCode/>}/>
+        <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
+        <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
+        <Route path='getAllKala/:homepartId/:id'    element={<GetAllKala buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
+        <Route path="*"                             element={<PageNotFound />} />
+        <Route
+          path="/successPayApi"
+          params={param => ({tref: param.tref, iN: param.iN, iD: param.iD})}
+          element={<SuccessPay/>}/>
+        <Route
+          path="/finalizeFactorPayApi"
+          params={param => ({ tref: param.tref, iN: param.iN, iD: param.iD})}
+          element={<PayFactor/>}/>
+          <Route path="showAllKala/:partId" element={<ShowAllKala  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
+          <Route path="showAllBrand/:brandId" element={<ShowAllBrand  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
       </Routes>
     </>
-  )
-
+  );
 }
 
 export default App;
