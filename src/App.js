@@ -39,6 +39,8 @@ import PayFactor from "./components/pages/PayFactor";
 import GetAllKala from "./components/pages/GetAllKala";
 import ShowAllKala from "./components/pages/ShowAllKala";
 import ShowAllBrand from "./components/pages/ShowAllBrand";
+import JaliLogin from "./components/pages/JaliLogin";
+import { param } from "jquery";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -123,6 +125,10 @@ function App() {
           element={<PayFactor/>}/>
           <Route path="showAllKala/:partId" element={<ShowAllKala  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
           <Route path="showAllBrand/:brandId" element={<ShowAllBrand  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}> </Route>
+          <Route path="jaliLoginRoute"
+            param = {param =>({forLogin: param.forLogin, forUserName:param.forUserName, forUserPsn: param.forUserPsn, forboughtAmount:param.forboughtAmount, forRole:param.forRole})} 
+            element={<JaliLogin />} />
+
       </Routes>
     </>
   );
