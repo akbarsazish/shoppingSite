@@ -12,11 +12,7 @@ const JaliLogin = ()=> {
     const getBuyAmount  = getPrameters.get('forboughtAmount');
     const getRole  = getPrameters.get('forRole');
 
-    console.log( getIsLogin,
-     getUserName,
-     getPsn,
-     getBuyAmount,
-     getRole)
+    // console.log( getIsLogin, getUserName, getPsn, getBuyAmount, getRole)
 
     localStorage.setItem("isLogedIn",getIsLogin);
     localStorage.setItem('userName', getUserName);
@@ -25,13 +21,11 @@ const JaliLogin = ()=> {
     localStorage.setItem("role", getRole);
 
     useEffect(() => {
-        window.open('http://192.168.10.33:3001/home', '_blank');
-      }, []);
+        window.open('https://star.starfoods.ir/home');
+    }, []);
 
     return(
-        <>
-         <h1>  ورود جعلی  </h1>
-        </>
+      <></>
     )
 }
 

@@ -34,7 +34,6 @@ export default function Shiping(props) {
     const today = new Date();
     const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 
-  console.log("i love you", dateString)
 
     const[payUrl, setPayUrl] = useState('');
     const changePayMoneyAndTakhfif=()=>{
