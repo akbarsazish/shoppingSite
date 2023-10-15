@@ -2142,16 +2142,6 @@ ul li a.active {
     font-size: 0.8rem !important;
 }
 
-.date-picker {
-    text-align: center;
-    border-radius: 4px;
-    border: 1px solid #cdd4da;
-    padding: 4px;
-    font-size: 12px;
-    margin-top: 10px;
-    width: 100%;
-}
-
 .css-817hxt {
   width: 230px !important;
   height: 282px !important;

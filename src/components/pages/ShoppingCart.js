@@ -154,8 +154,7 @@ export default function ShoppingCart(props) {
 
     const deleteOrder = (orderBYSSn, goodSn) => {
         Swal.fire({
-          title: '!آیا مطمئن هستید',
-          text: "دیگر قادر به بازیابی این کالا نیستید؟",
+          title: 'آیا میخواهید حذف  گردد!',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',

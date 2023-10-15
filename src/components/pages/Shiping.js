@@ -6,7 +6,8 @@ import Footer from "../genrealComponent/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { DatePicker } from "zaman";
+import {JBDateInput} from 'jb-date-input-react';
+
 
 export default function Shiping(props) {
     let now = new Date();
@@ -30,7 +31,20 @@ export default function Shiping(props) {
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const [date, setDate] = useState(null);
+    const [minDate, setMinDate] = useState(getTodayDate());
+
+    function getTodayDate() {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+        return `${yyyy}-${mm}-${dd}`;
+      }
+    
+      const delkhahChangeDate = (event) => {
+        setMinDate(event.target.value);
+      };
+
 
     const[payUrl, setPayUrl] = useState('');
 
@@ -103,12 +117,14 @@ export default function Shiping(props) {
         if(isUsedTakhfifCode === 1){
             takhfifCode=localStorage.getItem("takhfifCode");
         }
+        
         localStorage.setItem("recivedTime",selectdFactorDate);
         localStorage.setItem("takhfif",0);
         localStorage.setItem("takhfifCode",takhfifCode);
         localStorage.setItem("receviedAddress",selectdAddress);
         setIsButtonDisabled(false);
     }
+
     const addFactorToSefarish=()=>{
     axios.get("https://starfoods.ir/api/addFactorApi",{params:{
         pardakhtType:selectdPayType,
@@ -228,9 +244,7 @@ if(localStorage.getItem("isLogedIn")){
                                 <p className="weekDay"> تاریخ دلخواه </p>
                             </div>
                             <div className="col-lg-5 col-8 pe-0">
-                               <div className="date-picker"> 
-                                <DatePicker round="x2"  selected={date} onChange={(date) => setDate(date)}  inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
-                              </div>
+                               <JBDateInput min={minDate} onChange={delkhahChangeDate} format="YYYY/MM/DD" value=""></JBDateInput>
                             </div>
                         </div>
                     </div>

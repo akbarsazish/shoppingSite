@@ -19,8 +19,10 @@
     "bootstrap": "^5.2.3",
     "cors": "^2.8.5",
     "font-awesome": "^4.7.0",
+    "jb-date-input-react": "^2.1.0",
     "jquery": "^3.6.4",
     "node-sass": "^8.0.0",
+    "or": "^0.2.0",
     "react": "^18.2.0",
     "react-axios": "^2.0.6",
     "react-dom": "^18.2.0",
@@ -32,8 +34,7 @@
     "redux": "^4.2.1",
     "sweetalert2": "^11.7.26",
     "swiper": "^9.1.1",
-    "web-vitals": "^2.1.4",
-    "zaman": "^2.0.7"
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",

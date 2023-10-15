@@ -3,7 +3,6 @@ import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { DatePicker } from "zaman";
 import axios from "axios";
 import { data } from "jquery";
 
@@ -203,7 +202,7 @@ export default function ChequeRequest(){
                                 <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label">  تاریخ اتمام :</label>
                                 {/* <input  type="text" className="form-control form-control-sm" id="contractEndDate" /> */}
                                 <div className="date-picker mt-0"> 
-                                    <DatePicker round="x2" onChange={handleChange} name="contractDate" value={formData.contractDate} inputAttributes={{ placeholder: "انتخاب تاریخ "}} />
+                                    {/* <DatePicker round="x2" onChange={handleChange} name="contractDate" value={formData.contractDate} inputAttributes={{ placeholder: "انتخاب تاریخ "}} /> */}
                                 </div>
                                 <input type="hidden" id="contractEnEnd" name="contractDate" />
                             </div>
