@@ -8,7 +8,6 @@ import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/fr
 import axios from "axios";
 import {JBDateInput} from 'jb-date-input-react';
 
-
 export default function Shiping(props) {
     let now = new Date();
     const currentHour = now.getHours();
@@ -31,23 +30,13 @@ export default function Shiping(props) {
     const[takhfifCase,setTakhfifCase]=useState(0)
     const[sendFast,setFastFactor]=useState(0);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-    const [minDate, setMinDate] = useState(getTodayDate());
 
-    function getTodayDate() {
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth() + 1).padStart(2, '0');
-        const yyyy = today.getFullYear();
-        return `${yyyy}-${mm}-${dd}`;
-      }
-    
-      const delkhahChangeDate = (event) => {
-        setMinDate(event.target.value);
-      };
+    const today = new Date();
+    const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
 
+  console.log("i love you", dateString)
 
     const[payUrl, setPayUrl] = useState('');
-
     const changePayMoneyAndTakhfif=()=>{
         let element =document.getElementById("takhfifSwitch");
         if(isUsedTakhfifCode !==1){
@@ -244,7 +233,9 @@ if(localStorage.getItem("isLogedIn")){
                                 <p className="weekDay"> تاریخ دلخواه </p>
                             </div>
                             <div className="col-lg-5 col-8 pe-0">
-                               <JBDateInput min={minDate} onChange={delkhahChangeDate} format="YYYY/MM/DD" value=""></JBDateInput>
+                               <div className="date-picker"> 
+                                <JBDateInput id="date" calendarDefaultDateView={{dateString}} min={dateString} value=""> </JBDateInput>
+                              </div>
                             </div>
                         </div>
                     </div>
