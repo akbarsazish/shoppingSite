@@ -41,6 +41,7 @@ import ShowAllKala from "./components/pages/ShowAllKala";
 import ShowAllBrand from "./components/pages/ShowAllBrand";
 import JaliLogin from "./components/pages/JaliLogin";
 import { param } from "jquery";
+import AppGuide from "./components/appInfo/AppGuide";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -128,6 +129,8 @@ function App() {
           <Route path="jaliLoginRoute"
             param = {param =>({forLogin: param.forLogin, forUserName:param.forUserName, forUserPsn: param.forUserPsn, forboughtAmount:param.forboughtAmount, forRole:param.forRole})} 
             element={<JaliLogin />} />
+
+          <Route path="/appGuid" element={<AppGuide />} />
 
       </Routes>
     </>

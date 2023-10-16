@@ -9,6 +9,7 @@ import 'swiper/swiper.min.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart, faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export default function GroupingItems(props) {
     const [subGrups, setSubGroups] = useState(0);
@@ -31,7 +32,7 @@ export default function GroupingItems(props) {
 
     useEffect(() => {
         renewGroupItems();
-        },[id])
+    },[id])
 
         const requestProduct=(psn,goodSn,event)=>{
             axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
@@ -186,8 +187,8 @@ export default function GroupingItems(props) {
      }
     
     const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
-        if((amountUnit > amountExist) && (freeExistance===0)){
-        alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
+        if((amountUnit > amountExist) && (freeExistance==0)){
+            Swal.fire("حد اکثر مقدار خرید شما " + parseInt(amountExist) + " " + defaultUnit  + " می باشد")
         }else{
             if (costLimit > 0) {
                 if (amountUnit >= costLimit) {

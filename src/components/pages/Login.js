@@ -22,6 +22,7 @@ export default function Login(props) {
         password: '',
         error_list: [],
     });
+
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
     const hideModal=()=>{
@@ -123,6 +124,7 @@ export default function Login(props) {
         })
     }
 
+
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%", backgroundColor:"#ff0014"}}>
@@ -141,12 +143,12 @@ export default function Login(props) {
                         </div>
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">
-                                <Link to="" className="btn btn-dark btn-sm m-1">
+                                <a href={process.env.PUBLIC_URL + '/apks/starfood1.apk'}  className="btn btn-dark btn-sm m-1" download>
                                     <img className="downloadImg" alt="download-img" src={gPlay} />  <img alt="download-img" className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
-                                </Link>
-                                <Link to="" className="btn btn-dark btn-sm">
+                                </a>
+                                <a href="appGuid" target="" className="btn btn-dark btn-sm">
                                     IOS  <FontAwesomeIcon className="downloadIcon" icon={faApple} /> <br /> دانلود نسخه ویب آپ
-                                </Link>
+                                </a>
                             </div>
                             <Link className="loginContact" to="tel://02148286"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faPhone} />  <b>ارتباط :</b>  48286-021 </Link >
                             <Link className="loginContact mb-2" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
