@@ -129,7 +129,6 @@ function App() {
           <Route path="jaliLoginRoute"
             param = {param =>({forLogin: param.forLogin, forUserName:param.forUserName, forUserPsn: param.forUserPsn, forboughtAmount:param.forboughtAmount, forRole:param.forRole})} 
             element={<JaliLogin />} />
-
           <Route path="/appGuid" element={<AppGuide />} />
 
       </Routes>

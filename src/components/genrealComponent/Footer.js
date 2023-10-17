@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Home from "../pages/Home";
 import ShoppingCart from "../pages/ShoppingCart";
+import BackToTopButton from "../pages/BackToTop";
 
 const Footer = ()=> {
   return (
+    <>
     <div className="containerFluid px-0 mx-0">
         <div className="footer px-0 mx-0">
             <Link className="footerLink" to="/grouping">
@@ -15,6 +17,8 @@ const Footer = ()=> {
             <Link className="footerLink" to="/shoppingCart" element={<ShoppingCart />}><FontAwesomeIcon className="footerIcon text-light" icon={faShoppingCart} /></Link>
         </div>
     </div>
+    <BackToTopButton />
+    </>
   )
 }
 
