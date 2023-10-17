@@ -27,12 +27,12 @@ const ShowAllBrand = (props)=> {
           }
           
         const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
-            psn:psn,
-            gsn:goodSn
-         }}).then((data)=>{
+           axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
+             psn:psn,
+             gsn:goodSn
+           }}).then((data)=>{
               renewGroupItems();
-         })
+           })
         }
 
     const renewGroupItems=()=>{
@@ -140,7 +140,7 @@ const ShowAllBrand = (props)=> {
             const items=modalItems.map((item)=>item)
             setBuyOption(items)
         })
-    }
+     }
 
         const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
           axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
