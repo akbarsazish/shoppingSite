@@ -11,7 +11,8 @@ export default function ChequeRequest(){
     
     const [acceptState,setAcceptState]=useState("Rejected");
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/getChequeReqState",{params:{customerId:localStorage.getItem("psn")}}).then((result)=>{
+        axios.get("https://starfoods.ir/api/getChequeReqState",{
+            params:{customerId:localStorage.getItem("psn")}}).then((result)=>{
             setShowForm(result.data.requestState)
             setAcceptState(result.data.acceptState)
     })},[]);
@@ -72,7 +73,7 @@ export default function ChequeRequest(){
     return formattedNumber;
   }
 
- 
+
     const [formData, setFormData] = useState({
         name : '',
         customerId : '',

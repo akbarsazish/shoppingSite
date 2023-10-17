@@ -37,7 +37,8 @@ const Header = ()=>{
     const navigate = useNavigate();
 
     useEffect(()=>{
-        axios.get('https://starfoods.ir/api/checkLogin',{params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
+        axios.get('https://starfoods.ir/api/checkLogin',{
+            params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
             if(data.data.isLogin==="NO" && localStorage.getItem("role") != "jaliLogin"){
                localStorage.removeItem("isLogedIn")
             }

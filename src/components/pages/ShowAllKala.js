@@ -47,11 +47,9 @@ const ShowAllKala = (props)=> {
                 <img className="topLeft" src={starfood} alt="slider" />
                 {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
                 <Link to={"/descKala/"+element.GoodSn+"/"+partId} className="groupingItemLink">
-                    <img
-                        className="groupingItemsImg"
+                    <img className="groupingItemsImg"
                         src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"}
-                        onError={(e) => { e.target.src = starfood; }}
-                        alt="slider"
+                        onError={(e) => { e.target.src = starfood; }} alt="slider"
                     />
                 </Link>
 

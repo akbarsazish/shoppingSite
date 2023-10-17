@@ -10,6 +10,7 @@ import axios from "axios";
 export default function Message() {
     const[messages,setMessages]=useState([]);
     const[newMessage,setNewMessage]=useState("");
+
     const addNewMessage=()=>{
         setNewMessage(newMessage);
         setMessages([])
@@ -32,7 +33,7 @@ export default function Message() {
           ).then((data)=>{
             setMessages(data.data.messages)
          })
-       },[])
+    },[]);
 
     if(localStorage.getItem("isLogedIn")){
         return (

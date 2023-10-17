@@ -21,8 +21,7 @@ export default function FactorDetails() {
             factorSn: localStorage.getItem('selectedHDS'),
             psn: localStorage.getItem('psn'),
           },
-        })
-        .then((data) => {
+        }).then((data) => {
           setFactorItem(
             data.data.factorBYS.map((element, index) => (
               <div className="factorDetailPart" key={index}>

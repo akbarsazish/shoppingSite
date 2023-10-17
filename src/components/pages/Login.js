@@ -17,13 +17,9 @@ export default function Login(props) {
     const [userToken,setUserToken]=useState(0);
     const deviceDialog = document.getElementById("favDialog");
     const introducerDialog = document.getElementById("introducerDialog");
-    const [loginInput, setLogin] = useState({
-        email: '',
-        password: '',
-        error_list: [],
-    });
-
+    const [loginInput, setLogin] = useState({ email: '',  password: '',  error_list: [],});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
 
     const hideModal=()=>{
         deviceDialog.close("animalNotChosen");
@@ -87,12 +83,12 @@ export default function Login(props) {
             }
 
             if (res.data.isSuccessfull===0) {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'اوه ... ',
-                        text: res.data.message,
-                    });
-            }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'اوه ... ',
+                    text: res.data.message,
+                });
+             }
         });
     }
 
@@ -124,6 +120,12 @@ export default function Login(props) {
         })
     }
 
+    const handleDownloadClick = () => {
+        const apkLink = document.createElement('a');
+        apkLink.href = 'https://starfoods.ir/api/downloadApk'; 
+        apkLink.download = 'starfood001.apk';
+        apkLink.click();
+      };
 
     return (
         <>
@@ -143,9 +145,9 @@ export default function Login(props) {
                         </div>
                         <div className="loginFooter p-1">
                             <div className="text-center my-2">
-                                <a href={process.env.PUBLIC_URL + '/apks/starfood1.apk'}  className="btn btn-dark btn-sm m-1" download>
+                                <button onClick={handleDownloadClick} className="btn btn-dark btn-sm m-1">
                                     <img className="downloadImg" alt="download-img" src={gPlay} />  <img alt="download-img" className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
-                                </a>
+                                </button>
                                 <a href="appGuid" target="" className="btn btn-dark btn-sm">
                                     IOS  <FontAwesomeIcon className="downloadIcon" icon={faApple} /> <br /> دانلود نسخه ویب آپ
                                 </a>
