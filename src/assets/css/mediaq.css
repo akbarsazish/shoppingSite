@@ -271,5 +271,10 @@
     .shegoftAngizFirstItem {
         width: 44% !important;
       }
-      
+
+    .search-container {
+        width: 18rem;
+        right: 21%;
+        top: 7%;
+    }
 }

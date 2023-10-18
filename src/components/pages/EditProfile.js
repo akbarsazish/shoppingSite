@@ -118,7 +118,7 @@ export default function EditProfile() {
           });
       };
 
-    const handleSelect = (index) => {
+      const handleSelect = (index) => {
         setActiveTab(index);
     };
 

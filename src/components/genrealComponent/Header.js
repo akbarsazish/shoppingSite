@@ -10,7 +10,7 @@ import axios from "axios";
 const Header = ()=>{
     const [showSearchInput, setShowSearchInput] = useState(false);
     const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-    const [serarchContainer, setSeachContainer] = useState(false)
+    const [searchContainer, setSeachContainer] = useState(false)
     const [searchedValue, setSearchedValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
@@ -48,7 +48,8 @@ const Header = ()=>{
     // for searching kala
     useEffect(()=>{
         if (searchedValue.length > 0) {
-            axios.get('https://starfoods.ir/api/publicSearchKalaApi',{params: {psn:localStorage.getItem("psn"), name:searchedValue}
+            axios.get('https://starfoods.ir/api/publicSearchKalaApi',
+            {params: {psn:localStorage.getItem("psn"), name:searchedValue}
             }).then((response)=>{
                 setSearchResults(response.data);
             }).catch((error) => {
@@ -60,13 +61,19 @@ const Header = ()=>{
 
     },[searchedValue]);
 
-    const searchKala=()=>{
-        if (searchedValue.length < 1) {
-            window.location.href='https://star.starfoods.ir/home';
-            } else {
-            window.location.href='https://star.starfoods.ir/searchKala/'+searchedValue;
+    // const searchKala=()=>{
+    //     if (searchedValue.length > 0) {
+    //         window.location.href='https://star.starfoods.ir/searchKala/'+searchedValue;
+    //     }
+    // }
+
+    const searchKala = () => {
+        if (searchedValue.length > 0) {
+          const searchURL = `https://star.starfoods.ir/searchKala/${searchedValue}`;
+          window.location.href = searchURL;
         }
-    }
+      };
+
   
 if(localStorage.getItem("isLogedIn")){
     return (
@@ -78,18 +85,20 @@ if(localStorage.getItem("isLogedIn")){
                     <FontAwesomeIcon onClick={() =>navigate(-1)} className="faIcon chevron-icon-right ms-2" icon={faChevronRight} />
                     )}
                     <span className="ms-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"> <FontAwesomeIcon className="faIcon" icon={faBars} /> </span>
-                    <form className="d-inline">
+                   
                     <FontAwesomeIcon onClick={() => handleSearchIcon(!showSearchInput)} className="seachIcon faIcon" id="searchIcon" icon={faSearch} />
                         {showSearchInput && ( 
-                          <input className="txtsearch" id="searchTextInput" type="text" value={searchedValue}
-                            onChange={(e)=>{setSearchedValue(e.target.value); setSeachContainer(true);}}
-                            onKeyUp={(e) => {
-                                if (e.key === 'Enter') {
-                                    searchKala(e);
-                                }
-                              }}
-                             placeholder="چی لازم داری ؟  ..." />  )}
-                    </form>
+                          <input className="txtsearch" id="searchTextInput" type="text"
+                          value={searchedValue}
+                          onChange={(e) => {setSearchedValue(e.target.value);
+                            setSeachContainer(true);
+                          }}
+                          onKeyUp={(e) => { if (e.key === 'Enter') {
+                              searchKala();
+                            }
+                          }}
+                          placeholder="چی لازم داری ؟  ..."/>
+                        )}
                 </div>
                 <div className="flex-item-right mt-1 ps-0" id="headerStaff">
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} >
@@ -103,7 +112,7 @@ if(localStorage.getItem("isLogedIn")){
             </div>
         </div>
         
-        {serarchContainer ?
+        {searchContainer ?
         <div className="search-container">
           {searchResults.map((element) => (
             <div className="search-item">
@@ -122,9 +131,9 @@ if(localStorage.getItem("isLogedIn")){
         : ""}
     </>
     )
-}else{
-    window.location.href="/login"
-}
+    }else{
+        window.location.href="/login"
+    }
 }
 
 export default memo (Header)

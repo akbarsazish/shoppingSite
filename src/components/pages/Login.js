@@ -125,7 +125,7 @@ export default function Login(props) {
         apkLink.href = 'https://starfoods.ir/api/downloadApk'; 
         apkLink.download = 'starfood001.apk';
         apkLink.click();
-      };
+    };
 
     return (
         <>
