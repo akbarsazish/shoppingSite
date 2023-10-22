@@ -35,7 +35,7 @@ const ShowAllKala = (props)=> {
          })
         }
 
-    const renewGroupItems=()=>{
+     const renewGroupItems=()=>{
       axios.get('https://starfoods.ir/api/getAllKalaOfPartApi',{
         params: {
           psn:localStorage.getItem('psn'),
@@ -124,7 +124,7 @@ const ShowAllKala = (props)=> {
             </div>))
          })}
 
-    const showBuyModal=(goodSn,event)=>{
+     const showBuyModal=(goodSn,event)=>{
         axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")

@@ -12,10 +12,14 @@ import { faHeart, faShoppingCart,faBell } from "@fortawesome/free-solid-svg-icon
 import axios from 'axios'
 
 export default function GroupingItems(props) {
+
 const [items, setItems] = useState(0);
 const [buyOption, setBuyOption]=useState(0)
+const {term}=useParams();
 
-    const {term}=useParams();
+useEffect(()=>reNewSearchResult(),[])
+
+
     const requestProduct=(psn,goodSn,event)=>{
         axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
           customerId:psn,
@@ -66,11 +70,11 @@ const reNewSearchResult=()=>{
                                   :(
                                     element.requested===0?
                                       <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"request"+element.GoodSn}>
-                                          <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(3609,element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
+                                          <button value="0" id={"preButton"+element.GoodSn} onClick={(event)=>requestProduct(localStorage.getItem("psn"),element.GoodSn,event)}   className="btn btn-sm btn-danger selectAmount">خبرم کنید <FontAwesomeIcon icon={faBell}></FontAwesomeIcon></button>
                                         </span>
                                         :
                                         <span className="prikalaGroupPricece fw-bold mt-1 float-start" id={"norequest"+element.GoodSn}>
-                                          <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(3609,element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
+                                          <button value="1" id={"afterButton"+element.GoodSn} onClick={(event)=>cancelRequestKala(localStorage.getItem("psn"),element.GoodSn,event)}  className="btn btn-sm btn-danger selectAmount">اعلام شد <FontAwesomeIcon icon={faShoppingCart}></FontAwesomeIcon></button>
                                         </span>
                                     ) 
                         }
@@ -103,8 +107,7 @@ const reNewSearchResult=()=>{
 }
 
 const showBuyModal=(goodSn,event)=>{
-    
-    fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
+  fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
   .then(response=>response.json())
   .then((data) => {
     let modalItems=[];
@@ -145,7 +148,7 @@ const showBuyModal=(goodSn,event)=>{
 
 const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
 
-  if((amountUnit > amountExist) && (freeExistance===0)){
+  if((amountUnit > amountExist) && (freeExistance==0)){
     alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");
   }else{
           if (costLimit > 0) {
@@ -159,13 +162,13 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
             amountUnit: amountUnit
             }
           }).then((response)=> {
-          let  countBought=parseInt(localStorage.getItem('buyAmount'));
+          let countBought=parseInt(localStorage.getItem('buyAmount'));
             localStorage.setItem('buyAmount',countBought+1);
             reNewSearchResult();
           })
         }   
 }
-    useEffect(()=>reNewSearchResult(),[])
+   
 
     if(localStorage.getItem("isLogedIn")){
       return (
