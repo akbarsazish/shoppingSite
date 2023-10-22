@@ -159,7 +159,8 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
           axios.get('https://starfoods.ir/api/buySomething',
           {params:{
             kalaId: goodSn,
-            amountUnit: amountUnit
+            amountUnit: amountUnit,
+            psn:localStorage.getItem("psn")
             }
           }).then((response)=> {
           let countBought=parseInt(localStorage.getItem('buyAmount'));
