@@ -17,6 +17,7 @@ export default function ChequeRequest(){
             setAcceptState(result.data.acceptState)
     })},[]);
 
+
     function showHiddenDiv() {
         var selectElement = document.getElementById("ownershipStatus");
         var selectedOption = selectElement.value;
@@ -28,18 +29,24 @@ export default function ChequeRequest(){
         } else {
           hiddenDiv.style.display = "none";
         }
-      
-        var returnedChqueSelect = document.getElementById("returnCheckSelect");
-        var returnedChequState = returnedChqueSelect.value;
-        
-        var returnedChequeInfoDiv = document.getElementById("returnedCheck");
-        
-        if (returnedChequState === "yes") {
-          returnedChequeInfoDiv.style.display = "block";
-        } else {
-          returnedChequeInfoDiv.style.display = "none";
-        }
       }
+
+
+      function howHideReturnedCheckSate() {
+        var returnedCheckSelect = document.getElementById("returnCheckSelect");
+        var returnedCheckState = returnedCheckSelect.value;
+        var returnedCheckInfoDiv = document.getElementById("returnedCheck");
+
+        alert(returnedCheckState)
+        
+        if (returnedCheckState === "yes") {
+            returnedCheckInfoDiv.style.display = "block";
+        } else {
+            returnedCheckInfoDiv.style.display = "none";
+        }
+    }
+
+      
       function requestAmountShowValue(element,containerId,mynumber) {
         let number=mynumber.replace(/,/g, '');
         const first = ['','یک ','دو ','سه ','چهار ', 'پنج ','شش ','هفت ','هشت ','نه ','ده ','یازده ','دوازده ','سیزده ','چهارده ','پانزده ','شانزده ','هفده ','هیجده ','نزده '];
@@ -92,7 +99,7 @@ export default function ChequeRequest(){
         workExperience : '',
         lastAddress : '',
         reliablityMony : '',
-        returnedCheckState : 'خیر',
+        returnedCheckState : '',
         returnedCheckMoney : '',
         returnedCheckCause : '',
         zaminName : '',
@@ -202,9 +209,7 @@ export default function ChequeRequest(){
                         <div className="col-lg-3 col-md-3 col-sm-6">
                             <div className="mb-1 mt-1">
                                 <label htmlFor="shenasahmilli" className="form-label check-request-label cheque-label">  تاریخ اتمام :</label>
-                                <div className="date-picker mt-0"> 
-                                    <JBDateInput id="contractEndDate" onChange={handleChange} value={formData.contractDate}> </JBDateInput>
-                                </div>
+                                <JBDateInput style={{height:"22px"}} id="contractEndDate" onChange={handleChange} value={formData.contractDate}> </JBDateInput>
                                 <input type="hidden" id="contractEnEnd" name="contractDate" />
                             </div>
                         </div>
@@ -282,9 +287,10 @@ export default function ChequeRequest(){
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
                             <label htmlFor="address" className="form-label check-request-label cheque-label"> آیا هنوز تجربه چک برگشتی داشته‌اید؟ </label>
-                            <select className="form-select form-select-sm" name="returnedCheckState" value={formData.returnedCheckState} onChange={()=>showHiddenDiv()} id="returnCheckSelect">
-                                <option value="no"> خیر </option>
+                            <select className="form-select form-select-sm" name="returnedCheckState" value={formData.returnedCheckState} onChange={howHideReturnedCheckSate} id="returnCheckSelect">
+                                <option> انتخاب </option>
                                 <option value="yes"> بله </option>
+                                <option value="no"> خیر </option>
                             </select>
                         </div>
                     </div>

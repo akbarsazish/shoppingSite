@@ -62,7 +62,7 @@
         if (wonPrize) {
            setTimeout(() => {
               // applause.play();
-              audio.play()
+            audio.play()
             Swal.fire({
               title: `تبریک! شما برنده ${wonPrize} شده‌اید.`,
                   showClass: {
@@ -171,7 +171,7 @@
         const box = document.getElementById('box');
         const element = document.getElementById('mainbox');
         
-        box.style.transition = 'all ease 3s';
+        box.style.transition = 'all ease 1s';
         box.style.transform = `rotate(${hasil[0]}deg)`;
         element.classList.remove('animate');
 
@@ -266,9 +266,11 @@
                 </div>
                 <button className="spin" id="spinnerBtn" onClick={handleSpin}>  چرخش </button>
             </div>
+
             {/* Replace with actual audio elements */}
             <audio controls="controls" id="applause" src="/path/to/applause.mp3" type="audio/mp3"></audio>
             <audio controls="controls" id="wheel" src="/path/to/wheel.mp3" type="audio/mp3"></audio>
+
             </div>
          </div>
         </div>

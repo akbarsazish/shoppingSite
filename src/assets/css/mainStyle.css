@@ -21,6 +21,8 @@ li,
 div,
 span {
     font-family: IRANSans;
+    --jb-date-input-border:1px solid gray;
+    --jb-date-input-border-radius:3px;
 }
 
 .topMenu {

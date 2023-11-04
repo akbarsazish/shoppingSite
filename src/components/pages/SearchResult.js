@@ -168,8 +168,7 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
             reNewSearchResult();
           })
         }   
-}
-   
+    }
 
     if(localStorage.getItem("isLogedIn")){
       return (
