@@ -260,7 +260,7 @@ export default function ShoppingCart(props) {
                             </div>
                             <div className="modal-footer">
                                     <button type="button" className="btn btn-success float-end" onClick={()=>changeCartsPrice(snHDS)} data-bs-dismiss="modal">ادامه <i className="fa fa-repeat"></i></button>
-                                <button type="button" className="btn btn-danger float-end" data-bs-dismiss="modal">خیر <i className="fa fa-xmark"></i></button>
+                                <button type="button" className="btn btn-danger float-end mb-5" data-bs-dismiss="modal">خیر <i className="fa fa-xmark"></i></button>
                             </div>
                         </div>
                     </div>

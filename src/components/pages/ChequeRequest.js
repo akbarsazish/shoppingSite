@@ -76,10 +76,8 @@ export default function ChequeRequest(){
   
     var formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     var formattedNumber = formattedInteger + (decimalPart ? "." + decimalPart : "");
-  
     return formattedNumber;
   }
-
 
     const [formData, setFormData] = useState({
         name : '',

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import { faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png"
@@ -10,6 +10,7 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useState } from "react";
 import Swal from 'sweetalert2';
+import "../../assets/css/login.css"
 
 export default function Login(props) {
     const [deviceInfo,setDeviceInfo]=useState('');
@@ -35,7 +36,8 @@ export default function Login(props) {
     }
 
     const loginSubmit = (e) => {
-        // e.preventDefault();
+        // e.stopPropagation();
+        
         const data = {
             email: loginInput.email,
             password: loginInput.password,
@@ -126,25 +128,53 @@ export default function Login(props) {
         apkLink.download = 'starfood001.apk';
         apkLink.click();
     };
+   
+    const createBubble = () => {
+        const section = document.querySelector("section");
+        const createElement = document.createElement("span");
+        var size = Math.random() * 60;
+    
+        createElement.classList.add("bubbleSpan");
+        createElement.style.animation = "bubbleAnimation 6s linear infinite";
+        createElement.style.width = 180 + size + "px";
+        createElement.style.height = 180 + size + "px";
+        createElement.style.left = Math.random() * window.innerWidth + "px";
+        section.appendChild(createElement);
+    
+        setTimeout(() => {
+          createElement.remove();
+        }, 4000);
+      };
+    
+      useEffect(() => {
+        const intervalId = setInterval(createBubble, 1000);
+    
+        return () => {
+          clearInterval(intervalId);
+        };
+      }, []);
 
+  
+
+// loginWaper loginEnter
     return (
         <>
             <div className="containerFluid" style={{ height: "100vh", width: "100%", backgroundColor:"#ff0014"}}>
-                <div className="loginWaper p-5">
+                <section className="login-container">
                     <div className="login">
-                        <div className="loginHeader text-center">
-                            <img src={starfood} className="loginLogo p-2" alt="contact" />
-                            <h4 className="loginEnter p-2">ورود به استارفود</h4>
+                        <div className="text-center">
+                            <img src={starfood} className="logo-img" alt="logo" />
+                            <h3 className="login-label">ورود به استار فود </h3>
                         </div>
-                        <div className="loginBody py-2 px-4 text-center">
-                            <label className="text-start" style={{ float: "right" }}>  شماره موبایل</label>
-                            <input className="form-control form-control-sm" autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
-                            <label className="text-start mt-2" style={{ float: "right" }}> کلمه عبور </label>
-                            <input name="password" autoComplete="off" className="form-control form-control-sm" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
-                            <button type="button"  onClick={()=>{loginSubmit()}} className="btn btn-dark btn-sm"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
+                        <div className="text-center">
+                            <label className="label">  شماره موبایل</label>
+                            <input autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
+                            <label className="label"> کلمه عبور </label>
+                            <input name="password" autoComplete="off" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
+                            <button type="button"  onClick={()=>{loginSubmit()}} className="btn btn-dark btn-md"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
-                        <div className="loginFooter p-1">
-                            <div className="text-center my-2">
+                        <div className="loginFooter mt-4">
+                            <div className="text-center">
                                 <button onClick={handleDownloadClick} className="btn btn-dark btn-sm m-1">
                                     <img className="downloadImg" alt="download-img" src={gPlay} />  <img alt="download-img" className="downloadImg" src={bazar} /> <br /> دانلود  نسخه اندروید
                                 </button>
@@ -152,11 +182,11 @@ export default function Login(props) {
                                     IOS  <FontAwesomeIcon className="downloadIcon" icon={faApple} /> <br /> دانلود نسخه ویب آپ
                                 </a>
                             </div>
-                            <Link className="loginContact" to="tel://02148286"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faPhone} />  <b>ارتباط :</b>  48286-021 </Link >
-                            <Link className="loginContact mb-2" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان :</b>     49973000-021 </Link >
+                            <Link className="contact-label" to="tel://02148286"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faPhone} />  <b>ارتباط:</b>  48286-021 </Link >  &nbsp; &nbsp;
+                            <Link className="contact-label" to="tel://02149973000"> <FontAwesomeIcon className="contactIconLogin p-1 fs-6" icon={faUser} /> <b>پشتیبان:</b>   49973000-021 </Link >
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
 
              <dialog id="favDialog" className="loginDialog">
@@ -174,7 +204,7 @@ export default function Login(props) {
 
             <dialog className="loginDialog" id="introducerDialog" style={{width:'300px',margin:'0 auto'}}>
                 <div>
-                    <form>
+                    <form className="login-form">
                         <div className="form-group my-2">
                             <label className="form-label">کد معرف</label>
                             <input className="form-control" id="introducerCode" ></input>

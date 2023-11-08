@@ -16,12 +16,15 @@ export default function GroupingItems(props) {
     const [maingroupKala,setMainGroupKala]=useState(0);
     const {mainId,subId}=useParams();
     const [buyOption, setBuyOption]=useState(0)
+    const [subLinkId, setSubLinkId] = useState(null);
     
     useEffect(() => {
     fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId="+mainId)
     .then(response=>response.json())
     .then((groups) => {
-        setSubGroups(groups.map((element,index)=><SwiperSlide key={index}> 
+        setSubGroups(groups.map((element,index)=><SwiperSlide key={index} 
+        className={`categorySlider ${subLinkId === element.id ? "selected" : ""}`}
+         onClick={() => setSubLinkId(element.id)}> 
         <Link to={"/subGroupItems/"+element.selfGroupId+"/"+element.id} className="topSliderLink">
             <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/"+element.id+".jpg"} alt="slider"/>
             <p className="topSliderTile"> {element.title}</p>

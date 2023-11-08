@@ -7,8 +7,16 @@ import MainGroupItem from './MainGroupItem'
 import axios from "axios";
 import SecondMenu from "./SecondMenu";
 import HomeSliders from "../slider/HomeSliders";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 
 export default function Home() {
+    
+    AOS.init({
+        duration: 1000,
+      });
+
     const [showModal, setShowModal] = useState(false);
     const [mainGroups, setMainGroups] = useState(0);
     const [slides,setSlides]=useState([]);
@@ -37,8 +45,8 @@ export default function Home() {
     if(localStorage.getItem("isLogedIn")){    
     return (
         <div className="container bg-light marginTop">
-            <div className="mainSliderContainer">
-                <div className={`${smallSlider.activeOrNot == 1 ? 'mainSlider-right' : 'mainSlider-full-page'}`}>
+            <div className="mainSliderContainer"  data-aos="flip-left">
+                <div  data-aos="flip-left" className={`${smallSlider.activeOrNot == 1 ? 'mainSlider-right' : 'mainSlider-full-page'}`}>
                     <Swiper
                         spaceBetween={10}
                         autoplay={{
@@ -60,10 +68,10 @@ export default function Home() {
                 {smallSlider.activeOrNot==1 ?
                 <div className="mainSlider-left">
                     <div className="row">
-                        <img  className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} alt={smallSlider.secondPic} />
+                        <img className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.secondPic} alt={smallSlider.secondPic} />
                     </div>
                     <div className="row">
-                        <img  className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} alt={smallSlider.firstPic} />
+                        <img className="img-responsive smallSlider" src={"https://starfoods.ir/resources/assets/images/smallSlider/"+smallSlider.firstPic} alt={smallSlider.firstPic} />
                     </div>
                 </div>
                 :""}
@@ -75,7 +83,7 @@ export default function Home() {
                     {mainGroups}
                 </div>
                  <HomeSliders />
-                <div className="text-center mt-4">
+                <div className="text-center mt-4"  data-aos="flip-left">
                    <img className="fourColSliderImg" alt="تماس با ما" src={contactImage} />
                 </div>
             </div>

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import axios from "axios";
-
+import Swal from 'sweetalert2';
 
 export default function Wallet() {
     const baseUrl = "https://starfoods.ir/api";
@@ -35,21 +35,25 @@ export default function Wallet() {
     },[]);
 
     const handleSubmit = (event) => {
-       let  myanswer={answer1:document.getElementById("answer1").value,answer2:document.getElementById("answer2").value,
-                    answer3:document.getElementById("answer3").value,takhfif:document.getElementById("takhfif").value,
-                    psn:document.getElementById("psn").value,nazarId:document.getElementById("nazarId").value};
-        console.log(JSON.stringify(myanswer))
+      if(takhfifMoney > 0) {
+            let  myanswer={answer1:document.getElementById("answer1").value,answer2:document.getElementById("answer2").value,
+                        answer3:document.getElementById("answer3").value,takhfif:document.getElementById("takhfif").value,
+                        psn:document.getElementById("psn").value,nazarId:document.getElementById("nazarId").value};
+            event.preventDefault();
+            axios.get(`${baseUrl}/addMoneyToCase`, {params:myanswer})
+            .then((response) => response.json())
+            .then((data) => {
+                Swal.fire("تشکر از اشتراک شما 😍");
+            }).catch((error) => {
+                Swal.fire(" مشکل وجود دارد! 😡");
+            });
+            myanswer="";
+      }else{
         event.preventDefault();
-        axios.get(`${baseUrl}/addMoneyToCase`, {params:myanswer})
-        .then((response) => response.json())
-           .then((data) => {
-            console.log('Response from server:', data);
-      })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-        myanswer="";
-      };
+        Swal.fire(" امتیاز شما کم است! 🤩");
+      }
+       
+    };
 
     if(localStorage.getItem("isLogedIn")){
         return (
@@ -107,7 +111,7 @@ export default function Wallet() {
                                 </li>
                                 <span className="list-group-item question textn-end">
                                     <input type="hidden" name="takhfif" value="" />
-                                    <button id="sendAnswerBtn" className="walletbutton" type="submit"  disabled={takhfifMoney <= 0}>  ارسال </button>
+                                    <button id="sendAnswerBtn" className="walletbutton" type="submit">  ارسال </button>
                                 </span>
                              </form>
                             </ul>

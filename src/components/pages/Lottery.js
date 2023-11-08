@@ -23,7 +23,7 @@ export default function Lottery() {
     <>
     <Header />
     <Sidebar />
-     <div className="container marginTop">
+     <div className="container marginTop border">
         <Instruction mybonus={bonus.allBonus} />
         <LuckyCode mybonus={bonus.allBonus} minBonus={bonus.lotteryMinBonus}  />
         <DailyEmtyaz />

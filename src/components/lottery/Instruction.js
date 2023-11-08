@@ -10,14 +10,27 @@ export default function Instruction(props) {
         <div className="instruction-container">
             <h5> شیوه‌ی کسب ستاره از هرکدام از این فعالیت‌ها به شرح زیر است </h5>
             <div className="instruction-item">
-                <h6 className="instruction-description"> 
-                <FontAwesomeIcon className="text-danger ms-2" icon={faSquareCaretLeft} />   خرید از استار فود </h6>
-                 <p className="instruction-details">
-                 با هر خریدی که از استار فود انجام می‌دهید، به ازای مبلغ و اقلام خریداری شده، ستاره دریافت می‌کنید.
-                 </p>
+                <h6 className="instruction-description mt-4">  <FontAwesomeIcon className="text-danger ms-2" icon={faSquareCaretLeft} /> با هر خرید به مبلغ  </h6>
+                   <div className="get-emtyaz">
+                       <div className="get-emtyaz-items">
+                          <span className="get-tmtyaz-item"> 10,000,000 </span>
+                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
+                          <span className="get-tmtyaz-item"> 70 ستاره </span>
+                       </div>
+                       <div className="get-emtyaz-items">
+                          <span className="get-tmtyaz-item"> 20,000,000 </span>
+                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
+                          <span className="get-tmtyaz-item"> 150 ستاره </span>
+                       </div>
+                       <div className="get-emtyaz-items">
+                          <span className="get-tmtyaz-item"> 50,000,000 </span>
+                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
+                          <span className="get-tmtyaz-item"> 300 ستاره </span>
+                       </div>
+                   </div>
 
-                <h6 className="instruction-description"> 
-                <FontAwesomeIcon className="text-danger ms-2" icon={faSquareCaretLeft} />  شرکت در ستاره استار فود </h6>
+                <h6 className="instruction-description">
+                 <FontAwesomeIcon className="text-danger ms-2 mt-3" icon={faSquareCaretLeft} />  شرکت در ستاره استار فود </h6>
                  <p className="instruction-details">
                  برای دریافت تعداد بیشتری ستاره، به مدت 7 روز متوالی در استار فود فعالیت کنید و سر بزنید.
                  </p>

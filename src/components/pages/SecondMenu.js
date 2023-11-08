@@ -10,7 +10,7 @@ export default function SecondMenu() {
        
             <div className="round-menu">
                <div className="round-menu-items" id="roundMenuItem">
-                    <div className="round-item">
+                    <div className="round-item" data-aos="fade-right">
                         <Link to={"/wallet"} className="round-link">
                             <div className="round-menu-info">
                                 <img src={wallet} alt="star" className="round-menu-img" />
@@ -20,7 +20,7 @@ export default function SecondMenu() {
                     </div>
                 </div>
                 <div className="round-menu-items" id="roundMenuItem">
-                    <div className="round-item">
+                    <div className="round-item" data-aos="fade-right">
                         <Link to={"/gamerList"} className="round-link">
                             <div className="round-menu-info" >
                                 <img src={game} alt="star" className="round-menu-img" />
@@ -31,7 +31,7 @@ export default function SecondMenu() {
                </div>
         
                 <div className="round-menu-items" id="roundMenuItem">
-                    <div className="round-item">
+                    <div className="round-item" data-aos="fade-right">
                         <Link to={"/disAndPrice"} className="round-link">
                             <div className="round-menu-info">
                                 <img src={precentage} alt="star" className="round-menu-img" /> 
@@ -41,7 +41,7 @@ export default function SecondMenu() {
                     </div>
                 </div>
                 <div className="round-menu-items" id="roundMenuItem">
-                    <div className="round-item">
+                    <div className="round-item" data-aos="fade-right">
                         <Link to="/lottery" className="round-link">    
                             <div className="round-menu-info">
                                 <img src={star} alt="star" className="round-menu-img" /> 

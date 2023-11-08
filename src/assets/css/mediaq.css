@@ -277,4 +277,23 @@
         right: 21%;
         top: 7%;
     }
+
+    .get-emtyaz {
+        grid-template-columns: auto ;
+        text-align: center;
+      }
+
+    .get-emtyaz::before {
+        bottom: 0;
+        right: 50%;
+        width: 50%;
+        height: 0;
+    }
+
+    .get-emtyaz::after {
+        top: 10;
+        left: 0;
+        width: 2px;
+        height: 98%;
+    }
 }

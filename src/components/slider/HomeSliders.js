@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png";
 import axios from "axios";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const HomeSliders = ()=> {
     const {id}=useParams();
@@ -123,6 +125,11 @@ const HomeSliders = ()=> {
           });
       };
 
+      AOS.init({
+        duration: 1000,
+      });
+  
+
 return(
     <>
     {kalaSliders.map((kalaTypes) => (
@@ -159,7 +166,7 @@ return(
                         modules={[Autoplay, Pagination]}>
 
                          {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
-                            <SwiperSlide className="text-center bg-white rounded" key={kala.GoodSn}>
+                            <SwiperSlide className="text-center rounded border" key={kala.GoodSn}>
                              <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
                              {clickedItemId === kala.GoodSn && (
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
@@ -197,14 +204,14 @@ return(
          {/* شگفت انگیز */}
          {parseInt(kalaTypes.partType)===11 ?
             <>
-            <div className="forTitle mt-2 p-2">
+            <div className="forTitle mt-2 p-2" data-aos="fade-up">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start"> </div>
             </div>
 
-              <div className="fourColSide border-top py-1 shegoftAndgez" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
+              <div className="fourColSide border-top py-1 shegoftAndgez" data-aos="fade-left" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
                    <div className="text-center shegoftAngizFirstItem">
                         <h4 className="text-wrap" style={{padding:"5px 33px"}}> {kalaTypes.textLogo} </h4>
                         <Link to={"/showAllKala/"+kalaTypes.partId} className="btn btn-md border text-decoration-none"> 
@@ -265,7 +272,7 @@ return(
           {/* برندها  */}
           {parseInt(kalaTypes.partType)===12 ?
             <>
-            <div className="forTitle mt-2 p-2">
+            <div className="forTitle mt-2 p-2" data-aos="fade-up-right">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
@@ -293,7 +300,7 @@ return(
                     modules={[Autoplay, Pagination]}>
 
                     {kalaTypes.allBrands && kalaTypes.allBrands.map((brand) => (
-                    <SwiperSlide className="brandDiv text-center mt-1">
+                    <SwiperSlide className="brandDiv text-center mt-1 border">
                         <Link to={"/showAllBrand/"+brand.brandId} className="brandImageAnchor">
                           <img className="brandImage" alt="برندها" src={`https://starfoods.ir/resources/assets/images/brands/${brand.brandId}.jpg`} onError={(e) => { e.target.src = starfood; }} />
                         </Link>
@@ -315,7 +322,7 @@ return(
                 </div>
             </div>
 
-            <div className="fourColSide border-top">
+            <div className="fourColSide border-top" data-aos="zoom-in-up">
                 <Swiper className="mySwiper text-center mx-2"
                     slidesPerView={1}
                     spaceBetween={10}
@@ -333,7 +340,7 @@ return(
                     modules={[Autoplay, Pagination]}>
 
                     {kalaTypes.allGroups && kalaTypes.allGroups.map((group) => (
-                    <SwiperSlide className="groupsDiv text-center mt-1">
+                    <SwiperSlide className="groupsDiv text-center mt-1 border">
                         <Link to="/" className="groupsImageAnchor">
                           <img className="groupsImage" alt="گروهای ویژه" src={`https://starfoods.ir/resources/assets/images/mainGroups/${group.groupId}.jpg`} onError={(e) => { e.target.src = starfood; }} />
                         </Link>
@@ -347,7 +354,7 @@ return(
           {/* دو عکسی   */}
           {parseInt(kalaTypes.partType)===7 ?
             <>
-            <div className="forTitle mt-2 p-2">
+            <div className="forTitle mt-2 p-2" data-aos="zoom-in-up">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
@@ -356,7 +363,7 @@ return(
                 </div>
             </div>
 
-            <div className="fourColSide border-top">
+            <div className="fourColSide border-top" data-aos="zoom-in-up">
                 <div className="twoPicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <Link to={"/getAllKala/"+pictures.homepartId+"/"+pictures.id} className="twoPics">
@@ -392,7 +399,7 @@ return(
                 modules={[Autoplay, Navigation]}
                 className="mySwiper">
 
-            <div className="fourColSide border-top">
+            <div className="fourColSide border-top" data-aos="zoom-in-up">
                 <div className="threePicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                       <SwiperSlide>
@@ -409,11 +416,11 @@ return(
           {/*چهار عکسی  عکسی   */}
           {parseInt(kalaTypes.partType)===9?
             <>
-            <div className="forTitle mt-2 p-2">
+            <div className="forTitle mt-2 p-2" data-aos="zoom-in-up">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
-                <div className="forTitleItem text-start">
+                <div className="forTitleItem text-start" data-aos="zoom-in-up">
                    {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
@@ -430,7 +437,7 @@ return(
                 modules={[Autoplay, Navigation]}
                 className="mySwiper">
                         
-                 <div className="fourColSide border-top">
+                 <div className="fourColSide border-top" data-aos="zoom-in-up">
                    <div className="fourPicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <SwiperSlide>
@@ -448,11 +455,11 @@ return(
 
             {parseInt(kalaTypes.partType)===10?
             <>
-            <div className="forTitle mt-2 p-2">
+            <div className="forTitle mt-2 p-2" data-aos="zoom-in-up">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
-                <div className="forTitleItem text-start">
+                <div className="forTitleItem text-start" data-aos="zoom-in-up">
                    {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
@@ -468,8 +475,8 @@ return(
                 freeMode={true}
                 modules={[Autoplay, FreeMode]} className="mySwiper">
 
-                 <div className="fourColSide border-top">
-                  <div className="fourPicDiv text-center mt-1">
+                 <div className="fourColSide border-top" data-aos="zoom-in-up">
+                  <div className="fourPicDiv text-center mt-1"  data-aos="flip-left">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <SwiperSlide>
                             <Link to={"/getAllKala/"+pictures.homepartId+"/"+pictures.id} className="fivePics">

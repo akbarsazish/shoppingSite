@@ -183,6 +183,7 @@ span {
   background-color: #fff;
   margin: 3px;
   border-radius: 5px;
+  border: 1px solid rgb(221, 218, 218);
 }
 
 .categoryImg {
@@ -725,10 +726,14 @@ tr {
 
 /* grouping items styles */
 .groupingItemsTopSlider {
-    margin-top: 58px;
+    margin-top: 60px;
     height: 111px;
     background-color: #fff;
     text-align: center;
+}
+
+.categorySlider {
+  width: 22%;
 }
 
 .topSliderLink {
@@ -736,11 +741,12 @@ tr {
 }
 
 .topSliderImg {
-    width: 50%;
+    width: 55%;
 }
 
+
 .topSliderTile {
-    font-size: 12px;
+    font-size: 0.8rem;
 }
 
 .groupingItems {
@@ -750,14 +756,29 @@ tr {
 }
 
 .groupingItem {
-    flex: 24%;
-    max-width: 24%;
-    border: 1px solid #f5f5f5;
-    position: relative;
-    margin: 5px;
-    text-align: center;
-    background-color: #fff;
+  flex: 23.5%;
+  max-width: 23.5%;
+  border: 1px solid #e4dcdc;
+  position: relative;
+  margin: .3rem;
+  text-align: center;
+  background-color: #fff;
+}
 
+@keyframes slideBg {
+  0%   { background:#cc7033;}
+  40%  { background:#eb7d6a;}
+  80%  { background:#b16e2f;}
+  100% { background:#c45854;}
+}
+
+.selected {
+  border-radius: 5px;
+  background-color: rgb(218, 136, 136);
+  animation-name: slideBg;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  width: 80%;
 }
 
 .groupingItemsImg {
@@ -1001,6 +1022,7 @@ img.topLeft {
   font-size: 0.8rem;
   color: red;
 }
+
 .free-delivery {
   animation-name: iconAnimation;
   animation-iteration-count: infinite;
@@ -1438,9 +1460,9 @@ ul li a.active {
     outline: none;
     color: #fff;
     background-color: #ef3d52;
-
     border-radius: 15px;
     box-shadow: 0 9px #999;
+    margin-bottom: 2rem;
 }
 
 .walletbutton:hover {
@@ -1466,9 +1488,6 @@ ul li a.active {
     z-index: 999;
 }
 
-.loginBody {
-    border-bottom: 1px solid #f5f5f5;
-}
 
 .login {
     flex: 30%;
@@ -1480,10 +1499,6 @@ ul li a.active {
     align-items: center;
 }
 
-.loginLogo {
-    width: 25%;
-}
-
 .loginContact {
   text-decoration: none;
   color: #000;
@@ -1493,13 +1508,12 @@ ul li a.active {
 }
 
 
-
 .downloadIcon {
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .downloadImg {
-    width: 25px;
+    width: 22px;
 }
 
 .contactIconLogin {
@@ -1983,6 +1997,7 @@ ul li a.active {
 
 .instruction-description {
     font-size: 1rem;
+    font-weight: bold;
 }
 
 .award-description {
@@ -2605,3 +2620,58 @@ ul li a.active {
 .back-to-top-button.visible {
   display: block;
 }
+
+
+.get-emtyaz {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  border-radius: 5px;
+  position: relative;
+  padding: 5px;
+  flex-wrap: wrap;
+  margin: 5px;
+}
+
+.get-emtyaz-items {
+  border-radius: 9px;
+  background-color: #dcd8d8;
+  margin: 5px;
+  padding: 5px;
+  font-size: 0.6rem;
+  font-weight: bold;
+  justify-content: space-around;
+}
+
+.get-emtyaz::before,
+.get-emtyaz::after {
+  content: "";
+  position: absolute;
+  border: 2px solid #dcd8d8;
+  border-radius: 10px;
+}
+
+.get-emtyaz::before {
+  bottom: 0;
+  right: 50%;
+  width: 50%;
+  height: 0;
+  border-top-left-radius: 100px;
+  content: " دریافت نمایید";
+  text-align: left;
+  font-weight: bold;
+}
+
+.get-emtyaz::after {
+  top: 5;
+  left: 0;
+  width: 2px;
+  height: 96%;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
+
+.get-emtyaz-img {
+  width: 32px;
+  height: 32px;
+}
+

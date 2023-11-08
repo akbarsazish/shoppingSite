@@ -183,7 +183,7 @@ export default function DescKala(props) {
                         </div> <hr></hr>
                         <h5 className="similarKalaTitle"> کالاهای مشابه </h5>
                         <div className="similarKala">
-                            {asameKalas}
+                            {asameKalas ? asameKalas: <p> کالای مشابه ندارد </p>}
                         </div>
                     </div>
                 </div>

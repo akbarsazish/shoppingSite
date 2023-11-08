@@ -16,19 +16,28 @@ export default function GroupingItems(props) {
     const [maingroupKala, setMainGroupKala] = useState(0);
     const {id}=useParams();
     const [buyOption, setBuyOption]=useState(0);
+    const [selectedLinkId, setSelectedLinkId] = useState(null);
 
     useEffect(() => {
         fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId=" + id)
-            .then(response => response.json())
-            .then((groups) => {
-                setSubGroups(groups.map((element, index) => <SwiperSlide key={index}>
-                    <Link to={"/subGroupItems/" + element.selfGroupId + "/" + element.id} className="topSliderLink">
-                      <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/" + element.id + ".jpg"} alt="slider" />
-                      <p className="topSliderTile"> {element.title} </p>
-                    </Link>
-                </SwiperSlide>))
-            })
-        },[id]);
+          .then((response) => response.json())
+          .then((groups) => {
+            setSubGroups(
+              groups.map((element, index) => (
+                <SwiperSlide key={index}>
+                  <Link
+                    to={"/subGroupItems/" + element.selfGroupId + "/" + element.id}
+                    className={`topSliderLink ${
+                      selectedLinkId === element.id ? "selected" : ""
+                    }`} onClick={() => setSelectedLinkId(element.id)}>
+                    <img className="topSliderImg" src={"https://starfoods.ir/resources/assets/images/subgroup/" + element.id + ".jpg" } onError={(e) => { e.target.src = starfood;}} alt="slider" />
+                    
+                  </Link>
+                </SwiperSlide>
+              ))
+            );
+          });
+      }, [id, selectedLinkId])
 
     useEffect(() => {
         renewGroupItems();

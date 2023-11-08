@@ -74,6 +74,7 @@ const Header = ()=>{
         }
       };
 
+
   
 if(localStorage.getItem("isLogedIn")){
     return (
@@ -120,8 +121,7 @@ if(localStorage.getItem("isLogedIn")){
                     <li className="list-group-item">
                         <img className="seached-img"
                             src={`https://starfoods.ir/resources/assets/images/kala/${element.GoodSn}_1.jpg`}
-                            alt={element.GoodName}
-                        />
+                            alt={element.GoodName} />
                        {element.GoodName}
                     </li>
                 </a>
