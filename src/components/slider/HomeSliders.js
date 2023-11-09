@@ -300,8 +300,8 @@ return(
                     modules={[Autoplay, Pagination]}>
 
                     {kalaTypes.allBrands && kalaTypes.allBrands.map((brand) => (
-                    <SwiperSlide className="brandDiv text-center mt-1 border">
-                        <Link to={"/showAllBrand/"+brand.brandId} className="brandImageAnchor">
+                    <SwiperSlide className="brandDiv text-center mt-1">
+                        <Link to={"/showAllBrand/"+brand.brandId} className="brandImageAnchor border">
                           <img className="brandImage" alt="برندها" src={`https://starfoods.ir/resources/assets/images/brands/${brand.brandId}.jpg`} onError={(e) => { e.target.src = starfood; }} />
                         </Link>
                     </SwiperSlide>
