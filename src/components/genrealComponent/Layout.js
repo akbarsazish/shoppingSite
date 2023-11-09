@@ -9,13 +9,13 @@ import ChatGroup from "./ChatGroup";
 const Layout = () => {
     if(localStorage.getItem("isLogedIn")){
         return (
-         <>
+         <div className="container">
              <Header/>
              <Home/>
              <Sidebar/>
              <Footer/>
              <ChatGroup />
-         </>
+         </div>
         )
     }else{
         window.location.href = '/login'

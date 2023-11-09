@@ -28,6 +28,8 @@ span {
 .topMenu {
   position: fixed;
   top: 0;
+  right: 0;
+  left: 0;
   width: 100%;
   height: 58px;
   background-color: #ef3d52;
@@ -1631,7 +1633,6 @@ ul li a.active {
     width:70px;
     height: 70px;
     border-radius: 50%;
-    border: 3px solid red;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -1645,6 +1646,13 @@ ul li a.active {
 .round-menu-img {
     width:66px;
     height:66px;
+}
+
+.notVisited {
+  border: 3px solid red;
+}
+.visited {
+  border: 3px solid gray;
 }
 
 .round-link {
@@ -1664,65 +1672,69 @@ ul li a.active {
     align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 44px;
+    margin-top: 22px;
     padding: 10px;
  }
 
 .gamer-item {
-    width: 19%;
-    position: relative;
-    text-align: center;
-    align-items: center; 
-    margin-top: 22px;
+  width: 19%;
+  position: relative;
+  text-align: center;
+  align-items: center; 
+  margin-top: 22px;
 }
 
 .gamer-image {
-    width: 111px;
-    height: 111px;
-    border-radius: 50%;
-    box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+  width: 111px;
+  height: 111px;
+  border-radius: 50%;
+  box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
 }
 
 .gamer-prize {
-    font-size: 13px;
-    position: absolute;
-    box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
-    border-radius: 8px;
-    color: #000;
+  font-size: 13px;
+  position: absolute;
+  box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+  border-radius: 8px;
+  color: #000;
 }
 
 #firstPerson {
     background-color: gold;
     animation: firstPerson 1s infinite;
-  }
-  #secondPerson {
-    background-color: silver;
-    animation: secondPerson 1s infinite;
-  }
-  #thirdPerson {
-    background-color: #ec7147;
-    animation: thirdPerson 1s infinite;
-  }
+}
+
+#secondPerson {
+  background-color: silver;
+  animation: secondPerson 1s infinite;
+}
+
+#thirdPerson {
+  background-color: #ec7147;
+  animation: thirdPerson 1s infinite;
+}
   
-  @keyframes firstPerson {
-      from {background-color: gold;}
-      to {background-color: #af9317;}
-    }
-  @keyframes secondPerson {
-      from {background-color: silver;}
-      to {background-color: rgb(206, 207, 207);}
-    }
-  @keyframes thirdPerson {
-      from {background-color: #ec7147;}
-      to {background-color: rgb(196, 114, 114);}
-    }
+@keyframes firstPerson {
+    from {background-color: gold;}
+    to {background-color: #af9317;}
+}
+
+@keyframes secondPerson {
+    from {background-color: silver;}
+    to {background-color: rgb(206, 207, 207);}
+}
+  
+@keyframes thirdPerson {
+    from {background-color: #ec7147;}
+    to {background-color: rgb(196, 114, 114);}
+}
 
 .gamer-name {
-    font-size: 12px;
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: center;
-    color: #000000;
+  font-size: 12px;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+  color: #000000;
 }
 
 .gamer-score {
@@ -1738,22 +1750,22 @@ ul li a.active {
 }
 
 .buttonGame {
-    min-width: 188px;
-    min-height: 40px;
-    font-size: 18px;
-    font-weight: 600;
-    color: #000;
-    background: #ff3154;
-    border: none;
-    border-radius: 1000px;
-    cursor: pointer;
-    outline: none;
-    position: fixed;
-    bottom: 6%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 5px;
-    z-index: auto;
+  min-width: 188px;
+  min-height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+  background: #ff3154;
+  border: none;
+  border-radius: 1000px;
+  cursor: pointer;
+  outline: none;
+  position: fixed;
+  bottom: 6%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 5px;
+  z-index: auto;
 }
 
 .discount-container{
@@ -2604,7 +2616,7 @@ ul li a.active {
 .back-to-top-button {
   display: none;
   position: fixed;
-  bottom: 1rem;
+  bottom: 2rem;
   left: 1rem;
   cursor: pointer;
   font-size: 24px;
@@ -2615,12 +2627,12 @@ ul li a.active {
   padding: 0.4rem;
   width:40px;
   height:40px;
+  z-index: 999;
 }
 
 .back-to-top-button.visible {
   display: block;
 }
-
 
 .get-emtyaz {
   display: grid;
@@ -2674,4 +2686,5 @@ ul li a.active {
   width: 32px;
   height: 32px;
 }
+
 

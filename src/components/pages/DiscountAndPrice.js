@@ -33,6 +33,22 @@ export default function DiscountAndPrice() {
       setCopiedIndex(null);
     }, 1000);
   };
+
+  let customerId = localStorage.getItem("psn");
+   const vistedPage = "Discount";
+   const todayDate = new Date().toISOString().slice(0, 10);
+
+   useEffect(()=>{
+      axios.get("https://starfoods.ir/api/setAttractiveVisits",{
+        params:{
+            'psn':customerId,
+            'attractionName':vistedPage,
+            'ViewDate':todayDate,
+        }
+       }).then((data)=>{
+           console.log("discount and prize page", data);
+        });
+    }, []);
   
     return (
     <>

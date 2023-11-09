@@ -73,8 +73,6 @@ const Header = ()=>{
           window.location.href = searchURL;
         }
       };
-
-
   
 if(localStorage.getItem("isLogedIn")){
     return (
@@ -132,7 +130,7 @@ if(localStorage.getItem("isLogedIn")){
     </>
     )
     }else{
-        window.location.href="/login"
+      window.location.href="/login"
     }
 }
 

@@ -9,7 +9,7 @@ import BackToTopButton from "../pages/BackToTop";
 const Footer = ()=> {
   return (
     <>
-    <div className="containerFluid px-0 mx-0">
+    <div className="row">
         <div className="footer px-0 mx-0">
             <Link className="footerLink" to="/grouping">
               <span className="badge text-bg-danger notification"> {localStorage.getItem("buyAmount")} </span><FontAwesomeIcon className="footerIcon text-light" icon={faListAlt} /></Link>

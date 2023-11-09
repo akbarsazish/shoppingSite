@@ -22,7 +22,7 @@ export default function Wallet() {
     if (showQuestion) {
        const yesNoPart = document.getElementById("yesNoBtn");
            yesNoPart.style.display = 'none';
-      }
+    }
 
     useEffect(()=>{
         axios.get(`${baseUrl}/wallet`,{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
@@ -36,24 +36,40 @@ export default function Wallet() {
 
     const handleSubmit = (event) => {
       if(takhfifMoney > 0) {
-            let  myanswer={answer1:document.getElementById("answer1").value,answer2:document.getElementById("answer2").value,
+            let myanswer={answer1:document.getElementById("answer1").value,answer2:document.getElementById("answer2").value,
                         answer3:document.getElementById("answer3").value,takhfif:document.getElementById("takhfif").value,
                         psn:document.getElementById("psn").value,nazarId:document.getElementById("nazarId").value};
             event.preventDefault();
             axios.get(`${baseUrl}/addMoneyToCase`, {params:myanswer})
             .then((response) => response.json())
             .then((data) => {
-                Swal.fire("تشکر از اشتراک شما 😍");
+                console.log("Data has been submited", data)
             }).catch((error) => {
-                Swal.fire(" مشکل وجود دارد! 😡");
+                console.log("Has error", error);
             });
             myanswer="";
       }else{
         event.preventDefault();
         Swal.fire(" امتیاز شما کم است! 🤩");
       }
-       
     };
+    
+    let customerId = localStorage.getItem("psn");
+    const vistedPage = "MoneyCase";
+    const todayDate = new Date().toISOString().slice(0, 10);
+
+    useEffect(()=>{
+          axios.get("https://starfoods.ir/api/setAttractiveVisits",{
+            params:{
+                'psn':customerId,
+                'attractionName':vistedPage,
+                'ViewDate':todayDate,
+            }
+        }).then((data)=>{
+            console.log("stay focus", data);
+         });
+      }, []);
+
 
     if(localStorage.getItem("isLogedIn")){
         return (

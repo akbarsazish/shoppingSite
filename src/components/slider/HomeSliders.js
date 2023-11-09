@@ -204,7 +204,7 @@ return(
          {/* شگفت انگیز */}
          {parseInt(kalaTypes.partType)===11 ?
             <>
-            <div className="forTitle mt-2 p-2" data-aos="fade-up">
+            <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
@@ -272,7 +272,7 @@ return(
           {/* برندها  */}
           {parseInt(kalaTypes.partType)===12 ?
             <>
-            <div className="forTitle mt-2 p-2" data-aos="fade-up-right">
+            <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
@@ -322,7 +322,7 @@ return(
                 </div>
             </div>
 
-            <div className="fourColSide border-top" data-aos="zoom-in-up">
+            <div className="fourColSide border-top">
                 <Swiper className="mySwiper text-center mx-2"
                     slidesPerView={1}
                     spaceBetween={10}
@@ -354,7 +354,7 @@ return(
           {/* دو عکسی   */}
           {parseInt(kalaTypes.partType)===7 ?
             <>
-            <div className="forTitle mt-2 p-2" data-aos="zoom-in-up">
+            <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
@@ -363,7 +363,7 @@ return(
                 </div>
             </div>
 
-            <div className="fourColSide border-top" data-aos="zoom-in-up">
+            <div className="fourColSide border-top">
                 <div className="twoPicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <Link to={"/getAllKala/"+pictures.homepartId+"/"+pictures.id} className="twoPics">
@@ -399,7 +399,7 @@ return(
                 modules={[Autoplay, Navigation]}
                 className="mySwiper">
 
-            <div className="fourColSide border-top" data-aos="zoom-in-up">
+            <div className="fourColSide border-top">
                 <div className="threePicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                       <SwiperSlide>
@@ -409,18 +409,18 @@ return(
                       </SwiperSlide>
                    ))}
                 </div>
-            </div>
+        </div>
             </Swiper>
             </> : "" }
 
           {/*چهار عکسی  عکسی   */}
           {parseInt(kalaTypes.partType)===9?
             <>
-            <div className="forTitle mt-2 p-2" data-aos="zoom-in-up">
+            <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
-                <div className="forTitleItem text-start" data-aos="zoom-in-up">
+                <div className="forTitleItem text-start">
                    {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
@@ -437,7 +437,7 @@ return(
                 modules={[Autoplay, Navigation]}
                 className="mySwiper">
                         
-                 <div className="fourColSide border-top" data-aos="zoom-in-up">
+                 <div className="fourColSide border-top">
                    <div className="fourPicDiv text-center mt-1">
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <SwiperSlide>

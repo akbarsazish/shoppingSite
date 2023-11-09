@@ -44,7 +44,7 @@ export default function Home() {
 
     if(localStorage.getItem("isLogedIn")){    
     return (
-        <div className="container bg-light marginTop">
+        <div className="marginTop">
             <div className="mainSliderContainer"  data-aos="flip-left">
                 <div  data-aos="flip-left" className={`${smallSlider.activeOrNot == 1 ? 'mainSlider-right' : 'mainSlider-full-page'}`}>
                     <Swiper

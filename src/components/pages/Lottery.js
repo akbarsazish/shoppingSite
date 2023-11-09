@@ -19,6 +19,22 @@ export default function Lottery() {
     });
 }, []);
 
+   let customerId = localStorage.getItem("psn");
+   const vistedPage = "StarfoodStar";
+   const todayDate = new Date().toISOString().slice(0, 10);
+
+   useEffect(()=>{
+      axios.get("https://starfoods.ir/api/setAttractiveVisits",{
+        params:{
+            'psn':customerId,
+            'attractionName':vistedPage,
+            'ViewDate':todayDate,
+        }
+       }).then((data)=>{
+           console.log("lotter page", data);
+        });
+    }, []);
+
   return (
     <>
     <Header />
