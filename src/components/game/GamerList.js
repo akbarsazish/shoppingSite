@@ -100,8 +100,7 @@ export default function GamerList (){
                 <p className="gamer-score">  {gamer.score} </p>
                 <p className="gamer-name"> {gamer.Name} </p>
               </div>
-            )
-            ))}
+            )))}
             {!showAll && (
               <div className="gamer-item" id="gamerItem">
                 <button onClick={toggleShowAll} className="btn btn-danger"> نمایش همه </button>

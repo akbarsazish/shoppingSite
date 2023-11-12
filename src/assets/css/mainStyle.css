@@ -368,9 +368,9 @@ div.price {
 }
 
 .brandImageAnchor {
-  height: 190px;
-  width: 190px !important;
-  border-radius: 190px;
+  height: 188px;
+  width: 188px !important;
+  border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -379,8 +379,8 @@ div.price {
 }
 
 .brandImage {
-  width: 90%;
-  height: 90%;
+  width: 88%;
+  height: 88%;
   padding: 20px;
 }
 

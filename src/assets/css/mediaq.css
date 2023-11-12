@@ -98,7 +98,7 @@
         padding: 3px;
         border-radius: 8px;
         position: fixed;
-        bottom: 42px;
+        bottom: 44px;
         background-color: aliceblue;
         flex: 99%;
         max-width: 99%;
@@ -296,4 +296,9 @@
         width: 2px;
         height: 98%;
     }
+
+    .brandImageAnchor {
+        height: 177px;
+        width: 177px !important;
+      }
 }
