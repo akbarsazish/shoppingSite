@@ -52,7 +52,7 @@ label{
   float:right;
 }
 
-input{
+.login-input{
   display: block;
   height: 38px;
   width: 100%;
@@ -65,7 +65,7 @@ input{
   color:#000;
 }
 
-input:focus{
+.login-input:focus{
   color:#000;
   border:1px dotted green;
   background-color: #eee;

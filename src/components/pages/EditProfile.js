@@ -51,8 +51,6 @@ export default function EditProfile() {
               Swal.fire({
                 title: 'آیا معلومات ذخیره گردد؟',
                 showDenyButton: true,
-                showCancelButton: true,
-                cancelButtonText: 'لغو',
                 confirmButtonText: 'بلی',
                 denyButtonText: `خیر`,
               }).then((result) => {
@@ -101,8 +99,6 @@ export default function EditProfile() {
               Swal.fire({
                 title: 'آیا معلومات ذخیره گردد؟',
                 showDenyButton: true,
-                showCancelButton: true,
-                cancelButtonText: 'لغو',
                 confirmButtonText: 'بلی',
                 denyButtonText: `خیر`,
               }).then((result) => {

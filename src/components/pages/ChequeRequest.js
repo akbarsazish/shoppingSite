@@ -7,9 +7,9 @@ import axios from "axios";
 import {JBDateInput} from 'jb-date-input-react';
 
 export default function ChequeRequest(){
-    const [showForm,setShowForm]=useState(0);
+    const [showForm, setShowForm]=useState(0);
     
-    const [acceptState,setAcceptState]=useState("Rejected");
+    const [acceptState, setAcceptState]=useState("Rejected");
     useEffect(() => {
         axios.get("https://starfoods.ir/api/getChequeReqState",{
             params:{customerId:localStorage.getItem("psn")}}).then((result)=>{
@@ -292,7 +292,7 @@ export default function ChequeRequest(){
                             </select>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div className="row" id="showRequestedAmount">
                     <p id="amountOutput"></p>
                 </div>

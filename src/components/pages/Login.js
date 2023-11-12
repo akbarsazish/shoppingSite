@@ -36,63 +36,67 @@ export default function Login(props) {
     }
 
     const loginSubmit = (e) => {
-        // e.stopPropagation();
-        
         const data = {
             email: loginInput.email,
             password: loginInput.password,
-            token:localStorage.getItem("isLogedIn")
-        }
-        axios.get("https://starfoods.ir/api/loginApi", {params:data}).then(res => {
-
-            if(res.data.loginInfo){
-                if(res.data.loginInfo.length>0){
-                    setUserToken(res.data.token)
-                    localStorage.setItem("isLogedIn",res.data.token);
-                    setCustomerId(res.data.psn)
-                    setDeviceInfo(res.data.loginInfo.map((element,index)=>
-                       <tr key={index}>
-                         <td>{element.platform}</td>
-                         <td>{element.browser}</td>
-                         <td><input style={{width:"28px", height:"28px"}} className="select-to-logout" type="radio" onChange={()=>{setUserToken(element.sessionId);setCustomerId(element.customerId); setIsButtonDisabled(false)}} name="removeDevice" /></td>
-                       </tr>
-                    ))
+            token: localStorage.getItem("isLogedIn")
+        };
+    
+        axios.get("https://starfoods.ir/api/loginApi", { params: data })
+            .then(res => {
+                if (res.data.loginInfo && res.data.loginInfo.length > 0) {
+                    setUserToken(res.data.token);
+                    localStorage.setItem("isLogedIn", res.data.token);
+                    setCustomerId(res.data.psn);
+                    setDeviceInfo(res.data.loginInfo.map((element, index) => (
+                        <tr key={index}>
+                            <td>{element.platform}</td>
+                            <td>{element.browser}</td>
+                            <td>
+                                <input
+                                    style={{ width: "28px", height: "28px" }}
+                                    className="select-to-logout"
+                                    type="radio"
+                                    onChange={() => {
+                                        setUserToken(element.sessionId);
+                                        setCustomerId(element.customerId);
+                                        setIsButtonDisabled(false);
+                                    }}
+                                    name="removeDevice"
+                                />
+                            </td>
+                        </tr>
+                    )));
                     deviceDialog.showModal();
+                } else if (res.data.introducerCode) {
+                    setCustomerId(res.data.psn);
+                    setUserToken(res.data.token);
+                    introducerDialog.showModal();
+                } else if (res.data.isSuccessfull === 1 || res.data.logedInBefore) {
+                    localStorage.setItem("isLogedIn", res.data.token);
+                    localStorage.setItem('userName', res.data.username);
+                    localStorage.setItem('psn', res.data.psn);
+                    localStorage.setItem("buyAmount", res.data.countBuy);
+                    window.location.href = "/home";
+                } else if (res.data.isSuccessfull === 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'اوه ... ',
+                        text: res.data.message,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: "شماره تماس و یا کلمه عبور شما اشتباه است!",
+                        });
                 }
-                else {
-                    alert("Email or password is incorrect.");
-                }
-            }
-            
-            if(res.data.introducerCode){
-                setCustomerId(res.data.psn)
-                setUserToken(res.data.token)
-                introducerDialog.showModal();
-            }
-            if(res.data.isSuccessfull == 1) {
-                localStorage.setItem("isLogedIn",res.data.token);
-                localStorage.setItem('userName', res.data.username);
-                localStorage.setItem('psn', res.data.psn);
-                localStorage.setItem("buyAmount",res.data.countBuy);
-               window.location.href="/home"
-            }
-            if (res.data.logedInBefore) {
-                localStorage.setItem("isLogedIn",res.data.token);
-                localStorage.setItem('userName', res.data.username);
-                localStorage.setItem('psn', res.data.psn);
-                localStorage.setItem("buyAmount",res.data.countBuy);
-               window.location.href="/home"
-            }
-
-            if (res.data.isSuccessfull===0) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'اوه ... ',
-                    text: res.data.message,
-                });
-             }
-        });
-    }
+            })
+            .catch(error => {
+                console.error("An error occurred during login:", error);
+                // Handle error cases here
+            });
+    };
+    
 
     const saveIntroduceCode=()=>{
         axios.get("https://starfoods.ir/api/addIntroducerCode", {params:{
@@ -168,9 +172,9 @@ export default function Login(props) {
                         </div>
                         <div className="text-center">
                             <label className="label">  شماره موبایل</label>
-                            <input autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
+                            <input className="login-input" autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label className="label"> کلمه عبور </label>
-                            <input name="password" autoComplete="off" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
+                            <input className="login-input" name="password" autoComplete="off" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>
                             <button type="button"  onClick={()=>{loginSubmit()}} className="btn btn-dark btn-md"> <FontAwesomeIcon icon={faUnlockAlt} /> ورود به استار فود</button>
                         </div>
                         <div className="loginFooter mt-4">
