@@ -43,53 +43,69 @@ const HomeSliders = ()=> {
     }, [boughtKalaBYS]);
       
 
-    const purchaseKala = (goodSn, kala) => {
-        const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
-        const updatedValue =  parseInt(spanValue);
-        if(updatedValue > kala.PackAmount){
-            alert("این محصول کمتر از حد خرید است!")
-        }
 
-        if (updatedValue === 0) {
-            axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
-                params: {
-                    kalaId: goodSn,
-                    amountUnit: updatedValue + 1,
-                    psn: localStorage.getItem("psn")
-                }
-            }).then((data) => {
-                setboughtKalaOrderBYS(data.data.snLastBYS);
-                let boughtItem = parseInt(data.data.amountBought);
-                localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtItem);
+// Debounce function to set timeout while calling purchasekala function.
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func(...args);
+        }, delay);
+    };
+}
 
-                setPurchasedItems(prevPurchasedItems => ({
-                    ...prevPurchasedItems,
-                    [kala.GoodSn]: updatedValue + 1
-                }))
+const purchaseKala = (goodSn, kala) => {
+    const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
+    const updatedValue = parseInt(spanValue);
 
-                let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
-                countBought += updatedValue + 1;
-                localStorage.setItem('buyAmount', countBought.toString());
-            });
-        } else {
-            let updateBoughtItem = localStorage.getItem(`boughtItem_${kala.GoodSn}`);
-            axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
-                params: {
-                    orderBYSSn: boughtKalaBYS,
-                    amountUnit: parseInt(updateBoughtItem) + 1,
-                    kalaId: goodSn,
-                }
-                }).then((data) => {
-                    const boughtKalaUpdate = parseInt(data.data.boughtAmount);
-                    localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
-
-                    setPurchasedItems(prevPurchasedItems => ({
-                        ...prevPurchasedItems,
-                        [kala.GoodSn]: parseInt(updateBoughtItem) + 1,
-                      }));
-                });
-        }
+    if (updatedValue > kala.PackAmount) {
+        alert("این محصول کمتر از حد خرید است!");
     }
+
+    if (updatedValue === 0) {
+        axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
+            params: {
+                kalaId: goodSn,
+                amountUnit: updatedValue + 1,
+                psn: localStorage.getItem("psn")
+            }
+        }).then((data) => {
+            setboughtKalaOrderBYS(data.data.snLastBYS);
+            let boughtItem = parseInt(data.data.amountBought);
+            localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtItem);
+
+            setPurchasedItems(prevPurchasedItems => ({
+                ...prevPurchasedItems,
+                [kala.GoodSn]: updatedValue + 1
+            }));
+
+            let countBought = parseInt(localStorage.getItem('buyAmount')) || 0;
+            countBought += updatedValue + 1;
+            localStorage.setItem('buyAmount', countBought.toString());
+        });
+    } else {
+        let updateBoughtItem = localStorage.getItem(`boughtItem_${kala.GoodSn}`);
+        axios.get('https://starfoods.ir/api/updateBasketItemFromHomePage', {
+            params: {
+                orderBYSSn: boughtKalaBYS,
+                amountUnit: parseInt(updateBoughtItem) + 1,
+                kalaId: goodSn,
+            }
+        }).then((data) => {
+            const boughtKalaUpdate = parseInt(data.data.boughtAmount);
+            localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
+
+            setPurchasedItems(prevPurchasedItems => ({
+                ...prevPurchasedItems,
+                [kala.GoodSn]: parseInt(updateBoughtItem) + 1,
+            }));
+        });
+    }
+};
+
+const debouncedPurchaseKala = debounce(purchaseKala, 500);
+
 
     const decreaseKala = (goodSn, kala) => {
         const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
@@ -125,6 +141,7 @@ const HomeSliders = ()=> {
           });
       };
 
+    // aos for transition
       AOS.init({
         duration: 1000,
       });
@@ -170,7 +187,7 @@ return(
                              <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
                              {clickedItemId === kala.GoodSn && (
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                    <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faPlusCircle}/>
+                                    <FontAwesomeIcon onClick={() => debouncedPurchaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faPlusCircle}/>
                                       <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {localStorage.getItem(`boughtItem_${kala.GoodSn}`) || 0} </span>
                                     <FontAwesomeIcon onClick={() => decreaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faMinusCircle}/>
                                 </div>
@@ -241,7 +258,7 @@ return(
                          <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"}> </FontAwesomeIcon>
                             {clickedItemId === kala.GoodSn && (
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
-                                    <FontAwesomeIcon onClick={() => purchaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faPlusCircle}/>
+                                    <FontAwesomeIcon onClick={() => debouncedPurchaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faPlusCircle}/>
                                       <span className="buy-amount" id={`showBoughtKala${kala.GoodSn}`}> {localStorage.getItem(`boughtItem_${kala.GoodSn}`) || 0} </span>
                                     <FontAwesomeIcon onClick={() => decreaseKala(kala.GoodSn, kala)} className="home-buyButton" icon={faMinusCircle}/>
                                 </div>

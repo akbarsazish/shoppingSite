@@ -93,7 +93,7 @@ export default function GamerList (){
         <CountDownTimer />
          <div className="gamer-container">
            {gamerList.players.map((gamer, index) => (
-            (showAll || index <= 8) && (
+            (showAll || index <= 7) && (
               <div className="gamer-item" id="gamerItem" key={index}>
                 <span className="gamer-prize" id={addingId(index)}> {getGamerPrize(index)} </span>
                 <img src={userAvatar} alt="userAvatar" className="gamer-image" id={addingId(index)} />
@@ -103,7 +103,9 @@ export default function GamerList (){
             )
             ))}
             {!showAll && (
-               <button onClick={toggleShowAll} className="btn btn-danger"> نمایش همه </button>
+              <div className="gamer-item" id="gamerItem">
+                <button onClick={toggleShowAll} className="btn btn-danger"> نمایش همه </button>
+              </div>
             )}
          </div>
          <Link to='https://starfoods.ir/resources/assets/tower/index.html'>
