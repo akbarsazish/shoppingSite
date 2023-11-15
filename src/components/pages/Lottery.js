@@ -6,6 +6,7 @@ import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 import DailyEmtyaz from "../lottery/DailyEmtyaz";
 import LuckyCode from "../lottery/LuckyCode";
+import LuckyTest from "../../../src/LuckyTest"
 
 
 export default function Lottery() {
@@ -53,8 +54,9 @@ export default function Lottery() {
      <div className="container marginTop border mb-5">
       
         <Instruction mybonus={bonus.allBonus} />
-        <LuckyCode mybonus={bonus.allBonus} minBonus={bonus.lotteryMinBonus}  />
+        {/* <LuckyCode mybonus={bonus.allBonus} minBonus={bonus.lotteryMinBonus}  /> */}
         {/* <DailyEmtyaz /> */}
+        <LuckyTest />
     </div>
     <Footer />
     </>

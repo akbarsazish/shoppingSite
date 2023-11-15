@@ -447,3 +447,7 @@ audio {
 .swal2-x-mark {
   font-size: 0.7rem;
 }
+
+.lucky-wheel {
+  text-align: center !important;
+}

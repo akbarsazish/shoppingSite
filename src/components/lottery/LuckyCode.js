@@ -18,7 +18,7 @@ return array;
 export default function LuckyCode({mybonus, minBonus}) {
   const audio = new Audio(sound);
   const wheelAudio = new Audio(wheel);
-  const [wonPrize, setWonPrize]=useState('');
+  const [wonPrize, setWonPrize]= useState('');
   const [rotation, setRotation] = useState(190);
 
   const [selectedItem, setSelectedItem] = useState({eightthPrize:'',eleventhPrize:'',fifteenthPrize:'',
