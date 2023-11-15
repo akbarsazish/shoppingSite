@@ -116,7 +116,8 @@ export default function Login(props) {
     const confirmBrowserLogOut=()=> {
         axios.get("https://starfoods.ir/api/logOutConfirm", {params:{
             customerId:customerId,
-            token:userToken
+            token:userToken,
+            isAndroid:0,
         }}).then(res => {
             localStorage.setItem("isLogedIn",res.data.token);
             localStorage.setItem('userName', res.data.username);
@@ -159,7 +160,6 @@ export default function Login(props) {
       }, []);
 
   
-
 // loginWaper loginEnter
     return (
         <>
@@ -171,7 +171,7 @@ export default function Login(props) {
                             <h3 className="login-label">ورود به استار فود </h3>
                         </div>
                         <div className="text-center">
-                            <label className="label">  شماره موبایل</label>
+                            <label className="label">  شماره موبایل </label>
                             <input className="login-input" autoComplete="off" name="email" type="text"  onChange={handleInput} value={loginInput.email} placeholder="09120000000" aria-label=".form-control-sm example" />
                             <label className="label"> کلمه عبور </label>
                             <input className="login-input" name="password" autoComplete="off" type="password"  onChange={handleInput} value={loginInput.password} asp-for="Password" placeholder="کلمه عبور خود را وارد نمایید" required /> <br></br>

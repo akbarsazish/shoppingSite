@@ -1126,75 +1126,76 @@ img.topLeft {
 }
 
 .notExist {
-    background-color: #cac7c7 !important;
+  background-color: #cac7c7 !important;
 }
 
 .messageBody {
-    height: 48vh;
-    background-color: #fff;
-    border-radius: 10px;
-    width: 100%;
-    padding: 10px;
-    overflow-y: scroll;
+  height: 48vh;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  overflow-y: scroll;
 }
 
 
 .messageBody::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .messageBody::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(252, 0, 0, 0.3);
-    border-radius: 0.5rem;
+  -webkit-box-shadow: inset 0 0 6px rgba(252, 0, 0, 0.3);
+  border-radius: 0.5rem;
 }
 
 .messageBody::-webkit-scrollbar-thumb {
-    border-radius: 0.5rem;
-    -webkit-box-shadow: inset 0 0 6px rgba(250, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  -webkit-box-shadow: inset 0 0 6px rgba(250, 0, 0, 0.5);
 }
 
 .messageContentSender {
-    direction: rtl;
-    display: block;
+  direction: rtl;
+  display: block;
 }
 
 .messageContentRecevier {
-    direction: ltr !important;
-    float: left;
-    display: block;
+  direction: ltr !important;
+  float: left;
+  display: block;
 }
 
 .senderImg {
-    width: 10%;
+  width: 10%;
 }
 
 .messageText {
-    font-size: 12px;
-    padding: 15px;
-    background-color: #39c0ed33;
-    border-radius: 8px;
-    margin: 5px;
+  font-size: 12px;
+  padding: 15px;
+  background-color: #39c0ed33;
+  border-radius: 11px;
+  margin: 5px;
 }
 
 .messageDate {
-    font-size: 10px;
-    color: blue;
+  font-size: 10px;
+  color: blue;
+  margin: 0px 0.5rem;
 }
 
 .messageFooter {
-    position: fixed;
-    bottom: 88px;
-    width: 80%;
+  position: fixed;
+  bottom: 88px;
+  width: 80%;
 }
 
 .contact {
-    display: flex;
-    border-radius: 8px;
-    background-color: #fff;
-    padding: 10px;
-    height: 70vh;
-    flex-wrap: wrap;
-    border: 1px solid red;
+  display: flex;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 10px;
+  height: 70vh;
+  flex-wrap: wrap;
+  border: 1px solid red;
 }
 
 .contactRight {
@@ -1396,6 +1397,7 @@ ul li a.active {
     font-weight: bold;
 
 }
+
 
 
 /* bagCash styles */
@@ -1699,6 +1701,27 @@ ul li a.active {
   height: 111px;
   border-radius: 50%;
   box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+}
+
+.show-all-gamer {
+  width: 19%;
+  position: relative;
+  text-align: center;
+  align-items: center; 
+  width: 111px;
+  height: 111px;
+  border-radius: 50%;
+  box-shadow: -1px 0px 6px 0px rgba(245,15,15,0.75);
+  cursor: pointer;
+  margin-top: -1rem;
+}
+
+.show-all-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
 }
 
 .gamer-prize {

@@ -63,16 +63,16 @@ const Header = ()=>{
 
     // const searchKala=()=>{
     //     if (searchedValue.length > 0) {
-    //         window.location.href='https://star.starfoods.ir/searchKala/'+searchedValue;
+    //        window.location.href='https://star.starfoods.ir/searchKala/'+searchedValue;
     //     }
     // }
 
     const searchKala = () => {
-        if (searchedValue.length > 0) {
-          const searchURL = `https://star.starfoods.ir/searchKala/${searchedValue}`;
-          window.location.href = searchURL;
-        }
-      };
+      if (searchedValue.length > 0) {
+        const searchURL = `https://star.starfoods.ir/searchKala/${searchedValue}`;
+        window.location.href = searchURL;
+      }
+    };
   
 if(localStorage.getItem("isLogedIn")){
     return (

@@ -9,6 +9,7 @@ import starfood from "../../assets/images/starfood.png";
 import axios from "axios";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Swal from 'sweetalert2';
 
 const HomeSliders = ()=> {
     const {id}=useParams();
@@ -60,8 +61,8 @@ const purchaseKala = (goodSn, kala) => {
     const updatedValue = parseInt(spanValue);
 
     if (updatedValue > kala.PackAmount) {
-        alert("این محصول کمتر از حد خرید است!");
-    }
+        Swal.fire("این محصول کمتر از حد خرید است!");
+    } else {
 
     if (updatedValue === 0) {
         axios.get('https://starfoods.ir/api/addToBasketFromHomePageApi', {
@@ -102,10 +103,10 @@ const purchaseKala = (goodSn, kala) => {
             }));
         });
     }
+  }
 };
 
 const debouncedPurchaseKala = debounce(purchaseKala, 500);
-
 
     const decreaseKala = (goodSn, kala) => {
         const spanValue = document.getElementById(`showBoughtKala${kala.GoodSn}`).innerText;
@@ -119,8 +120,7 @@ const debouncedPurchaseKala = debounce(purchaseKala, 500);
               amountUnit: updatedValue - 1,
               kalaId: goodSn,
             },
-          })
-          .then((data) => {
+          }).then((data) => {
             const boughtKalaUpdate = parseInt(data.data.boughtAmount);
                   localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
 
@@ -170,7 +170,7 @@ return(
                         loop={true}
                         spaceBetween={10}
                         autoplay={{
-                            delay: 3500,
+                            delay: 5000,
                             disableOnInteraction: false,
                           }}
                         breakpoints={{
@@ -183,7 +183,7 @@ return(
                         modules={[Autoplay, Pagination]}>
 
                          {kalaTypes.allKalas && kalaTypes.allKalas.map((kala) => (
-                            <SwiperSlide className="text-center rounded border" key={kala.GoodSn}>
+                             <SwiperSlide className="text-center rounded border" key={kala.GoodSn}>
                              <FontAwesomeIcon onClick={() => setClickedItemId(kala.GoodSn)} icon={faPlusCircle} className={kala.bought === "No" ? "clickToBuy" : "clickToUpdateBuy"} /> 
                              {clickedItemId === kala.GoodSn && (
                                 <div className='smallModalTobuy' id={`preBuyFromHome${kala.partId}_${kala.GoodSn}`}>
@@ -240,7 +240,7 @@ return(
                     loop={true}
                     spaceBetween={3}
                     autoplay={{
-                        delay: 3000,
+                        delay: 5000,
                         disableOnInteraction: false,
                       }}
                     breakpoints={{
@@ -304,7 +304,7 @@ return(
                     loop={true}
                     spaceBetween={10}
                     autoplay={{
-                        delay: 3200,
+                        delay: 5000,
                         disableOnInteraction: false,
                       }}
                     breakpoints={{
@@ -344,7 +344,7 @@ return(
                     slidesPerView={1}
                     spaceBetween={10}
                     autoplay={{
-                        delay: 2500,
+                        delay: 4000,
                         disableOnInteraction: false,
                       }}
                     breakpoints={{

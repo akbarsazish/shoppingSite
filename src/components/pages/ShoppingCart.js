@@ -103,9 +103,8 @@ export default function ShoppingCart(props) {
                   } else {
                     console.error("Invalid data for profit calculation");
                   }
-                } 
-              });
-
+            } 
+        });
 
             setCartItems(data.data.orders.map((element) => <div className="shoppingItem" id={element.GoodSn + 'cartDiv'} ref={props.cartRef}>
                 <div className="firstItem text-center">
@@ -126,30 +125,34 @@ export default function ShoppingCart(props) {
       }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
+        
         fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
             .then(response => response.json())
             .then((data) => {
+                console.log("update modal", data)
                 let modalItems = [];
                 for (let index = 1; index <= data.maxSale; index++) {
-                    modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() => updateBuy(snOrderBYS, data.amountUnit * index, data.kalaId)}>{index + ' ' + data.secondUnit + ' معادل ' + ' ' + index * data.amountUnit + ' ' + data.defaultUnit}</button>)
+                    modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() => updateBuy(snOrderBYS, data.amountUnit * index, data.kalaId, data.amountExist, data.defaultUnit, data.freeExistance)}>{index + ' ' + data.secondUnit + ' معادل ' + ' ' + index * data.amountUnit + ' ' + data.defaultUnit}</button>)
                 }
                 const items = modalItems.map((item) => item)
-                setBuyOption(items)
+                  setBuyOption(items)
             })
     }
 
-    const updateBuy = (orderId, amountUnit, goodSn) => {
-        axios.get('https://starfoods.ir/api/updateOrderBYS',
-            {
-                params: {
-                    kalaId: goodSn,
-                    amountUnit: amountUnit,
-                    orderBYSSn: orderId
-                }
-            }
-        ).then((response) => {
-            renewCarts()
-        })
+    const updateBuy = (orderId, amountUnit, goodSn, amountExist, defaultUnit, freeExistance) => {
+        if(amountUnit > amountExist && freeExistance==0){
+            Swal.fire("حد اکثر مقدار خرید شما " + parseInt(amountExist) + " " + defaultUnit  + " می باشد")
+        }else{
+        axios.get('https://starfoods.ir/api/updateOrderBYS', {
+            params: {
+              kalaId: goodSn,
+              amountUnit: amountUnit,
+              orderBYSSn: orderId
+            }})
+            .then((response) => {
+              renewCarts()
+         })
+      }
     }
 
     const deleteOrder = (orderBYSSn, goodSn) => {
@@ -163,7 +166,6 @@ export default function ShoppingCart(props) {
           cancelButtonText: 'خیر'
         }).then((result) => {
           if (result.isConfirmed) {
-
             axios.get('https://starfoods.ir/api/deleteOrderBYS',{
                 params: {
                   SnOrderBYS: orderBYSSn

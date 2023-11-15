@@ -42,31 +42,37 @@ export default function Message() {
                 <Sidebar />
                 <div className="container marginTop">
                     <div className="messageHeader text-center mt-2">
-                        <h6 className="messageTitle">
+                        <h6 className="messageTitle" style={{transform: "rotate(-4deg)"}}>
                             با پیام ها خود ما را در ارائه بهتر خدمات یاری رسانید <FontAwesomeIcon style={{ color: "red", fontSize: "22px" }} icon={faHandshake} />
                         </h6>
                     </div>
                     <div className="messageBody">
-                        <div className="messageContent">
-                       {messages.map((message, index)=> 
-                         <>
-                            <span className="messageContentSender" key={index}>
-                                <img className="profilePic" alt="عکس یوزر" src={boy} />
-                                <span className="messageText"> <span className="messageDate">
-                                     {new Date(message.messageDate).toLocaleString('fa-IR')}
-                                </span> {message.messageContent} </span>
-                            </span>
+                          {messages.map((message, index)=> 
+                            <div className="row messageContent">
+                                <div className="messageContentSender" key={index}>
+                                    <img className="profilePic" alt="عکس یوزر" src={boy} />
+                                    <span className="messageText"> 
+                                      {message.messageContent}
+                                      <span className="messageDate">
+                                        {new Date(message.messageDate).toLocaleString('fa-IR')}
+                                      </span>
+                                        
+                                    </span>
+                                </div> 
                             {message.replay.map((replay, index)=>
-                                <span className="messageContentRecevier" key={index}>
+                                <div className="messageContentRecevier" key={index}>
                                     <img className="profilePic" alt="عکس یوزر" src={profile} />
-                                    <span className="messageText"> <span className="messageDate">
-                                        {new Date(replay.replayDate).toLocaleString('fa-IR')}
-                                        </span> {replay.replayContent} </span>
-                                </span>
+                                    <span className="messageText">
+                                       {replay.replayContent} &
+                                       <span className="messageDate">
+                                         {new Date(replay.replayDate).toLocaleString('fa-IR')}
+                                        </span>
+                                        
+                                    </span>
+                                </div> 
                               )}
-                            </>   
+                            </div>   
                           )}
-                        </div>
                     </div> 
                     <div className="messageFooter">
                         <div className="mb-3">

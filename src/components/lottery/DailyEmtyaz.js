@@ -21,10 +21,13 @@ function DailyEmtyaz() {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
+        
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
     })
 }, []);
+
+
 
  function checkCheckboxPresent() {
     setIsChecked(!isChecked);
@@ -32,6 +35,7 @@ function DailyEmtyaz() {
      axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
        params: {psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0], bonus:todayInputValue.split("_")[1] },
      }).then((data) => {
+      console.log("searching ispresent", data)
       //  window.location.reload();
   });
  }
@@ -46,25 +50,25 @@ function DailyEmtyaz() {
     <div className="weekly-calendar">
       {daysOfWeek.map((currentDay, i) => {
         let todayClass='';
-        if(i===0 && starfoodStarInfo.First===today){
+        if(i==0 && starfoodStarInfo.First===today){
           todayClass='current-day'
         }
-        if(i===1 && starfoodStarInfo.Second===today){
+        if(i==1 && starfoodStarInfo.Second===today){
           todayClass='current-day'
         }
-        if(i===2 && starfoodStarInfo.Third===today){
+        if(i==2 && starfoodStarInfo.Third===today){
           todayClass='current-day'
         }
-        if(i===3 && starfoodStarInfo.Fourth===today){
+        if(i==3 && starfoodStarInfo.Fourth===today){
           todayClass='current-day'
         }
-        if(i===4 && starfoodStarInfo.Fifth===today){
+        if(i==4 && starfoodStarInfo.Fifth===today){
           todayClass='current-day'
         }
-        if(i===5 && starfoodStarInfo.Sixth===today){
+        if(i==5 && starfoodStarInfo.Sixth===today){
           todayClass='current-day'
         }
-        if(i===6 && starfoodStarInfo.Seventh===today){
+        if(i==6 && starfoodStarInfo.Seventh===today){
           todayClass='current-day'
         }
         const dayNumber = i + 1;
@@ -73,36 +77,36 @@ function DailyEmtyaz() {
         return (
           <div className="week-day" key={i}>
             <div className={"day-content "+todayClass}>
-              <div className="top">{i===0?starfoodStarInfo.FirstB:(i===1?starfoodStarInfo.SecondB:(i===2?starfoodStarInfo.ThirdB:(i===3?starfoodStarInfo.FourthB:(i===4?starfoodStarInfo.FifthB:(i===5?starfoodStarInfo.SixthB:(i===6?starfoodStarInfo.SeventhB:5))))))}</div>
+              <div className="top">{i===0?starfoodStarInfo.FirstB:(i==1?starfoodStarInfo.SecondB:(i==2?starfoodStarInfo.ThirdB:(i==3?starfoodStarInfo.FourthB:(i==4?starfoodStarInfo.FifthB:(i==5?starfoodStarInfo.SixthB:(i==6?starfoodStarInfo.SeventhB:5))))))}</div>
                 <div className="daily-bottom">
-                  {i===0?(i===0 && starfoodStarInfo.FirstPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
-                  {i===1?(i===1 && starfoodStarInfo.SecondPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
-                  {i===2?(i===2 && starfoodStarInfo.ThirdPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
-                  {i===3?(i===3 && starfoodStarInfo.FourthPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
-                  {i===4?(i===4 && starfoodStarInfo.FifthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
-                  {i===5?(i===5 && starfoodStarInfo.SixthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
-                  {i===6?(i===6 && starfoodStarInfo.SeventhPr==1? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==0?(i==0 && starfoodStarInfo.FirstPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==1?(i==1 && starfoodStarInfo.SecondPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==2?(i==2 && starfoodStarInfo.ThirdPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==3?(i==3 && starfoodStarInfo.FourthPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==4?(i==4 && starfoodStarInfo.FifthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==5?(i==5 && starfoodStarInfo.SixthPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
+                  {i==6?(i==6 && starfoodStarInfo.SeventhPr==1? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
                   <input className="form-check-input check-day"  checked={isChecked} type="checkbox" id="checkCurrentDay" />
                 </div>
             </div>
             
             <p className="day-label">
-                {i===0?(i===0 && starfoodStarInfo.First === today?'امروز':'روز'+(i+1)):''}
-                {i===1?(i===1 && starfoodStarInfo.Second === today ?'امروز':'روز'+(i+1)):''}
-                {i===2?(i===2 && starfoodStarInfo.Third === today ?'امروز':'روز'+(i+1)):''}
-                {i===3?(i===3 && starfoodStarInfo.Fourth === today  ?'امروز':'روز'+(i+1)):''}
-                {i===4?(i===4 && starfoodStarInfo.Fifth === today  ?'امروز':'روز'+(i+1)):''}
-                {i===5?(i===5 && starfoodStarInfo.Sixth === today?'امروز':'روز'+(i+1)):''}
-                {i===6?(i===6 && starfoodStarInfo.Seventh === today ?'امروز':'روز'+(i+1)):''}
+                {i==0?(i==0 && starfoodStarInfo.First == today?'امروز':'روز'+(i+1)):''}
+                {i==1?(i==1 && starfoodStarInfo.Second == today ?'امروز':'روز'+(i+1)):''}
+                {i==2?(i==2 && starfoodStarInfo.Third == today ?'امروز':'روز'+(i+1)):''}
+                {i==3?(i==3 && starfoodStarInfo.Fourth == today  ?'امروز':'روز'+(i+1)):''}
+                {i==4?(i==4 && starfoodStarInfo.Fifth == today  ?'امروز':'روز'+(i+1)):''}
+                {i==5?(i==5 && starfoodStarInfo.Sixth == today?'امروز':'روز'+(i+1)):''}
+                {i==6?(i==6 && starfoodStarInfo.Seventh == today ?'امروز':'روز'+(i+1)):''}
             </p>
 
-              {i===0?(i===0 && starfoodStarInfo.First === today ? <input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" /> :''):''}
-              {i===1?(i===1 && starfoodStarInfo.Second === today ? <input type="text" value={"SecondPr_"+starfoodStarInfo.SecondB} id="todayInput" /> :''):''}
-              {i===2?(i===2 && starfoodStarInfo.Third === today ? <input type="text" value={"ThirdPr_"+starfoodStarInfo.ThirdB} id="todayInput" /> :''):''}
-              {i===3?(i===3 && starfoodStarInfo.Fourth === today ? <input type="text" value={"FourthPr_"+starfoodStarInfo.FourthB} id="todayInput" /> :''):''}
-              {i===4?(i===4 && starfoodStarInfo.Fifth === today  ? <input type="text" value={"FifthPr_"+starfoodStarInfo.FifthB} id="todayInput" /> :''):''}
-              {i===5?(i===5 && starfoodStarInfo.Sixth === today ? <input type="text" value={"SixthPr_"+starfoodStarInfo.SixthB} id="todayInput" /> :''):''}
-              {i===6?(i===6 && starfoodStarInfo.Seventh === today ? <input type="text" value={"SeventhPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
+              {i==0?(i==0 && starfoodStarInfo.First == today ? <input type="text" value={"FirstPr_"+starfoodStarInfo.FirstB} id="todayInput" /> :''):''}
+              {i==1?(i==1 && starfoodStarInfo.Second == today ? <input type="text" value={"SecondPr_"+starfoodStarInfo.SecondB} id="todayInput" /> :''):''}
+              {i==2?(i==2 && starfoodStarInfo.Third == today ? <input type="text" value={"ThirdPr_"+starfoodStarInfo.ThirdB} id="todayInput" /> :''):''}
+              {i==3?(i==3 && starfoodStarInfo.Fourth == today ? <input type="text" value={"FourthPr_"+starfoodStarInfo.FourthB} id="todayInput" /> :''):''}
+              {i==4?(i==4 && starfoodStarInfo.Fifth == today  ? <input type="text" value={"FifthPr_"+starfoodStarInfo.FifthB} id="todayInput" /> :''):''}
+              {i==5?(i==5 && starfoodStarInfo.Sixth == today ? <input type="text" value={"SixthPr_"+starfoodStarInfo.SixthB} id="todayInput" /> :''):''}
+              {i==6?(i==6 && starfoodStarInfo.Seventh == today ? <input type="text" value={"SeventhPr_"+starfoodStarInfo.SeventhB} id="todayInput" />:''):''}
           </div>
         );
       })}

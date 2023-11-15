@@ -9,6 +9,7 @@ import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../genrealComponent/Footer";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export default function Favorite(props) {
     const [kalaItem,setKalaItem]=useState(0)
@@ -129,29 +130,30 @@ export default function Favorite(props) {
         .then((data) => {
           let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
-              modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
+              modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId, data.data.amountExist, data.data.defaultUnit, data.data.freeExistance)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
             }
             const items=modalItems.map((item)=>item)
             setBuyOption(items)
             
         })
       }
-      const updateBuy=(orderId,amountUnit,goodSn)=>{
 
+      const updateBuy=(orderId,amountUnit,goodSn, amountExist, defaultUnit, freeExistance)=>{
+        if((amountUnit > amountExist) && (freeExistance==0)){
+          Swal.fire("حد اکثر مقدار خرید شما " + parseInt(amountExist) + " " + defaultUnit  + " می باشد");
+      }else{
         axios.get('https://starfoods.ir/api/updateOrderBYS',
-        {params:{
-          kalaId: goodSn,
-          amountUnit: amountUnit,
-          orderBYSSn: orderId
-        }
-        }
-        ).then((response)=> {
+          {params:{
+            kalaId: goodSn,
+            amountUnit: amountUnit,
+            orderBYSSn: orderId
+          }}).then((response)=> {
             renewFavorite();
-        })
-  
+          })
+      }
     }
   
-    const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
+    const buySomething=(amountExist,freeExistance, zeroExistance, costLimit, costError, amountUnit, goodSn, defaultUnit, btnModalEvent, event)=>{
   
       if((amountUnit > amountExist) && (freeExistance===0)){
         alert("حد اکثر مقدار خرید شما " + amountExist + " " + defaultUnit + "می باشد");

@@ -7,6 +7,7 @@ import Sidebar from "../genrealComponent/Sidebar";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import starfood from "../../assets/images/starfood.png";
+import Swal from 'sweetalert2';
 
 export default function DescKala(props) {
     const { goodSn, groupId } = useParams();
@@ -40,7 +41,7 @@ export default function DescKala(props) {
             .then((data) => {
                 let modalItems = [];
                 for (let index = 1; index <= data.maxSale; index++) {
-                    modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() => updateBuy(snOrderBYS, data.amountUnit * index, data.kalaId)}>{index + ' ' + data.secondUnit + ' معادل ' + ' ' + index * data.amountUnit + ' ' + data.defaultUnit}</button>)
+                    modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() => updateBuy(snOrderBYS, data.amountUnit * index, data.kalaId, data.amountExist, data.defaultUnit, data.freeExistance)}>{index + ' ' + data.secondUnit + ' معادل ' + ' ' + index * data.amountUnit + ' ' + data.defaultUnit}</button>)
                 }
                 const items = modalItems.map((item) => item)
                 setBuyOption(items)
@@ -72,16 +73,20 @@ export default function DescKala(props) {
         renewDescKala();
     },[goodSn])
 
-    const updateBuy=(orderId,amountUnit,goodSn)=>{
-        axios.get('https://starfoods.ir/api/updateOrderBYS',{
+    const updateBuy=(orderId,amountUnit,goodSn, amountExist, defaultUnit, freeExistance)=>{
+        if((amountUnit > amountExist) && (freeExistance==0)){
+            Swal.fire("حد اکثر مقدار خرید شما " + parseInt(amountExist) + " " + defaultUnit  + " می باشد");
+        }else{
+         axios.get('https://starfoods.ir/api/updateOrderBYS',{
             params: {
               kalaId: goodSn,
               amountUnit: amountUnit,
               orderBYSSn: orderId
             }
-        }).then((response) => {
-            renewDescKala();
-        })
+            }).then((response) => {
+                renewDescKala();
+            })
+        }
     }
 
     const buySomething = (amountExist, freeExistance, zeroExistance, costLimit, costError, amountUnit, goodSn, defaultUnit, btnModalEvent, event) => { 

@@ -54,22 +54,6 @@ export default function Wallet() {
       }
     };
     
-    let customerId = localStorage.getItem("psn");
-    const vistedPage = "MoneyCase";
-    const todayDate = new Date().toISOString().slice(0, 10);
-
-    useEffect(()=>{
-          axios.get("https://starfoods.ir/api/setAttractiveVisits",{
-            params:{
-                'psn':customerId,
-                'attractionName':vistedPage,
-                'ViewDate':todayDate,
-            }
-        }).then((data)=>{
-            console.log("stay focus", data);
-         });
-      }, []);
-
 
     if(localStorage.getItem("isLogedIn")){
         return (

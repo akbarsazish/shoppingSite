@@ -292,10 +292,11 @@ if(localStorage.getItem("isLogedIn")){
                     <div className="shippingPartBottom mt-2">
                         <p className="factorInfo"> {parseInt(parseInt(allMoney) + parseInt(allProfit)).toLocaleString("fa-IR")} تومان </p>
                         <p className="factorInfo" style={{display:"inline"}}> {parseInt(takhfifCase).toLocaleString("fa-IR")} تومان  </p> 
-                        <input type="checkbox" onChange={()=>changePayMoneyAndTakhfif()} id="takhfifSwitch" />
+                        <input className="takhfifKalaCheckbox" type="checkbox" onChange={()=>changePayMoneyAndTakhfif()} id="takhfifSwitch" />
                         <p className="factorInfo text-danger"> {parseInt(allProfit).toLocaleString("fa-IR")} تومان </p>
                         <p className="factorInfo"> {parseInt(allMoney).toLocaleString("fa-IR")} تومان </p>
                     </div>
+                    
                     <div className="shippingPartBottom">
                        {(payType==="hozori" && factorDay) ? (
                            <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>addFactorToSefarish()}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>

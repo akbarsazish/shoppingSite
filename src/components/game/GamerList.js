@@ -46,7 +46,7 @@ export default function GamerList (){
             case 2:
             prize = "نفر سوم 100,000 تومان"
             break;
-
+            
             default:
             prize = "";
         }
@@ -69,21 +69,6 @@ export default function GamerList (){
       return myClass;
    }
 
-   let customerId = localStorage.getItem("psn");
-   const vistedPage = "Game";
-   const todayDate = new Date().toISOString().slice(0, 10);
-
-   useEffect(()=>{
-         axios.get("https://starfoods.ir/api/setAttractiveVisits",{
-           params:{
-               'psn':customerId,
-               'attractionName':vistedPage,
-               'ViewDate':todayDate,
-           }
-       }).then((data)=>{
-           console.log("stay focus", data);
-        });
-    }, []);
 
     return (
      <>
@@ -102,8 +87,8 @@ export default function GamerList (){
               </div>
             )))}
             {!showAll && (
-              <div className="gamer-item" id="gamerItem">
-                <button onClick={toggleShowAll} className="btn btn-danger"> نمایش همه </button>
+              <div className="show-all-gamer" onClick={toggleShowAll} >
+                 <span className="show-all-text">  نمایش همه  </span>
               </div>
             )}
          </div>

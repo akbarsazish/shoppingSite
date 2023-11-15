@@ -176,24 +176,29 @@ export default function GroupingItems(props) {
           .then((data) => {
             let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
-                modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
+                modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId, data.data.amountExist, data.data.defaultUnit, data.data.freeExistance)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
             }
             const items=modalItems.map((item)=>item)
             setBuyOption(items);
           })
         }
-        const updateBuy=(orderId,amountUnit,goodSn)=>{
-          axios.get('https://starfoods.ir/api/updateOrderBYS',
-          {params:{
-            kalaId: goodSn,
-            amountUnit: amountUnit,
-            orderBYSSn: orderId
-          }
-         }
-        ).then((response)=> {
-            renewGroupItems();
-        })
-     }
+
+        const updateBuy=(orderId,amountUnit,goodSn, amountExist, defaultUnit, freeExistance)=>{
+            if((amountUnit > amountExist) && (freeExistance==0)){
+                Swal.fire("حد اکثر مقدار خرید شما " + parseInt(amountExist) + " " + defaultUnit  + " می باشد")
+            }else{
+                axios.get('https://starfoods.ir/api/updateOrderBYS',
+                {params:{
+                    kalaId: goodSn,
+                    amountUnit: amountUnit,
+                    orderBYSSn: orderId
+                }
+                }
+                ).then((response)=> {
+                    renewGroupItems();
+                });
+            }
+        }
     
     const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,amountUnit,goodSn,defaultUnit,btnModalEvent,event)=>{
         if((amountUnit > amountExist) && (freeExistance==0)){
