@@ -6,7 +6,7 @@ import yourStar from '../../assets/images/siteImage/your-star.png'
 export default function Instruction(props) {
   return (
     <>
-      <div className="container">
+      <div className="container mt-4">
         <div className="instruction-container">
             <h5> شیوه‌ی کسب ستاره از هرکدام از این فعالیت‌ها به شرح زیر است </h5>
             <div className="instruction-item">
@@ -27,6 +27,7 @@ export default function Instruction(props) {
                           <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
                           <span className="get-tmtyaz-item"> 300 ستاره </span>
                        </div>
+                       <h6 class="me-3 mt-0"> ستاره دریافت نمایید! </h6>
                    </div>
 
                 <h6 className="instruction-description">

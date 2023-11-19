@@ -443,11 +443,18 @@ audio {
   transition: all ease 5s;
 }
 
-
 .swal2-x-mark {
   font-size: 0.7rem;
 }
 
-.lucky-wheel {
-  text-align: center !important;
+#luckyWheel {
+  justify-content: center !important;
+  padding: 1rem;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }

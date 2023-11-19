@@ -300,5 +300,15 @@
     .brandImageAnchor {
         height: 177px;
         width: 177px !important;
-      }
+    }
+
+    #luckyWheel {
+        position: relative;
+        height: 280px;
+    }
+
+    
+#wheel canvas {
+    width: 444px;
+  }
 }

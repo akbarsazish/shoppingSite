@@ -44,7 +44,7 @@ export default function Lottery() {
     }, []);
 
     if (loading) {
-      return <p>Loading...</p>;
+      return <p style={{textAlign:"center"}}> لطفا صبور باشید!...</p>;
     }
 
   return (
@@ -55,8 +55,8 @@ export default function Lottery() {
       
         <Instruction mybonus={bonus.allBonus} />
         {/* <LuckyCode mybonus={bonus.allBonus} minBonus={bonus.lotteryMinBonus}  /> */}
-        {/* <DailyEmtyaz /> */}
-        <LuckyTest />
+        <LuckyTest mybonus={parseInt(bonus.allBonus)} minBonus={parseInt(bonus.lotteryMinBonus)} />
+        <DailyEmtyaz />
     </div>
     <Footer />
     </>

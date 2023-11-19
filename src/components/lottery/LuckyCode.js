@@ -74,11 +74,11 @@ export default function LuckyCode({mybonus, minBonus}) {
         }, 5000);
 
         // send data to the server
+
         axios.get('https://starfoods.ir/api/setCustomerLotteryHistory', {
             params: {product:wonPrize, customerId: localStorage.getItem('psn')},
         }).then((res)=>{
             if(res.data==="success"){
-                mybonus = mybonus - 500;
                 console.log("data has been sent");
             }else {
                 console.log("data did not send");

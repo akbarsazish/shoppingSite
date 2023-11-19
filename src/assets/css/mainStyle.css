@@ -1574,16 +1574,6 @@ ul li a.active {
     font-size: 16px;
 }
 
-#wheel canvas {
-    text-align: center !important;
-    justify-content: center !important;
-    align-items: center !important;
-    align-self: center !important;
-    width: 80% !important;
-    display: flex !important;
-}
-
-
 .aboutImg {
     width: 100%;
     height: auto;
@@ -2684,35 +2674,13 @@ ul li a.active {
   padding: 5px;
   font-size: 0.6rem;
   font-weight: bold;
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.get-tmtyaz-item {
   justify-content: space-around;
-}
-
-.get-emtyaz::before,
-.get-emtyaz::after {
-  content: "";
-  position: absolute;
-  border: 2px solid #dcd8d8;
-  border-radius: 10px;
-}
-
-.get-emtyaz::before {
-  bottom: 0;
-  right: 50%;
-  width: 50%;
-  height: 0;
-  border-top-left-radius: 100px;
-  content: " دریافت نمایید";
-  text-align: left;
-  font-weight: bold;
-}
-
-.get-emtyaz::after {
-  top: 5;
-  left: 0;
-  width: 2px;
-  height: 96%;
-  border-top-right-radius: 100px;
-  border-bottom-right-radius: 100px;
+  margin-top: 0.4rem;
 }
 
 .get-emtyaz-img {
@@ -2720,4 +2688,18 @@ ul li a.active {
   height: 32px;
 }
 
+.lucky-audio {
+  display: none !important;
+}
 
+#luckyWheel {
+  position: relative;
+  height: 566px;
+}
+
+#wheel canvas {
+  position: absolute;
+  left: 22%;
+  padding: 0 !important;
+  margin: auto !important;
+}

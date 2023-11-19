@@ -21,13 +21,10 @@ function DailyEmtyaz() {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
-        
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
     })
 }, []);
-
-
 
  function checkCheckboxPresent() {
     setIsChecked(!isChecked);
@@ -41,7 +38,7 @@ function DailyEmtyaz() {
  }
 
   return (
-    <section className="weekly-calendar-container my-3" id="weely-calendar">
+    <section className="row weekly-calendar-container my-3" id="weely-calendar">
       <div className="row">
           <div className="col-lg-12 p-4">
             <h3 className='dialy-credit'>  امتیاز روزانه </h3>
@@ -111,6 +108,7 @@ function DailyEmtyaz() {
         );
       })}
     </div>
+
     <div className="row">
         <div className="col-lg-12 p-2 text-center">
           <p className="calendar-info" > هفت روز پشت سر هم مراجعه کنید و ستاره های بیشتری را به دست آورید! جایزه‌های ارزشمندی را برای شما در نظر داریم! </p> 
