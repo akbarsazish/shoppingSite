@@ -88,8 +88,6 @@ export default function LuckyTest(mybonus) {
       : null;
   };
 
-
-
   return (
     <div id="luckyWheel" className="lucky-wheel">
       {loading ? ( <p>لطفا منتظر باشید! ...</p> ) : (
