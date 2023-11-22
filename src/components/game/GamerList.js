@@ -57,10 +57,10 @@ export default function GamerList (){
           return "firstPerson";
         }else {
           if(index === 1){
-              return "secondPerson";
+            return "secondPerson";
           }
           if(index === 2){
-              return "thirdPerson";
+            return "thirdPerson";
           }
         }
         return myClass;
@@ -88,8 +88,8 @@ export default function GamerList (){
               </div>
             )}
          </div>
-         <Link to='/stackTower' target="_blank">
-           <button id="playButton" className="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button>
+         <Link to='/stackTower'>
+            <button id="playButton" className="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button>
          </Link>
       </div>
       <Footer />

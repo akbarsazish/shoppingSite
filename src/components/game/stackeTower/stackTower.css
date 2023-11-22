@@ -33,7 +33,7 @@
   .screen {
     color: #fff;
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 100;
@@ -64,6 +64,17 @@
   
   }
   
+  .goBack {
+    position: fixed;
+    right: 2%;
+    top: 2%;
+    background-color: red;
+    width: 6rem;
+    height: 2rem;
+    border-radius: 5px;
+    z-index: 999999;
+  }
+
   .text--glitch {
     text-align: center;
     margin: 0;

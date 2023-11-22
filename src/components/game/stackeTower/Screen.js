@@ -1,8 +1,10 @@
 import React from "react";
-
+import { useNavigate } from 'react-router-dom';
 const Screen = ({ score, startGame }) => {
+    const navigate = useNavigate();
     return (
         <>
+            <button className="goBack" onClick={() => navigate(-1)}> باز گشت </button>
             <div className="screen">
                 {score > 0 ? (
                     <>
