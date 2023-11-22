@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faIdCard, faMoon, faSun, faTruck } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import {JBDateInput} from 'jb-date-input-react';
+import Swal from 'sweetalert2';
 
 export default function Shiping(props) {
     let now = new Date();
@@ -33,8 +34,7 @@ export default function Shiping(props) {
 
     const today = new Date();
     const dateString = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`;
-
-
+    
     const[payUrl, setPayUrl] = useState('');
     const changePayMoneyAndTakhfif=()=>{
         let element =document.getElementById("takhfifSwitch");
@@ -45,7 +45,7 @@ export default function Shiping(props) {
                 setAllMoney(allMoney + takhfifCase)
             }
         }else{
-            alert("استفاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.");
+            Swal.fire("استفاده همزمان از کد تخفیف و کیف تخفیف ممکن نیست.");
             element.checked=false;
         }
     }
@@ -63,10 +63,12 @@ export default function Shiping(props) {
             setaAternoonTimeContent(data.data.setting.afternoonTimeContent);
             setDefaultAddress(data.data.customer.peopeladdress);
             setSelectedAddress(0+'_'+data.data.customer.peopeladdress);
-            setOtherAddresses(data.data.addresses.map((element)=><option value={element.AddressPeopel+'_'+element.SnPeopelAddress}>{element.AddressPeopel}</option>))
+            setOtherAddresses(data.data.addresses.map((element)=> <option value={parseInt(element.SnPeopelAddress) +'_'+ element.AddressPeopel}> {element.AddressPeopel} </option> ))
             // used for takhfifcode updating
         })
     },[]);
+
+    
 
     useEffect(() => {
         axios.get('https://starfoods.ir/api/getPaymentFormApi', {
@@ -96,7 +98,7 @@ export default function Shiping(props) {
 
     const checkSelectedFactorDay=(factorDay)=>{
         if(!factorDay && payType ==="hozori"){
-          alert("لطفا تاریخ فاکتور را انتخاب کنید.")
+          Swal.fire("لطفا تاریخ فاکتور را انتخاب کنید.");
         }
      }
 
@@ -106,25 +108,29 @@ export default function Shiping(props) {
             takhfifCode=localStorage.getItem("takhfifCode");
         }
         
-        localStorage.setItem("recivedTime",selectdFactorDate);
-        localStorage.setItem("takhfif",0);
-        localStorage.setItem("takhfifCode",takhfifCode);
-        localStorage.setItem("receviedAddress",selectdAddress);
+        localStorage.setItem("recivedTime", selectdFactorDate);
+        localStorage.setItem("takhfif", 0);
+        localStorage.setItem("takhfifCode", takhfifCode);
+        localStorage.setItem("receviedAddress", selectdAddress);
         setIsButtonDisabled(false);
     }
 
     const addFactorToSefarish=()=>{
-    axios.get("https://starfoods.ir/api/addFactorApi",{params:{
-        pardakhtType:selectdPayType,
-        recivedTime:selectdFactorDate,
-        customerAddress:selectdAddress,
-        psn:localStorage.getItem("psn"),
-        allMoney:allMoney
-    }
-    }).then((data)=>{
-        window.location.href = '/success'
-    })    
-}
+        if(selectdPayType,selectdFactorDate,selectdAddress,allMoney){
+            axios.get("https://starfoods.ir/api/addFactorApi",{params:{
+            pardakhtType:selectdPayType,
+            recivedTime:selectdFactorDate,
+            customerAddress:selectdAddress,
+            psn:localStorage.getItem("psn"),
+            allMoney:allMoney
+        }}).then((data)=>{
+            window.location.href = '/success'
+        });
+        }else{
+            console.log("which one go empty", selectdPayType, +"1"+selectdFactorDate,  +"2"+ selectdAddress,  +"3"+ allMoney)
+        }
+   }
+
 
 const calculateTakhfifCode=()=>{
     let element=document.getElementById("takhfifSwitch");
@@ -247,7 +253,7 @@ if(localStorage.getItem("isLogedIn")){
                                 <select className="form-select form-select-sm mt-2"
                                   onChange={(e)=>setSelectedAddress(e.target.value)} style={{ width: "195px" }}
                                   aria-label=".form-select-sm example">
-                                    <option selected value={0+'_'+defaultAddress} className="text-end">  {defaultAddress}  </option>
+                                    <option value={0+'_'+defaultAddress} className="text-end">  {defaultAddress}  </option>
                                     {otherAddresses}
                                 </select>
                             </div>
@@ -263,7 +269,7 @@ if(localStorage.getItem("isLogedIn")){
                         <div className="form-check">
                             <label className="form-check-label text-start timeLabel" htmlFor="payHozori">
                                 <input className="form-check-input float-end mx-1 mt-2 customRadio"
-                                onChange={()=>{checkSelectedFactorDay(factorDay);setpayType("hozori");setSelectedPayType("hozori"); payHozoriFun();}}
+                                onChange={()=>{checkSelectedFactorDay(factorDay); setpayType("hozori"); setSelectedPayType("hozori"); payHozoriFun()}}
                                 type="radio" name="payTypeRadio" id="payHozori" />
                                 حضوری  <FontAwesomeIcon style={{ color: "red", marginTop: "5px", fontSize: "18px" }} icon={faTruck} />
                             </label>
@@ -299,14 +305,14 @@ if(localStorage.getItem("isLogedIn")){
                     
                     <div className="shippingPartBottom">
                        {(payType==="hozori" && factorDay) ? (
-                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>addFactorToSefarish()}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 hozori p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>addFactorToSefarish()}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور </button>
                        )
                        :((payType==="online" && factorDay)?
                         <Link id="payOnlineForm" to={payUrl} target={"_blank"}>
-                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled}> <FontAwesomeIcon icon={faCheckCircle}/> ارسال فاکتور</button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 online p-2 continueBtn" disabled={isButtonDisabled}> <FontAwesomeIcon icon={faCheckCircle}/> ارسال فاکتور</button>
                         </Link>
                        :<Link to="#">
-                           <button type="button" className="btn btn-sm btn-danger mt-3 p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
+                           <button type="button" className="btn btn-sm btn-danger mt-3 nonofthem p-2 continueBtn" disabled={isButtonDisabled} onClick={()=>alert("تاریخ و نوعیت پرداخت را انتخاب کنید.")}> <FontAwesomeIcon icon={faCheckCircle} /> ارسال فاکتور</button>
                         </Link>
                         )
                        }

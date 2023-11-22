@@ -42,6 +42,7 @@ import ShowAllBrand from "./components/pages/ShowAllBrand";
 import JaliLogin from "./components/pages/JaliLogin";
 import { param } from "jquery";
 import AppGuide from "./components/appInfo/AppGuide";
+import StackTower from "./components/game/stackeTower/StackTower";
 
 function App() {
   const [byModal, setByModal] = useState(false);
@@ -130,6 +131,7 @@ function App() {
             param = {param =>({forLogin: param.forLogin, forUserName:param.forUserName, forUserPsn: param.forUserPsn, forboughtAmount:param.forboughtAmount, forRole:param.forRole})} 
             element={<JaliLogin />} />
           <Route path="/appGuid" element={<AppGuide />} />
+          <Route path="/stackTower" element ={<StackTower />} />
 
       </Routes>
     </>

@@ -38,37 +38,33 @@ export default function GamerList (){
             case 0:
                 prize = "نفر اول 300,000 تومان"
             break;
-
             case 1:
                 prize ="نفر دوم 200,000 تومان"
             break;
-
             case 2:
             prize = "نفر سوم 100,000 تومان"
             break;
-            
             default:
             prize = "";
         }
       return prize;
    }
  
-//add class to first, second and third gamer items
-   const addingId = (index) => {
-     let myClass="";
-     if(index === 0){
-        return "firstPerson";
-      }else {
-        if(index === 1){
-            return "secondPerson";
+  //add class to first, second and third gamer items
+    const addingId = (index) => {
+      let myClass="";
+      if(index === 0){
+          return "firstPerson";
+        }else {
+          if(index === 1){
+              return "secondPerson";
+          }
+          if(index === 2){
+              return "thirdPerson";
+          }
         }
-        if(index === 2){
-            return "thirdPerson";
-        }
-      }
-      return myClass;
-   }
-
+        return myClass;
+    }
 
     return (
      <>
@@ -92,7 +88,7 @@ export default function GamerList (){
               </div>
             )}
          </div>
-         <Link to='https://starfoods.ir/resources/assets/tower/index.html'>
+         <Link to='/stackTower' target="_blank">
            <button id="playButton" className="buttonGame">  ورود به بازی  <FontAwesomeIcon style={{marginBottom:"-3px"}} icon={faAngleLeft} /> </button>
          </Link>
       </div>

@@ -150,6 +150,7 @@ export default function ShoppingCart(props) {
               orderBYSSn: orderId
             }})
             .then((response) => {
+            
               renewCarts()
          })
       }

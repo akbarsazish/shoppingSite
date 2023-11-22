@@ -72,12 +72,7 @@ export default function GroupingItems(props) {
                 <img className="topLeft" src={starfood} alt="slider" />
                 {(element.Price4>0 & element.Amount>0) ? <span className="groupingTakhfif"> {parseInt(((element.Price4-element.Price3)*100)/element.Price4)}%</span>: ''}
                 <Link to={"/descKala/"+element.GoodSn+"/"+id} className="groupingItemLink">
-                    <img
-                        className="groupingItemsImg"
-                        src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"}
-                        onError={(e) => { e.target.src = starfood; }}
-                        alt="slider"
-                    />
+                    <img className="groupingItemsImg" src={"https://starfoods.ir/resources/assets/images/kala/" + element.GoodSn + "_1.jpg"} onError={(e) => { e.target.src = starfood; }} alt="slider" />
                 </Link>
 
                 <Link to={"/descKala/"+element.GoodSn+"/"+id} className="groupingItemTitleLink">

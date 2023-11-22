@@ -33,7 +33,7 @@ function DailyEmtyaz() {
        params: {psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0], bonus:todayInputValue.split("_")[1] },
      }).then((data) => {
       console.log("searching ispresent", data)
-      //  window.location.reload();
+      window.location.reload();
   });
  }
 
