@@ -68,8 +68,6 @@ export default function Shiping(props) {
         })
     },[]);
 
-    
-
     useEffect(() => {
         axios.get('https://starfoods.ir/api/getPaymentFormApi', {
           params: { psn: localStorage.getItem("psn"),allMoney:allMoney }

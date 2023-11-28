@@ -68,8 +68,8 @@ function DailyEmtyaz() {
         if(i==6 && starfoodStarInfo.Seventh===today){
           todayClass='current-day'
         }
-        const dayNumber = i + 1;
-        const y = `${currentDay}`;
+        // const dayNumber = i + 1;
+        // const y = `${currentDay}`;
 
         return (
           <div className="week-day" key={i}>

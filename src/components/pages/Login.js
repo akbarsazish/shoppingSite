@@ -21,7 +21,6 @@ export default function Login(props) {
     const [loginInput, setLogin] = useState({ email: '',  password: '',  error_list: [],});
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-
     const hideModal=()=>{
         deviceDialog.close("animalNotChosen");
     }
@@ -53,17 +52,12 @@ export default function Login(props) {
                             <td>{element.platform}</td>
                             <td>{element.browser}</td>
                             <td>
-                                <input
-                                    style={{ width: "28px", height: "28px" }}
-                                    className="select-to-logout"
-                                    type="radio"
+                            <input style={{ width: "28px", height: "28px" }} className="select-to-logout" type="radio" name="removeDevice"
                                     onChange={() => {
                                         setUserToken(element.sessionId);
                                         setCustomerId(element.customerId);
                                         setIsButtonDisabled(false);
-                                    }}
-                                    name="removeDevice"
-                                />
+                            }}/>
                             </td>
                         </tr>
                     )));
@@ -93,7 +87,6 @@ export default function Login(props) {
             })
             .catch(error => {
                 console.error("An error occurred during login:", error);
-                // Handle error cases here
             });
     };
     
@@ -153,13 +146,11 @@ export default function Login(props) {
     
       useEffect(() => {
         const intervalId = setInterval(createBubble, 1000);
-    
         return () => {
           clearInterval(intervalId);
         };
       }, []);
 
-  
 // loginWaper loginEnter
     return (
         <>

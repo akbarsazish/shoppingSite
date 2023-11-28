@@ -2692,6 +2692,10 @@ ul li a.active {
   display: none !important;
 }
 
+#wheel {
+  text-align: center !important;
+}
+
 #luckyWheel {
   position: relative;
   height: 566px;

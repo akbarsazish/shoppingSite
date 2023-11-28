@@ -7,8 +7,6 @@ import Footer from "../genrealComponent/Footer";
 import DailyEmtyaz from "../lottery/DailyEmtyaz";
 import LuckyCode from "../lottery/LuckyCode";
 
-
-
 export default function Lottery() {
   const [bonus, setBonus] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -52,7 +50,6 @@ export default function Lottery() {
     <Header />
     <Sidebar />
      <div className="container marginTop border mb-5">
-      
         <Instruction mybonus={bonus.allBonus} />
         <LuckyCode mybonus={parseInt(bonus.allBonus)} minBonus={parseInt(bonus.lotteryMinBonus)} />
         <DailyEmtyaz />

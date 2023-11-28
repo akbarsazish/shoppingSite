@@ -1,13 +1,11 @@
 import React, { useState, useEffect} from 'react';
-import WheelComponent from 'react-wheel-of-prizes';
+import WheelComponent from './LuckyWheel';
 import axios from 'axios';
 import sound from '../../assets/lottery/applause.mp3'
-import wheel from '../../assets/lottery/wheel.mp3';
 import Swal from 'sweetalert2';
 
-export default function LuckyTest(mybonus) {
+export default function LuckyCode(mybonus) {
   const audio = new Audio(sound);
-  const wheelAudio = new Audio(wheel);
   const [wonPrize, setWinner] = useState();
   const [lotteryResult, setLotteryResult] = useState(false);
   const [wheelChoices, setWheelChoices] = useState([]);
@@ -88,6 +86,8 @@ export default function LuckyTest(mybonus) {
       : null;
   };
 
+
+
   return (
     <div id="luckyWheel" className="lucky-wheel">
       {loading ? ( <p>لطفا منتظر باشید! ...</p> ) : (
@@ -100,9 +100,9 @@ export default function LuckyTest(mybonus) {
           contrastColor="white"
           buttonText="چرخش"
           isOnlyOnce={false}
-          size={270}
-          upDuration={500}
-          downDuration={800}
+          size={260}
+          upDuration={300}
+          downDuration={400}
         />
       )}
 

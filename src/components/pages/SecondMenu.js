@@ -8,6 +8,7 @@ import star from '../../assets/images/siteImage/star.png';
 export default function SecondMenu() {
 
   const [attractions, setAttractions] = useState([]);
+ 
   const todayDate = new Date().toISOString().slice(0, 10);
   let visitedDate = attractions.ViewJustDate;
   let visitMoneyCase = attractions.MoneyCase;

@@ -95,9 +95,7 @@ function StackTower() {
             fallingBox.z = topBox.z;
             fallingBox.depth = prevBox.depth;
         }
-        const delta = Math.abs(prevBox[direction] - topBox[direction]).toFixed(
-            2
-        );
+        const delta = Math.abs(prevBox[direction] - topBox[direction]).toFixed(2);
         const overlap = prevBox[checkSize] - delta;
 
         if (overlap <= 0) {

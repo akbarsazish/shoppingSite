@@ -24,9 +24,9 @@ export default function GamerList (){
  
   useEffect(() => {
       axios.get("https://starfoods.ir/api/getGamerList", {
-      params: { gameId: 2, psn: localStorage.getItem("psn") }
+      params: { gameId: 3, psn: localStorage.getItem("psn") }
       }).then((response) => {
-          setGamerLest(response.data);
+        setGamerLest(response.data);
       }).catch((error) => {
       console.error("Error fetching data:", error);
       });
