@@ -38,7 +38,9 @@ export default function Login(props) {
         const data = {
             email: loginInput.email,
             password: loginInput.password,
-            token: localStorage.getItem("isLogedIn")
+            token: localStorage.getItem("isLogedIn"),
+            browser:'',
+            isAndroid:0
         };
     
         axios.get("https://starfoods.ir/api/loginApi", { params: data })
@@ -111,6 +113,8 @@ export default function Login(props) {
             customerId:customerId,
             token:userToken,
             isAndroid:0,
+            exitterToken:localStorage.getItem("isLogedIn"),
+            browser:''
         }}).then(res => {
             localStorage.setItem("isLogedIn",res.data.token);
             localStorage.setItem('userName', res.data.username);
