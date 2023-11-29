@@ -9,7 +9,6 @@ const WheelComponent = ({segments, segColors,
 
   const wheelAudio = new Audio(wheel);
    
-
   let currentSegment = ''
   let isStarted = false
   const [isFinished, setFinished] = useState(false)
@@ -23,8 +22,8 @@ const WheelComponent = ({segments, segColors,
   const downTime = segments.length * downDuration
   let spinStart = 0
   let frames = 0
-  const centerX = 250
-  const centerY = 250
+  const centerX = 300
+  const centerY = 300
   useEffect(() => {
     wheelInit()
     setTimeout(() => {
@@ -38,14 +37,20 @@ const WheelComponent = ({segments, segColors,
 
   const initCanvas = () => {
     let canvas = document.getElementById('canvas')
-    console.log(navigator)
+ 
     if (navigator.userAgent.indexOf('MSIE') !== -1) {
       canvas = document.createElement('canvas')
-      canvas.setAttribute('width', 500)
-      canvas.setAttribute('height', 500)
+      canvas.setAttribute('width', 555)
+      canvas.setAttribute('height', 555)
       canvas.setAttribute('id', 'canvas')
       document.getElementById('wheel').appendChild(canvas)
     }
+
+    canvas.addEventListener('click', handleCanvasClick, false);
+
+    // Add touch event handling for mobile devices
+    canvas.addEventListener('touchend', handleCanvasClick, { passive: false });
+
     // canvas.addEventListener('click', spin, false)
     canvasContext = canvas.getContext('2d')
   }
@@ -101,7 +106,7 @@ const WheelComponent = ({segments, segColors,
       angleDelta = 0
        if (wheelAudio) {
         wheelAudio.pause();
-        wheelAudio.currentTime = 0; // Reset audio to the beginning
+        wheelAudio.currentTime = 0;
       }
     }
   }
@@ -192,11 +197,31 @@ const WheelComponent = ({segments, segColors,
     ctx.strokeStyle = primaryColor
     ctx.stroke()
   }
+
+
   const handleCanvasClick = (event) => {
-    // Calculate the distance from the click point to the center of the circle
-    const distance = Math.sqrt(
-      Math.pow(event.offsetX - centerX, 2) + Math.pow(event.offsetY - centerY, 2)
-    );
+    // Prevent the default action to avoid unexpected behavior
+    event.preventDefault();
+  
+    const rect = event.target.getBoundingClientRect();
+    let clickX, clickY;
+  
+    if (event.type === 'touchend') {
+      // For touch events, use the first touch point
+      const touch = event.changedTouches[0];
+      clickX = touch.clientX - rect.left;
+      clickY = touch.clientY - rect.top;
+    } else {
+      // For click events, use clientX and clientY directly
+      clickX = event.clientX - rect.left;
+      clickY = event.clientY - rect.top;
+    }
+  
+    // Dynamically calculate the center based on canvas size
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+  
+    const distance = Math.sqrt(Math.pow(clickX - centerX, 2) + Math.pow(clickY - centerY, 2));
   
     // If the click is within the center circle, call the spin function
     if (distance <= 50) {
@@ -233,10 +258,10 @@ const WheelComponent = ({segments, segColors,
     ctx.clearRect(0, 0, 1000, 800)
   }
   return (
-    <div id='wheel' style={{textAlign:"center"}}>
-      <canvas id='canvas' width='500' height='500'
+    <div id='wheel' style={{textAlign:"center" }}>
+      <canvas id='canvas' width='600' height='600'
         style={{
-          pointerEvents: isFinished && isOnlyOnce ? 'none' : 'auto', backgroundColor:"red"
+          pointerEvents: isFinished && isOnlyOnce ? 'none' : 'auto'
         }}
       />
     </div>

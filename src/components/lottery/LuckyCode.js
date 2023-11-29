@@ -28,7 +28,7 @@ export default function LuckyCode(mybonus) {
         const response = await axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
           params: { psn: localStorage.getItem('psn') },
         });
-
+  
         const products = response.data.products;
         if (products && products.length > 0) {
           const preciousPrizeToExclude = products[0].fourthPrize.trim();
@@ -41,20 +41,29 @@ export default function LuckyCode(mybonus) {
             products[0].sixthPrize.trim(),
             products[0].seventhPrize.trim(),
             products[0].eightthPrize.trim(),
-            products[0].teenthPrize.trim()
-         ].filter(prize => prize !== preciousPrizeToExclude);
+            products[0].teenthPrize.trim(),
+            products[0].eleventhPrize.trim(),
+            products[0].twelvthPrize.trim(),
+            products[0].therteenthPrize.trim(),
+            products[0].fourteenthPrize.trim(),
+            products[0].fifteenthPrize.trim(),
+            products[0].sixteenthPrize.trim(),
+          ].filter(prize => prize !== preciousPrizeToExclude && prize.trim() !== "");
+  
           setWheelChoices(choices);
         }
       } catch (error) {
-         console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);
       } finally {
-         setLoading(false);
+        setLoading(false);
       }
     };
-
+  
     fetchData();
+  }, [wonPrize, lotteryResult]);
 
-}, [wonPrize, lotteryResult]);
+  
+
 
   let setLotteryHistory = () =>{
     if (wonPrize && myBonus >= 500) {
@@ -85,8 +94,6 @@ export default function LuckyCode(mybonus) {
       ? wheelChoices[Math.floor(Math.random() * wheelChoices.length)]
       : null;
   };
-
-
 
   return (
     <div id="luckyWheel" className="lucky-wheel">

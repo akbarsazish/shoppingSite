@@ -21,24 +21,43 @@ function DailyEmtyaz() {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
+      console.log(data.data.presentInfo[0])
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
     })
 }, []);
 
- function checkCheckboxPresent() {
-    setIsChecked(!isChecked);
-   let todayInputValue=document.getElementById("todayInput").value;
-     axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
-       params: {psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0], bonus:todayInputValue.split("_")[1] },
-     }).then((data) => {
-      console.log("searching ispresent", data)
+//  function checkCheckboxPresent() {
+//     setIsChecked(!isChecked);
+//    let todayInputValue=document.getElementById("todayInput").value;
+//      axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
+//        params: {psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0], bonus:todayInputValue.split("_")[1] },
+//      }).then((data) => {
+//       console.log("searching ispresent", data)
+//       window.location.reload();
+//   });
+//  }
+
+function checkCheckboxPresent() {
+  setIsChecked(!isChecked);
+  let todayInput = document.getElementById("todayInput");
+
+  if (todayInput) {
+    let todayInputValue = todayInput.value;
+
+    axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
+      params: { psn: localStorage.getItem('psn'), dayPr: todayInputValue.split("_")[0], bonus: todayInputValue.split("_")[1] },
+    }).then((data) => {
+      console.log("searching ispresent", data);
       window.location.reload();
-  });
- }
+    });
+  }else {
+    console.log("input value is empty ")
+  }
+}
 
   return (
-    <section className="row weekly-calendar-container my-3" id="weely-calendar">
+    <section className="row weekly-calendar-container mb-5" id="weely-calendar">
       <div className="row">
           <div className="col-lg-12 p-4">
             <h3 className='dialy-credit'>  امتیاز روزانه </h3>
@@ -74,7 +93,7 @@ function DailyEmtyaz() {
         return (
           <div className="week-day" key={i}>
             <div className={"day-content "+todayClass}>
-              <div className="top">{i===0?starfoodStarInfo.FirstB:(i==1?starfoodStarInfo.SecondB:(i==2?starfoodStarInfo.ThirdB:(i==3?starfoodStarInfo.FourthB:(i==4?starfoodStarInfo.FifthB:(i==5?starfoodStarInfo.SixthB:(i==6?starfoodStarInfo.SeventhB:5))))))}</div>
+              <div className="top">{i==0?starfoodStarInfo.FirstB:(i==1?starfoodStarInfo.SecondB:(i==2?starfoodStarInfo.ThirdB:(i==3?starfoodStarInfo.FourthB:(i==4?starfoodStarInfo.FifthB:(i==5?starfoodStarInfo.SixthB:(i==6?starfoodStarInfo.SeventhB:5))))))}</div>
                 <div className="daily-bottom">
                   {i==0?(i==0 && starfoodStarInfo.FirstPr==1  ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
                   {i==1?(i==1 && starfoodStarInfo.SecondPr==1 ? <FontAwesomeIcon icon={faCalendarCheck} className="text-success calendar-check"/> : <FontAwesomeIcon icon={faCalendarTimes} className="text-danger crossIcon"/>) : ''}
@@ -93,7 +112,7 @@ function DailyEmtyaz() {
                 {i==2?(i==2 && starfoodStarInfo.Third == today ?'امروز':'روز'+(i+1)):''}
                 {i==3?(i==3 && starfoodStarInfo.Fourth == today  ?'امروز':'روز'+(i+1)):''}
                 {i==4?(i==4 && starfoodStarInfo.Fifth == today  ?'امروز':'روز'+(i+1)):''}
-                {i==5?(i==5 && starfoodStarInfo.Sixth == today?'امروز':'روز'+(i+1)):''}
+                {i==5?(i==5 && starfoodStarInfo.Sixth == today ?'امروز':'روز'+(i+1)):''}
                 {i==6?(i==6 && starfoodStarInfo.Seventh == today ?'امروز':'روز'+(i+1)):''}
             </p>
 

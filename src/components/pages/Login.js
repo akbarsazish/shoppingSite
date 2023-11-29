@@ -45,6 +45,7 @@ export default function Login(props) {
     
         axios.get("https://starfoods.ir/api/loginApi", { params: data })
             .then(res => {
+                console.log(res.data)
                 if (res.data.loginInfo && res.data.loginInfo.length > 0) {
                     setUserToken(res.data.token);
                     localStorage.setItem("isLogedIn", res.data.token);
