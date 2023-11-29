@@ -8,57 +8,32 @@ import profile from "../../assets/images/profile.png"
 import boy from "../../assets/images/boy.png"
 import axios from "axios";
 export default function Message() {
-    const[messages,setMessages]=useState("");
+    const[messages,setMessages]=useState([]);
     const[newMessage,setNewMessage]=useState("");
+
     const addNewMessage=()=>{
         setNewMessage(newMessage);
+        setMessages([])
         document.getElementById("messageTextArea").value="";
         axios.get("https://starfoods.ir/api/doAddMessage",{params:{
             pmContent:newMessage,
             psn:localStorage.getItem("psn")
         }}).then((data)=>{
-            if(data.data==="good"){
-                axios.get("https://starfoods.ir/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
-                <>
-                    <br/>
-                    <span className="messageContentSender">
-                        <img className="profilePic" alt="عکس یوزر" src={boy} />
-                        <span className="messageText"> <span className="messageDate"> {new Date(message.messageDate).toLocaleString('fa-IR')} </span> {message.messageContent} </span>
-                    </span>
-                    <br/>
-                    {message.replay.map((replay)=>
-                    <>
-                        <br/>
-                        <span className="messageContentRecevier">
-                        <img className="profilePic" alt="عکس یوزر" src={profile} />
-                        <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
-                        </span>
-                        <br/><br/>
-                    </>)}
-            </>))}
-            )}
-        })
+            axios.get("https://starfoods.ir/api/messageList",{params:{psn:localStorage.getItem("psn")}}
+            ).then((data)=>{
+                setMessages(data.data.messages)
+            }
+        )}
+      )
     }
-    useEffect(()=>{
-        axios.get("https://starfoods.ir/api/messageList",{params:{psn:localStorage.getItem("psn")}}).then((data)=>{setMessages(data.data.messages.map((message)=> 
-        <><br/>
-            <span className="messageContentSender">
-                <img className="profilePic" alt="عکس یوزر" src={boy} />
-                <span className="messageText"> <span className="messageDate"> {new Date(message.messageDate).toLocaleString('fa-IR')} </span> {message.messageContent} </span>
-            </span>
-            <br/>
-            {message.replay.map((replay)=>
-              <><br/><span className="messageContentRecevier">
-                    <img className="profilePic" alt="عکس یوزر" src={profile} />
-                    <span className="messageText"> <span className="messageDate"> {new Date(replay.replayDate).toLocaleString('fa-IR')} </span> {replay.replayContent} </span>
-                    </span><br/><br/>
-             </>)}
-        </>   
-        ))
 
-        }
-        )
-    },[])
+    useEffect(()=>{
+        axios.get("https://starfoods.ir/api/messageList",{
+            params:{psn:localStorage.getItem("psn")}}
+          ).then((data)=>{
+            setMessages(data.data.messages)
+         })
+    },[]);
 
     if(localStorage.getItem("isLogedIn")){
         return (
@@ -67,18 +42,41 @@ export default function Message() {
                 <Sidebar />
                 <div className="container marginTop">
                     <div className="messageHeader text-center mt-2">
-                        <h6 className="messageTitle">
+                        <h6 className="messageTitle" style={{transform: "rotate(-4deg)"}}>
                             با پیام ها خود ما را در ارائه بهتر خدمات یاری رسانید <FontAwesomeIcon style={{ color: "red", fontSize: "22px" }} icon={faHandshake} />
                         </h6>
                     </div>
                     <div className="messageBody">
-                        <div className="messageContent">
-                            {messages}
-                        </div>
-                    </div>
+                          {messages.map((message, index)=> 
+                            <div className="row messageContent">
+                                <div className="messageContentSender" key={index}>
+                                    <img className="profilePic" alt="عکس یوزر" src={boy} />
+                                    <span className="messageText"> 
+                                      {message.messageContent}
+                                      <span className="messageDate">
+                                        {new Date(message.messageDate).toLocaleString('fa-IR')}
+                                      </span>
+                                        
+                                    </span>
+                                </div> 
+                            {message.replay.map((replay, index)=>
+                                <div className="messageContentRecevier" key={index}>
+                                    <img className="profilePic" alt="عکس یوزر" src={profile} />
+                                    <span className="messageText">
+                                       {replay.replayContent} &
+                                       <span className="messageDate">
+                                         {new Date(replay.replayDate).toLocaleString('fa-IR')}
+                                        </span>
+                                        
+                                    </span>
+                                </div> 
+                              )}
+                            </div>   
+                          )}
+                    </div> 
                     <div className="messageFooter">
-                        <div class="mb-3">
-                            <textarea class="form-control h-25" id="messageTextArea" onKeyUp={(event)=>setNewMessage(event.target.value)} rows="3" placeholder="متن پیام خود را بنویسید!"></textarea>
+                        <div className="mb-3">
+                            <textarea className="form-control h-25" id="messageTextArea" onKeyUp={(event)=>setNewMessage(event.target.value)} rows="3" placeholder="متن پیام خود را بنویسید!"></textarea>
                         </div>
                         <button className="btn btn-sm btn-primary" onClick={()=>addNewMessage()}> ارسال پیام <FontAwesomeIcon icon={faMessage} /> </button>
                     </div>

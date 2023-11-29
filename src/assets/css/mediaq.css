@@ -26,7 +26,7 @@
 @media (max-width: 920px) {
     .cartNotification {
         top: 1%;
-        left: 18%;
+        left: 10%;
     }
 }
 
@@ -42,9 +42,9 @@
     }
 
     .groupingPartItem {
-        flex-basis: 30%;
+      flex-basis: 30%;
+      height: 9rem;
     }
-
 
     .groupingTitle {
         font-size: 10px;
@@ -80,8 +80,6 @@
         max-width: 47%;
         flex-basis: 47%;
     }
-
-
 }
 
 @media (max-width: 920px) {
@@ -94,17 +92,17 @@
         flex: 99%;
         max-width: 99%;
     }
-
+    
     .shoppingLeft {
         border: 1px solid red;
         padding: 3px;
         border-radius: 8px;
         position: fixed;
-        bottom: 42px;
+        bottom: 44px;
         background-color: aliceblue;
         flex: 99%;
         max-width: 99%;
-        width: 84%;
+        width: 88%;
         align-self: center;
     }
 
@@ -112,7 +110,6 @@
         display: flex;
         flex: 98%;
         max-width: 98%;
-
     }
 
     .yourBenefit {
@@ -237,4 +234,81 @@
         margin: 3px;
         gap: 3px;
      }
+
+     .contactList {
+        font-size:11px;
+    }
+}
+
+@media (max-width: 768px) { 
+    .messageBody {
+      height: 66vh;
+      width: 100%;
+      padding: 5px;
+    }
+
+    .messageFooter {
+        width: 92%;
+        bottom: 60px;
+    }
+
+    .live-chat {
+        width: 93.5%;
+     }
+
+    .mainSlider-right {
+        width: 100%;
+    }
+    .mainSlider-left {
+      width: 100%;
+    }
+
+    div.price {
+      height: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .shegoftAngizFirstItem {
+        width: 44% !important;
+      }
+
+    .search-container {
+        width: 18rem;
+        right: 21%;
+        top: 7%;
+    }
+
+    .get-emtyaz {
+        grid-template-columns: auto ;
+        text-align: center;
+      }
+
+    .get-emtyaz::before {
+        bottom: 0;
+        right: 50%;
+        width: 50%;
+        height: 0;
+    }
+
+    .get-emtyaz::after {
+        top: 10;
+        left: 0;
+        width: 2px;
+        height: 98%;
+    }
+
+    .brandImageAnchor {
+        height: 177px;
+        width: 177px !important;
+    }
+
+    #luckyWheel {
+        position: relative;
+        height: 280px;
+    }
+
+    
+#wheel canvas {
+    width: 444px;
+  }
 }

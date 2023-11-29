@@ -1,6 +1,7 @@
 {
-  "short_name": "Starfoods",
-  "name": "starfoods shopping site",
+  "short_name": "استارفود",
+  "name": "آپلیشکن استارفود",
+  "description": "استارفود را نصب کنید تا دسترسی آسان داشته باشید!",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +9,13 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "starfoods.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose":"any maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "starfoods.png",
       "type": "image/png",
       "sizes": "512x512"
     }

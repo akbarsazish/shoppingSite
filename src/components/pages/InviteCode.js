@@ -44,7 +44,7 @@ export default function InviteCode() {
     <>
     <Header />
     <Sidebar />
-    <div className="container marginTop p-2 rounded">
+    <div className="container marginTop p-2 rounded mb-4">
       <div className="row">
         <div className="col-lg-12 invite-code-div">
           <div className="row">

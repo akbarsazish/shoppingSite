@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 export default function Grouping(props) {
-    if(localStorage.getItem("isLogedIn")){
+  if(localStorage.getItem("isLogedIn")){
         return (
             <>
             <li className="groupingPartItem shadow">
@@ -11,8 +12,8 @@ export default function Grouping(props) {
                 <Link to={"/groupingItems/"+props.id} className="groupingTitleLink"> <p className="groupingTitle"> {props.title} </p> </Link>
             </li>
             </>
-        )
-        }else{
-            window.location.href="/login"
-        }
+          )
+    }else{
+        window.location.href="/login"
+    }
 }

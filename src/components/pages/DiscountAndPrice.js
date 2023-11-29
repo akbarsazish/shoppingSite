@@ -33,7 +33,7 @@ export default function DiscountAndPrice() {
       setCopiedIndex(null);
     }, 1000);
   };
-  
+
     return (
     <>
     <Header />
@@ -73,7 +73,6 @@ export default function DiscountAndPrice() {
               <p className="award-description"> 
                 <FontAwesomeIcon className="text-danger ms-2" icon={faSquareCaretLeft} />  ندارید! </p>
             </div>
-
               <div className="award-container-item" >
                 <h6> جوایز لاتری </h6>   
                 { yourPrizes.map((element,index)=>
@@ -87,7 +86,6 @@ export default function DiscountAndPrice() {
                    </span>)
                   }
               </div>
-
             <div className="award-container-item">
               <h6> تخفیف ها </h6>
               { discount.takhfifCodes.map((takhfifData, index)=> (
@@ -103,7 +101,6 @@ export default function DiscountAndPrice() {
       </div>
     </div>
     </div>
-   
     <Footer />
     </>
   )

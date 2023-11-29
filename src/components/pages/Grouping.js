@@ -22,7 +22,7 @@ export default function Grouping() {
                     <ul className="groupingPart">
                         {mainGroups}
                     </ul >
-                </div >
+                </div>
                 <Footer />
             </>
         )
