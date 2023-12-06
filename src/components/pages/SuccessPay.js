@@ -33,7 +33,7 @@ export default function SuccessPay() {
             ,allMoney:localStorage.getItem("allMoney")
         }})
         .then((response)=>{
-            if(response.data.result == "OK"){
+            if(response.data.result === "OK"){
                 localStorage.setItem("recivedTime","");
                 localStorage.setItem("takhfif",0);
                 localStorage.setItem("takhfifCode","");

@@ -8,13 +8,6 @@ import star from '../../assets/images/siteImage/star.png';
 export default function SecondMenu() {
 
   const [attractions, setAttractions] = useState([]);
- 
-  const todayDate = new Date().toISOString().slice(0, 10);
-  let visitedDate = attractions.ViewJustDate;
-  let visitMoneyCase = attractions.MoneyCase;
-  let visitGame = attractions.Game;
-  let visitDiscount = attractions.Discount;
-  let visitStar = attractions.StarfoodStar;
   let customerId = localStorage.getItem("psn");
 
   useEffect(() => {
@@ -25,6 +18,13 @@ export default function SecondMenu() {
       });
   }, []);
 
+  const todayDate = new Date().toISOString().slice(0, 10);
+  let visitedDate = attractions.ViewJustDate;
+  let visitMoneyCase = attractions.MoneyCase;
+  let visitGame = attractions.Game;
+  let visitDiscount = attractions.Discount;
+  let visitStar = attractions.StarfoodStar;
+ 
 
   return (
     <div className="round-menu">

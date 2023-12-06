@@ -150,6 +150,7 @@ const calculateTakhfifCode=()=>{
     }
 }
 
+
 if(localStorage.getItem("isLogedIn")){
     return (
         <>
@@ -164,7 +165,7 @@ if(localStorage.getItem("isLogedIn")){
                             </div>
                             <div className="col-10">
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" htmlFor="dayOneMorining">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="dayOneMorining"> 
                                         {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color:"orange", fontSize:"18px"}} icon={faSun} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={tomorrowDate} 
                                         onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0);}} 
@@ -185,23 +186,23 @@ if(localStorage.getItem("isLogedIn")){
                     <div className="shippingPart">
                         <div className="row">
                             <div className="col-lg-2 col-2">
-                                <p className="weekDay"> {weekDay2}  </p>
+                                <p className="weekDay"> {weekDay2} </p>
                             </div>
                             <div className="col-lg-10 col-10">
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" htmlFor="flexRadioDefault1">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="secondDay">
                                        {moorningTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "orange", fontSize: "18px"}} icon={faSun} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} 
                                         onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("1,"+e.target.value); setFastFactor(0);}} 
-                                        type="radio" name="factorDay" id="flexRadioDefault1" />
+                                        type="radio" name="factorDay" id="secondDay1" />
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <label className="form-check-label text-start timeLabel" htmlFor="flexRadioDefault1">
+                                    <label className="form-check-label text-start timeLabel" htmlFor="secondDay">
                                        {afternoonTimeContent} &nbsp; <FontAwesomeIcon style={{ color: "green", marginTop: "5px", fontSize: "18px" }} icon={faMoon} />
                                         <input className="form-check-input float-end mx-3 customRadio" value={afteromorrowDate} 
-                                        onChange={(e)=>{setFactorDay(true);setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}} 
-                                        type="radio" name="factorDay"  />
+                                        onChange={(e)=>{setFactorDay(true);  setSelectedFactorDate("2,"+e.target.value); setFastFactor(0);}} 
+                                        type="radio" name="factorDay"  id="secondDay2" />
                                     </label>
                                 </div>
                             </div>

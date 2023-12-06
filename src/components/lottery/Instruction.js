@@ -14,17 +14,17 @@ export default function Instruction(props) {
                    <div className="get-emtyaz">
                        <div className="get-emtyaz-items">
                           <span className="get-tmtyaz-item"> 10,000,000 </span>
-                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
+                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" alt="your-star" src={yourStar} /> </span>
                           <span className="get-tmtyaz-item"> 70 ستاره </span>
                        </div>
                        <div className="get-emtyaz-items">
                           <span className="get-tmtyaz-item"> 20,000,000 </span>
-                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
+                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" alt="your-star" src={yourStar} /> </span>
                           <span className="get-tmtyaz-item"> 150 ستاره </span>
                        </div>
                        <div className="get-emtyaz-items">
                           <span className="get-tmtyaz-item"> 50,000,000 </span>
-                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" src={yourStar} /> </span>
+                          <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" alt="your-star" src={yourStar} /> </span>
                           <span className="get-tmtyaz-item"> 300 ستاره </span>
                        </div>
                        <h6 class="me-3 mt-0"> ستاره دریافت نمایید! </h6>

@@ -57,7 +57,7 @@ function checkCheckboxPresent() {
 }
 
   return (
-    <section className="row weekly-calendar-container mb-5" id="weely-calendar">
+    <section className="row weekly-calendar-container" id="weely-calendar">
       <div className="row">
           <div className="col-lg-12 p-4">
             <h3 className='dialy-credit'>  امتیاز روزانه </h3>
@@ -87,8 +87,7 @@ function checkCheckboxPresent() {
         if(i==6 && starfoodStarInfo.Seventh===today){
           todayClass='current-day'
         }
-        // const dayNumber = i + 1;
-        // const y = `${currentDay}`;
+
 
         return (
           <div className="week-day" key={i}>
@@ -134,7 +133,6 @@ function checkCheckboxPresent() {
           <button className="btn btn-info" id="receivedEmtyaz" onClick={checkCheckboxPresent}> دریافت امتیاز</button>
         </div>
     </div>
-    
   </section>
   );
 }

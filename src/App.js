@@ -40,7 +40,6 @@ import GetAllKala from "./components/pages/GetAllKala";
 import ShowAllKala from "./components/pages/ShowAllKala";
 import ShowAllBrand from "./components/pages/ShowAllBrand";
 import JaliLogin from "./components/pages/JaliLogin";
-import { param } from "jquery";
 import AppGuide from "./components/appInfo/AppGuide";
 import StackTower from "./components/game/stackeTower/StackTower";
 

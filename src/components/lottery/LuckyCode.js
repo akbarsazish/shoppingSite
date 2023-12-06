@@ -31,7 +31,7 @@ export default function LuckyCode(mybonus) {
   
         const products = response.data.products;
         if (products && products.length > 0) {
-          const preciousPrizeToExclude = products[0].fourthPrize.trim();
+          // const preciousPrizeToExclude = products[0].fourthPrize.trim();
           const choices = [
             products[0].firstPrize.trim(),
             products[0].secondPrize.trim(),
@@ -48,7 +48,7 @@ export default function LuckyCode(mybonus) {
             products[0].fourteenthPrize.trim(),
             products[0].fifteenthPrize.trim(),
             products[0].sixteenthPrize.trim(),
-          ].filter(prize => prize !== preciousPrizeToExclude && prize.trim() !== "");
+          ].filter(prize => prize.trim() !== "");
   
           setWheelChoices(choices);
         }
@@ -63,8 +63,6 @@ export default function LuckyCode(mybonus) {
   }, [wonPrize, lotteryResult]);
 
   
-
-
   let setLotteryHistory = () =>{
     if (wonPrize && myBonus >= 500) {
         let newBonus = myBonus - 500;

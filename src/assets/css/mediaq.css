@@ -307,8 +307,11 @@
         height: 280px;
     }
 
-    
-#wheel canvas {
-    width: 444px;
+    #wheel canvas {
+        width: 444px;
+    }
+
+  #luckyWheel {
+    margin-bottom: 4rem;
   }
 }
