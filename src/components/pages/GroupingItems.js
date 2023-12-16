@@ -67,6 +67,7 @@ export default function GroupingItems(props) {
             mainGrId:id
         }})
         .then((data) => {
+            console.log("love to chekc the data", data.data.listKala);
             setMainGroupKala(data.data.listKala.map((element,index)=>
             <div key={index} className="groupingItem">
                 <img className="topLeft" src={starfood} alt="slider" />

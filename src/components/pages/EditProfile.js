@@ -47,6 +47,7 @@ export default function EditProfile() {
             email : document.getElementById("haqiqiEmail").value,
         }})
           .then((response) => {
+             console.log(response.data.exacHaqiqi);
               setHaqiqiCustomerInfo(response.data.exacHaqiqi);
               Swal.fire({
                 title: 'آیا معلومات ذخیره گردد؟',

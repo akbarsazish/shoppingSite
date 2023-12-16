@@ -17,7 +17,7 @@ const Header = ()=>{
     const [currentPage, setCurrentPage] = useState('home');
 
     const pageChange = (page) => {
-    setCurrentPage(page);
+       setCurrentPage(page);
     };
 
   const handleSearchIcon = () => {
@@ -99,6 +99,7 @@ if(localStorage.getItem("isLogedIn")){
                           placeholder="چی لازم داری ؟  ..."/>
                         )}
                 </div>
+                
                 <div className="flex-item-right mt-1 ps-0" id="headerStaff">
                     <Link className="headerLink" to="/shoppingCart" element={<ShoppingCart />} >
                         <FontAwesomeIcon className="faIcon mt-2" icon={faShoppingCart} /> &nbsp; 
