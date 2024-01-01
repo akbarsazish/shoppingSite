@@ -66,6 +66,7 @@ export default function SuccessPay() {
             setPaymentStat(response.data.result)
             });
         },[]);
+        
     return(
     <>
     <Header/>

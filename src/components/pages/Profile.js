@@ -1,4 +1,4 @@
-import { faEdit, faEye, faHeart, faHistory, faInfoCircle, faIdCard} from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faEye, faHeart, faHistory, faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -20,23 +20,9 @@ export default function Profile(props) {
     
     useEffect(() => {
         axios.get("https://starfoods.ir/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
-            setSendedFactors(data.data.factors.map((element, index) =>
-                <tr>
-                    <th>{index + 1}</th>
-                    <td>{element.FactNo}</td>
-                    <td>{new Date(element.timestamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
-                    <td>{element.FactDate}</td>
-                    <td> {parseInt(element.TotalPriceHDS / 10).toLocaleString()} </td>
-                    <td> <Link to="/factorDetails" style={{textDecoration:'none'}} onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > پرداخت </Link> </td>
-                    <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > <FontAwesomeIcon icon={faEye} />  </Link> </td></tr>))
-
-            setWaitingOrders(data.data.orders.map((element, index) =>
-                <tr><th>{index + 1}</th>
-                    <td>{element.OrderNo}</td>
-                    <td>{new Date(element.TimeStamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
-                    <td>{element.OrderDate}</td><td> {parseInt(element.Price / 10).toLocaleString()} </td>
-                    <td>  پرداخت در محل  </td>
-                    <td> <Link to="/orderDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SnOrder) }}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td></tr>))
+            console.log("check for is pay", data.data)
+            setSendedFactors(data.data)
+            setWaitingOrders(data.data)
             setCustomerName(data.data.profile.Name)
             setIntroducerCode(data.data.profile.selfIntroCode)
             setCustomerMobile((data.data.profile.PhoneStr.split("-"))[0])
@@ -90,7 +76,7 @@ export default function Profile(props) {
                         </div>
                         <div className="profileLeftPart card">
                                 <span className="tableTitle">فاکتور های ارسال شده </span>
-                            <table class="table table-bordered table-sm factorTable">
+                            <table className="table table-bordered table-sm factorTable">
                                 <thead className="tableHeader">
                                     <tr>
                                         <th> ردیف </th>
@@ -102,13 +88,23 @@ export default function Profile(props) {
                                         <th> جزئیات </th>
                                     </tr>
                                 </thead>
-                                <tbody style={{height:"5rem"}}>
-                                    {sendedFactors}
+                                <tbody>
+                                    {sendedFactors && sendedFactors.factors.map((element, index) =>(
+                                        <tr>
+                                            <th>{index + 1}</th>
+                                            <td>{element.FactNo}</td>
+                                            <td>{new Date(element.timestamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
+                                            <td>{element.FactDate}</td>
+                                            <td> {parseInt(element.TotalPriceHDS / 10).toLocaleString()} </td>
+                                            <td> <Link to="/factorDetails" style={{textDecoration:'none'}} onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > پرداخت </Link> </td>
+                                            <td> <Link to="/factorDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SerialNoHDS) }} > <FontAwesomeIcon icon={faEye} />  </Link> </td>
+                                        </tr>
+                                     ))}
                                 </tbody>
                             </table>
 
                             <h5 className="tableTitle"> فاکتور های در انتظار ارسال </h5>
-                            <table class="table table-bordered table-sm factorTable">
+                            <table className="table table-bordered table-sm factorTable">
                                 <thead className="tableHeader">
                                     <tr>
                                         <th> ردیف </th>
@@ -121,7 +117,15 @@ export default function Profile(props) {
                                     </tr>
                                 </thead>
                                 <tbody className="tableBody"style={{height:"5rem"}}>
-                                    {waitingOrders}
+                                  {waitingOrders && waitingOrders.orders.map((element, index) =>(
+                                    <tr><th>{index + 1}</th>
+                                        <td>{element.OrderNo}</td>
+                                        <td>{new Date(element.TimeStamp).toLocaleDateString('fa-IR-u-nu-latn')}</td>
+                                        <td>{element.OrderDate}</td><td> {parseInt(element.Price / 10).toLocaleString()} </td>
+                                        <td>  پرداخت در محل  </td>
+                                        <td> <Link to="/orderDetails" onClick={() => { localStorage.setItem("selectedHDS", element.SnOrder) }}> <FontAwesomeIcon icon={faEye} /> {element.orders} </Link> </td>
+                                    </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>

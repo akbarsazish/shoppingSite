@@ -159,7 +159,7 @@ export default function ChequeRequest(){
      <Header />
      <Sidebar />
 
-     { showForm == 0 ?
+    { showForm == 0 ?
     <>
      <div className="container marginTop">
         <div className="row my-4">

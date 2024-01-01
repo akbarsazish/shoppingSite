@@ -13,6 +13,7 @@ export default function FactorDetails() {
     const [factorItem, setFactorItem] = useState([]);
     const [allPrice, setAllPrice] = useState(0);
     const [payUrl, setPayUrl] = useState('');
+    const [paied, setPaied] = useState('');
   
     useEffect(() => {
       axios
@@ -22,6 +23,7 @@ export default function FactorDetails() {
             psn: localStorage.getItem('psn'),
           },
         }).then((data) => {
+          setPaied(data.data.isPayed)
           setFactorItem(
             data.data.factorBYS.map((element, index) => (
               <div className="factorDetailPart" key={index}>
@@ -46,6 +48,7 @@ export default function FactorDetails() {
             )
           );
         });
+        
     }, []);
   
     useEffect(() => {
@@ -58,6 +61,7 @@ export default function FactorDetails() {
             },
           })
           .then((data) => {
+            console.log("love js", data)
             setPayUrl(data.data);
           });
       }
@@ -98,9 +102,11 @@ if(localStorage.getItem("isLogedIn")){
                                     <button className="btn btn-sm btn-danger" onClick={() => navigate(-1)}> <FontAwesomeIcon icon={faHistory} /> بازگشت </button>
                                 </div>
                                 <div className="factor-details-item text-start">
-                                    <button onClick={clickToPay} className="btn btn-sm btn-danger" id="payOnlineForm">
-                                        <FontAwesomeIcon icon={faIdCard} /> پرداخت 
-                                    </button>
+                                  {
+                                    paied == "No" ?
+                                        <button onClick={clickToPay} className="btn btn-sm btn-danger" id="payOnlineForm"> <FontAwesomeIcon icon={faIdCard} /> پرداخت </button>
+                                    : "پرداخت شده "
+                                  }
                                 </div>
                             </div>
                         </div>

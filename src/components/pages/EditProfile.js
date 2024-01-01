@@ -47,7 +47,6 @@ export default function EditProfile() {
             email : document.getElementById("haqiqiEmail").value,
         }})
           .then((response) => {
-             console.log(response.data.exacHaqiqi);
               setHaqiqiCustomerInfo(response.data.exacHaqiqi);
               Swal.fire({
                 title: 'آیا معلومات ذخیره گردد؟',
@@ -64,7 +63,7 @@ export default function EditProfile() {
           })
           .catch((error) => {
               console.error('Error:', error);
-          });
+          }); 
       };
 
     // Hoqoqi customer 
@@ -135,7 +134,7 @@ if(localStorage.getItem("isLogedIn")){
         <Header />
         <Sidebar />
         <div className="container marginTop" style={{ borderRadius: "10px 10px 5px 5px" }}>
-          <div className="editProfile">
+          <div className="editProfile rounded border">
             <ul className="nav nav-tabs editProfileTab">
                 <li className="nav-item ">
                     <Link className={`nav-link tabLink ${activeTab === 0 ? 'active' : ''}`} onClick={() => handleSelect(0)} data-bs-toggle="tab" data-bs-target="#tab1">
