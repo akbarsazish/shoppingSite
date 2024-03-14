@@ -1,11 +1,10 @@
 import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
-import { faPhone, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faUser, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png"
 import gPlay from "../../assets/images/Gplay.png"
 import bazar from "../../assets/images/bazar.png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 import { useState } from "react";
@@ -46,7 +45,7 @@ export default function Login(props) {
     
         axios.get("https://starfoods.ir/api/loginApi", { params: data })
             .then(res => {
-                console.log(res.data)
+                console.log("looking for token", res.data)
                 if (res.data.loginInfo && res.data.loginInfo.length > 0) {
                     setUserToken(res.data.token);
                     localStorage.setItem("isLogedIn", res.data.token);
@@ -118,6 +117,7 @@ export default function Login(props) {
             exitterToken:localStorage.getItem("isLogedIn"),
             browser:''
         }}).then(res => {
+            console.log("confirm logout", res.data)
             localStorage.setItem("isLogedIn",res.data.token);
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);

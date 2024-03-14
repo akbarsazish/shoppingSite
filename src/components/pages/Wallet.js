@@ -71,10 +71,19 @@ export default function Wallet() {
                             </div>
                             <div className="mt-4 p-4" id="useWallet" style={{ boxShadow: "0 2px 4px 0 #f50303cc", borderRadius: "5px" }}>
                                 <p className="explain"> استفاده از کیف پول منوط به پرداخت آنلاین می باشد. </p>
-                                <Link type="button" onClick={() => setYesNo(!yesNo)} className="btn btn-sm btn-success" > استفاده از کیف پول <FontAwesomeIcon icon={faCheckCircle} /> </Link>
+                                <Link 
+                                    type="button"
+                                    onClick={() => setYesNo(!yesNo)}
+                                    className="btn btn-sm btn-success"
+                                > 
+                                   استفاده از کیف پول <FontAwesomeIcon icon={faCheckCircle} />
+                                </Link>
                             </div>
 
-                            {yesNo ? <div className="walletGuid mt-3 p-4" id="yesNoBtn" style={{ fontSize: "16px", boxShadow: "0 2px 4px 0 #f50303cc", borderRadius: "5px" }}>
+                            {yesNo ?
+                                <div className="walletGuid mt-3 p-4" id="yesNoBtn"
+                                    style={{ fontSize: "16px", boxShadow: "0 2px 4px 0 #f50303cc", borderRadius: "5px" }}
+                                >
                                 <p className="explain">
                                     برای استفاده از کیف پول در نظر سنجی ما شرکت نمایید!
                                 </p>

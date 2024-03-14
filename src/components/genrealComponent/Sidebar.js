@@ -20,6 +20,7 @@ const Sidebar = ()=> {
       axios.get('https://starfoods.ir/api/getHeaderInfo',{
         params:{  psn:localStorage.getItem("psn")}})
       .then((data)=>{
+        console.log("I can do that", data)
           setSocialMedia(data.data)
       });
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,8 +8,13 @@ import {JBDateInput} from 'jb-date-input-react';
 
 export default function ChequeRequest(){
     const [showForm, setShowForm]=useState(0);
-    
+    const customerIdRef = useRef(null);
     const [acceptState, setAcceptState]=useState("Rejected");
+
+    useEffect(() => {
+        customerIdRef.current.value = localStorage.getItem("psn");
+      }, []);
+
     useEffect(() => {
         axios.get("https://starfoods.ir/api/getChequeReqState",{
             params:{customerId:localStorage.getItem("psn")}}).then((result)=>{
@@ -21,7 +26,6 @@ export default function ChequeRequest(){
     function showHiddenDiv() {
         var selectElement = document.getElementById("ownershipStatus");
         var selectedOption = selectElement.value;
-        
         var hiddenDiv = document.getElementById("endOfContract");
         
         if (selectedOption === "mostager") {
@@ -31,13 +35,10 @@ export default function ChequeRequest(){
         }
       }
 
-
       function howHideReturnedCheckSate() {
         var returnedCheckSelect = document.getElementById("returnCheckSelect");
         var returnedCheckState = returnedCheckSelect.value;
         var returnedCheckInfoDiv = document.getElementById("returnedCheck");
-
-        alert(returnedCheckState)
         
         if (returnedCheckState === "yes") {
             returnedCheckInfoDiv.style.display = "block";
@@ -81,7 +82,7 @@ export default function ChequeRequest(){
 
     const [formData, setFormData] = useState({
         name : '',
-        customerId : '',
+        customerId :localStorage.getItem("psn"),
         milliCode : '',
         PhoneNumber : '',
         milkState : '',
@@ -113,46 +114,19 @@ export default function ChequeRequest(){
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
     };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-   
-      axios.get(`https://starfoods.ir/api/addRequestCheck`,{params:{
-        name : document.getElementById("name").value,
-        customerId : document.getElementById("customerId").value,
-        milliCode : document.getElementById("milliCode").value,
-        PhoneNumber : document.getElementById("phone").value,
-        milkState : document.getElementById("ownershipStatus").value,
-        bankAccNum : document.getElementById("accountNo").value,
-        bankName : document.getElementById("bankName").value,
-        branchName : document.getElementById("branchName").value,
-        contractDate : document.getElementById("contractEnEnd").value,
-        malikName : document.getElementById("malikName").value,
-        depositAmount : document.getElementById("depositAmount").value,
-        malikPhone : document.getElementById("malikPhone").value,
-        homeAddress : document.getElementById("homeAddress").value,
-        jawazState : document.getElementById("jawazState").value,
-        workExperience : document.getElementById("workExperience").value,
-        lastAddress : document.getElementById("lastAddress").value,
-        reliablityMony : document.getElementById("requestedAmount").value,
-        returnedCheckState : document.getElementById("returnCheckSelect").value,
-        returnedCheckMoney : document.getElementById("returnedCheckMoney").value,
-        returnedCheckCause : document.getElementById("returnedCheckCause").value,
-        zaminName : document.getElementById("zaminName").value,
-        zaminAddress : document.getElementById("zaminAddress").value,
-        zaminPhone : document.getElementById("zaminPhone").value,
-        zaminJob : document.getElementById("zaminJob").value,
-        lastSuppName : document.getElementById("lastSuppName").value,
-        lastSuppPhone : document.getElementById("lastSuppPhone").value,
-        lastSuppAddress : document.getElementById("lastSuppAddress").value
-      }})
-        .then((response) => {
-          console.log('Response:', response.data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+
+    console.log("formData", formData)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+          const response = await axios.post('https://starfoods.ir/api/addRequestCheck', formData );
+          console.log('API Response:', response.data);
+        } catch (error) {
+          console.error('Error submitting form:', error);
+        }
     };
+  
 
     return (
     <>
@@ -167,12 +141,13 @@ export default function ChequeRequest(){
             <fieldset className="cheque-fieldset rounded p-2">
             <legend className="float-none w-auto legendLabel p-2 m-1 fw-bold"> در خواست خرید چکی  </legend>
               <form onSubmit={handleSubmit} id="addRequestCheckForm" className="p-3">
-                <div className="row ">
+                <div className="row">
                     <div className="col-lg-6 col-md-6 col-sm-12">
                         <div className="mb-1 mt-1">
                             <label htmlFor="roleNo" className="form-label check-request-label cheque-label" > نام و نام خانوادگی :</label>
-                            <input type="text" className="form-control form-control-sm" id="name" name="name" onChange={handleChange} value={formData.name} required  />
-                            <input type="hidden" id="customerId" name="customerId" onChange={handleChange} value={localStorage.getItem("psn")} />
+                            <input type="text" className="form-control form-control-sm"
+                             id="name" name="name" onChange={handleChange} value={formData.name} required  />
+                            <input type="hidden" id="customerId" name="customerId" ref={customerIdRef} value={localStorage.getItem("psn")} />
                         </div>
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-12">
@@ -332,31 +307,31 @@ export default function ChequeRequest(){
                                 <option value="بانک پارسیان"> بانک پارسیان </option>
                                 <option value="پست بانک"> پست بانک </option>
                                 <option value="بانک آینده "> بانک آینده </option>
-                                <option value=" بانک پاسارگاد  "> بانک پاسارگاد </option>
-                                <option value=" بانک توسعه صادرات ">  بانک توسعه صادرات </option>
-                                <option value=" بانک دی">  بانک دی</option>
-                                <option value=" بانک سپه ">  بانک سپه </option>
-                                <option value=" بانک شهر ">  بانک شهر </option>
-                                <option value=" بانک قرض‌الحسنه رسالت ">  بانک قرض‌الحسنه رسالت </option>
-                                <option value="  بانک کارآفرین  ">  بانک کارآفرین </option>
-                                <option value=" بانک مرکزی">  بانک مرکزی</option>
-                                <option value=" بانک اقتصاد نوین  ">  بانک اقتصاد نوین </option>
-                                <option value=" بانک ایران و ونزوئلا ">  بانک ایران و ونزوئلا </option>
-                                <option value=" بانک حکمت ایرانیان ">  بانک حکمت ایرانیان </option>
-                                <option value="  بانک رفاه کارگران  ">  بانک رفاه کارگران </option>
-                                <option value=" بانک سرمایه ">  بانک سرمایه </option>
-                                <option value=" بانک قرض‌الحسنه مهر ایران ">  بانک قرض‌الحسنه مهر ایران </option>
-                                <option value=" بانک مسکن ">  بانک مسکن </option>
-                                <option value=" بانک مهر اقتصاد ">  بانک مهر اقتصاد </option>
-                                <option value=" بانک انصار ">  بانک انصار </option>
-                                <option value=" بانک پارسیان ">  بانک پارسیان </option>
-                                <option value=" بانک توسعه تعاون ">  بانک توسعه تعاون </option>
-                                <option value=" بانک خاورمیانه ">  بانک خاورمیانه </option>
-                                <option value=" بانک سامان ">  بانک سامان </option>
-                                <option value=" بانک سینا ">  بانک سینا </option>
-                                <option value=" بانک صنعت و معدن ">  بانک صنعت و معدن </option>
-                                <option value=" بانک قوامین ">  بانک قوامین </option>
-                                <option value=" بانک گردشگری ">  بانک گردشگری </option>
+                                <option value="بانک پاسارگاد  "> بانک پاسارگاد </option>
+                                <option value="بانک توسعه صادرات ">  بانک توسعه صادرات </option>
+                                <option value="بانک دی">  بانک دی</option>
+                                <option value="بانک سپه ">  بانک سپه </option>
+                                <option value="بانک شهر ">  بانک شهر </option>
+                                <option value="بانک قرض‌الحسنه رسالت ">  بانک قرض‌الحسنه رسالت </option>
+                                <option value="بانک کارآفرین">  بانک کارآفرین </option>
+                                <option value="بانک مرکزی">  بانک مرکزی</option>
+                                <option value="بانک اقتصاد نوین">  بانک اقتصاد نوین </option>
+                                <option value="بانک ایران و ونزوئلا">  بانک ایران و ونزوئلا </option>
+                                <option value="بانک حکمت ایرانیان ">  بانک حکمت ایرانیان </option>
+                                <option value="بانک رفاه کارگران">  بانک رفاه کارگران </option>
+                                <option value="بانک سرمایه ">  بانک سرمایه </option>
+                                <option value="بانک قرض‌الحسنه مهر ایران ">  بانک قرض‌الحسنه مهر ایران </option>
+                                <option value="بانک مسکن">  بانک مسکن </option>
+                                <option value="بانک مهر اقتصاد">  بانک مهر اقتصاد </option>
+                                <option value="بانک انصار">  بانک انصار </option>
+                                <option value="بانک پارسیان">  بانک پارسیان </option>
+                                <option value="بانک توسعه تعاون">  بانک توسعه تعاون </option>
+                                <option value="بانک خاورمیانه">  بانک خاورمیانه </option>
+                                <option value="بانک سامان">  بانک سامان </option>
+                                <option value="بانک سینا">  بانک سینا </option>
+                                <option value="بانک صنعت و معدن">  بانک صنعت و معدن </option>
+                                <option value="بانک قوامین">  بانک قوامین </option>
+                                <option value="بانک گردشگری">  بانک گردشگری </option>
                             </select>
                         </div>
                     </div>

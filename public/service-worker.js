@@ -51,3 +51,6 @@ self.addEventListener("activate", (event) => {
     })
   );
 });
+
+
+// The service work cache shoul be deleted

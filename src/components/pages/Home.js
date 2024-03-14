@@ -37,6 +37,7 @@ export default function Home() {
         })
 
     axios.get("https://starfoods.ir/api/getMainGroups").then((data) => {
+            console.log("love problem solving", data)
             setMainGroups(data.data.map((element,index)=>
             <MainGroupItem key={index} title={element.title} id={element.id} ></MainGroupItem>))
         })

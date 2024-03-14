@@ -17,14 +17,23 @@ const HomeSliders = ()=> {
     const [clickedItemId, setClickedItemId] = useState(null);
     const [boughtKalaBYS, setboughtKalaOrderBYS] = useState(localStorage.getItem("boughtKalaBYS") || 0);
     const [purchasedItems, setPurchasedItems] = useState({});
+    const [psn, setPsn] = useState(localStorage.getItem("psn"))
+
+    const headers = { 
+        Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+        Accept :'application/json',
+        'Content-Type': 'application/json',
+    }
     
+
     useEffect(() => {
         const fetchSliderData = async () => {
           try {
             const response = await axios.get("https://starfoods.ir/api/getHomeParts", {
-              params: {psn: localStorage.getItem('psn')}
+              params: {psn:psn},
+              headers,
             });
-
+        
             const initialKala = response.data.parts.map((kala) => ({
                 ...kala,
                 isClicked: false,
@@ -33,12 +42,13 @@ const HomeSliders = ()=> {
 
               setAllKalaSlider(initialKala);
           } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error('Get Home part :', error);
           } 
         };
         fetchSliderData();
     }, []);
 
+    
     useEffect(() => {
       localStorage.setItem("boughtKalaBYS", boughtKalaBYS);
     }, [boughtKalaBYS]);
@@ -69,7 +79,8 @@ const purchaseKala = (goodSn, kala) => {
             params: {
                 kalaId: goodSn,
                 amountUnit: updatedValue + 1,
-                psn: localStorage.getItem("psn")
+                params: {psn:psn},
+                headers,
             }
         }).then((data) => {
             setboughtKalaOrderBYS(data.data.snLastBYS);
@@ -92,6 +103,7 @@ const purchaseKala = (goodSn, kala) => {
                 orderBYSSn: boughtKalaBYS,
                 amountUnit: parseInt(updateBoughtItem) + 1,
                 kalaId: goodSn,
+                headers,
             }
         }).then((data) => {
             const boughtKalaUpdate = parseInt(data.data.boughtAmount);
@@ -119,6 +131,7 @@ const debouncedPurchaseKala = debounce(purchaseKala, 500);
               orderBYSSn: boughtKalaBYS,
               amountUnit: updatedValue - 1,
               kalaId: goodSn,
+              headers,
             },
           }).then((data) => {
             const boughtKalaUpdate = parseInt(data.data.boughtAmount);
@@ -294,7 +307,7 @@ return(
                     <h6> {kalaTypes.title} </h6>
                 </div>
                 <div className="forTitleItem text-start">
-                   {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
+                     {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
 
@@ -358,7 +371,7 @@ return(
 
                     {kalaTypes.allGroups && kalaTypes.allGroups.map((group) => (
                     <SwiperSlide className="groupsDiv text-center mt-1 border">
-                        <Link to="/" className="groupsImageAnchor">
+                        <Link to={"/showAllKala/"+group.groupId} className="groupsImageAnchor">
                           <img className="groupsImage" alt="گروهای ویژه" src={`https://starfoods.ir/resources/assets/images/mainGroups/${group.groupId}.jpg`} onError={(e) => { e.target.src = starfood; }} />
                         </Link>
                           <div className="special-group-title" > {group.title} </div>
@@ -494,13 +507,15 @@ return(
 
                  <div className="fourColSide border-top" data-aos="zoom-in-up">
                   <div className="fourPicDiv text-center mt-1"  data-aos="flip-left">
+
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <SwiperSlide>
                             <Link to={"/getAllKala/"+pictures.homepartId+"/"+pictures.id} className="fivePics">
-                                <img className="fivePic rounded" alt="دو عکسی" src={`https://starfoods.ir/resources/assets/images/fivePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
+                                <img className="fivePic rounded" alt="پنج عکسی" src={`https://starfoods.ir/resources/assets/images/fivePics/${kalaTypes.homepartId}_${index+1}.jpg`} onError={(e) => { e.target.src = starfood; }} />
                             </Link>
                         </SwiperSlide>
                      ))}
+
                    </div>
                 </div>
             </Swiper>

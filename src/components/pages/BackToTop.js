@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaChevronUp, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BackToTopButton = () => {

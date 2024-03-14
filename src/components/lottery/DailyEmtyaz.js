@@ -21,7 +21,6 @@ function DailyEmtyaz() {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
         params : {psn: localStorage.getItem('psn'), date: new Date()}
     }).then((data)=> {
-      console.log(data.data.presentInfo[0])
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
     })
@@ -48,7 +47,6 @@ function checkCheckboxPresent() {
     axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
       params: { psn: localStorage.getItem('psn'), dayPr: todayInputValue.split("_")[0], bonus: todayInputValue.split("_")[1] },
     }).then((data) => {
-      console.log("searching ispresent", data);
       window.location.reload();
     });
   }else {

@@ -81,13 +81,11 @@ const WheelComponent = ({segments, segColors,
       if (winningSegment) {
         if (currentSegment === winningSegment && frames > segments.length) {
           progress = duration / upTime
-          angleDelta =
-            maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2)
+          angleDelta = maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2)
           progress = 1
         } else {
           progress = duration / downTime
-          angleDelta =
-            maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2)
+          angleDelta = maxSpeed * Math.sin((progress * Math.PI) / 2 + Math.PI / 2)
         }
       } else {
         progress = duration / downTime
@@ -105,8 +103,8 @@ const WheelComponent = ({segments, segColors,
       timerHandle = 0
       angleDelta = 0
        if (wheelAudio) {
-        wheelAudio.pause();
-        wheelAudio.currentTime = 0;
+           wheelAudio.pause();
+           wheelAudio.currentTime = 0;
       }
     }
   }
@@ -260,9 +258,7 @@ const WheelComponent = ({segments, segColors,
   return (
     <div id='wheel' style={{textAlign:"center" }}>
       <canvas id='canvas' width='600' height='600'
-        style={{
-          pointerEvents: isFinished && isOnlyOnce ? 'none' : 'auto'
-        }}
+        style={{ pointerEvents: isFinished && isOnlyOnce ? 'none' : 'auto' }}
       />
     </div>
   )

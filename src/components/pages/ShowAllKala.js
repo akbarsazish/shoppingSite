@@ -42,6 +42,7 @@ const ShowAllKala = (props)=> {
           partId:partId
         }})
         .then((data) => {
+            console.log("checking data", data)
           setShowAllKala(data.data.kala.map((element,index)=>
             <div key={index} className="groupingItem">
                 <img className="topLeft" src={starfood} alt="slider" />

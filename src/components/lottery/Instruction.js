@@ -27,7 +27,7 @@ export default function Instruction(props) {
                           <span className="get-tmtyaz-item">  <img className="get-emtyaz-img" alt="your-star" src={yourStar} /> </span>
                           <span className="get-tmtyaz-item"> 300 ستاره </span>
                        </div>
-                       <h6 class="me-3 mt-0"> ستاره دریافت نمایید! </h6>
+                       <h6 className="me-3 mt-0"> ستاره دریافت نمایید! </h6>
                    </div>
 
                 <h6 className="instruction-description">
