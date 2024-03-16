@@ -109,7 +109,7 @@ function App() {
         <Route path="/policy"                       element={<Policy/>}/>
         <Route path="privacy"                       element={<Privacy/>}/>
         <Route path="gamerList"                     element={<GamerList/>}/>
-        <Route path="disAndPrice"                    element={<DiscountAndPrice/>}/>
+        <Route path="disAndPrice"                   element={<DiscountAndPrice/>}/>
         <Route path="lottery"                       element={<Lottery/>}/>
         <Route path="inviteCode"                    element={<InviteCode/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
