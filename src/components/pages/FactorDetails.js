@@ -8,7 +8,7 @@ import Sidebar from "../genrealComponent/Sidebar";
 import axios from "axios";
 import { useState } from "react";
 
-export default function FactorDetails() {
+export default function FactorDetails(props) {
     const navigate = useNavigate();
     const [factorItem, setFactorItem] = useState([]);
     const [allPrice, setAllPrice] = useState(0);
@@ -22,6 +22,7 @@ export default function FactorDetails() {
             factorSn: localStorage.getItem('selectedHDS'),
             psn: localStorage.getItem('psn'),
           },
+          headers: props.headers
         }).then((data) => {
           setPaied(data.data.isPayed)
           setFactorItem(
@@ -56,9 +57,8 @@ export default function FactorDetails() {
       if (allMoney > 0) {
         axios
           .get('https://starfoods.ir/api/getFactorPaymentFormApi', {
-            params: {
-              allMoney: allMoney,
-            },
+            params: {allMoney: allMoney},
+            headers: props.headers
           })
           .then((data) => {
             console.log("love js", data)

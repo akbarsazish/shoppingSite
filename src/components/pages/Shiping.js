@@ -52,7 +52,9 @@ export default function Shiping(props) {
 
     useEffect(() => {
         axios.get("https://starfoods.ir/api/shippingData",{
-         params:{psn:localStorage.getItem("psn")}})
+         params:{psn:localStorage.getItem("psn")},
+            headers:props.headers
+        })
         .then((data) =>{
             setTakhfifCase(data.data.takhfifCase/10);
             setWeekDay1(data.data.date1);
@@ -70,7 +72,8 @@ export default function Shiping(props) {
 
     useEffect(() => {
         axios.get('https://starfoods.ir/api/getPaymentFormApi', {
-          params: { psn: localStorage.getItem("psn"),allMoney:allMoney }
+          params: { psn: localStorage.getItem("psn"),allMoney:allMoney},
+          headers:props.headers
           }).then((data) => {
             setPayUrl(data.data)
         });
@@ -121,7 +124,9 @@ export default function Shiping(props) {
             customerAddress:selectdAddress,
             psn:localStorage.getItem("psn"),
             allMoney:allMoney
-        }}).then((data)=>{
+        },
+        headers:props.headers
+     }).then((data)=>{
             window.location.href = '/success'
         });
         }else{
@@ -139,7 +144,9 @@ const calculateTakhfifCode=()=>{
         {params:{
             psn:localStorage.getItem("psn"),
             code:localStorage.getItem("takhfifCode")
-        }}).then((respond)=>{
+        },
+        headers:props.headers
+    }).then((respond)=>{
             if(respond.data.takhfifCodeMoneyInToman===0){
                 document.getElementById("errorContainer").textContent="کد تخفیف شما استفاده و یا اینکه موعدش گذشته است.";
             }else{

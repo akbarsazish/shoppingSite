@@ -118,7 +118,7 @@ export default function ShoppingCart(props) {
                 </div>
                 <div className="secondItem">
                     <p className="shoppingItemName" style={{ fontWeight: "bold", fontSize: "14px" }}> {element.GoodName} </p>
-                    
+
                     <button className="btn btn-sm btn-info selectAmount" 
                          onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)}
                          data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -185,7 +185,9 @@ export default function ShoppingCart(props) {
             axios.get('https://starfoods.ir/api/deleteOrderBYS',{
                 params: {
                   SnOrderBYS: orderBYSSn
-            }})
+            },
+            headers: props.headers
+        })
              .then((data) => {
               let countBought = parseInt(localStorage.getItem('buyAmount'));
               let boughtFromHome = parseInt(localStorage.getItem(`boughtItem_${goodSn}`));

@@ -7,14 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faHistory } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-export default function Success() {
+export default function Success(props) {
     const[factorNo, setFactorNo] = useState("");
     localStorage.setItem("buyAmount",0)
     const [succedFactorData,setSuccedFactorData]=useState(0)
     const[allProfit, setAllprofit]=useState(0)
     useEffect(()=>{
         axios.get("https://starfoods.ir/api/successFactorInfo",
-        {params:{psn:localStorage.getItem("psn")}})
+        {params:{psn:localStorage.getItem("psn")}, headers:props.headers})
         .then((data)=>{
             setSuccedFactorData(data.data.factorBYS.map((element,index)=>
             <tr>

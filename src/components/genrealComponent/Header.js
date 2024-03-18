@@ -14,6 +14,12 @@ const Header = ()=>{
     const [searchedValue, setSearchedValue] = useState('');
     const [searchResults, setSearchResults] = useState([]);
 
+    const headers = { 
+        Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+        Accept :'application/json',
+        'Content-Type': 'application/json',
+    }
+
     const [currentPage, setCurrentPage] = useState('home');
 
     const pageChange = (page) => {
@@ -38,7 +44,9 @@ const Header = ()=>{
 
     useEffect(()=>{
         axios.get('https://starfoods.ir/api/checkLogin',{
-            params:{token:localStorage.getItem("isLogedIn")}}).then((data)=>{
+            params:{token:localStorage.getItem("isLogedIn")},
+            headers,
+          }).then((data)=>{
             if(data.data.isLogin==="NO" && localStorage.getItem("role") != "jaliLogin"){
                localStorage.removeItem("isLogedIn")
             }
@@ -48,8 +56,9 @@ const Header = ()=>{
     // for searching kala
     useEffect(()=>{
         if (searchedValue.length > 0) {
-            axios.get('https://starfoods.ir/api/publicSearchKalaApi',
-            {params: {psn:localStorage.getItem("psn"), name:searchedValue}
+            axios.get('https://starfoods.ir/api/publicSearchKalaApi',{
+              params: {psn:localStorage.getItem("psn"), name:searchedValue},
+              headers,
             }).then((response)=>{
                 setSearchResults(response.data);
             }).catch((error) => {
@@ -69,7 +78,7 @@ const Header = ()=>{
 
     const searchKala = () => {
       if (searchedValue.length > 0) {
-        const searchURL = `https://star.starfoods.ir/searchKala/${searchedValue}`;
+        const searchURL = `https://star.starfoods.ir/searchKala/${searchedValue},${headers}`;
         window.location.href = searchURL;
       }
     };

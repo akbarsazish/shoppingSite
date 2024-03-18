@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function CountDownTimer() {
-  const [timeRemaining, setTimeRemaining] = useState({
-    remainDays: []
-});
+  const [timeRemaining, setTimeRemaining] = useState({remainDays: []});
+
+  const headers = { 
+    Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+    Accept :'application/json',
+    'Content-Type': 'application/json',
+}
 
   useEffect(() => {
     axios.get("https://starfoods.ir/api/getGamerList", {
-    params: { gameId: 2, psn: localStorage.getItem("psn") }
+    params: { gameId: 2, psn: localStorage.getItem("psn")},
+    headers,
     }).then((response) => {
 
         let currentTime = new Date().getTime();

@@ -4,14 +4,16 @@ import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import Footer from "../genrealComponent/Footer";
 
-export default function InviteCode() {
+export default function InviteCode(props) {
   const [copied, setCopied] = useState(false);
   const [invitInfo, setInviteInfo] = useState("");
   const [ invitedCustomer, setInvitedCustomer] =  useState({invitedCustomers: []});
 
   useEffect( () =>{
       axios.get("https://starfoods.ir/api/getInviteCodeApi",{
-         params:{psn:localStorage.getItem("psn")}}).then((response)=>{
+         params:{psn:localStorage.getItem("psn")},
+        headers:props.headers
+        }).then((response)=>{
           setInviteInfo(response.data.profile);
           setInvitedCustomer(response.data);
          })

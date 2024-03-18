@@ -100,25 +100,25 @@ function App() {
         <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
         <Route path='/descKala/:goodSn/:groupId'    element={<DescKala  headers={headers} buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
         <Route path='/shoppingCart'                 element={<ShoppingCart headers={headers} cartRef={cartRef}  setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}/>}/>
-        <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
-        <Route path='/message'                      element={<Message/>}/>
+        <Route path='/favorite'                     element={<Favorite headers={headers} buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/message'                      element={<Message headers={headers}/>}/>
         <Route path='/contact'                      element={<Contact/>}/>
         <Route path='/editProfile'                  element={<EditProfile/>}/> 
         <Route path='/returnedFactor'               element={<ReturnedFactor/>}/>
-        <Route path='/shipping'                     element={<Shiping/>}/>
-        <Route path='/success'                      element={<Success/>}/>
+        <Route path='/shipping'                     element={<Shiping headers={headers}/>}/>
+        <Route path='/success'                      element={<Success headers={headers}/>}/>
         <Route path='/wallet'                       element={<Wallet headers={headers}/>}/>
-        <Route path='/factorDetails'                element={<FactoreDetails/>}/>
+        <Route path='/factorDetails'                element={<FactoreDetails headers={headers}/>}/>
         <Route path='/orderDetails'                 element={<OrderDetails/>}/>
         <Route path='/login'                        element={<Login/>}/>
         <Route path="/about"                        element={<About/>}/>
         <Route path="/policy"                       element={<Policy/>}/>
         <Route path="privacy"                       element={<Privacy/>}/>
-        <Route path="gamerList"                     element={<GamerList/>}/>
+        <Route path="gamerList"                     element={<GamerList headers={headers}/>}/>
         <Route path="disAndPrice"                   element={<DiscountAndPrice/>}/>
         <Route path="lottery"                       element={<Lottery/>}/>
-        <Route path="inviteCode"                    element={<InviteCode/>}/>
-        <Route path='/searchKala/:term'             element={<SearchResult changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
+        <Route path="inviteCode"                    element={<InviteCode headers={headers}/>}/>
+        <Route path='/searchKala/:term'             element={<SearchResult headers={headers} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
         <Route path='getAllKala/:homepartId/:id'    element={<GetAllKala buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />} />
         <Route path="*"                             element={<PageNotFound />} />

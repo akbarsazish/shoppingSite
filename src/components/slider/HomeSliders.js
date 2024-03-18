@@ -79,9 +79,9 @@ const purchaseKala = (goodSn, kala) => {
             params: {
                 kalaId: goodSn,
                 amountUnit: updatedValue + 1,
-                params: {psn:psn},
+                psn:psn
+            },
                 headers,
-            }
         }).then((data) => {
             setboughtKalaOrderBYS(data.data.snLastBYS);
             let boughtItem = parseInt(data.data.amountBought);
@@ -103,8 +103,8 @@ const purchaseKala = (goodSn, kala) => {
                 orderBYSSn: boughtKalaBYS,
                 amountUnit: parseInt(updateBoughtItem) + 1,
                 kalaId: goodSn,
-                headers,
-            }
+            },
+            headers,
         }).then((data) => {
             const boughtKalaUpdate = parseInt(data.data.boughtAmount);
             localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);
@@ -131,8 +131,8 @@ const debouncedPurchaseKala = debounce(purchaseKala, 500);
               orderBYSSn: boughtKalaBYS,
               amountUnit: updatedValue - 1,
               kalaId: goodSn,
-              headers,
             },
+            headers,
           }).then((data) => {
             const boughtKalaUpdate = parseInt(data.data.boughtAmount);
                   localStorage.setItem(`boughtItem_${kala.GoodSn}`, boughtKalaUpdate);

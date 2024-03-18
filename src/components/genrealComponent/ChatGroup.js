@@ -11,6 +11,12 @@ export default function ChatGroup() {
     const [customerText, setCustomerText] = useState('');
     const [customerReply, setCustomerReply] = useState('');
 
+    const headers = { 
+      Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+      Accept :'application/json',
+      'Content-Type': 'application/json',
+    }
+
     const showToggleChat = () => {
       setLiveChat(true)
     }
@@ -40,7 +46,7 @@ export default function ChatGroup() {
         setCustomerText('');
         setMessages([]);
         const psn = localStorage.getItem("psn");
-        const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}`;
+        const apiUrl = `https://starfoods.ir/api/addMessage?psn=${psn}&messageContent=${encodeURIComponent(customerText)}, ${headers}`;
         axios.get(apiUrl)
           .then(response => {
             setMessages(response.data);
@@ -55,7 +61,7 @@ export default function ChatGroup() {
         setCustomerReply('');
         setMessages([]);
         const psn = localStorage.getItem("psn");
-        const apiUrl = `https://starfoods.ir/api/replayMessage?psn=${psn}&messageId=${msTobeRepliedId}&messageContent=${encodeURIComponent(customerReply)}`;
+        const apiUrl = `https://starfoods.ir/api/replayMessage?psn=${psn}&messageId=${msTobeRepliedId}&messageContent=${encodeURIComponent(customerReply)},${headers}`;
         axios.get(apiUrl)
           .then(response => {
             setMessages(response.data);
@@ -69,7 +75,10 @@ export default function ChatGroup() {
     useEffect(()=>{
         const fetchData = async () => {
           try {
-            const response = await axios.get('https://starfoods.ir/api/getChatMessages', {params:{psn:localStorage.getItem("psn")}});
+            const response = await axios.get('https://starfoods.ir/api/getChatMessages', {
+              params:{psn:localStorage.getItem("psn")},
+              headers,
+            });
             setMessages(response.data);
           } catch (error) {
             console.error('Error fetching data:', error);

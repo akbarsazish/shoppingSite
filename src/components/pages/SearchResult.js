@@ -1,8 +1,5 @@
 import React, { useState,useEffect } from "react";
-import {
-    Link,
-    useParams
-} from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Header from "../genrealComponent/Header";
 import Sidebar from "../genrealComponent/Sidebar";
 import starfood from "../../assets/images/starfood.png"
@@ -24,24 +21,29 @@ useEffect(()=>reNewSearchResult(),[])
         axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
           customerId:psn,
           productId:goodSn
-        }}).then((data)=>{
+        },
+         headers: props.headers
+      }).then((data)=>{
             reNewSearchResult();
         })
       }
       
       const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
-          psn:psn,
-          gsn:goodSn
-        }}).then((data)=>{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{
+          params:{ psn:psn, gsn:goodSn},
+          headers: props.headers
+        }).then((data)=>{
             reNewSearchResult();
         })
       }
 const reNewSearchResult=()=>{
-        axios.get("https://starfoods.ir/api/searchKala",{params:{
+        axios.get("https://starfoods.ir/api/searchKala",{
+          params:{ 
             psn:localStorage.getItem("psn"),
             name:term
-        }}).then((data)=>{
+         },
+        headers: props.headers
+      }).then((data)=>{
            
             setItems(data.data.kala.map((element,index)=>
             <div key={index} className="groupingItem">
@@ -107,7 +109,7 @@ const reNewSearchResult=()=>{
 }
 
 const showBuyModal=(goodSn,event)=>{
-  fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
+  fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn, {headers:props.headers})
   .then(response=>response.json())
   .then((data) => {
     let modalItems=[];
@@ -120,7 +122,7 @@ const showBuyModal=(goodSn,event)=>{
 }
 
   const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-    fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn)
+    fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode="+goodSn, {headers:props.headers})
     .then(response=>response.json())
     .then((data) => {
       let modalItems=[];
@@ -133,14 +135,15 @@ const showBuyModal=(goodSn,event)=>{
     })
   }
   const updateBuy=(orderId,amountUnit,goodSn)=>{
-    axios.get('https://starfoods.ir/api/updateOrderBYS',
-    {params:{
-      kalaId: goodSn,
-      amountUnit: amountUnit,
-      orderBYSSn: orderId
-    }
-    }
-    ).then((response)=> {
+    axios.get('https://starfoods.ir/api/updateOrderBYS',{
+      params:{
+        kalaId: goodSn,
+        amountUnit: amountUnit,
+        orderBYSSn: orderId
+      },
+      headers: props.headers
+    })
+    .then((response)=> {
         reNewSearchResult();
     })
 
@@ -156,12 +159,13 @@ const buySomething=(amountExist,freeExistance,zeroExistance,costLimit,costError,
               alert(costError);
             }
           }
-          axios.get('https://starfoods.ir/api/buySomething',
-          {params:{
-            kalaId: goodSn,
-            amountUnit: amountUnit,
-            psn:localStorage.getItem("psn")
-            }
+          axios.get('https://starfoods.ir/api/buySomething',{
+            params:{
+              kalaId: goodSn,
+              amountUnit: amountUnit,
+              psn:localStorage.getItem("psn")
+            },
+            headers: props.headers
           }).then((response)=> {
           let countBought=parseInt(localStorage.getItem('buyAmount'));
             localStorage.setItem('buyAmount',countBought+1);

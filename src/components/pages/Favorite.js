@@ -20,7 +20,10 @@ export default function Favorite(props) {
 
     const renewFavorite=()=>{
     axios.get("https://starfoods.ir/api/favoritKalaApi",
-           {params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+           {params:{psn:localStorage.getItem("psn")},
+           headers:props.headers
+          
+          }).then((data)=>{
             setKalaItem(data.data.favorits.map((element,index)=>
 
         <div key={index} className="groupingItem">
@@ -91,7 +94,9 @@ export default function Favorite(props) {
         axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
           customerId:psn,
           productId:goodSn
-        }}).then((data)=>{
+        },
+        headers:props.headers
+      }).then((data)=>{
             renewFavorite();
         })
       }
@@ -100,7 +105,11 @@ export default function Favorite(props) {
         axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
           psn:psn,
           gsn:goodSn
-        }}).then((data)=>{
+        },
+
+        headers:props.headers
+
+      }).then((data)=>{
             renewFavorite();
         })
       }
@@ -109,7 +118,9 @@ export default function Favorite(props) {
       axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
-        }})
+        },
+        headers:props.headers
+      })
       .then((data) => {
         let modalItems=[];
           for (let index = 1; index <= data.data.maxSale; index++) {
@@ -124,10 +135,10 @@ export default function Favorite(props) {
         axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
-        }
-      }
-      )
-        .then((data) => {
+        },
+           headers:props.headers
+      })
+      .then((data) => {
           let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
               modalItems.push(<button data-bs-dismiss="modal" className="btn btn-sm btn-info buyButton" onClick={() =>updateBuy(snOrderBYS,data.data.amountUnit*index,data.data.kalaId, data.data.amountExist, data.data.defaultUnit, data.data.freeExistance)}>{index+' '+data.data.secondUnit+' معادل '+' '+index*data.data.amountUnit+' '+data.data.defaultUnit}</button>)
@@ -147,7 +158,9 @@ export default function Favorite(props) {
             kalaId: goodSn,
             amountUnit: amountUnit,
             orderBYSSn: orderId
-          }}).then((response)=> {
+          },
+          headers:props.headers
+        }).then((response)=> {
             renewFavorite();
           })
       }
@@ -163,12 +176,14 @@ export default function Favorite(props) {
                   alert(costError);
                 }
               }
-              axios.get('https://starfoods.ir/api/buySomething',
-              {params:{
-                kalaId: goodSn,
-                amountUnit: amountUnit,
-                psn:localStorage.getItem("psn")
-                }
+              axios.get('https://starfoods.ir/api/buySomething',{
+                params:{
+                  kalaId: goodSn,
+                  amountUnit: amountUnit,
+                  psn:localStorage.getItem("psn")
+                },
+                headers:props.headers
+
               }).then((response)=> {
               let  countBought=parseInt(localStorage.getItem('buyAmount'));
                 localStorage.setItem('buyAmount',countBought+1);

@@ -9,7 +9,7 @@ import axios from "axios";
 import CountDownTimer from "./CountDownTimer";
 import { Link } from "react-router-dom";
 
-export default function GamerList (){
+export default function GamerList (props){
   const [showAll, setShowAll] = useState(false);
   
   const toggleShowAll = () => {
@@ -24,7 +24,8 @@ export default function GamerList (){
  
   useEffect(() => {
       axios.get("https://starfoods.ir/api/getGamerList", {
-      params: { gameId: 3, psn: localStorage.getItem("psn") }
+      params: { gameId: 1, psn: localStorage.getItem("psn")},
+      headers: props.headers
       }).then((response) => {
         setGamerLest(response.data);
       }).catch((error) => {

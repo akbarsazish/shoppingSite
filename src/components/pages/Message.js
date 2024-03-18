@@ -7,7 +7,7 @@ import Sidebar from "../genrealComponent/Sidebar";
 import profile from "../../assets/images/profile.png"
 import boy from "../../assets/images/boy.png"
 import axios from "axios";
-export default function Message() {
+export default function Message(props) {
     const[messages,setMessages]=useState([]);
     const[newMessage,setNewMessage]=useState("");
 
@@ -18,7 +18,9 @@ export default function Message() {
         axios.get("https://starfoods.ir/api/doAddMessage",{params:{
             pmContent:newMessage,
             psn:localStorage.getItem("psn")
-        }}).then((data)=>{
+        },
+        headers:props.headers
+    }).then((data)=>{
             axios.get("https://starfoods.ir/api/messageList",{params:{psn:localStorage.getItem("psn")}}
             ).then((data)=>{
                 setMessages(data.data.messages)
@@ -29,8 +31,10 @@ export default function Message() {
 
     useEffect(()=>{
         axios.get("https://starfoods.ir/api/messageList",{
-            params:{psn:localStorage.getItem("psn")}}
-          ).then((data)=>{
+            params:{psn:localStorage.getItem("psn")},
+            headers:props.headers
+        })
+        .then((data)=>{
             setMessages(data.data.messages)
          })
     },[]);

@@ -10,8 +10,14 @@ export default function SecondMenu() {
   const [attractions, setAttractions] = useState([]);
   let customerId = localStorage.getItem("psn");
 
+  const headers = { 
+    Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+    Accept :'application/json',
+    'Content-Type': 'application/json',
+}
+
   useEffect(() => {
-    fetch(`https://starfoods.ir/api/getAttractiveVisits?psn=${customerId}`)
+    fetch(`https://starfoods.ir/api/getAttractiveVisits?psn=${customerId}, ${headers}`)
       .then((response) => response.json())
       .then((data) => {
         setAttractions(data[0]);
