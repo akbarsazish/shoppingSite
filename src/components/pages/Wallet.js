@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export default function Wallet() {
+export default function Wallet(props) {
     const baseUrl = "https://starfoods.ir/api";
     const [yesNo, setYesNo] = useState(false);
     const [showQuestion, setShowQuestions] = useState(false);
@@ -25,7 +25,7 @@ export default function Wallet() {
     }
 
     useEffect(()=>{
-        axios.get(`${baseUrl}/wallet`,{params:{psn:localStorage.getItem("psn")}}).then((data)=>{
+        axios.get(`${baseUrl}/wallet`,{params:{psn:localStorage.getItem("psn")}, headers:props.headers}).then((data)=>{
             settakhfifMoney(data.data.moneyTakhfif)
             setFirstQuestions(data.data.nazars[0].question1)
             setSecondQuestions(data.data.nazars[0].question2)

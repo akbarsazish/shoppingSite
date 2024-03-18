@@ -44,28 +44,34 @@ import AppGuide from "./components/appInfo/AppGuide";
 import StackTower from "./components/game/stackeTower/StackTower";
 
 function App() {
+  const headers = { 
+    Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+    Accept :'application/json',
+    'Content-Type': 'application/json',
+  }
+
   const [byModal, setByModal] = useState(false);
   const cartRef = useRef(null);
-  const API_URL = 'https://starfoods.ir/api'
+  const API_URL = 'https://starfoods.ir/api';
 
-  const login = (username, password) => {
-    return axios.post(API_URL + '/login', {
+  const login = async (username, password) => {
+    const response = await axios.post(API_URL + '/login', {
       username,
       password
-    }).then(response => {
-      if (response.data.accessToken) {
-        localStorage.setItem('user', JSON.stringify(response.data));
-      }
-      return response.data;
-    })
+    });
+    if (response.data.accessToken) {
+      localStorage.setItem('user', JSON.stringify(response.data));
+    }
+    return response.data;
   }
 
   const changeHeartIconColor = (goodSn, event) => {
     axios.get('https://starfoods.ir/api/setFavorite', {
       params: {
         goodSn: goodSn,
-        psn:localStorage.getItem("psn")
-      }
+        psn:localStorage.getItem("psn"),
+      },
+      headers,
     }).then((data) => {
       if (data.data.msg) {
         event.target.style.color = "red";
@@ -88,12 +94,12 @@ function App() {
       <Routes>
         <Route path='/home' element={<Layout />} />
         <Route path='/' element={<Layout />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/grouping' element={<Grouping />} />
-        <Route path='/groupingItems/:id'            element={<GroupingItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/profile' element={<Profile  headers={headers} />} />
+        <Route path='/grouping' element={<Grouping headers={headers} />} />
+        <Route path='/groupingItems/:id'            element={<GroupingItems headers={headers}  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
         <Route path='/subGroupItems/:mainId/:subId' element={<SubGroupItems  buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
-        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
-        <Route path='/shoppingCart'                 element={<ShoppingCart   cartRef={cartRef}  setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}/>}/>
+        <Route path='/descKala/:goodSn/:groupId'    element={<DescKala  headers={headers} buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
+        <Route path='/shoppingCart'                 element={<ShoppingCart headers={headers} cartRef={cartRef}  setAllMoneyToLocaleStorage={(allMoney)=>setAllMoneyToLocaleStorage(allMoney)} setAllProfitToLocaleStorage={(allProfit)=>setAllProfitToLocaleStorage(allProfit)}/>}/>
         <Route path='/favorite'                     element={<Favorite       buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
         <Route path='/message'                      element={<Message/>}/>
         <Route path='/contact'                      element={<Contact/>}/>
@@ -101,7 +107,7 @@ function App() {
         <Route path='/returnedFactor'               element={<ReturnedFactor/>}/>
         <Route path='/shipping'                     element={<Shiping/>}/>
         <Route path='/success'                      element={<Success/>}/>
-        <Route path='/wallet'                       element={<Wallet/>}/>
+        <Route path='/wallet'                       element={<Wallet headers={headers}/>}/>
         <Route path='/factorDetails'                element={<FactoreDetails/>}/>
         <Route path='/orderDetails'                 element={<OrderDetails/>}/>
         <Route path='/login'                        element={<Login/>}/>

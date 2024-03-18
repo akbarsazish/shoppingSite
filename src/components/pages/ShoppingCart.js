@@ -23,7 +23,9 @@ export default function ShoppingCart(props) {
     useEffect(() => {
         axios.get("https://starfoods.ir/api/cartsList",{
             params:{
-                psn:localStorage.getItem("psn")}})
+                psn:localStorage.getItem("psn")},
+                headers:props.headers
+            })
             .then((data) => {
             let currency = data.data.currency;
             setMinSalePriceFactor(data.data.minSalePriceFactor)
@@ -71,7 +73,9 @@ export default function ShoppingCart(props) {
 
     const changeCartsPrice = (snHDS) => {
        axios.get("https://starfoods.ir/api/updateChangedPrice", { 
-          params: { SnHDS: snHDS,psn:localStorage.getItem("psn")}})
+          params: { SnHDS: snHDS,psn:localStorage.getItem("psn")},
+          headers:props.headers
+        })
           .then((data) => {
             renewCarts();
         })  
@@ -79,7 +83,9 @@ export default function ShoppingCart(props) {
 
     const renewCarts = () => {
         axios.get("https://starfoods.ir/api/cartsList",{
-            params:{psn:localStorage.getItem("psn")}})
+            params:{psn:localStorage.getItem("psn")},
+            headers:props.headers
+        })
             .then((data) => {
               let currency = data.data.currency;
               setMinSalePriceFactor(data.data.minSalePriceFactor)
@@ -112,7 +118,14 @@ export default function ShoppingCart(props) {
                 </div>
                 <div className="secondItem">
                     <p className="shoppingItemName" style={{ fontWeight: "bold", fontSize: "14px" }}> {element.GoodName} </p>
-                    <button className="btn btn-sm btn-info selectAmount" onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)} data-bs-toggle="modal" data-bs-target="#exampleModal"> {parseInt(element.PackAmount) + ' ' + element.secondUnitName + ' معادل ' + parseInt(element.Amount) + ' ' + element.UName} <FontAwesomeIcon icon={faShoppingCart} />  </button>
+                    
+                    <button className="btn btn-sm btn-info selectAmount" 
+                         onClick={() => showUpdateBuyModal(element.GoodSn, element.SnOrderBYS)}
+                         data-bs-toggle="modal" data-bs-target="#exampleModal">
+                         {parseInt(element.PackAmount) + ' ' + element.secondUnitName + ' معادل ' + parseInt(element.Amount) + ' ' + element.UName}
+                        <FontAwesomeIcon icon={faShoppingCart} /> 
+                     </button>
+
                     <p className="shoppingPrice" style={{ marginTop: "8px", color: "#00712e" }} > {parseInt(element.Fi / currency).toLocaleString("fa-IR")} {data.data.currencyName}</p>
                     <p className="shoppingPrice" style={{ fontWeight: "bold" }}> {parseInt(element.Price / currency).toLocaleString("fa-IR")} {data.data.currencyName}</p>
                 </div>
@@ -148,7 +161,9 @@ export default function ShoppingCart(props) {
               kalaId: goodSn,
               amountUnit: amountUnit,
               orderBYSSn: orderId
-            }})
+            },
+            headers: props.headers
+        })
             .then((response) => {
             
               renewCarts()

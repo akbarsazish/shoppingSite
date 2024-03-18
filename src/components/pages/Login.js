@@ -41,7 +41,6 @@ export default function Login(props) {
             browser:'',
             isAndroid:0
         };
-
     
         axios.get("https://starfoods.ir/api/loginApi", { params: data })
             .then(res => {
@@ -64,7 +63,9 @@ export default function Login(props) {
                             </td>
                         </tr>
                     )));
+
                     deviceDialog.showModal();
+
                 } else if (res.data.introducerCode) {
                     setCustomerId(res.data.psn);
                     setUserToken(res.data.token);
@@ -100,7 +101,7 @@ export default function Login(props) {
             customerId:customerId,
             token:userToken
         }}).then(res => {
-            localStorage.setItem("isLogedIn",userToken);
+            localStorage.setItem('isLogedIn',userToken);
             localStorage.setItem('userName', res.data.username);
             localStorage.setItem('psn',customerId);
             localStorage.setItem("buyAmount",res.data.buyAmount);
@@ -110,6 +111,7 @@ export default function Login(props) {
     }
 
     const confirmBrowserLogOut=()=> {
+        // console.log("confirm browser logout", localStorage.getItem("isLogedIn"));
         axios.get("https://starfoods.ir/api/logOutConfirm", {params:{
             customerId:customerId,
             token:userToken,

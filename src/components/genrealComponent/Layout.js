@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Sidebar from './Header'
 import Header from './Sidebar';
 import ChatGroup from "./ChatGroup";
+import { Navigate } from "react-router-dom";
 
 
 const Layout = () => {
@@ -18,7 +19,7 @@ const Layout = () => {
          </div>
         )
     }else{
-        window.location.href = '/login'
+        <Navigate to="/login"/>
     }
 }
 

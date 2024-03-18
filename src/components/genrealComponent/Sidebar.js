@@ -14,13 +14,18 @@ import ChequeRequest from "../pages/ChequeRequest";
 import { faInstagramSquare, faTelegram, faWhatsappSquare } from "@fortawesome/free-brands-svg-icons";
 import axios from "axios";
 
+const headers = { 
+    Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+    Accept :'application/json',
+    'Content-Type': 'application/json',
+  }
+
 const Sidebar = ()=> {
     const [socialMedai, setSocialMedia] = useState("")
     useEffect(() => {
       axios.get('https://starfoods.ir/api/getHeaderInfo',{
-        params:{  psn:localStorage.getItem("psn")}})
+        params:{  psn:localStorage.getItem("psn")}, headers})
       .then((data)=>{
-        console.log("I can do that", data)
           setSocialMedia(data.data)
       });
 

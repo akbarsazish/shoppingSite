@@ -11,16 +11,20 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Profile(props) {
-    const [sendedFactors, setSendedFactors] = useState(0);
+    const [sendedFactors, setSendedFactors] = useState(0);  
     const [waitingOrders, setWaitingOrders] = useState(0);
     const [customerName, setCustomerName] = useState(0)
     const [introducerCode, setIntroducerCode] = useState(0)
     const [customerMobile, setCustomerMobile] = useState(0)
     const [customerPhone, setCustomerPhone] = useState(0);
+   
     
     useEffect(() => {
-        axios.get("https://starfoods.ir/api/profile",{params:{psn:localStorage.getItem("psn")}}).then((data) => {
-            console.log("check for is pay", data.data)
+        axios.get("https://starfoods.ir/api/profile",{
+            params:{psn:localStorage.getItem("psn")},
+            headers:props.headers
+          
+        }).then((data) => {
             setSendedFactors(data.data)
             setWaitingOrders(data.data)
             setCustomerName(data.data.profile.Name)

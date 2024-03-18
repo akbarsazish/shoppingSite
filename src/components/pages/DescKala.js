@@ -23,7 +23,7 @@ export default function DescKala(props) {
     
     // fetching data form backend
     const showBuyModal = (goodSn, event) => {
-        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn, { headers: props.headers })
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -36,7 +36,7 @@ export default function DescKala(props) {
          }
 
     const showUpdateBuyModal = (goodSn, snOrderBYS) => {
-        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn)
+        fetch("https://starfoods.ir/api/getUnitsForUpdate/?Pcode=" + goodSn, { headers: props.headers })
             .then(response => response.json())
             .then((data) => {
                 let modalItems = [];
@@ -52,7 +52,8 @@ export default function DescKala(props) {
             params: {
                 customerId: psn,
                 productId: goodSn
-            }
+            },
+            headers: props.headers,
         }).then((data) => {
             renewDescKala();
         })
@@ -63,7 +64,8 @@ export default function DescKala(props) {
             params: {
                 psn: psn,
                 gsn: goodSn
-            }
+            },
+          headers: props.headers,
         }).then((data) => {
             renewDescKala();
         })
@@ -82,7 +84,8 @@ export default function DescKala(props) {
               kalaId: goodSn,
               amountUnit: amountUnit,
               orderBYSSn: orderId
-            }
+            },
+            headers: props.headers
             }).then((response) => {
                 renewDescKala();
             })
@@ -103,7 +106,8 @@ export default function DescKala(props) {
                     kalaId: goodSn,
                     amountUnit: amountUnit,
                     psn:localStorage.getItem("psn")
-                }
+                },
+                 headers: props.headers
                 }).then((response) => {
                     let countBought = parseInt(localStorage.getItem('buyAmount'));
                     localStorage.setItem('buyAmount', countBought + 1);
@@ -118,7 +122,8 @@ export default function DescKala(props) {
                 id: goodSn,
                 groupId: groupId,
                 psn:localStorage.getItem("psn")
-            }
+            },
+            headers: props.headers 
         }).then((data) => {
             setDescKala(data.data.descKala)
             setIsFavorite(data.data.favorite)

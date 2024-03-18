@@ -19,7 +19,7 @@ export default function GroupingItems(props) {
     const [selectedLinkId, setSelectedLinkId] = useState(null);
 
     useEffect(() => {
-        fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId=" + id)
+        fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId=" + id, {headers:props.headers})
           .then((response) => response.json())
           .then((groups) => {
             setSubGroups(
@@ -47,7 +47,9 @@ export default function GroupingItems(props) {
             axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
               customerId:psn,
               productId:goodSn
-            }}).then((data)=>{
+            },
+            headers:props.headers,
+        }).then((data)=>{
                 renewGroupItems();
             })
           }
@@ -56,7 +58,10 @@ export default function GroupingItems(props) {
         axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
             psn:psn,
             gsn:goodSn
-         }}).then((data)=>{
+         },
+         headers:props.headers,
+        
+        }).then((data)=>{
               renewGroupItems();
          })
         }
@@ -65,9 +70,10 @@ export default function GroupingItems(props) {
         axios.get("https://starfoods.ir/api/getMainGroupKala",{params:{
             psn:localStorage.getItem('psn'),
             mainGrId:id
-        }})
+        },
+        headers:props.headers,
+    })
         .then((data) => {
-            console.log("love to chekc the data", data.data.listKala);
             setMainGroupKala(data.data.listKala.map((element,index)=>
             <div key={index} className="groupingItem">
                 <img className="topLeft" src={starfood} alt="slider" />
@@ -151,7 +157,9 @@ export default function GroupingItems(props) {
         axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
-        }})
+        },
+        headers:props.headers,
+    })
         .then((data) => {
         let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
@@ -168,7 +176,9 @@ export default function GroupingItems(props) {
           axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
             Pcode:goodSn,
             psn:localStorage.getItem("psn")
-          }})
+          },
+          headers:props.headers,
+        })
           .then((data) => {
             let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
@@ -183,12 +193,13 @@ export default function GroupingItems(props) {
             if((amountUnit > amountExist) && (freeExistance==0)){
                 Swal.fire("حد اکثر مقدار خرید شما " + parseInt(amountExist) + " " + defaultUnit  + " می باشد")
             }else{
-                axios.get('https://starfoods.ir/api/updateOrderBYS',
-                {params:{
+                axios.get('https://starfoods.ir/api/updateOrderBYS',{
+                params:{
                     kalaId: goodSn,
                     amountUnit: amountUnit,
                     orderBYSSn: orderId
-                }
+                },
+                headers:props.headers,
                 }
                 ).then((response)=> {
                     renewGroupItems();
@@ -209,7 +220,9 @@ export default function GroupingItems(props) {
                   kalaId: goodSn,
                   amountUnit: amountUnit,
                   psn:localStorage.getItem("psn")
-                }})
+                },
+                headers:props.headers,
+            })
                 .then((response)=> {
                 let countBought=parseInt(localStorage.getItem('buyAmount'));
                 localStorage.setItem('buyAmount',countBought+1);

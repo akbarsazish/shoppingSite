@@ -12,6 +12,12 @@ import 'aos/dist/aos.css';
 
 
 export default function Home() {
+
+    const headers = { 
+        Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
+        Accept :'application/json',
+        'Content-Type': 'application/json',
+    }
     
     AOS.init({
         duration: 1000,
@@ -30,14 +36,16 @@ export default function Home() {
 
     useEffect(() => {
         axios.get("https://starfoods.ir/api/getSlidersApi",{
-            params:{psn:localStorage.getItem("psn")}})
+            params:{psn:localStorage.getItem("psn")},
+            headers,
+           })
             .then((data) => {
             setSlides(data.data.sliders[0])
             setSmallSlider(data.data.smallSlider[0])
         })
 
-    axios.get("https://starfoods.ir/api/getMainGroups").then((data) => {
-            console.log("love problem solving", data)
+    axios.get("https://starfoods.ir/api/getMainGroups", {headers}).then((data) => {
+            
             setMainGroups(data.data.map((element,index)=>
             <MainGroupItem key={index} title={element.title} id={element.id} ></MainGroupItem>))
         })
