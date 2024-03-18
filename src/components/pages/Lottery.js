@@ -7,7 +7,8 @@ import Footer from "../genrealComponent/Footer";
 import DailyEmtyaz from "../lottery/DailyEmtyaz";
 import LuckyCode from "../lottery/LuckyCode";
 
-export default function Lottery() {
+export default function Lottery(props) {
+
   const [bonus, setBonus] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +18,8 @@ export default function Lottery() {
       const fetchData = async () => {
           try {
               const response = await axios.get(getLotteryApi, {
-                  params: { psn: customerId },
+                  params: { psn: customerId},
+                  headers:props.headers
               });
               return response.data;
           } catch (error) {
@@ -37,7 +39,6 @@ export default function Lottery() {
                 setLoading(false);
             }
         };
-
         fetchDataAndSetState();
     }, []);
 
@@ -49,11 +50,11 @@ export default function Lottery() {
     <>
     <Header />
     <Sidebar />
-     <div className="container marginTop border mb-5">
-        <Instruction mybonus={bonus.allBonus} />
-        <LuckyCode mybonus={parseInt(bonus.allBonus)} minBonus={parseInt(bonus.lotteryMinBonus)} />
-        <DailyEmtyaz />
-    </div>
+      <div className="container marginTop border mb-5">
+          <Instruction mybonus={bonus.allBonus} />
+          <LuckyCode headers={props.headers} mybonus={parseInt(bonus.allBonus)} minBonus={parseInt(bonus.lotteryMinBonus)} />
+          <DailyEmtyaz headers={props.headers} />
+      </div>
     <Footer />
     </>
   )

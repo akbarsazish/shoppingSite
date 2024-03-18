@@ -7,7 +7,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 
 
-export default function EditProfile() {
+export default function EditProfile(props) {
     const [activeTab, setActiveTab] = useState(0);
     const [customerSn, setcustomerSn] = useState(localStorage.getItem("psn"));
     const [haqiqiType, sethaqiqiType] = useState('haqiqi');
@@ -45,7 +45,7 @@ export default function EditProfile() {
             address : document.getElementById("hqiqiAddress").value,
             codePosti : document.getElementById("haqiqiPostalCode").value,
             email : document.getElementById("haqiqiEmail").value,
-        }})
+        }, headers:props.headers})
           .then((response) => {
               setHaqiqiCustomerInfo(response.data.exacHaqiqi);
               Swal.fire({
@@ -93,7 +93,7 @@ export default function EditProfile() {
             codeNaqsh : document.getElementById("hoqoqiCodeNaqsh").value,
             codePosti : document.getElementById("hoqoqiCostalCode").value,
             address : document.getElementById("address").value
-        }})
+        }, headers:props.headers})
           .then((response) => {
             setHoqoqiCustomerInfo(response.data.exactHoqoqi);
               Swal.fire({
@@ -120,7 +120,8 @@ export default function EditProfile() {
 
     useEffect(() => {
         axios.get("https://starfoods.ir/api/getCustomerOfficialInfo", {
-            params: { psn: localStorage.getItem("psn") }
+            params: { psn: localStorage.getItem("psn") },
+            headers:props.headers
         })
         .then((data) => {
             setHaqiqiCustomerInfo(data.data.exacHaqiqi)

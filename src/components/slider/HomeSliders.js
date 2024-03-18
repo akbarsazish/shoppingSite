@@ -7,9 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinusCircle, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import starfood from "../../assets/images/starfood.png";
 import axios from "axios";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import Swal from 'sweetalert2';
+import Loader from "../pages/Loader";
 
 const HomeSliders = ()=> {
     const {id}=useParams();
@@ -17,7 +16,8 @@ const HomeSliders = ()=> {
     const [clickedItemId, setClickedItemId] = useState(null);
     const [boughtKalaBYS, setboughtKalaOrderBYS] = useState(localStorage.getItem("boughtKalaBYS") || 0);
     const [purchasedItems, setPurchasedItems] = useState({});
-    const [psn, setPsn] = useState(localStorage.getItem("psn"))
+    const [psn, setPsn] = useState(localStorage.getItem("psn"));
+    const [loading, setLoading] = useState(true);
 
     const headers = { 
         Authorization: `Bearer ${localStorage.getItem('isLogedIn')}`,
@@ -28,6 +28,7 @@ const HomeSliders = ()=> {
 
     useEffect(() => {
         const fetchSliderData = async () => {
+            setLoading(true);
           try {
             const response = await axios.get("https://starfoods.ir/api/getHomeParts", {
               params: {psn:psn},
@@ -41,6 +42,7 @@ const HomeSliders = ()=> {
               }));
 
               setAllKalaSlider(initialKala);
+              setLoading(false);
           } catch (error) {
             console.error('Get Home part :', error);
           } 
@@ -154,16 +156,11 @@ const debouncedPurchaseKala = debounce(purchaseKala, 500);
           });
       };
 
-    // aos for transition
-      AOS.init({
-        duration: 1000,
-      });
-  
-
 return(
     <>
-    {kalaSliders.map((kalaTypes) => (
+     {kalaSliders.map((kalaTypes) => (
      <>
+     {loading ? <Loader /> : 
       <div className="wrapper-sliders">
           {/* جدیدترین کالا ها */ }
           {parseInt(kalaTypes.partType) === 2 ?
@@ -241,7 +238,7 @@ return(
                 <div className="forTitleItem text-start"> </div>
             </div>
 
-              <div className="fourColSide border-top py-1 shegoftAndgez" data-aos="fade-left" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
+              <div className="fourColSide border-top py-1 shegoftAndgez" style={{ backgroundColor: `${kalaTypes.partColor}`}}>
                    <div className="text-center shegoftAngizFirstItem">
                         <h4 className="text-wrap" style={{padding:"5px 33px"}}> {kalaTypes.textLogo} </h4>
                         <Link to={"/showAllKala/"+kalaTypes.partId} className="btn btn-md border text-decoration-none"> 
@@ -485,11 +482,11 @@ return(
 
             {parseInt(kalaTypes.partType)===10?
             <>
-            <div className="forTitle mt-2 p-2" data-aos="zoom-in-up">
+            <div className="forTitle mt-2 p-2">
                 <div className="forTitleItem">
                     <h6> {kalaTypes.title} </h6>
                 </div>
-                <div className="forTitleItem text-start" data-aos="zoom-in-up">
+                <div className="forTitleItem text-start">
                    {kalaTypes.showAll ? <Link to={"/showAllKala/"+kalaTypes.partId}> <h6> مشاهده همه  </h6> </Link> : "" }
                 </div>
             </div>
@@ -505,8 +502,8 @@ return(
                 freeMode={true}
                 modules={[Autoplay, FreeMode]} className="mySwiper">
 
-                 <div className="fourColSide border-top" data-aos="zoom-in-up">
-                  <div className="fourPicDiv text-center mt-1"  data-aos="flip-left">
+                 <div className="fourColSide border-top">
+                  <div className="fourPicDiv text-center mt-1">
 
                     {kalaTypes && kalaTypes.pictures.map((pictures, index) => (
                         <SwiperSlide>
@@ -519,9 +516,10 @@ return(
                    </div>
                 </div>
             </Swiper>
-          </> : "" }
+              </> : "" }
           </div>
-       </>))}
+      } </>))}
+        
     </>  
 )}
 

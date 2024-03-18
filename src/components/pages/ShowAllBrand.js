@@ -18,19 +18,25 @@ const ShowAllBrand = (props)=> {
         },[brandId])
 
         const requestProduct=(psn,goodSn,event)=>{
-            axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
-              customerId:psn,
-              productId:goodSn
-            }}).then((data)=>{
+            axios.get("https://starfoods.ir/api/addRequestedProduct",{
+                params:{
+                  customerId:psn,
+                  productId:goodSn
+                },
+                headers:props.headers
+        }).then((data)=>{
                 renewGroupItems();
             })
           }
           
         const cancelRequestKala=(psn,goodSn,event)=>{
-           axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
+           axios.get("https://starfoods.ir/api/cancelRequestedProduct",{
+            params:{
              psn:psn,
              gsn:goodSn
-           }}).then((data)=>{
+           },
+           headers:props.headers
+        }).then((data)=>{
               renewGroupItems();
            })
         }
@@ -40,7 +46,9 @@ const ShowAllBrand = (props)=> {
         params: {
           psn:localStorage.getItem('psn'),
           brandId:brandId
-        }})
+        },
+        headers:props.headers
+    })
         .then((data) => {
           setAllBrand(data.data.kala.map((element,index)=>
             <div key={index} className="groupingItem">

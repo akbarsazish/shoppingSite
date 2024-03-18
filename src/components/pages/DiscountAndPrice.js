@@ -6,14 +6,15 @@ import Footer from "../genrealComponent/Footer";
 import { faAward, faPercentage, faSquareCaretLeft} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export default function DiscountAndPrice() {
+export default function DiscountAndPrice(props) {
   const [copiedIndex, setCopiedIndex] = useState(null);
    const [discount, setDiscount] = useState({takhfifCodes: []});
    const [yourPrizes, setPrize] = useState([])
 
    useEffect(() => {
     axios.get("https://starfoods.ir/api/getTakhfifAndPrize", {
-    params: { psn: localStorage.getItem("psn") }
+    params: { psn: localStorage.getItem("psn") },
+    headers: props.headers
     }).then((response) => {
          setDiscount(response.data);
          setPrize(response.data.prizes);

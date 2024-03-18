@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart, faBell, faCheck } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Loader from "./Loader";
 
 export default function GroupingItems(props) {
     const [subGrups, setSubGroups] = useState(0);
@@ -17,8 +18,10 @@ export default function GroupingItems(props) {
     const {id}=useParams();
     const [buyOption, setBuyOption]=useState(0);
     const [selectedLinkId, setSelectedLinkId] = useState(null);
+    const [loader, setLoader] = useState(true);
 
     useEffect(() => {
+        setLoader(true);
         fetch("https://starfoods.ir/api/getSubGroupList/?mainGrId=" + id, {headers:props.headers})
           .then((response) => response.json())
           .then((groups) => {
@@ -36,7 +39,9 @@ export default function GroupingItems(props) {
                 </SwiperSlide>
               ))
             );
+            setLoader(false);
           });
+         
       }, [id, selectedLinkId])
 
     useEffect(() => {
@@ -67,6 +72,7 @@ export default function GroupingItems(props) {
         }
 
     const renewGroupItems=()=>{
+        setLoader(true);
         axios.get("https://starfoods.ir/api/getMainGroupKala",{params:{
             psn:localStorage.getItem('psn'),
             mainGrId:id
@@ -151,6 +157,7 @@ export default function GroupingItems(props) {
                     }
                 </div>
             </div>))
+            setLoader(false)
          })}
 
     const showBuyModal=(goodSn,event)=>{
@@ -234,8 +241,11 @@ export default function GroupingItems(props) {
     if(localStorage.getItem("isLogedIn")){
         return (
             <>
+           
                 <Header />
                 <Sidebar />
+                {loader ? <Loader /> :
+               <>
                 <div className="container">
                     <div className="groupingItemsTopSlider">
                         <Swiper
@@ -278,6 +288,8 @@ export default function GroupingItems(props) {
                         </div>
                     </div>
                 </div>
+                </>
+               }
             </>
         )
      }else {

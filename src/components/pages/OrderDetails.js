@@ -14,7 +14,8 @@ export default function FactoreDetails(props){
             params: {
               factorSn:localStorage.getItem("selectedHDS"),
               psn:localStorage.getItem("psn")
-            }
+            },
+            headers:props.headers
         }).then((data)=>{
          setFactorItem(data.data.orders.map((element, index) => 
             <div className="factorDetailPart" key={index}>

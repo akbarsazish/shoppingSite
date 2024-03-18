@@ -103,20 +103,20 @@ function App() {
         <Route path='/favorite'                     element={<Favorite headers={headers} buyModal={byModal} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>}/>
         <Route path='/message'                      element={<Message headers={headers}/>}/>
         <Route path='/contact'                      element={<Contact/>}/>
-        <Route path='/editProfile'                  element={<EditProfile/>}/> 
+        <Route path='/editProfile'                  element={<EditProfile headers={headers}/>}/> 
         <Route path='/returnedFactor'               element={<ReturnedFactor/>}/>
         <Route path='/shipping'                     element={<Shiping headers={headers}/>}/>
         <Route path='/success'                      element={<Success headers={headers}/>}/>
         <Route path='/wallet'                       element={<Wallet headers={headers}/>}/>
         <Route path='/factorDetails'                element={<FactoreDetails headers={headers}/>}/>
-        <Route path='/orderDetails'                 element={<OrderDetails/>}/>
+        <Route path='/orderDetails'                 element={<OrderDetails headers={headers}/>}/>
         <Route path='/login'                        element={<Login/>}/>
         <Route path="/about"                        element={<About/>}/>
         <Route path="/policy"                       element={<Policy/>}/>
         <Route path="privacy"                       element={<Privacy/>}/>
         <Route path="gamerList"                     element={<GamerList headers={headers}/>}/>
-        <Route path="disAndPrice"                   element={<DiscountAndPrice/>}/>
-        <Route path="lottery"                       element={<Lottery/>}/>
+        <Route path="disAndPrice"                   element={<DiscountAndPrice headers={headers}/>}/>
+        <Route path="lottery"                       element={<Lottery headers={headers}/>}/>
         <Route path="inviteCode"                    element={<InviteCode headers={headers}/>}/>
         <Route path='/searchKala/:term'             element={<SearchResult headers={headers} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))} />}/>
         <Route path="chequeRequest"                 element={<ChequeRequest/>}/>
@@ -130,8 +130,8 @@ function App() {
           path="/finalizeFactorPayApi"
           params={param => ({ tref: param.tref, iN: param.iN, iD: param.iD})}
           element={<PayFactor/>}/>
-          <Route path="showAllKala/:partId" element={<ShowAllKala  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>} />
-          <Route path="showAllBrand/:brandId" element={<ShowAllBrand  changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>} />
+          <Route path="showAllKala/:partId" element={<ShowAllKala headers={headers} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>} />
+          <Route path="showAllBrand/:brandId" element={<ShowAllBrand headers={headers} changeHeartIconColor={((goodSn,event)=>changeHeartIconColor(goodSn,event))}/>} />
           <Route path="jaliLoginRoute"
             param = {param =>({forLogin: param.forLogin, forUserName:param.forUserName, forUserPsn: param.forUserPsn, forboughtAmount:param.forboughtAmount, forRole:param.forRole})} 
             element={<JaliLogin />} />

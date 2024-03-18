@@ -7,8 +7,7 @@ import MainGroupItem from './MainGroupItem'
 import axios from "axios";
 import SecondMenu from "./SecondMenu";
 import HomeSliders from "../slider/HomeSliders";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import Loader from "./Loader";
 
 export default function Home() {
 
@@ -17,15 +16,13 @@ export default function Home() {
         Accept :'application/json',
         'Content-Type': 'application/json',
     }
-    
-    AOS.init({
-        duration: 1000,
-      });
 
     const [showModal, setShowModal] = useState(false);
     const [mainGroups, setMainGroups] = useState(0);
     const [slides,setSlides]=useState([]);
     const [smallSlider,setSmallSlider]=useState([]);
+    const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
         setTimeout(function () {
@@ -34,27 +31,32 @@ export default function Home() {
     }, [showModal]);
 
     useEffect(() => {
+        setLoading(true);
         axios.get("https://starfoods.ir/api/getSlidersApi",{
             params:{psn:localStorage.getItem("psn")},
             headers,
            })
             .then((data) => {
             setSlides(data.data.sliders[0])
-            setSmallSlider(data.data.smallSlider[0])
+            setSmallSlider(data.data.smallSlider[0]);
+            setLoading(false);
         })
 
     axios.get("https://starfoods.ir/api/getMainGroups", {headers}).then((data) => {
             
             setMainGroups(data.data.map((element,index)=>
             <MainGroupItem key={index} title={element.title} id={element.id} ></MainGroupItem>))
+            setLoading(false);
         })
     },[])
 
     if(localStorage.getItem("isLogedIn")){    
     return (
+     <>
+      {loading ? <Loader /> :
         <div className="marginTop">
-            <div className="mainSliderContainer"  data-aos="flip-left">
-                <div  data-aos="flip-left" className={`${smallSlider.activeOrNot == 1 ? 'mainSlider-right' : 'mainSlider-full-page'}`}>
+            <div className="mainSliderContainer">
+                <div className={`${smallSlider.activeOrNot == 1 ? 'mainSlider-right' : 'mainSlider-full-page'}`}>
                     <Swiper
                         spaceBetween={10}
                         autoplay={{
@@ -91,7 +93,7 @@ export default function Home() {
                     {mainGroups}
                 </div>
                  <HomeSliders />
-                <div className="text-center mt-4"  data-aos="flip-left">
+                <div className="text-center mt-4">
                    <img className="fourColSliderImg" alt="تماس با ما" src={contactImage} />
                 </div>
             </div>
@@ -117,6 +119,8 @@ export default function Home() {
                 </div> <hr/>
             </div>
         </div>
+        }
+        </>
       )
     }else{
         window.location.href="/login"

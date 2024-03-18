@@ -21,16 +21,21 @@ const ShowAllKala = (props)=> {
             axios.get("https://starfoods.ir/api/addRequestedProduct",{params:{
               customerId:psn,
               productId:goodSn
-            }}).then((data)=>{
+            },
+            headers:props.headers
+        }).then((data)=>{
                 renewGroupItems();
             })
           }
           
         const cancelRequestKala=(psn,goodSn,event)=>{
-        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{params:{
-            psn:psn,
-            gsn:goodSn
-         }}).then((data)=>{
+        axios.get("https://starfoods.ir/api/cancelRequestedProduct",{
+            params:{
+              psn:psn,
+              gsn:goodSn
+            },
+            headers:props.headers
+        }).then((data)=>{
               renewGroupItems();
          })
         }
@@ -40,7 +45,9 @@ const ShowAllKala = (props)=> {
         params: {
           psn:localStorage.getItem('psn'),
           partId:partId
-        }})
+        },
+        headers:props.headers
+        })
         .then((data) => {
             console.log("checking data", data)
           setShowAllKala(data.data.kala.map((element,index)=>
@@ -126,10 +133,13 @@ const ShowAllKala = (props)=> {
          })}
 
      const showBuyModal=(goodSn,event)=>{
-        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
-            Pcode:goodSn,
-            psn:localStorage.getItem("psn")
-        }})
+        axios.get("https://starfoods.ir/api/getUnitsForUpdate",{
+            params:{
+                Pcode:goodSn,
+                psn:localStorage.getItem("psn")
+            },
+            headers:props.headers
+        })
         .then((data) => {
         let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
@@ -143,10 +153,13 @@ const ShowAllKala = (props)=> {
     }
 
         const showUpdateBuyModal=(goodSn,snOrderBYS)=>{
-          axios.get("https://starfoods.ir/api/getUnitsForUpdate",{params:{
-            Pcode:goodSn,
-            psn:localStorage.getItem("psn")
-          }})
+          axios.get("https://starfoods.ir/api/getUnitsForUpdate",{
+            params:{
+                Pcode:goodSn,
+                psn:localStorage.getItem("psn")
+            },
+            headers:props.headers
+        })
           .then((data) => {
             let modalItems=[];
             for (let index = 1; index <= data.data.maxSale; index++) {
@@ -157,12 +170,13 @@ const ShowAllKala = (props)=> {
           })
         }
         const updateBuy=(orderId,amountUnit,goodSn)=>{
-          axios.get('https://starfoods.ir/api/updateOrderBYS',
-          {params:{
-            kalaId: goodSn,
-            amountUnit: amountUnit,
-            orderBYSSn: orderId
-          }
+          axios.get('https://starfoods.ir/api/updateOrderBYS',{
+            params:{
+                kalaId: goodSn,
+                amountUnit: amountUnit,
+                orderBYSSn: orderId
+            },
+            headers:props.headers
          }
         ).then((response)=> {
             renewGroupItems();
@@ -177,12 +191,14 @@ const ShowAllKala = (props)=> {
                 if (amountUnit >= costLimit) {
                     alert(costError);
                 }}
-                axios.get('https://starfoods.ir/api/buySomething',
-                {params:{
-                  kalaId: goodSn,
-                  amountUnit: amountUnit,
-                  psn:localStorage.getItem("psn")
-                }})
+                axios.get('https://starfoods.ir/api/buySomething',{
+                    params:{
+                        kalaId: goodSn,
+                        amountUnit: amountUnit,
+                        psn:localStorage.getItem("psn")
+                    },
+                    headers:props.headers
+                })
                 .then((response)=> {
                 let countBought=parseInt(localStorage.getItem('buyAmount'));
                 localStorage.setItem('buyAmount',countBought+1);

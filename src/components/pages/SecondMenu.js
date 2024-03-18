@@ -17,7 +17,7 @@ export default function SecondMenu() {
 }
 
   useEffect(() => {
-    fetch(`https://starfoods.ir/api/getAttractiveVisits?psn=${customerId}, ${headers}`)
+    fetch(`https://starfoods.ir/api/getAttractiveVisits?psn=${customerId},${headers}`)
       .then((response) => response.json())
       .then((data) => {
         setAttractions(data[0]);

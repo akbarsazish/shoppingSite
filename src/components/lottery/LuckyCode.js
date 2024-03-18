@@ -4,15 +4,17 @@ import axios from 'axios';
 import sound from '../../assets/lottery/applause.mp3'
 import Swal from 'sweetalert2';
 
-export default function LuckyCode(mybonus) {
+export default function LuckyCode(props) {
   const audio = new Audio(sound);
   const [wonPrize, setWinner] = useState();
   const [lotteryResult, setLotteryResult] = useState(false);
   const [wheelChoices, setWheelChoices] = useState([]);
-  const [filteredChoices,setFilteredChoices]=useState([])
+  const [filteredChoices,setFilteredChoices]=useState([]);
+
+  console.log("props in lucky code", props.headers)
 
   const [loading, setLoading] = useState(true);
-  let myBonus = parseInt(mybonus.mybonus);
+  let myBonus = parseInt(props.mybonus);
 
   const [hasSetLotteryHistory, setHasSetLotteryHistory] = useState(false);
 
@@ -29,6 +31,7 @@ export default function LuckyCode(mybonus) {
       try {
         const response = await axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
           params: { psn: localStorage.getItem('psn') },
+          headers:props.headers
         });
 
         let allPrize = response.data.products;

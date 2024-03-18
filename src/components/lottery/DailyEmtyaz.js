@@ -3,7 +3,7 @@ import axios from 'axios';
 import { faCalendarCheck, faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function DailyEmtyaz() {
+function DailyEmtyaz(props) {
   const [isChecked, setIsChecked] = useState(false);
   const [today, setToday] = useState('FirstPr');
   const [starfoodStarInfo, setStarfoodStarInfo]=useState({Fifth:null,FifthB:"0",FifthPr:"0",First:"",FirstB:"0"
@@ -19,23 +19,13 @@ function DailyEmtyaz() {
   
   useEffect(()=> {
     axios.get('https://starfoods.ir/api/getLotteryInfoApi', {
-        params : {psn: localStorage.getItem('psn'), date: new Date()}
+        params : {psn: localStorage.getItem('psn'), date: new Date()},
+        headers: props.headers
     }).then((data)=> {
         setToday(data.data.todayDate.date.split(" ")[0]);
         setStarfoodStarInfo(data.data.presentInfo[0]);
     })
 }, []);
-
-//  function checkCheckboxPresent() {
-//     setIsChecked(!isChecked);
-//    let todayInputValue=document.getElementById("todayInput").value;
-//      axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
-//        params: {psn: localStorage.getItem('psn'), dayPr:todayInputValue.split("_")[0], bonus:todayInputValue.split("_")[1] },
-//      }).then((data) => {
-//       console.log("searching ispresent", data)
-//       window.location.reload();
-//   });
-//  }
 
 function checkCheckboxPresent() {
   setIsChecked(!isChecked);
@@ -45,7 +35,11 @@ function checkCheckboxPresent() {
     let todayInputValue = todayInput.value;
 
     axios.get('https://starfoods.ir/api/setWeeklyPresentApi', {
-      params: { psn: localStorage.getItem('psn'), dayPr: todayInputValue.split("_")[0], bonus: todayInputValue.split("_")[1] },
+      params: {
+        psn: localStorage.getItem('psn'),
+        dayPr: todayInputValue.split("_")[0],
+        bonus: todayInputValue.split("_")[1]},
+        headers: props.headers
     }).then((data) => {
       window.location.reload();
     });
